@@ -1,7 +1,7 @@
-.TabBar{
-float: right;
-font-size: medium;
-color: green;
-padding: 3%;
-margin: 1%;
+.TabBar {
+    float: right;
+    font-size: medium;
+    color: green;
+    padding: 3%;
+    margin-left: 1%;
 }

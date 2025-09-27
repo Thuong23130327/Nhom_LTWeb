@@ -1,0 +1,16 @@
+.TabBar {
+    float: right;
+    font-size: medium;
+    color: black;
+    padding: 3%;
+    margin-left: 1%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#TabActive {
+    color: white;
+    border: 1px;
+    background-color: rgb(98, 220, 98);
+    border-radius: 35%;
+
+}
