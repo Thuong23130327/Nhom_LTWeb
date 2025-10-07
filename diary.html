@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="styleDiary.css" />
+    <title>Group Diary - Phân công</title>
+</head>
+<body>
+    <header class="ThanhTab">
+        <a href="index.html" class="TabBar">Home</a>
+        <a href="diary.html" class="TabBar active">Group Diary</a>
+        <a href="about.html" class="TabBar">About</a>
+        <a href="project.html" class="TabBar">Project</a>
+    </header>
+
+    <!-- container (màu xanh ngoài) + card (nội dung trắng) -->
+    <main class="container">
+        <div class="card">
+            <h1>Phân công công việc theo tuần</h1>
+            <p class="lead">Chọn tuần để xem nhiệm vụ và tiến độ từng thành viên.</p>
+
+            <!-- Week buttons + progress -->
+            <div class="week-controls" role="region" aria-label="Chọn tuần và tiến độ">
+                <div class="week-buttons" role="tablist" aria-label="Chọn tuần">
+                    <a href="#week-1" class="week-btn" data-week="1">Tuần 1</a>
+                    <a href="#week-2" class="week-btn" data-week="2">Tuần 2</a>
+                    <a href="#week-3" class="week-btn" data-week="3">Tuần 3</a>
+                    <a href="#week-4" class="week-btn" data-week="4">Tuần 4</a>
+                    <a href="#week-5" class="week-btn" data-week="5">Tuần 5</a>
+                    <a href="#week-6" class="week-btn" data-week="6">Tuần 6</a>
+                    <a href="#week-7" class="week-btn" data-week="7">Tuần 7</a>
+                    <a href="#week-8" class="week-btn" data-week="8">Tuần 8</a>
+                </div>
+
+                <div class="progress-wrap" aria-hidden="false">
+                    <div class="progress-label">Tiến độ hoàn thành: <span id="progress-percent">0%</span></div>
+                    <div class="progress" aria-hidden="true">
+                        <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+                    </div>
+                    <div class="progress-week" id="progress-week">Đang ở: Tuần - / 8</div>
+                </div>
+            </div>
+
+            <!-- Table rendered by script: 3 columns (Thành viên | Nhiệm vụ tuần N | Tiến độ thành viên) -->
+            <div class="table-wrap">
+                <table class="diary-table" id="diary-table" aria-live="polite">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <p class="note"><strong>Ghi chú:</strong> Chỉ nhiệm vụ của tuần được chọn sẽ hiển thị. Cập nhật dữ liệu members trong script khi cần.</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Liên hệ: 23130327@st.hcmuaf.edu.vn | Điện thoại: 0123 456 789</p>
+    </footer>
+
+<script>
+// Hiển thị nhiệm vụ chỉ khi chọn tuần, hiển thị tiến độ từng thành viên và tổng
+(function(){
+    const totalWeeks = 8;
+
+    // Dữ liệu mẫu: cập nhật tên, tasks và progress theo thực tế
+    const members = [
+        {
+            name: "Nguyễn Hoài Thương - Nhóm trưởng",
+            tasks: {
+                1: "Tạo trang thông tin nhóm, thành viên",
+                2: "Cập nhật nội dung trang chủ, theo dõi tiến độ"
+            },
+            progress: { 1: 100, 2: 100 }
+        },
+        {
+            name: "Thòng Lý Tiểu Yến",
+            tasks: {
+                1: "Thiết kế trang Home - bản mẫu",
+                2: "Hoàn thiện giao diện Home, responsive"
+            },
+            progress: { 1: 100, 2: 100 }
+        },
+        {
+            name: "Vũ Châu Hoài Phong",
+            tasks: {
+                1: "Chuẩn bị layout Group Diary",
+                2: "Triển khai Group Diary, phân công tuần"
+            },
+            progress: { 1: 100, 2: 100 }
+        }
+    ];
+
+    const table = document.getElementById('diary-table');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+
+    function escapeHtml(str){
+        return String(str || '')
+            .replace(/&/g,'&amp;')
+            .replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;')
+            .replace(/"/g,'&quot;')
+            .replace(/'/g,'&#39;');
+    }
+
+    function renderHeader(week){
+        thead.innerHTML = `
+            <tr>
+                <th scope="col">Thành viên</th>
+                <th scope="col">Nhiệm vụ - Tuần ${week}</th>
+                <th scope="col">Tiến độ</th>
+            </tr>
+        `;
+    }
+
+    function renderBody(week){
+        tbody.innerHTML = members.map(m=>{
+            const task = m.tasks && m.tasks[week] ? escapeHtml(m.tasks[week]) : '';
+            const progress = (m.progress && typeof m.progress[week] === 'number') ? m.progress[week] : 0;
+            const taskHtml = task ? `<div class="task">${task}</div>` : `<div class="no-task">Chưa có nhiệm vụ</div>`;
+            return `
+                <tr>
+                    <td class="member-name">${escapeHtml(m.name)}</td>
+                    <td class="task-cell">${taskHtml}</td>
+                    <td class="member-progress-cell">
+                        <div class="member-progress-wrap" aria-hidden="false">
+                            <div class="member-progress-bar-bg" title="${progress}% hoàn thành">
+                                <div class="member-progress-bar" style="width:${progress}%"></div>
+                            </div>
+                            <div class="member-progress-label">${progress}%</div>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function calcOverallProgress(week){
+        const vals = members.map(m => (m.progress && typeof m.progress[week] === 'number') ? m.progress[week] : 0);
+        if(vals.length === 0) return 0;
+        const sum = vals.reduce((a,b)=>a+b,0);
+        return Math.round(sum / vals.length);
+    }
+
+    function setWeek(n){
+        n = Math.max(1, Math.min(totalWeeks, Math.floor(n)));
+        document.querySelectorAll('.week-btn').forEach(b=>{
+            b.classList.toggle('active', Number(b.dataset.week) === n);
+            b.setAttribute('aria-selected', Number(b.dataset.week) === n ? 'true' : 'false');
+            b.setAttribute('tabindex', Number(b.dataset.week) === n ? '0' : '-1');
+        });
+
+        renderHeader(n);
+        renderBody(n);
+
+        const overall = calcOverallProgress(n);
+        const percentEl = document.getElementById('progress-percent');
+        const barEl = document.getElementById('progress-bar');
+        const weekEl = document.getElementById('progress-week');
+
+        if(percentEl) percentEl.textContent = overall + '%';
+        if(barEl) barEl.style.width = overall + '%';
+        if(weekEl) weekEl.textContent = `Đang ở: Tuần ${n} / ${totalWeeks}`;
+
+        if(location.hash !== `#week-${n}`) history.replaceState(null,'',`#week-${n}`);
+    }
+
+    // handle button clicks
+    document.querySelectorAll('.week-btn').forEach(btn=>{
+        btn.addEventListener('click', function(e){
+            e.preventDefault();
+            const w = parseInt(this.dataset.week,10) || 2;
+            setWeek(w);
+            this.focus();
+        });
+        btn.addEventListener('keydown', function(e){
+            // Left/Right arrow to navigate weeks
+            if(e.key === 'ArrowLeft' || e.key === 'ArrowRight'){
+                e.preventDefault();
+                const cur = parseInt(this.dataset.week,10);
+                const next = e.key === 'ArrowLeft' ? Math.max(1,cur-1) : Math.min(totalWeeks,cur+1);
+                const target = document.querySelector(`.week-btn[data-week="${next}"]`);
+                if(target) { target.click(); target.focus(); }
+            }
+        });
+    });
+
+    // init from hash or default to week 2
+    let week = 2;
+    if(location.hash && location.hash.startsWith('#week-')){
+        const w = parseInt(location.hash.replace('#week-',''),10);
+        if(!isNaN(w)) week = w;
+    }
+    setWeek(week);
+
+    // respond to back/forward
+    window.addEventListener('hashchange', ()=>{
+        if(location.hash.startsWith('#week-')){
+            const w = parseInt(location.hash.replace('#week-',''),10);
+            if(!isNaN(w)) setWeek(w);
+        }
+    });
+})();
+</script>
+</body>
+</html>
