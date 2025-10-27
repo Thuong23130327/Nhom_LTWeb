@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraSound Logo HTML/CSS</title>
+
+    <style>
+        /* Thiết lập nền tối để logo nổi bật (giống ảnh mẫu) */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #1e1e24;
+            /* Nền xám đậm */
+        }
+
+        /* Vùng chứa logo, sắp xếp icon và chữ nằm ngang */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            /* Sử dụng font đã import */
+        }
+
+        /* --- Phần Biểu tượng (Icon) --- */
+        .logo-icon {
+            width: 60px;
+            /* Kích thước icon */
+            height: 60px;
+            margin-right: 12px;
+            /* Khoảng cách giữa icon và chữ */
+
+            /* Tạo hiệu ứng vòng tròn chuyển màu (gradient) */
+            border-radius: 50%;
+            /* Biến hình vuông thành tròn */
+            background: linear-gradient(135deg, #4a6fff, #b76bff);
+
+            /* Dùng flex để căn giữa các vạch sóng âm bên trong */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            /* Khoảng cách giữa các vạch sóng âm */
+
+            /* Thêm một chút bóng đổ cho đẹp mắt */
+            box-shadow: 0 4px 15px rgba(135, 96, 255, 0.3);
+        }
+
+        /* Các vạch sóng âm */
+        .sound-wave {
+            width: 4px;
+            /* Độ dày của vạch */
+            background-color: #ffffff;
+            /* Màu trắng */
+            border-radius: 2px;
+            /* Bo góc vạch */
+
+            /* Hiệu ứng nhấp nháy cho sóng âm */
+            animation: bounce 1.3s infinite ease-in-out;
+        }
+
+        /* Tạo chiều cao khác nhau cho 3 vạch */
+        .wave-1 {
+            height: 15px;
+            animation-delay: -1.1s;
+        }
+
+        .wave-2 {
+            height: 30px;
+            animation-delay: -1.0s;
+        }
+
+        .wave-3 {
+            height: 15px;
+            animation-delay: -0.9s;
+        }
+
+        /* Animation cho sóng âm */
+        @keyframes bounce {
+
+            0%,
+            40%,
+            100% {
+                transform: scaleY(0.5);
+                /* Thu nhỏ */
+            }
+
+            20% {
+                transform: scaleY(1.0);
+                /* Phóng to */
+            }
+        }
+
+        /* --- Phần Chữ (Text) --- */
+        .logo-text {
+            font-size: 36px;
+            /* Kích thước chữ */
+            font-weight: 600;
+            /* Độ đậm */
+
+            /* Kỹ thuật tạo chữ có màu chuyển sắc (gradient) */
+            background: linear-gradient(90deg, #b76bff, #4a6fff);
+            -webkit-background-clip: text;
+            /* Cắt nền theo hình dạng chữ */
+            -webkit-text-fill-color: transparent;
+            /* Ẩn màu chữ gốc */
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="logo-container">
+
+        <div class="logo-icon">
+            <div class="sound-wave wave-1"></div>
+            <div class="sound-wave wave-2"></div>
+            <div class="sound-wave wave-3"></div>
+        </div>
+
+        <span class="logo-text">AuraSound</span>
+
+    </div>
+
+</body>
+
+</html>
