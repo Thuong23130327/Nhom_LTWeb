@@ -1,7 +1,6 @@
-let menu = document.querySelector('#menu-icon');
-let navbar = document.querySelector('.navbar');
+const searchBar = document.querySelector('.searchBar');
+const icon = document.querySelector('.searchBar i');
 
-menu.onclick = () => {
-    menu.classList.toggle('bx-x');
-    navbar.classList.toggle('open');
-}
+icon.addEventListener( 'click', () => {
+    searchBar.classList.toggle('active');
+});
