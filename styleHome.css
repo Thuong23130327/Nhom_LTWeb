@@ -25,14 +25,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Đẩy 2 phần ra 2 bên */
     height: 100%;
 
-    /* 2 dòng quan trọng nhất để căn giữa giống nav */
     max-width: 1200px;
     margin: 0 auto;
 
-    /* Thêm padding 2 bên để thẳng hàng với padding của nav */
     padding: 0 25px;
     box-sizing: border-box;
 }
@@ -335,6 +332,13 @@ p {
     color: inherit;
 }
 
+#new {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0;
+}
+
 @media (max-width: 700px) {
     .head-right {
         display: none;
@@ -366,6 +370,11 @@ p {
 
     .mobile-menu-item .searchBar {
         display: flex;
+    }
+
+    #new {
+        flex-direction: column;
+        margin: 20px auto;
     }
 }
 
@@ -435,7 +444,7 @@ p {
 .logo-text {
     font-size: 24px;
     font-weight: 600;
-    background:var(--theme-gradient-button);
+    background: var(--theme-gradient-button);
     background-clip: text;
     color: transparent;
 }
