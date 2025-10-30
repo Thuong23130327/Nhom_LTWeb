@@ -3,22 +3,34 @@ const icon = document.querySelector('.searchBar i');
 
 icon.addEventListener('click', () => {
     searchBar.classList.toggle('active');
-});// Tìm các phần tử
-let menuIcon = document.getElementById('menu-icon');
-let tabBar = document.getElementById('TabBarRight');
-let overlay = document.getElementById('menu-overlay'); // TÌM LỚP MỜ MỚI
+});
 
-// Thêm sự kiện "click" vào icon menu
-menuIcon.onclick = () => {
-    // Bật/tắt class 'active' cho menu
-    tabBar.classList.toggle('active');
-    
-    // Bật/tắt class 'active' cho LỚP MỜ
-    overlay.classList.toggle('active');
-};
+document.addEventListener("DOMContentLoaded", function () {
 
-// (TÙY CHỌN CAO CẤP): Đóng menu khi click vào lớp mờ
-overlay.onclick = () => {
-    tabBar.classList.remove('active');
-    overlay.classList.remove('active');
-};
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const mobileMenu = document.getElementById('mobile-menu-container');
+    const closeIcon = document.getElementById('mobile-menu-close');
+    const overlay = document.getElementById('menu-overlay');
+
+    function openMenu() {
+        mobileMenu.classList.add('active'); 
+        overlay.classList.add('active');    
+    }
+
+    function closeMenu() {
+        mobileMenu.classList.remove('active');
+        overlay.classList.remove('active');   
+    }
+
+    if (hamburgerIcon) { 
+        hamburgerIcon.addEventListener('click', openMenu);
+    }
+
+    if (closeIcon) {
+        closeIcon.addEventListener('click', closeMenu);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeMenu);
+    }
+});

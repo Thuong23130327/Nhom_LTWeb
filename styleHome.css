@@ -8,7 +8,7 @@ body {
 /* Head phan loop va chuc nang */
 .head-left {
     margin-left: 10px;
-    width: 50%;
+    width: 60%;
     overflow: hidden;
     white-space: nowrap;
     box-sizing: border-box;
@@ -29,7 +29,7 @@ header {
 .ticker-content {
     display: flex;
     width: 200%;
-    animation: scroll-left 20s linear infinite;
+    animation: scroll-left 18s linear infinite;
 }
 
 .ticker-item {
@@ -40,7 +40,7 @@ header {
 
 @keyframes scroll-left {
     0% {
-        transform: translateX(0);
+        transform: translateX(100%);
     }
 
     100% {
@@ -60,6 +60,7 @@ header {
 }
 
 .head-right a {
+    white-space: nowrap;
     text-decoration: none;
     color: white;
     font-size: 13px;
@@ -68,12 +69,10 @@ header {
 
 .head-right a:hover {
     color: #4a6fff;
-    transition: color 0.2s ease;
     transform: scale(1.1);
-    transition: transform 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-/*Nav = logo + Tabbarright*/
 nav {
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -89,24 +88,35 @@ nav {
 #TabBarRight {
     display: flex;
     align-items: center;
-    gap: 30px;
-}
-
-.nav-group {
-    display: flex;
-    /* Bắt "Giỏ hàng" và "Đăng nhập" xếp hàng ngang */
-    align-items: center;
-    /* Căn chúng thẳng hàng */
-    gap: 20px;
-    /* Tạo khoảng cách 30px giữa chúng */
-    justify-content: center;
-    margin-top: 15px;
-    /* Tạo khoảng cách với thanh search ở trên */
+    gap: 16px;
 }
 
 .TabBar {
     font-size: 18px;
     box-sizing: border-box;
+}
+
+#nav-login,
+.mobile-menu-item .nav-login-btn {
+    background-color: #4a6fff;
+    padding: 5px 10px;
+    border-radius: 33px;
+    color: white;
+}
+
+
+#nav-login:hover,
+.mobile-menu-item .nav-login-btn:hover {
+    background: linear-gradient(135deg, #b76bff, #4a6fff);
+    transform: scale(1.02);
+    padding: 5px 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    color: white;
+}
+
+
+#nav-login a {
+    color: white;
 }
 
 .TabBar a {
@@ -115,16 +125,97 @@ nav {
 }
 
 .TabBar:hover {
-    transition: color 0.3s ease;
-    transition: transform 0.2s ease;
     transform: scale(1.1);
-
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .TabBar a:hover {
     color: black;
 }
 
+#hamburger-icon {
+    display: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #4a6fff;
+    margin-left: 10px;
+}
+
+
+.searchBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15px;
+    width: 80px;
+    border-radius: 60px;
+    background-color: white;
+    padding: 10px 15px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    transition: 0.5s ease-out;
+}
+
+.searchBar input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.searchBar a {
+    text-decoration: none;
+}
+
+.searchBar i {
+    cursor: pointer;
+    font-size: 15px;
+    color: #4a6fff;
+    margin-left: 10px;
+}
+
+
+.searchBar:hover,
+.searchBar.active {
+    width: 150px;
+    transition: 0.5s ease-in;
+
+}
+
+@media (max-width: 700px) {
+    .head-right {
+        display: none;
+    }
+
+    .head-left {
+        width: 100%;
+    }
+
+    .searchBar,
+    #nav-cart {
+        display: none;
+    }
+
+    #hamburger-icon {
+        display: block;
+    }
+
+    .nav-login-btn {
+        font-size: 15px;
+        white-space: nowrap;
+        padding: 0;
+    }
+
+    nav {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .mobile-menu-item .searchBar {
+        display: flex;
+    }
+}
 
 .logo-container {
     display: flex;
@@ -197,47 +288,98 @@ nav {
     color: transparent;
 }
 
-.searchBar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 15px;
-    width: 5px;
-    border-radius: 60px;
-    background-color: #fff;
-    padding: 10px 20px;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-    transition: 0.5s ease-out;
-}
-
-.searchBar input {
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    border: none;
-    outline: none;
-    font-size: 12px;
-    font-weight: 400;
-
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.searchBar a {
-    text-decoration: none;
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
 }
 
-.searchBar i {
-    cursor: pointer;
-    font-size: 18px;
-    color: #4a6fff;
-}
-
-
-.searchBar:hover {
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 300px;
-    transition: 0.5s ease-in;
+    max-width: 50%;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.mobile-menu-header .logo-text {
+    font-size: 20px;
+}
+
+#mobile-menu-close {
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+}
+
+
+#mobile-menu-close:hover {
+    transform: scale(1.1);
+    color: #4a6fff;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-menu-item {
+    display: flex;
+    justify-content: center;
+    padding: 10px 10px;
+    border-bottom: 1px solid #eee;
 
 }
 
-.searchBar.active {
-    width: 600px;
-    transition: 0.5s ease-in;
+
+.mobile-menu-item a:hover {
+    transform: scale(1.1);
+    color: #4a6fff;
+    transition: color 0.3s ease, transform 0.3s ease;
+
+}
+
+.mobile-menu-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    display: block;
+}
+
+.mobile-menu-item .searchBar {
+    width: 300px;
+    height: 30px;
+    padding: 5px 10px;
+    max-width: 90%;
+}
+
+.mobile-menu-item .searchBar:hover {
+    width: 100%;
 }
