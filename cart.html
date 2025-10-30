@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - AuraSound</title>
+    
+    <!-- Link tới file CSS chung (để lấy header/nav) -->
+    <link rel="stylesheet" href="styleHome.css">
+    <link rel="stylesheet" href="styleCart.css">
+    
+    <!-- Các link fonts và icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="cart-body-bg"> <!-- Thêm class để đổi màu nền -->
+    <!-- Copy y hệt Header và Nav từ index.html -->
+    <header>
+        <div class="header-container">
+            <div class="head-left">
+                <div class="ticker-content">
+                    <div class="ticker-item">AuraSound - Âm thanh định hình phong cách </div>
+                    <div class="ticker-item">Chuyên Tai nghe, Loa chính hãng</div>
+                    <div class="ticker-item">AuraSound - Âm thanh định hình phong cách</div>
+                    <div class="ticker-item">Bảo hành 1 đổi 1</div>
+                </div>
+            </div>
+            <div class="head-right">
+                <a href="#" class="head-link">Cửa hàng gần đây</a>
+                <a href="#" class="head-link">Tra cứu đơn hàng</a>
+                <a href="tel:19001809" class="utility-phone">1900 1809</a>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="logo-container">
+            <!-- Link logo về trang chủ -->
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                <div class="logo-icon">
+                    <div class="sound-wave wave-1"></div>
+                    <div class="sound-wave wave-2"></div>
+                    <div class="sound-wave wave-3"></div>
+                </div>
+                <span class="logo-text">AuraSound</span>
+            </a>
+        </div>
+
+        <div id="TabBarRight">
+            <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
+            </div>
+            <div class="TabBar" id="nav-cart">
+                <a href="cart.html">Giỏ hàng</a>
+            </div>
+            <div class="TabBar" id="nav-login">
+                <a href="about.html" class="nav-login-btn">Đăng nhập</a>
+            </div>
+            <div id="hamburger-icon">
+                <i class="ri-menu-line"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu-container">
+        <div class="mobile-menu-header">
+            <span class="logo-text">AuraSound</span>
+            <i class="ri-close-line" id="mobile-menu-close"></i>
+        </div>
+        <div class="mobile-menu-item">
+            <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
+            </div>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="cart.html">Giỏ hàng</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="about.html" class="nav-login-btn">Đăng nhập</a>
+        </div>
+    </div>
+    <div class="overlay" id="menu-overlay"></div>
+
+    <main class="cart-container">
+        <div class="cart-title-bar">
+            <a href="index.html" class="back-link"><i class="ri-arrow-left-s-line"></i> Quay về</a>
+            <h3>Giỏ hàng</h3>
+        </div>
+        <div class="delivery-container">
+            <label class="delivery-option">
+                <input type="radio" name="delivery-type" value="deliver">
+                <span>Giao tận nơi</span>
+            </label>
+            <label class="delivery-option active">
+                <input type="radio" name="delivery-type" value="pickup" checked>
+                <span>Nhận tại siêu thị</span>
+            </label>
+        </div>
+
+        <!-- Thông tin người nhận (Mock) -->
+        <div class="user-info-box">
+            <i class="ri-user-6-line"></i>
+            <div>
+                <strong>Người nhận: Anh NGUYỄN VĂN A - 0909123456</strong>
+                <p>43 Quốc Lộ 1K, Khu phố 2, Phường Linh Xuân, Thành phố Thủ Đức,...</p>
+            </div>
+            <i class="ri-arrow-right-s-line arrow-icon"></i>
+        </div>
+
+        <!-- Danh sách sản phẩm -->
+        <div class="cart-items-list">
+            
+            <!-- Sản phẩm 1 -->
+            <div class="cart-item">
+                <div class="item-main">
+                    <img class="item-img" src="https://placehold.co/100x100/EFE/333?text=Oppo" alt="Sản phẩm">
+                    <div class="item-details">
+                        <h4>Điện thoại OPPO Reno13 5G 12GB/512GB</h4>
+                        <div class="item-variant">
+                            <span>Màu: Xanh Dương</span>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                        <div class="item-promo">
+                            <i class="ri-coupon-3-line"></i>
+                            <span> 6 Khuyến mãi</span>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </div>
+                    <div class="item-price-col">
+                        <span class="item-price">16.690.000₫</span>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <span class="item-delete">Xoá</span>
+                    <div class="quantity-control">
+                        <button class="quantity-btn" aria-label="Giảm">-</button>
+                        <input class="quantity-input" type="text" value="1" aria-label="Số lượng">
+                        <button class="quantity-btn" aria-label="Tăng">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upsell: Mua kèm giảm giá -->
+            <div class="upsell-section">
+                <div class="upsell-header">
+                    <i class="ri-shopping-bag-3-line"></i>
+                    <strong>Mua kèm giảm giá 20%</strong>
+                    <i class="ri-arrow-down-s-line arrow-icon"></i>
+                </div>
+                <div class="upsell-body">
+                    <div class="upsell-tabs">
+                        <button class="upsell-tab active">Tai nghe</button>
+                        <button class="upsell-tab">Sạc dự phòng</button>
+                        <button class="upsell-tab">Phụ kiện</button>
+                    </div>
+                    <div class="upsell-items">
+                        <!-- Item 1 -->
+                        <div class="upsell-item">
+                            <img src="https://placehold.co/80x80/EEE/333?text=Enco" alt="Tai nghe">
+                            <span class="upsell-discount">-20%</span>
+                            <p class="upsell-name">Tai nghe Bluetooth True Wireless OPPO...</p>
+                            <span class="upsell-new-price">710.000₫</span>
+                            <span class="upsell-old-price">800.000₫</span>
+                            <button class="upsell-add-btn">Chọn mua</button>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="upsell-item">
+                            <img src="https://placehold.co/80x80/EEE/333?text=Air+4" alt="Tai nghe">
+                            <span class="upsell-discount">-20%</span>
+                            <p class="upsell-name">Tai nghe Bluetooth TWS OPPO Enco Air 4 Pro...</p>
+                            <span class="upsell-new-price">1.560.000₫</span>
+                            <span class="upsell-old-price">1.950.000₫</span>
+                            <button class="upsell-add-btn">Chọn mua</button>
+                        </div>
+                        <!-- Item 3 (thêm để scroll) -->
+                        <div class="upsell-item">
+                            <img src="https://placehold.co/80x80/EEE/333?text=AVA+" alt="Tai nghe">
+                            <span class="upsell-discount">-20%</span>
+                            <p class="upsell-name">Tai nghe Bluetooth AVA+ Go P310</p>
+                            <span class="upsell-new-price">190.000₫</span>
+                            <span class="upsell-old-price">240.000₫</span>
+                            <button class="upsell-add-btn">Chọn mua</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 2 -->
+            <div class="cart-item">
+                <div class="item-main">
+                    <img class="item-img" src="https://placehold.co/100x100/FEE/333?text=AVA+" alt="Sản phẩm">
+                    <div class="item-details">
+                        <h4>Tai nghe Bluetooth AVA+ Go P310</h4>
+                        <div class="item-variant">
+                            <span>Màu: Màu be</span>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                        <div class="item-promo-flashsale">
+                            <i class="ri-flashlight-line"></i>
+                            <span>Flashsale kết thúc sau: 07:01:09</span>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </div>
+                    <div class="item-price-col">
+                        <span class="item-price">190.000₫</span>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <span class="item-delete">Xoá</span>
+                    <div class="quantity-control">
+                        <button class="quantity-btn" aria-label="Giảm">-</button>
+                        <input class="quantity-input" type="text" value="1" aria-label="Số lượng">
+                        <button class="quantity-btn" aria-label="Tăng">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- Hết cart-items-list -->
+        
+        <!-- Tạm tính -->
+        <div class="cart-subtotal">
+            <span>Tạm tính (2 sản phẩm):</span>
+            <span class="subtotal-price">16.880.000₫</span>
+        </div>
+
+        <!-- Nút đặt hàng -->
+        <div class="checkout-button-container">
+            <button class="checkout-button-tgdd">
+                ĐẶT HÀNG
+                <span>(Giao hàng từ 2h - 12h)</span>
+            </button>
+        </div>
+
+    </main>
+    
+    <!-- (Bạn có thể thêm <footer> vào đây sau) -->
+
+    <!-- Script cho mobile menu -->
+    <script>
+        const hamburger = document.getElementById('hamburger-icon');
+        const mobileMenu = document.getElementById('mobile-menu-container');
+        const closeMenu = document.getElementById('mobile-menu-close');
+        const overlay = document.getElementById('menu-overlay');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        if (hamburger) hamburger.addEventListener('click', toggleMenu);
+        if (closeMenu) closeMenu.addEventListener('click', toggleMenu);
+        if (overlay) overlay.addEventListener('click', toggleMenu);
+        
+        const searchBars = document.querySelectorAll('.searchBar');
+        searchBars.forEach(bar => {
+            const input = bar.querySelector('input');
+            if (input) {
+                input.addEventListener('focus', () => bar.classList.add('active'));
+                input.addEventListener('blur', () => bar.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
