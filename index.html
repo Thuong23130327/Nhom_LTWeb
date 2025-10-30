@@ -17,39 +17,70 @@
 
 <body>
     <header>
-        <div class="loopText">
-            <div class="loop-item">AuraSound - Âm thanh định hình phong cách</div>
-            <div class="loop-item">AuraSound - Âm thanh định hình phong cách</div>
-        </div>
-        <div class="RightHead">
-            <a href="">Cửu hàng gần đây</a>
-            <a href="">Tra cứu đơn hàng</a>
-            <a href="">1900 1809</a>
+        <div class="head-left">
+            <div class="ticker-content">
+                <div class="ticker-item">AuraSound - Âm thanh định hình phong cách </div>
+                <div class="ticker-item">Chuyên Tai nghe, Loa chính hãng</div>
+                <div class="ticker-item">AuraSound - Âm thanh định hình phong cách</div>
+                <div class="ticker-item">Bảo hành 1 đổi 1</div>
+            </div>
         </div>
 
+        <div class="head-right">
+            <a href="#" class="head-link">Cửa hàng gần đây</a>
+            <a href="#" class="head-link">Tra cứu đơn hàng</a>
+            <a href="tel:19001809" class="utility-phone">1900 1809</a>
+        </div>
     </header>
     <nav>
-        <div class="logo">
-            <div class="logo-container">
-                <div class="logo-icon">
-                    <div class="sound-wave wave-1"></div>
-                    <div class="sound-wave wave-2"></div>
-                    <div class="sound-wave wave-3"></div>
-                </div>
-                <span class="logo-text">AuraSound</span>
+        <div class="logo-container">
+            <div class="logo-icon">
+                <div class="sound-wave wave-1"></div>
+                <div class="sound-wave wave-2"></div>
+                <div class="sound-wave wave-3"></div>
             </div>
-            <div id="TabBarRight">
-                <div class="searchBar">
-                    <input type="text" placeholder="Search here">
-                    <a href="#"><i class="ri-search-line"></i></a>
-                </div>
-                <div class="TabBar">Đăng nhập</div>
-                <div class="TabBar">Giỏ hàng</div>
-                <div class="TabBar"> <a href="about.html">About</a></div>
-                <div class="TabBar">Project</div>
+            <span class="logo-text">AuraSound</span>
+        </div>
+
+        <div id="TabBarRight">
+            <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
+            </div>
+            <div class="TabBar" id="nav-cart">
+                <a href="about.html">Giỏ hàng</a>
+            </div>
+            <div class="TabBar" id="nav-login">
+                <a href="about.html" class="nav-login-btn">Đăng nhập</a>
+            </div>
+            <div id="hamburger-icon">
+                <i class="ri-menu-line"></i>
             </div>
         </div>
     </nav>
+
+    <div class="mobile-menu" id="mobile-menu-container">
+        <div class="mobile-menu-header">
+            <span class="logo-text">AuraSound</span>
+            <i class="ri-close-line" id="mobile-menu-close"></i>
+        </div>
+
+        <div class="mobile-menu-item">
+             <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-item">
+            <a href="about.html">Giỏ hàng</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="about.html" class="nav-login-btn">Đăng nhập</a>
+        </div>
+
+    </div>
+    <div class="overlay" id="menu-overlay"></div>
 
     <main>
         <!-- thong tin -->
