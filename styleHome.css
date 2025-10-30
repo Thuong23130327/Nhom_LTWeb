@@ -1,7 +1,14 @@
+:root {
+    --theme-color-primary: #4a6fff;
+    --theme-color-secondary: #b76bff;
+    --theme-gradient-button: linear-gradient(135deg, var(--theme-color-secondary), var(--theme-color-primary));
+    --theme-gradient-icon: linear-gradient(135deg, var(--theme-color-primary), var(--theme-color-secondary));
+    --theme-gradient-text: linear-gradient(90deg, var(--theme-color-secondary), var(--theme-color-primary));
+}
+
 body {
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: lightblue;
+    margin: 0;
+    background-color: white;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -14,10 +21,23 @@ body {
     box-sizing: border-box;
 }
 
-
-header {
+.header-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    /* Đẩy 2 phần ra 2 bên */
+    height: 100%;
+
+    /* 2 dòng quan trọng nhất để căn giữa giống nav */
+    max-width: 1200px;
+    margin: 0 auto;
+
+    /* Thêm padding 2 bên để thẳng hàng với padding của nav */
+    padding: 0 25px;
+    box-sizing: border-box;
+}
+
+header {
     width: 100%;
     background-color: #222;
     color: white;
@@ -68,12 +88,14 @@ header {
 }
 
 .head-right a:hover {
-    color: #4a6fff;
+    color: var(--theme-color-primary);
     transform: scale(1.1);
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
 nav {
+    max-width: 1200px;
+    margin: 0 auto;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     display: flex;
@@ -98,7 +120,7 @@ nav {
 
 #nav-login,
 .mobile-menu-item .nav-login-btn {
-    background-color: #4a6fff;
+    background-color: var(--theme-color-primary);
     padding: 5px 10px;
     border-radius: 33px;
     color: white;
@@ -107,7 +129,7 @@ nav {
 
 #nav-login:hover,
 .mobile-menu-item .nav-login-btn:hover {
-    background: linear-gradient(135deg, #b76bff, #4a6fff);
+    background: var(--theme-gradient-button);
     transform: scale(1.02);
     padding: 5px 10px;
     transition: color 0.3s ease, transform 0.2s ease;
@@ -121,7 +143,7 @@ nav {
 
 .TabBar a {
     text-decoration: none;
-    color: #4a6fff;
+    color: var(--theme-color-primary);
 }
 
 .TabBar:hover {
@@ -137,7 +159,7 @@ nav {
     display: none;
     font-size: 18px;
     cursor: pointer;
-    color: #4a6fff;
+    color: var(--theme-color-primary);
     margin-left: 10px;
 }
 
@@ -171,7 +193,7 @@ nav {
 .searchBar i {
     cursor: pointer;
     font-size: 15px;
-    color: #4a6fff;
+    color: var(--theme-color-primary);
     margin-left: 10px;
 }
 
@@ -182,34 +204,40 @@ nav {
     transition: 0.5s ease-in;
 
 }
+
 /* xu li secsion */
 #home {
     width: 100%;
     height: 90vh;
-    background: url("img/banner/banner.jpg") center/cover no-repeat ;
+    background: url("img/banner/banner.jpg") center/cover no-repeat;
     background-size: cover;
     background-position: top center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-}   
-#home span{
-    color: #4a6fff;
 }
-h5{
+
+#home span {
+    color: var(--theme-color-primary);
+}
+
+h5 {
     font-size: 30px;
 }
-h1{
+
+h1 {
     font-size: 50px;
     font-weight: 700;
 }
-p{
+
+p {
     font-size: 30px;
     color: #000000;
     font-weight: 600;
 }
-.buyNow-button{
+
+.buyNow-button {
     font-size: 0.8rem;
     font-weight: 700;
     border-radius: 50px;
@@ -223,11 +251,11 @@ p{
     transition: 0.3s ease;
 }
 
-.buyNow-button:hover{
-    background-color: #4a6fff;
+.buyNow-button:hover {
+    background-color: var(--theme-color-primary);
 }
 
-#new .one img{
+#new .one img {
     width: 100%;
     height: 100%;
     background-position: center center;
@@ -236,7 +264,7 @@ p{
     position: relative;
 }
 
-#new .one .details{
+#new .one .details {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -244,36 +272,37 @@ p{
     left: 0;
     transition: 0.3s ease;
 }
-#new .one:hover .details{
+
+#new .one:hover .details {
     cursor: pointer;
-    background-color: rgba( 245, 178, 178, 0.7) ;
+    background-color: rgba(245, 178, 178, 0.7);
 }
 
-#new .one .details button{
+#new .one .details button {
     display: inline-block;
     background: transparent;
     border: none;
     font-size: 28px;
     font-weight: 500;
-    color: #4a6fff;
+    color: var(--theme-color-primary);
     text-transform: uppercase;
-    border-bottom: 1px solid #4a6fff;
+    border-bottom: 1px solid var(--theme-color-primary);
     padding: 2.5px;
     transform: translateY(70px);
     transition: 0.3s ease;
 }
 
-#new .one .details button:hover{
+#new .one .details button:hover {
     color: #fff;
     border-bottom: 1px solid #fff;
 }
 
-#new .one .details .product-text{
+#new .one .details .product-text {
     font-size: 35px;
-    color: #4a6fff;
+    color: var(--theme-color-primary);
 }
 
-#new .one:nth-child(1) .details{
+#new .one:nth-child(1) .details {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -281,7 +310,7 @@ p{
     text-align: start;
 }
 
-#new .one:nth-child(2) .details{
+#new .one:nth-child(2) .details {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -289,7 +318,7 @@ p{
     text-align: center;
 }
 
-#new .one:nth-child(3) .details{
+#new .one:nth-child(3) .details {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -297,13 +326,15 @@ p{
     text-align: end;
 }
 
-#new .one{
+#new .one {
     position: relative;
 }
+
 .TabBar a {
     text-decoration: none;
     color: inherit;
 }
+
 @media (max-width: 700px) {
     .head-right {
         display: none;
@@ -357,7 +388,7 @@ p{
     height: 40px;
     margin-right: 8px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #4a6fff, #b76bff);
+    background: var(--theme-gradient-button);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -404,7 +435,7 @@ p{
 .logo-text {
     font-size: 24px;
     font-weight: 600;
-    background: linear-gradient(90deg, #b76bff, #4a6fff);
+    background:var(--theme-gradient-button);
     background-clip: text;
     color: transparent;
 }
@@ -467,7 +498,7 @@ p{
 
 #mobile-menu-close:hover {
     transform: scale(1.1);
-    color: #4a6fff;
+    color: var(--theme-color-primary);
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -482,7 +513,7 @@ p{
 
 .mobile-menu-item a:hover {
     transform: scale(1.1);
-    color: #4a6fff;
+    color: var(--theme-color-primary);
     transition: color 0.3s ease, transform 0.3s ease;
 
 }
