@@ -46,7 +46,7 @@ header {
     box-sizing: border-box;
 }
 
-main{
+main {
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -214,7 +214,7 @@ nav {
 #home {
     width: 100%;
     height: 90vh;
-        /* Ảnh ở đây */
+    /* Ảnh ở đây */
     background: url("img/banner/banner.jpg") center/cover no-repeat;
     background-size: cover;
     background-position: top 10px center;
@@ -242,25 +242,27 @@ p {
     color: #000000;
     font-weight: 400;
 }
+
 /* Đường kẻ ngăn cách */
-hr{
+hr {
     width: 30px;
     height: 3px;
     background-color: #000000;
 }
 
-.line{
+.line {
     width: 90%;
     height: 5px;
     border-radius: 3px;
     margin: 0 auto;
 }
+
 /* --- */
-.star{
+.star {
     padding: 10px 0;
 }
 
-.star i{
+.star i {
     font-size: 0.8rem;
     color: goldenrod;
 }
@@ -355,7 +357,7 @@ hr{
 }
 
 /* Product */
-.product{
+.product {
     cursor: pointer;
     margin-bottom: 2rem;
     padding-bottom: 10px;
@@ -364,15 +366,15 @@ hr{
     gap: 5px;
 }
 
-.product img{
+.product img {
     transition: 0.3s all;
 }
 
-.product:hover img{
+.product:hover img {
     opacity: 0.5;
 }
 
-.product .buy-btn{
+.product .buy-btn {
     background-color: #4a6fff;
     color: white;
     font-size: 15px;
@@ -384,14 +386,14 @@ hr{
     padding: 5px 20px;
     border-radius: 30px;
 }
-    
 
-.product:hover .buy-btn{
+
+.product:hover .buy-btn {
     transform: translateY(0);
     opacity: 1;
 }
 
-#banner{
+#banner {
     width: 100%;
     height: 90vh;
     /* Ảnh ở đây */
@@ -399,23 +401,22 @@ hr{
     background-size: cover;
     background-position: top 10px center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    
+
 }
 
-#banner h4{
+#banner h4 {
     color: #fff;
 }
 
-#banner h1{
+#banner h1 {
     color: white;
 }
 
-#banner button{
+#banner button {
     background-color: #4a6fff;
     color: white;
     border: none;
@@ -426,7 +427,7 @@ hr{
     transition: 0.3s ease;
 }
 
-#banner button:hover{
+#banner button:hover {
     opacity: 0.7;
     background-color: blue;
     scale: 1.1;
@@ -541,7 +542,7 @@ hr{
 .logo-text {
     font-size: 24px;
     font-weight: 600;
-    background:var(--theme-gradient-button);
+    background: var(--theme-gradient-button);
     background-clip: text;
     color: transparent;
 }
