@@ -1,9 +1,6 @@
-/* --------- Trang Giỏ Hàng (Phong cách TGDĐ) --------- */
 
-/* Đặt màu nền cho body của trang giỏ hàng */
 .cart-body-bg {
     background-color: #f3f3f3;
-    /* Màu nền xám nhạt */
 }
 
 .cart-container {
@@ -38,8 +35,9 @@
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
-    text-align: center;
     flex-grow: 1;
+    justify-content: center;
+    display: flex;
 }
 
 /* Tùy chọn Giao hàng */
