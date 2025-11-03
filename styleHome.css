@@ -238,11 +238,18 @@ p {
     color: #000000;
     font-weight: 400;
 }
-
+/* Đường kẻ ngăn cách */
 hr{
     width: 30px;
     height: 3px;
     background-color: #000000;
+}
+
+.line{
+    width: 90%;
+    height: 5px;
+    border-radius: 3px;
+    margin: 0 auto;
 }
 
 .star{
