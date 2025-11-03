@@ -46,6 +46,10 @@ header {
     box-sizing: border-box;
 }
 
+main{
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
 .ticker-content {
     display: flex;
@@ -251,7 +255,7 @@ hr{
     border-radius: 3px;
     margin: 0 auto;
 }
-
+/* --- */
 .star{
     padding: 10px 0;
 }
@@ -354,7 +358,10 @@ hr{
 .product{
     cursor: pointer;
     margin-bottom: 2rem;
-    
+    padding-bottom: 10px;
+    box-shadow: lightgray 0 2px 5px;
+    display: block;
+    gap: 5px;
 }
 
 .product img{
@@ -371,7 +378,6 @@ hr{
     font-size: 15px;
     border: none;
     font-weight: 500;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     transform: translateY(20px);
     opacity: 0;
     transition: 0.3s all;
@@ -398,6 +404,7 @@ hr{
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    
 }
 
 #banner h4{
