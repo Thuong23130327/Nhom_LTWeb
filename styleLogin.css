@@ -12,7 +12,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Roboto', sans-serif;
 }
 
 body{
@@ -34,6 +34,15 @@ body{
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+}
+
+.container h1{
+    font-weight: 700;
+    font-family: 'Roboto', 'Poppins', sans-serif;
+}
+
+.container p, .container span{
+    font-weight: 400;
 }
 
 .container p{
@@ -75,6 +84,7 @@ body{
 }
 
 .container form{
+    font-weight: 500;
     background-color: white;
     display: flex;
     align-items: center;
