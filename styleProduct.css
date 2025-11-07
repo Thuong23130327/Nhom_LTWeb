@@ -1,12 +1,51 @@
 
+
+body {
+    margin: 0;
+    background-color: var(--white);
+    font-family: 'Poppins', sans-serif;
+}
+/* 
+main {
+  max-width: 1200px; 
+  margin: 0 auto;      
+  padding: 0;   
+} */
+
+.info h6{
+    color: #a0a0a0;
+}
+
+.info h3{
+    font-weight: 700;
+}
+
+.info h2{
+    font-weight: 500;
+}
 .small-img-group{
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
+    background-color: #efefef;
 }
 
 .small-img-col{
     flex-basis: 24%;
     cursor: pointer;
+}
+
+.small-img {
+  width: 100%;
+  border: 1px solid var(--black);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--white);
+}
+
+.img-primary{
+    background-color: var(--white);
+    border: 1px solid var(--black);
 }
 
 .sproduct select{
