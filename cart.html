@@ -14,53 +14,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header>
-        <div class="header-container content">
+        <div class="header-container">
             <div class="head-left">
-                <div class="head-scroll">
-                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
-                    <div class="text-item">Chuyên các loại Loa, Tai nghe chính hãng</div>
-                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
-                    <div class="text-item">Bảo hành 1 đổi 1 trong 1 tháng</div>
+                <div class="ticker-content">
+                    <div class="ticker-item">AuraSound - Âm thanh định hình phong cách </div>
+                    <div class="ticker-item">Chuyên Tai nghe, Loa chính hãng</div>
+                    <div class="ticker-item">AuraSound - Âm thanh định hình phong cách</div>
+                    <div class="ticker-item">Bảo hành 1 đổi 1</div>
                 </div>
             </div>
             <div class="head-right">
-                <div class="info-item"><a href="">Cửa hàng gần đây</a></div>
-                <div class="info-item"><a href="">Tra cứu đơn hàng</a></div>
-                <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
+                <a href="#" class="head-link">Cửa hàng gần đây</a>
+                <a href="#" class="head-link">Tra cứu đơn hàng</a>
+                <a href="tel:19001809" class="utility-phone">1900 1809</a>
             </div>
         </div>
     </header>
+
     <nav>
-        <div class="nav-container content">
-            <div class="nav-left">
-                <div class="logo-wave">
-                    <div class="sound-wave wave1"></div>
-                    <div class="sound-wave wave2"></div>
-                    <div class="sound-wave wave3"></div>
+        <div class="logo-container">
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                <div class="logo-icon">
+                    <div class="sound-wave wave-1"></div>
+                    <div class="sound-wave wave-2"></div>
+                    <div class="sound-wave wave-3"></div>
                 </div>
-                <div class="logo-text">AuraSound
-                </div>
+                <span class="logo-text">AuraSound</span>
+            </a>
+        </div>
+
+        <div id="TabBarRight">
+            <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
             </div>
-            <div class="nav-right">
-                <div class="searchBar">
-                    <input type="text" placeholder="Tìm kiếm">
-                    <a href="#"><i class="bi bi-search"></i></a>
-                </div>
-                <a class="a-nodecor" href="cart.html">
-                    <div class="cart">Giỏ hàng</div>
-                </a>
-                <a class="a-nodecor" href="index.html">
-                    <div class="login">Đăng nhập</div>
-                </a>
-                <div id="hamburger-icon">
-                    <i class="ri-menu-line"></i>
-                </div>
+            <div class="TabBar" id="nav-cart">
+                <a href="cart.html">Giỏ hàng</a>
+            </div>
+            <div class="TabBar" id="nav-login">
+                <a href="login.html" class="nav-login-btn">Đăng nhập</a>
+            </div>
+            <div id="hamburger-icon">
+                <i class="ri-menu-line"></i>
             </div>
         </div>
     </nav>
@@ -192,7 +196,7 @@
 
             <div class="upsell-section">
                 <div class="upsell-header">
-                    <i class="ri-shopping-bag-3-line"></i>
+                    <i class="ri-shoppin g-bag-3-line"></i>
                     <strong>Mua kèm giảm giá 20%</strong>
                     <i class="ri-arrow-down-s-line arrow-icon"></i>
                 </div>

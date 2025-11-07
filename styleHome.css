@@ -28,7 +28,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Đẩy 2 phần ra 2 bên */
     height: 100%;
 
     /* 2 dòng quan trọng nhất để căn giữa giống nav */
@@ -534,7 +533,6 @@ hr {
 }
 
 @keyframes bounce {
-
     0%,
     40%,
     100% {
