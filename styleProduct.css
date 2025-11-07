@@ -1,3 +1,4 @@
+
 .small-img-group{
     display: flex;
     justify-content: space-between;
@@ -6,4 +7,44 @@
 .small-img-col{
     flex-basis: 24%;
     cursor: pointer;
+}
+
+.sproduct select{
+    display: block;
+    padding: 5px 10px;
+    border: 2px solid #a0a0a0;
+    border-radius: 10px;
+}
+
+.sproduct input{
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 2px solid #a0a0a0;
+}
+
+.sproduct input:focus{
+    outline: auto;
+}
+
+.buy-btn{
+    background-color: var(--theme-color-primary);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover{
+    color: var(--white);
+    background: var(--theme-gradient-button);
+    transition: all 0.3s ease;
+    transform: scale(1.1);
 }
