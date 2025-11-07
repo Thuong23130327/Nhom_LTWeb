@@ -41,33 +41,36 @@
     </header>
     <nav>
         <div class="nav-container content">
+
             <div class="nav-left">
-                <div class="logo-wave">
-                    <div class="sound-wave wave1"></div>
-                    <div class="sound-wave wave2"></div>
-                    <div class="sound-wave wave3"></div>
-                </div>
-                <span class="logo-text">AuraSound</span>
+                <a class="a-nodecor logo-container " href="index.html">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
                 </a>
             </div>
 
-            <div id="TabBarRight">
-                <div class="nav-right">
-                    <div class="searchBar">
-                        <input type="text" placeholder="Tìm kiếm">
-                        <a href="#"><i class="bi bi-search"></i></a>
-                    </div>
-                    <a class="a-nodecor" href="cart.html">
-                        <div class="cart">Giỏ hàng</div>
-                    </a>
-                    <a class="a-nodecor" href="index.html">
-                        <div class="login">Đăng nhập</div>
-                    </a>
-                    <div id="hamburger-icon">
-                        <i class="ri-menu-line"></i>
-                    </div>
+            <div class="nav-right">
+                <div class="searchBar">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <a href="#"><i class="bi bi-search"></i></a>
+                </div>
+                <a class="a-nodecor" href="cart.html">
+                    <div class="cart"> <i class="bi bi-cart"></i>
+                        Giỏ hàng</div>
+                </a>
+                <a class="a-nodecor" href="login.html">
+                    <div class="login">Đăng nhập</div>
+                </a>
+                <div id="hamburger-icon">
+                    <i class="bi bi-list"></i>
                 </div>
             </div>
+
+        </div>
     </nav>
 
     <div class="mobile-menu" id="mobile-menu-container">
@@ -75,18 +78,21 @@
             <span class="logo-text">AuraSound</span>
             <i class="ri-close-line" id="mobile-menu-close"></i>
         </div>
+
         <div class="mobile-menu-item">
             <div class="searchBar">
                 <input type="text" placeholder="Tìm kiếm">
                 <a href="#"><i class="ri-search-line"></i></a>
             </div>
         </div>
+
         <div class="mobile-menu-item">
             <a href="cart.html">Giỏ hàng</a>
         </div>
         <div class="mobile-menu-item">
-            <a href="about.html" class="nav-login-btn">Đăng nhập</a>
+            <a href="login.html" class="nav-login-btn">Đăng nhập</a>
         </div>
+
     </div>
     <div class="overlay" id="menu-overlay"></div>
 
@@ -155,30 +161,62 @@
 
 
     <main class="cart-container">
-        <div class="user-info-box">
+        <div class="user-container">
             <i class="bi bi-person-circle"></i>
             <div>
                 <strong>Người nhận: Anh NGUYỄN HOÀI THƯƠNG - 0909123456</strong>
                 <p>43 Quốc Lộ 1K, Khu phố 2, Phường Linh Xuân, Thành phố Thủ Đức,...</p>
             </div>
-            <i class="ri-arrow-right-s-line arrow-icon"></i>
+            <i class="bi bi-arrow-right-circle"></i>
         </div>
 
         <div class="cart-items-list">
+            <div class="cart-item">
+                <div class="item-main">
+                    <img class="item-img"
+                        src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/333575/oppo-reno13-white-1-638711560052523670-750x500.jpg"
+                        alt="Sản phẩm">
+                    <div class="item-details">
+                        <h4>Điện thoại OPPO Reno13 5G 12GB/512GB</h4>
+                        <div class="item-variant">
+                            <span>Màu: Trắng</span>
+                            <i class="bi bi-chevron-compact-down"></i>
+                        </div>
+                        <div class="item-promo">
+                            <i class="bi bi-ticket-perforated-fill"></i>
+                            <span> 6 Khuyến mãi</span>
+                            <i class="bi bi-chevron-compact-down"></i>
+                        </div>
+                    </div>
+                    <div class="item-price-col">
+                        <span class="item-price">16.690.000₫</span>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <span class="item-delete">Xoá</span>
+                    <div class="quantity-control">
+                        <button class="quantity-btn" aria-label="Giảm">-</button>
+                        <input class="quantity-input" type="text" value="1" aria-label="Số lượng">
+                        <button class="quantity-btn" aria-label="Tăng">+</button>
+                    </div>
+                </div>
+            </div>
 
             <div class="cart-item">
                 <div class="item-main">
-                    <img class="item-img" src="https://placehold.co/100x100/EFE/333?text=Oppo" alt="Sản phẩm">
+                    <img class="item-img"
+                        src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/333575/oppo-reno13-blue-1-638711561368890602-750x500.jpg"
+                        alt="Sản phẩm">
                     <div class="item-details">
                         <h4>Điện thoại OPPO Reno13 5G 12GB/512GB</h4>
                         <div class="item-variant">
                             <span>Màu: Xanh Dương</span>
-                            <i class="ri-arrow-down-s-line"></i>
+                            <i class="bi bi-chevron-compact-down"></i>
                         </div>
                         <div class="item-promo">
-                            <i class="ri-coupon-3-line"></i>
+                            <i class="bi bi-ticket-perforated-fill"></i>
                             <span> 6 Khuyến mãi</span>
-                            <i class="ri-arrow-down-s-line"></i>
+                            <i class="bi bi-chevron-compact-down"></i>
                         </div>
                     </div>
                     <div class="item-price-col">
