@@ -74,11 +74,6 @@ main {
     width: 100px;
 } */
 
-
-.cart-body-bg {
-    background-color: #f3f3f3;
-}
-
 .cart-container {
     max-width: 1200px;
     margin: 20px auto;
@@ -86,75 +81,65 @@ main {
     box-sizing: border-box;
 }
 
-.cart-title-bar {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 8px 8px 0 0;
-    padding: 10px;
-    border-bottom: 1px solid #f3f3f3;
-}
-
-.cart-title-bar .back-link {
-    text-decoration: none;
+/* Button Giỏ hàng */
+.cart {
+    box-shadow: lightgrey 0 2px 5px;
+    border: var(--theme-color-primary) 1px solid;
     color: var(--theme-color-primary);
-    font-size: 1rem;
+}
+
+.cart:hover {
+    box-shadow: lightgrey 0 2px 10px;
+    color: white;
+    background-color: var(--theme-color-primary);
+    font-weight: 200;
+}
+
+.user-container {
+    background-color: #f1f8fe;
     display: flex;
     align-items: center;
-}
-
-.cart-title-bar .back-link i {
-    font-size: 1.5rem;
-}
-
-.cart-title-bar h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
-    flex-grow: 1;
-    justify-content: center;
-    display: flex;
-}
-
- .user-info-box {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    padding: 15px;
-    margin-top: 15px;
-    border-radius: 8px;
-    gap: 15px;
     cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    gap: 15px 10px;
+    margin: 5px;
+    border: #bbd6f0 2px solid;
 }
 
-.user-info-box>i:first-child {
-    font-size: 1.5rem;
-    color: var(--theme-color-primary, #4a6fff);
+/* Div chứa thông tin khách hàng */
+.user-container i {
+    font-size: 20px;
+    color: var(--theme-color-primary);
+    transition: all 0.4s ease;
 }
 
-.user-info-box div {
+.user-container i:hover {
+    transform: scale(1.5);
+    color: var(--theme-color-secondary);
+}
+
+
+.user-container div {
     flex-grow: 1;
 }
 
-.user-info-box strong {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
+.user-container strong {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--black);
 }
 
-.user-info-box p {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 5px 0 0 0;
+.user-container p {
+    font-size: 14px;
+    color: lightslategrey;
+    margin-top: 5px;
 }
 
-.user-info-box .arrow-icon {
-    font-size: 1.5rem;
-    color: #999;
-}
+/* SP trong giỏ hàng */
 
 .cart-items-list {
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 8px;
     margin-top: 15px;
     overflow: hidden;
@@ -168,7 +153,7 @@ main {
 .cart-item:last-child {
     border-bottom: none;
 }
-
+/* chứa SP - Ko gồm thêm sluong */
 .item-main {
     display: flex;
     gap: 15px;
@@ -179,7 +164,7 @@ main {
     height: 80px;
     object-fit: cover;
     border-radius: 8px;
-    border: 1px solid #eee;
+    border: 1px solid #f3f3f3;
     flex-shrink: 0;
 }
 
@@ -210,6 +195,7 @@ main {
     margin-left: 5px;
 }
 
+/* Deal khi mua kèm */
 .item-promo,
 .item-promo-flashsale {
     font-size: 0.9rem;
@@ -234,7 +220,7 @@ main {
     font-weight: 600;
     color: #e74c3c;
 }
-
+/* thao tác sluong */
 .item-actions {
     display: flex;
     justify-content: flex-end;
