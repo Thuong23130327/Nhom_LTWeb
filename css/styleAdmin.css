@@ -10,20 +10,20 @@
     --theme-gradient-text: linear-gradient(90deg, var(--theme-color-secondary), var(--theme-color-primary));
 }
 
-body{
+body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--white);
     color: var(--black);
 }
 
 /* Navbar */
-.navbar{
+.navbar {
     background: var(--theme-gradient-icon) !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);    
 }
 
 /* Tùy chỉnh slideBar */
-.sidebar{
+.sidebar {
     position: fixed;
     top: 56px;
     bottom: 0;
@@ -34,21 +34,120 @@ body{
     background-color: var(--white);
 }
 
-.sidebar .nav-link{
+.sidebar .nav-link {
     font-weight: 500;
     color: var(--black);
     transition: all 0.3s;
 }
 
-.sidebar .nav-link:hover{
+.sidebar .nav-link:hover {
     color: var(--theme-color-primary);
     background-color: var(--white);
 }
 
-.sidebar .nav-link.active{
+.sidebar .nav-link.active {
     color: var(--white);
     background: var(--theme-gradient-button);
     font-weight: 600;
     border-radius: 5px;
     margin-right: 10px;
+}
+
+/* Tiêu đề chính */
+.h2{
+    font-weight: 700;
+    background: var(--theme-gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Tùy chỉnh nút */
+
+.btn-toolbar button {
+    background: var(--theme-gradient-button);
+    border: none;
+    color: var(--white);
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(74, 111, 255, 0.3);
+    transition: all 0.3s;
+}
+
+.btn-toolbar button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Đảm bảo nội dung chính không bị sidebar che */
+main {
+    padding-top: 56px;
+}
+
+/* Tùy chỉnh cho card */
+.card {
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 12px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card .card-text.h3 {
+    font-weight: 700;
+}
+
+.card .fa-3x {
+    opacity: 0.7;
+}
+
+/* Bảng */
+.table th{
+    font-weight: 600;
+}
+
+/* CSS cho biểu đồ */
+.chart-container {
+    height: 250px;
+    padding: 20px 0;
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--black);
+}
+
+.bar-chart {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.bar {
+    width: 12%;
+    background: var(--theme-gradient-button);
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.bar::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: var(--black);
+    font-weight: 500;
+}
+
+/* Hoạt động gần đây */
+.activity-list .list-group-item{
+    font-size: 0.95rem;
+    padding: 10px 15px;
+    border-color: var(--white);
 }
