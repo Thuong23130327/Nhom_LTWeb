@@ -153,6 +153,7 @@ main {
 .cart-item:last-child {
     border-bottom: none;
 }
+
 /* chứa SP - Ko gồm thêm sluong */
 .item-main {
     display: flex;
