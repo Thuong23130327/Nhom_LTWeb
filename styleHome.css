@@ -211,7 +211,7 @@ nav {
     border-radius: 33px;
     color: var(--white);
 }
- 
+
 .mobile-menu-item .nav-login-btn:hover {
     background: var(--theme-gradient-button);
     transform: scale(1.02);
@@ -824,12 +824,14 @@ hr {
     z-index: 100;
     display: flex;
     flex-direction: column;
-    transform: translateX(-100%);
+    display: none;
     transition: transform 0.3s ease;
+    border-radius: 15px 0 0 15px;
 }
 
 .mobile-menu.active {
-    transform: translateX(0);
+    display: block;
+    transform: translateX(100%);
 }
 
 .mobile-menu-header {
