@@ -1,0 +1,73 @@
+/* ======== CÀI ĐẶT CHUNG ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+/* ======== HEADER GIẢ LẬP ======== */
+header {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-bottom: 1px solid #ddd;
+}
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+.nav-links, .nav-icons {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+.nav-links a, .nav-icons a {
+    text-decoration: none;
+    color: #555;
+    font-weight: bold;
+}
+.nav-links a.active {
+    color: #007bff; /* Màu cho link active */
+    border-bottom: 2px solid #007bff;
+}
+
+/* ======== BREADCRUMB ======== */
+.breadcrumb {
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+.breadcrumb a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+/* ======== BỐ CỤC TRANG CHÍNH ======== */
+.store-page-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem; /* 2rem = 32px */
+}
+
+.store-layout {
+    display: flex;
+    gap: 30px; /* Khoảng cách giữa sidebar và product list */
+}
+
+/* ======== 1. SIDEBAR BỘ LỌC ======== */
+.sidebar-filters {
+    flex: 1; /* Chiếm 1 phần */
+    min

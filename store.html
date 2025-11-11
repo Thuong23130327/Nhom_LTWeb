@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa Hàng - Tai Nghe & Loa</title>
+    <link rel="stylesheet" href="/css/styleStore.css">
+</head>
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <a href="index.html" class="logo">SoundLife</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="store.html" class="active">Cửa Hàng</a></li>
+                <li><a href="about.html">Giới Thiệu</a></li>
+                <li><a href="contact.html">Liên Hệ</a></li>
+            </ul>
+            <ul class="nav-icons">
+                <li><a href="cart.html">🛒 Giỏ Hàng</a></li>
+                <li><a href="login.html">👤 Đăng Nhập</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="store-page-container">
+        
+        <div class="breadcrumb">
+            <a href="index.html">Trang chủ</a> > <span>Cửa hàng</span>
+        </div>
+
+        <h1>Cửa Hàng</h1>
+
+        <div class="store-layout">
+            
+            <aside class="sidebar-filters">
+                <h3>Bộ Lọc</h3>
+
+                <div class="filter-group">
+                    <h4>Danh Mục Sản Phẩm</h4>
+                    <ul>
+                        <li><a href="#">Tất cả sản phẩm</a></li>
+                        <li><a href="#">Tai nghe Over-Ear</a></li>
+                        <li><a href="#">Tai nghe In-Ear</a></li>
+                        <li><a href="#">Loa Di Động</a></li>
+                        <li><a href="#">Loa Dàn</a></li>
+                    </ul>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Thương Hiệu</h4>
+                    <div>
+                        <input type="checkbox" id="brand-sony" name="brand-sony">
+                        <label for="brand-sony">Sony</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="brand-bose" name="brand-bose">
+                        <label for="brand-bose">Bose</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="brand-jbl" name="brand-jbl">
+                        <label for="brand-jbl">JBL</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Mức Giá</h4>
+                    <div>
+                        <input type="radio" id="price-1" name="price-range">
+                        <label for="price-1">Dưới 1.000.000đ</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="price-2" name="price-range">
+                        <label for="price-2">1.000.000đ - 3.000.000đ</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="price-3" name="price-range">
+                        <label for="price-3">Trên 3.000.000đ</label>
+                    </div>
+                </div>
+
+                <button type="button" class="filter-btn">Áp Dụng</button>
+            </aside>
+
+            <section class="product-listing">
+                
+                <div class="sort-bar">
+                    <label for="sort-select">Sắp xếp theo:</label>
+                    <select id="sort-select" name="sort-select">
+                        <option value="default">Mặc định</option>
+                        <option value="price-asc">Giá: Tăng dần</option>
+                        <option value="price-desc">Giá: Giảm dần</option>
+                        <option value="newest">Mới nhất</option>
+                    </select>
+                </div>
+
+                <div class="product-grid">
+                    
+                    <a href="product-detail-1.html" class="product-card">
+                        <img src="images/tai-nghe-1.jpg" alt="Tai nghe Sony WH-1000XM5">
+                        <h4 class="product-name">Tai nghe Sony WH-1000XM5</h4>
+                        <p class="product-price">7.990.000đ</p>
+                    </a>
+
+                    <a href="product-detail-2.html" class="product-card">
+                        <img src="images/loa-1.jpg" alt="Loa JBL Charge 5">
+                        <h4 class="product-name">Loa JBL Charge 5</h4>
+                        <p class="product-price">3.990.000đ</p>
+                    </a>
+
+                    <a href="product-detail-3.html" class="product-card">
+                        <img src="images/tai-nghe-2.jpg" alt="Tai nghe Bose QC45">
+                        <h4 class="product-name">Tai nghe Bose QC45</h4>
+                        <p class="product-price">6.490.000đ</p>
+                    </a>
+
+                    <a href="product-detail-4.html" class="product-card">
+                        <img src="images/loa-2.jpg" alt="Loa Marshall Stanmore II">
+                        <h4 class="product-name">Loa Marshall Stanmore II</h4>
+                        <p class="product-price">9.990.000đ</p>
+                    </a>
+                    
+                    <a href="product-detail-5.html" class="product-card">
+                        <img src="images/tai-nghe-3.jpg" alt="Apple AirPods Pro 2">
+                        <h4 class="product-name">Apple AirPods Pro 2</h4>
+                        <p class="product-price">5.490.000đ</p>
+                    </a>
+
+                    <a href="product-detail-6.html" class="product-card">
+                        <img src="images/loa-3.jpg" alt="Loa Sony SRS-XB13">
+                        <h4 class="product-name">Loa Sony SRS-XB13</h4>
+                        <p class="product-price">1.190.000đ</p>
+                    </a>
+                    
+                </div>
+
+                <div class="pagination">
+                    <a href="#">&laquo;</a> <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">&raquo;</a> </div>
+
+            </section>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Đồ án Lập Trình Web. Bán tai nghe và loa.</p>
+    </footer>
+
+    <script src="/js/scriptStore.js"></script>
+</body>
+</html>
