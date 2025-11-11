@@ -1,0 +1,81 @@
+#form-details{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px;
+    padding: 40px;
+    border: 1px solid #d3d3d3;
+}
+
+
+#form-details form{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#form-details form span{
+    font-size: 12px;
+}
+
+#form-details form h2{
+    font-size: 26px;
+    line-height: 35px;
+    padding: 20px 0;
+}
+
+#form-details form input,
+#form-details form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    outline: none;
+    margin-bottom: 20px;
+    border: 1px solid #d3d3d3;
+}
+
+#form-details form button{
+    background-color: var(--theme-color-primary);
+    color: var(--white);
+    font-size: 15px;
+    border: none;
+    font-weight: 500;
+    padding: 5px 20px;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+   
+}
+
+#form-details form button:hover{
+    background: var(--theme-gradient-button);
+    transform: scale(1.1);
+}
+
+.people div{
+    padding-bottom: 25px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.people div img{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 15px;
+}
+
+.people div p{
+    margin: 0;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+.people div p span{
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--black);
+}
+
+
