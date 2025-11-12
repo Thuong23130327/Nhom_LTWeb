@@ -12,7 +12,7 @@ Thương */
 
 body {
     margin: 0;
-    background-color: var(--white);
+    background-color: black;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -220,7 +220,7 @@ nav {
     color: var(--white);
 }
 
-.active {
+.nav-right.active {
     color: var(--theme-color-secondary);
 }
 
@@ -264,7 +264,6 @@ nav {
 
 .login:hover {
     box-shadow: lightgrey 0 2px 5px;
-    transform: scale(1.1);
     background: var(--theme-gradient-icon);
 }
 
@@ -276,20 +275,27 @@ nav {
     border-radius: 15px;
 }
 
-.cart {
+.cart,
+.home,
+.contact,
+.store {
     box-sizing: border-box;
-    transition: all 0.5s ease;
+    transition: color 0.5s ease;
     color: var(--theme-color-primary);
     padding: 5px 10px;
     border-radius: 15px;
 }
 
-
-.cart:hover {
+.cart:hover,
+.home:hover,
+.contact:hover,
+.store:hover {
+    color: var(--white);
+    box-sizing: border-box;
     box-shadow: lightgrey 0 2px 5px;
     background: var(--theme-gradient-button);
-    color: var(--white);
 }
+
 
 
 .searchBar:hover input,
@@ -320,7 +326,6 @@ nav {
     .home,
     .cart,
     .searchBar {
-        /* Đã bỏ #nav-cart khỏi đây */
         display: none;
     }
 
