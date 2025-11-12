@@ -620,6 +620,7 @@ hr {
 
 .product .buy-btn {
     background-color: var(--theme-color-primary);
+    object-fit: contain;
     color: var(--white);
     font-size: 15px;
     border: none;
@@ -627,7 +628,7 @@ hr {
     transform: translateY(20px);
     opacity: 0;
     transition: 0.3s all;
-    padding: 5px 20px;
+    padding: 5px 30px;
     border-radius: 30px;
 }
 
