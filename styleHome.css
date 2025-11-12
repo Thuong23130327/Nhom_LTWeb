@@ -210,7 +210,7 @@ nav {
     border-radius: 33px;
     color: var(--white);
 }
-
+ 
 .mobile-menu-item .nav-login-btn:hover {
     background: var(--theme-gradient-button);
     transform: scale(1.02);
