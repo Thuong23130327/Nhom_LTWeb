@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Cửa Hàng</title>
     <link rel="stylesheet" href="styleHome.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="styleStore.css">
 </head>
 
 <body>
@@ -31,7 +41,7 @@
         <div class="nav-container content">
 
             <div class="nav-left">
-                <a class="a-nodecor logo-container " href="index.html">
+                <a class="a-nodecor logo-container" href="index.html">
                     <div class="logo-wave">
                         <div class="sound-wave wave1"></div>
                         <div class="sound-wave wave2"></div>
@@ -47,15 +57,15 @@
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
                 <a class="a-nodecor" href="index.html">
-                    <div class="home active"></i>
+                    <div class="home">
                         Trang chủ</div>
                 </a>
                 <a class="a-nodecor" href="contact.html">
-                    <div class="contact"></i>
+                    <div class="contact">
                         Liên hệ</div>
                 </a>
                 <a class="a-nodecor" href="store.html">
-                    <div class="store"></i>
+                    <div class="store active">
                         Sản phẩm</div>
                 </a>
                 <a class="a-nodecor" href="cart.html">
@@ -73,43 +83,194 @@
         </div>
     </nav>
 
-    <div class="mobile-menu" id="mobile-menu-container">
-        <div class="mobile-menu-header">
-            <div class="logo-container">
-                <a href="index.html" class="a-nodecor">
-                    <div class="logo-wave">
-                        <div class="sound-wave wave1"></div>
-                        <div class="sound-wave wave2"></div>
-                        <div class="sound-wave wave3"></div>
-                    </div>
-                    <span class="logo-text">AuraSound</span>
-                </a>
-            </div>
-            <i class="bi bi-x-lg" id="mobile-menu-close"></i>
-        </div>
-
-        <div class="mobile-menu-item">
-            <div class="searchBar">
-                <input type="text" placeholder="Tìm kiếm">
-                <a href="#"><i class="ri-search-line"></i></a>
-            </div>
-        </div>
-
-        <div class="mobile-menu-item">
-            <a href="cart.html">Giỏ hàng</a>
-        </div>
-        <div class="mobile-menu-item">
-            <a href="login.html" class="nav-login-btn">Đăng nhập</a>
-        </div>
-        <div class="mobile-menu-item">
-            <a href="contact.html">Liên hệ</a>
-        </div>
-        <div class="mobile-menu-item">
-            <a href="store.html">Sản phẩm</a>
-        </div>
-    </div>
+    <div class="mobile-menu" id="mobile-menu-container"> ... </div>
     <div class="overlay" id="menu-overlay"></div>
+
+
+    <main class="store-container content">
+        <h1>Sản Phẩm</h1>
+
+        <div class="store-controls" id="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Tất cả</button>
+            <button class="filter-btn" data-filter="tai-nghe">Tai Nghe</button>
+            <button class="filter-btn" data-filter="loa">Loa</button>
+        </div>
+
+        <div class="product-grid" id="product-grid">
+
+            <a href="sproduct.html" class="product-card tai-nghe page-1">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Sony WH-1000XM5">
+                <div class="product-card-info">
+                    <h4>Sony WH-1000XM5</h4>
+                    <p>7.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-2.html" class="product-card loa page-1">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/l/o/loa-jbl-charge-5-hong-pink-4.jpg"
+                    alt="Loa JBL Charge 5">
+                <div class="product-card-info">
+                    <h4>Loa JBL Charge 5</h4>
+                    <p>3.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-3.html" class="product-card tai-nghe page-1">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Apple AirPods Pro 2">
+                <div class="product-card-info">
+                    <h4>Apple AirPods Pro 2</h4>
+                    <p>5.490.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-4.html" class="product-card loa page-1">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Loa Marshall Stanmore II">
+                <div class="product-card-info">
+                    <h4>Loa Marshall Stanmore II</h4>
+                    <p>9.990.000đ</p>
+                </div>
+            </a>
+            <a href="sproduct.html" class="product-card tai-nghe page-1">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Sony WH-1000XM5">
+                <div class="product-card-info">
+                    <h4>Sony WH-1000XM5</h4>
+                    <p>7.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-2.html" class="product-card loa page-1">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/l/o/loa-jbl-charge-5-hong-pink-4.jpg"
+                    alt="Loa JBL Charge 5">
+                <div class="product-card-info">
+                    <h4>Loa JBL Charge 5</h4>
+                    <p>3.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-3.html" class="product-card tai-nghe page-1">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Apple AirPods Pro 2">
+                <div class="product-card-info">
+                    <h4>Apple AirPods Pro 2</h4>
+                    <p>5.490.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-4.html" class="product-card loa page-1">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Loa Marshall Stanmore II">
+                <div class="product-card-info">
+                    <h4>Loa Marshall Stanmore II</h4>
+                    <p>9.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-5.html" class="product-card tai-nghe page-1">
+                <img src="assets/images/bose-qc45.jpg" alt="Bose QuietComfort 45">
+                <div class="product-card-info">
+                    <h4>Bose QuietComfort 45</h4>
+                    <p>6.490.000đ</p>
+                </div>
+            </a>
+            <a href="sproduct.html" class="product-card tai-nghe page-1">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Sony WH-1000XM5">
+                <div class="product-card-info">
+                    <h4>Sony WH-1000XM5</h4>
+                    <p>7.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-2.html" class="product-card loa page-1">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/l/o/loa-jbl-charge-5-hong-pink-4.jpg"
+                    alt="Loa JBL Charge 5">
+                <div class="product-card-info">
+                    <h4>Loa JBL Charge 5</h4>
+                    <p>3.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-3.html" class="product-card tai-nghe page-1">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Apple AirPods Pro 2">
+                <div class="product-card-info">
+                    <h4>Apple AirPods Pro 2</h4>
+                    <p>5.490.000đ</p>
+                </div>
+            </a>
+
+            <a href="product-detail-4.html" class="product-card loa page-2">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Loa Marshall Stanmore II">
+                <div class="product-card-info">
+                    <h4>Loa Marshall Stanmore II</h4>
+                    <p>9.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-5.html" class="product-card tai-nghe page-2">
+                <img src="assets/images/bose-qc45.jpg" alt="Bose QuietComfort 45">
+                <div class="product-card-info">
+                    <h4>Bose QuietComfort 45</h4>
+                    <p>6.490.000đ</p>
+                </div>
+            </a>
+            <a href="sproduct.html" class="product-card tai-nghe page-2">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Sony WH-1000XM5">
+                <div class="product-card-info">
+                    <h4>Sony WH-1000XM5</h4>
+                    <p>7.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-2.html" class="product-card loa page-2">
+                <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/l/o/loa-jbl-charge-5-hong-pink-4.jpg"
+                    alt="Loa JBL Charge 5">
+                <div class="product-card-info">
+                    <h4>Loa JBL Charge 5</h4>
+                    <p>3.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-3.html" class="product-card tai-nghe page-2">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Apple AirPods Pro 2">
+                <div class="product-card-info">
+                    <h4>Apple AirPods Pro 2</h4>
+                    <p>5.490.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-4.html" class="product-card loa page-2">
+                <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
+                    alt="Loa Marshall Stanmore II">
+                <div class="product-card-info">
+                    <h4>Loa Marshall Stanmore II</h4>
+                    <p>9.990.000đ</p>
+                </div>
+            </a>
+            <a href="product-detail-5.html" class="product-card tai-nghe page-2">
+                <img src="assets/images/bose-qc45.jpg" alt="Bose QuietComfort 45">
+                <div class="product-card-info">
+                    <h4>Bose QuietComfort 45</h4>
+                    <p>6.490.000đ</p>
+                </div>
+            </a>
+
+            <a href="product-detail-5.html" class="product-card tai-nghe page-3">
+                <img src="assets/images/bose-qc45.jpg" alt="Bose QuietComfort 45">
+                <div class="product-card-info">
+                    <h4>Bose QuietComfort 45 (Trang 3)</h4>
+                    <p>6.490.000đ</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="pagination" id="pagination-buttons">
+            <button class="page-btn active" data-page="1">1</button>
+            <button class="page-btn" data-page="2">2</button>
+            <button class="page-btn" data-page="3">3</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Đồ án Web tĩnh.</p>
+    </footer>
+
     <script src="script.js"></script>
+    <script src="/js/scriptStore.js"></script>
 </body>
 
 </html>

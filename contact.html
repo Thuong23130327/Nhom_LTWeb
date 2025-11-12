@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
+
 <body>
+
     <header>
         <div class="header-container content">
             <div class="head-left">
@@ -54,6 +57,18 @@
                     <input type="text" placeholder="Tìm kiếm">
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
+                <a class="a-nodecor" href="index.html">
+                    <div class="home active">
+                        Trang chủ</div>
+                </a>
+                <a class="a-nodecor" href="contact.html">
+                    <div class="contact">
+                        Liên hệ</div>
+                </a>
+                <a class="a-nodecor" href="store.html">
+                    <div class="store">
+                        Sản phẩm</div>
+                </a>
                 <a class="a-nodecor" href="cart.html">
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
@@ -69,41 +84,81 @@
         </div>
     </nav>
 
-    <main>
-        <section id="page-header" class="contact-header">
-        <h2>#let's_talk</h2>
-        <p>LEAVE A MESSAGE,We love to hear from you</p>
-    </section>
-
-    <section id="form-details">
-        <form action="">
-            <span>LEAVE A MESSAGE</span>
-            <h2>We love to hear from you</h2>
-            <input type="text" placeholder="Your name">
-            <input type="text" placeholder="E-mail">
-            <input type="text" placeholder="Subject">
-            <textarea name="" id="" cols="30" rows="10" placeholder="Your message"></textarea>
-            <button>Submit</button>
-        </form>
-
-        <div class="people">
-            <div>
-                <img src="img/Contact/img1.jpg" alt="">
-                <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323 
-                    <br> E-mail: NHThuong@AuraSound.com</p>
+    <div class="mobile-menu" id="mobile-menu-container">
+        <div class="mobile-menu-header">
+            <div class="logo-container">
+                <a href="index.html" class="a-nodecor">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
+                </a>
             </div>
-             <div>
-                <img src="img/Contact/img1.jpg" alt="">
-                <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323 
-                    <br> E-mail: NHThuong@AuraSound.com</p>
-            </div>
-             <div>
-                <img src="img/Contact/img1.jpg" alt="">
-                <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323 
-                    <br> E-mail: NHThuong@AuraSound.com</p>
+            <i class="bi bi-x-lg" id="mobile-menu-close"></i>
+        </div>
+
+        <div class="mobile-menu-item">
+            <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
             </div>
         </div>
-    </section>
+
+        <div class="mobile-menu-item">
+            <a href="cart.html">Giỏ hàng</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="login.html" class="nav-login-btn">Đăng nhập</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="contact.html">Liên hệ</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="store.html">Sản phẩm</a>
+        </div>
+    </div>
+    <div class="overlay" id="menu-overlay"></div>
+
+    <main>
+        <section id="page-header" class="contact-header">
+            <h2>#let's_talk</h2>
+            <p>LEAVE A MESSAGE,We love to hear from you</p>
+        </section>
+
+        <section id="form-details">
+            <form action="">
+                <span>LEAVE A MESSAGE</span>
+                <h2>We love to hear from you</h2>
+                <input type="text" placeholder="Your name">
+                <input type="text" placeholder="E-mail">
+                <input type="text" placeholder="Subject">
+                <textarea name="" id="" cols="30" rows="10" placeholder="Your message"></textarea>
+                <button>Submit</button>
+            </form>
+
+            <div class="people">
+                <div>
+                    <img src="img/Contact/img1.jpg" alt="">
+                    <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323
+                        <br> E-mail: NHThuong@AuraSound.com
+                    </p>
+                </div>
+                <div>
+                    <img src="img/Contact/img1.jpg" alt="">
+                    <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323
+                        <br> E-mail: NHThuong@AuraSound.com
+                    </p>
+                </div>
+                <div>
+                    <img src="img/Contact/img1.jpg" alt="">
+                    <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323
+                        <br> E-mail: NHThuong@AuraSound.com
+                    </p>
+                </div>
+            </div>
+        </section>
 
 
     </main>
@@ -121,65 +176,67 @@
                         <span class="logo-text">AuraSound</span>
                     </a>
                 </div>
-                    <p class="pt-3">Với Aura Sound, âm nhạc không chỉ để nghe – mà là để cảm nhận. Mỗi nhịp điệu, mỗi giai điệu đều
-                        được
-                        tái hiện chân thực, giúp bạn thể hiện phong cách và cá tính qua từng thanh âm.</p>
+                <p class="pt-3">Với Aura Sound, âm nhạc không chỉ để nghe – mà là để cảm nhận. Mỗi nhịp điệu, mỗi giai
+                    điệu đều
+                    được
+                    tái hiện chân thực, giúp bạn thể hiện phong cách và cá tính qua từng thanh âm.</p>
+            </div>
+            <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+                <h5 class="pb-2">Featured</h5>
+                <ul class="text-uppercase list-unstyled">
+                    <li><a href="#">Tai nghe thể thao</a></li>
+                    <li><a href="#">Tai nghe cao cấp</a></li>
+                    <li><a href="#">Loa cao cấp</a></li>
+                    <li><a href="#">Tai nghe SONY</a></li>
+                    <li><a href="#">Loa JBL</a></li>
+                </ul>
+            </div>
+            <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+                <h5 class="pb-2">Contact Us</h5>
+                <div>
+                    <h6 class="text-uppercase">Address</h6>
+                    <p>111 STREET NAME, HCM CITY, VIETNAM</p>
                 </div>
-                <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-                    <h5 class="pb-2">Featured</h5>
-                    <ul class="text-uppercase list-unstyled">
-                        <li><a href="#">Tai nghe thể thao</a></li>
-                        <li><a href="#">Tai nghe cao cấp</a></li>
-                        <li><a href="#">Loa cao cấp</a></li>
-                        <li><a href="#">Tai nghe SONY</a></li>
-                        <li><a href="#">Loa JBL</a></li>
-                    </ul>
+                <div>
+                    <h6 class="text-uppercase">Phone</h6>
+                    <p>1900 1010</p>
                 </div>
-                <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-                    <h5 class="pb-2">Contact Us</h5>
-                    <div>
-                        <h6 class="text-uppercase">Address</h6>
-                        <p>111 STREET NAME, HCM CITY, VIETNAM</p>
-                    </div>
-                    <div>
-                        <h6 class="text-uppercase">Phone</h6>
-                        <p>1900 1010</p>
-                    </div>
-                    <div>
-                        <h6 class="text-uppercase">Email</h6>
-                        <p>EXAMPLE@gmail.com</p>
-                    </div>
+                <div>
+                    <h6 class="text-uppercase">Email</h6>
+                    <p>EXAMPLE@gmail.com</p>
                 </div>
-                <div class="footer-one col-lg-3 col-md-6 col-12">
-                    <h5 class="pb-2">Instagram</h5>
-                    <div class="row">
-                        <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img1.jpg" alt="">
-                        <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img10.jpg" alt="">
-                        <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img2.jpg" alt="">
-                        <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img5.jpg" alt="">
-                        <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img6.jpg" alt="">
-                    </div>
+            </div>
+            <div class="footer-one col-lg-3 col-md-6 col-12">
+                <h5 class="pb-2">Instagram</h5>
+                <div class="row">
+                    <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img1.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img10.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img2.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img5.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="img/Instagram/img6.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright mt-5">
+
+            <div class="row container mx-auto">
+                <div class="col-lg-3 col-md-6 col-12 mb-4">
+                    <img src="img/Payment/payment.png" alt="">
+                </div>
+                <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
+                    <p>© 2025 Công Ty Cổ Phần AuraSound </p>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
 
-            <div class="copyright mt-5">
-
-                <div class="row container mx-auto">
-                    <div class="col-lg-3 col-md-6 col-12 mb-4">
-                        <img src="img/Payment/payment.png" alt="">
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
-                        <p>© 2025 Công Ty Cổ Phần AuraSound </p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-
-            </div>
+        </div>
     </footer>
-    
+
 </body>
+
 </html>
