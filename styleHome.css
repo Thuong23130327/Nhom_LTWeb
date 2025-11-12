@@ -203,7 +203,6 @@ nav {
     height: 10px;
     animation-delay: -0.9s;
 }
-
 /*  */
 .mobile-menu-item .nav-login-btn {
     background-color: var(--theme-color-primary);
@@ -220,7 +219,9 @@ nav {
     color: var(--white);
 }
 
-
+.active{
+    color: var(--theme-color-secondary);
+}
 
 #hamburger-icon {
     display: none;
@@ -285,9 +286,16 @@ nav {
 
 .cart:hover {
     box-shadow: lightgrey 0 2px 5px;
-    border: var(--theme-color-primary) 1px solid;
-    color: var(--theme-color-primary);
-    font-weight: 200;
+    background: var(--theme-gradient-button);
+    color: var(--white);
+}
+
+.active {
+    padding: 5px 10px;
+    border-radius: 15px;
+    box-shadow: lightgrey 0 2px 5px;
+    background: var(--theme-gradient-button);
+    color: var(--white);
 }
 
 
@@ -825,12 +833,14 @@ hr {
     z-index: 100;
     display: flex;
     flex-direction: column;
-    transform: translateX(-100%);
+    display: none;
     transition: transform 0.3s ease;
+    border-radius: 15px 0 0 15px;
 }
 
 .mobile-menu.active {
-    transform: translateX(0);
+    display: block;
+    transform: translateX(100%);
 }
 
 .mobile-menu-header {
