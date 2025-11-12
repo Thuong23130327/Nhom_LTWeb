@@ -81,12 +81,7 @@ main {
     box-sizing: border-box;
 }
 
-/* Button Giỏ hàng */
-.cart {
-    box-shadow: lightgrey 0 2px 5px;
-    border: var(--theme-color-primary) 1px solid;
-    color: var(--theme-color-primary);
-}
+
 
 .cart:hover {
     box-shadow: lightgrey 0 2px 10px;

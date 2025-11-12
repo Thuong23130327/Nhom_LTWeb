@@ -1,31 +1,90 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cửa Hàng - Tai Nghe & Loa</title>
-    <link rel="stylesheet" href="/css/styleStore.css">
+    <link rel="stylesheet" href="styleStore.css">
 </head>
-<body>
 
-    <header>
-        <nav class="main-nav">
-            <a href="index.html" class="logo">SoundLife</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Trang Chủ</a></li>
-                <li><a href="store.html" class="active">Cửa Hàng</a></li>
-                <li><a href="about.html">Giới Thiệu</a></li>
-                <li><a href="contact.html">Liên Hệ</a></li>
-            </ul>
-            <ul class="nav-icons">
-                <li><a href="cart.html">🛒 Giỏ Hàng</a></li>
-                <li><a href="login.html">👤 Đăng Nhập</a></li>
-            </ul>
-        </nav>
+<body>
+ <header>
+        <div class="header-container content">
+            <div class="head-left">
+                <div class="head-scroll">
+                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
+                    <div class="text-item">Chuyên các loại Loa, Tai nghe chính hãng</div>
+                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
+                    <div class="text-item">Bảo hành 1 đổi 1 trong 1 tháng</div>
+                </div>
+            </div>
+            <div class="head-right">
+                <div class="info-item"><a href="">Cửa hàng gần đây</a></div>
+                <div class="info-item"><a href="">Tra cứu đơn hàng</a></div>
+                <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
+            </div>
+        </div>
     </header>
+    <nav>
+        <div class="nav-container content">
+
+            <div class="nav-left">
+                <a class="a-nodecor logo-container " href="index.html">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
+                </a>
+            </div>
+
+            <div class="nav-right">
+                <div class="searchBar">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <a href="#"><i class="bi bi-search"></i></a>
+                </div>
+                <a class="a-nodecor" href="cart.html">
+                    <div class="cart"> <i class="bi bi-cart"></i>
+                        Giỏ hàng</div>
+                </a>
+                <a class="a-nodecor" href="login.html">
+                    <div class="login">Đăng nhập</div>
+                </a>
+                <div id="hamburger-icon">
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu-container">
+        <div class="mobile-menu-header">
+            <span class="logo-text">AuraSound</span>
+            <i class="ri-close-line" id="mobile-menu-close"></i>
+        </div>
+
+        <div class="mobile-menu-item">
+            <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-item">
+            <a href="cart.html">Giỏ hàng</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="login.html" class="nav-login-btn">Đăng nhập</a>
+        </div>
+
+    </div>
+    <div class="overlay" id="menu-overlay"></div>
 
     <main class="store-page-container">
-        
+
         <div class="breadcrumb">
             <a href="index.html">Trang chủ</a> > <span>Cửa hàng</span>
         </div>
@@ -33,7 +92,7 @@
         <h1>Cửa Hàng</h1>
 
         <div class="store-layout">
-            
+
             <aside class="sidebar-filters">
                 <h3>Bộ Lọc</h3>
 
@@ -84,7 +143,7 @@
             </aside>
 
             <section class="product-listing">
-                
+
                 <div class="sort-bar">
                     <label for="sort-select">Sắp xếp theo:</label>
                     <select id="sort-select" name="sort-select">
@@ -96,7 +155,7 @@
                 </div>
 
                 <div class="product-grid">
-                    
+
                     <a href="product-detail-1.html" class="product-card">
                         <img src="images/tai-nghe-1.jpg" alt="Tai nghe Sony WH-1000XM5">
                         <h4 class="product-name">Tai nghe Sony WH-1000XM5</h4>
@@ -120,7 +179,7 @@
                         <h4 class="product-name">Loa Marshall Stanmore II</h4>
                         <p class="product-price">9.990.000đ</p>
                     </a>
-                    
+
                     <a href="product-detail-5.html" class="product-card">
                         <img src="images/tai-nghe-3.jpg" alt="Apple AirPods Pro 2">
                         <h4 class="product-name">Apple AirPods Pro 2</h4>
@@ -132,14 +191,15 @@
                         <h4 class="product-name">Loa Sony SRS-XB13</h4>
                         <p class="product-price">1.190.000đ</p>
                     </a>
-                    
+
                 </div>
 
                 <div class="pagination">
                     <a href="#">&laquo;</a> <a href="#" class="active">1</a>
                     <a href="#">2</a>
                     <a href="#">3</a>
-                    <a href="#">&raquo;</a> </div>
+                    <a href="#">&raquo;</a>
+                </div>
 
             </section>
         </div>
@@ -152,4 +212,5 @@
 
     <script src="/js/scriptStore.js"></script>
 </body>
+
 </html>
