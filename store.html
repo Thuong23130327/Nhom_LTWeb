@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cửa Hàng - Tai Nghe & Loa</title>
-    <link rel="stylesheet" href="styleStore.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styleHome.css">
 </head>
 
 <body>
- <header>
+    <header>
         <div class="header-container content">
             <div class="head-left">
                 <div class="head-scroll">
@@ -45,6 +46,18 @@
                     <input type="text" placeholder="Tìm kiếm">
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
+                <a class="a-nodecor" href="index.html">
+                    <div class="home active"></i>
+                        Trang chủ</div>
+                </a>
+                <a class="a-nodecor" href="contact.html">
+                    <div class="contact"></i>
+                        Liên hệ</div>
+                </a>
+                <a class="a-nodecor" href="store.html">
+                    <div class="store"></i>
+                        Sản phẩm</div>
+                </a>
                 <a class="a-nodecor" href="cart.html">
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
@@ -62,8 +75,17 @@
 
     <div class="mobile-menu" id="mobile-menu-container">
         <div class="mobile-menu-header">
-            <span class="logo-text">AuraSound</span>
-            <i class="ri-close-line" id="mobile-menu-close"></i>
+            <div class="logo-container">
+                <a href="index.html" class="a-nodecor">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
+                </a>
+            </div>
+            <i class="bi bi-x-lg" id="mobile-menu-close"></i>
         </div>
 
         <div class="mobile-menu-item">
@@ -79,138 +101,15 @@
         <div class="mobile-menu-item">
             <a href="login.html" class="nav-login-btn">Đăng nhập</a>
         </div>
-
+        <div class="mobile-menu-item">
+            <a href="contact.html">Liên hệ</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="store.html">Sản phẩm</a>
+        </div>
     </div>
     <div class="overlay" id="menu-overlay"></div>
-
-    <main class="store-page-container">
-
-        <div class="breadcrumb">
-            <a href="index.html">Trang chủ</a> > <span>Cửa hàng</span>
-        </div>
-
-        <h1>Cửa Hàng</h1>
-
-        <div class="store-layout">
-
-            <aside class="sidebar-filters">
-                <h3>Bộ Lọc</h3>
-
-                <div class="filter-group">
-                    <h4>Danh Mục Sản Phẩm</h4>
-                    <ul>
-                        <li><a href="#">Tất cả sản phẩm</a></li>
-                        <li><a href="#">Tai nghe Over-Ear</a></li>
-                        <li><a href="#">Tai nghe In-Ear</a></li>
-                        <li><a href="#">Loa Di Động</a></li>
-                        <li><a href="#">Loa Dàn</a></li>
-                    </ul>
-                </div>
-
-                <div class="filter-group">
-                    <h4>Thương Hiệu</h4>
-                    <div>
-                        <input type="checkbox" id="brand-sony" name="brand-sony">
-                        <label for="brand-sony">Sony</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="brand-bose" name="brand-bose">
-                        <label for="brand-bose">Bose</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="brand-jbl" name="brand-jbl">
-                        <label for="brand-jbl">JBL</label>
-                    </div>
-                </div>
-
-                <div class="filter-group">
-                    <h4>Mức Giá</h4>
-                    <div>
-                        <input type="radio" id="price-1" name="price-range">
-                        <label for="price-1">Dưới 1.000.000đ</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="price-2" name="price-range">
-                        <label for="price-2">1.000.000đ - 3.000.000đ</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="price-3" name="price-range">
-                        <label for="price-3">Trên 3.000.000đ</label>
-                    </div>
-                </div>
-
-                <button type="button" class="filter-btn">Áp Dụng</button>
-            </aside>
-
-            <section class="product-listing">
-
-                <div class="sort-bar">
-                    <label for="sort-select">Sắp xếp theo:</label>
-                    <select id="sort-select" name="sort-select">
-                        <option value="default">Mặc định</option>
-                        <option value="price-asc">Giá: Tăng dần</option>
-                        <option value="price-desc">Giá: Giảm dần</option>
-                        <option value="newest">Mới nhất</option>
-                    </select>
-                </div>
-
-                <div class="product-grid">
-
-                    <a href="product-detail-1.html" class="product-card">
-                        <img src="images/tai-nghe-1.jpg" alt="Tai nghe Sony WH-1000XM5">
-                        <h4 class="product-name">Tai nghe Sony WH-1000XM5</h4>
-                        <p class="product-price">7.990.000đ</p>
-                    </a>
-
-                    <a href="product-detail-2.html" class="product-card">
-                        <img src="images/loa-1.jpg" alt="Loa JBL Charge 5">
-                        <h4 class="product-name">Loa JBL Charge 5</h4>
-                        <p class="product-price">3.990.000đ</p>
-                    </a>
-
-                    <a href="product-detail-3.html" class="product-card">
-                        <img src="images/tai-nghe-2.jpg" alt="Tai nghe Bose QC45">
-                        <h4 class="product-name">Tai nghe Bose QC45</h4>
-                        <p class="product-price">6.490.000đ</p>
-                    </a>
-
-                    <a href="product-detail-4.html" class="product-card">
-                        <img src="images/loa-2.jpg" alt="Loa Marshall Stanmore II">
-                        <h4 class="product-name">Loa Marshall Stanmore II</h4>
-                        <p class="product-price">9.990.000đ</p>
-                    </a>
-
-                    <a href="product-detail-5.html" class="product-card">
-                        <img src="images/tai-nghe-3.jpg" alt="Apple AirPods Pro 2">
-                        <h4 class="product-name">Apple AirPods Pro 2</h4>
-                        <p class="product-price">5.490.000đ</p>
-                    </a>
-
-                    <a href="product-detail-6.html" class="product-card">
-                        <img src="images/loa-3.jpg" alt="Loa Sony SRS-XB13">
-                        <h4 class="product-name">Loa Sony SRS-XB13</h4>
-                        <p class="product-price">1.190.000đ</p>
-                    </a>
-
-                </div>
-
-                <div class="pagination">
-                    <a href="#">&laquo;</a> <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">&raquo;</a>
-                </div>
-
-            </section>
-        </div>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Đồ án Lập Trình Web. Bán tai nghe và loa.</p>
-    </footer>
-
-    <script src="/js/scriptStore.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
