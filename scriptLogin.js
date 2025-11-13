@@ -15,8 +15,10 @@ loginBtn.addEventListener("click", () => {
 
 // Xử lí đăng kí, đăng nhập
 signUpBtn.addEventListener("click", () =>{
+  localStorage.setItem('isLoggedIn', 'true');
     window.location.href = "index.html";
 })
 signInBtn.addEventListener("click", () =>{
+  localStorage.setItem('isLoggedIn', 'true');
     window.location.href = "index.html";
 })
