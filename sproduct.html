@@ -123,11 +123,14 @@
     <main>
         <section class="container sproduct my-5 pt-5">
             <div class="row">
-                <div class="col-lg-5 col-md-12 col-12">
-                    <img class="img-fluid w-100 pb-1" src="img/Sony/6.webp" width="100%" id="product-img">
 
-                    <div class="small-img-group">
-                        <div class="small-img-col">
+                <div class="gallery-container col-lg-5 col-md-12 col-12">
+                    <img class="main-img img-fluid w-100 pb-1" src="img/Sony/6.webp" width="100%" id="MainImg">
+
+                    <div class="thumb-container">
+                        <button class="scroll-btn left" onclick="prevImage()">&#10094;</button>
+
+                        <!-- <div class="small-img-col">
                             <img src="img/Sony/6.webp" width="100%" class="small-img" alt="">
                         </div>
                         <div class="small-img-col">
@@ -138,7 +141,19 @@
                         </div>
                         <div class="small-img-col">
                             <img src="img/Sony/9.webp" width="100%" class="small-img" alt="">
+                        </div> -->
+                        <div class="small-img-group" id="thumbScroll">
+                            <img src="img/Sony/6.webp" class="small-img active" onclick="showImg(this, 0)">
+                            <img src="img/Sony/7.webp" class="small-img" onclick="showImg(this, 1)">
+                            <img src="img/Sony/8.webp" class="small-img" onclick="showImg(this, 2)">
+                            <img src="img/Sony/9.webp" class="small-img" onclick="showImg(this, 3)">
+                            <img src="img/Sony/1.webp" class="small-img" onclick="showImg(this, 4)">
+                            <img src="img/Sony/2.webp" class="small-img" onclick="showImg(this, 5)">
+                            <img src="img/Sony/3.webp" class="small-img" onclick="showImg(this, 6)">
+                            <img src="img/Sony/4.webp" class="small-img" onclick="showImg(this, 7)">
+                            <img src="img/Sony/5.webp" class="small-img" onclick="showImg(this, 8)">
                         </div>
+                        <button class="scroll-btn right" onclick="nextImage()">&#10095;</button>
                     </div>
                 </div>
 
@@ -371,6 +386,7 @@
         </div>
     </footer>
 
+    <script src="scriptProduct.js"></script>
 </body>
 
 

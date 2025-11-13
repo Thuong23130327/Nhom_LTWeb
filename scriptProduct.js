@@ -1,18 +1,73 @@
-var MainImg = document.getElementById('MainImg');
-var smallimg = document.getElementsByClassName('small-img');
+// let MainImg = document.getElementById("MainImg");
+// let smallImgs = document.querySelectorAll(".small-img");
+// let currentIndex = 0;
 
-smallimg[0].onclick = function(){
-    MainImg.src = smallimg[0].src;
+// function showImg(img, index) {
+//   MainImg.style.opacity = 0;
+//   setTimeout(() => {
+//     MainImg.src = img.src;
+//     MainImg.style.opacity = 1;
+//   }, 150);
+//   currentIndex = index;
+//   setActiveThumbnail();
+//   scrollToThumb(index);
+// }
+
+// function setActiveThumbnail() {
+//   smallImgs.forEach(img => img.classList.remove("active"));
+//   smallImgs[currentIndex].classList.add("active");
+// }
+
+// function nextImage() {
+//   currentIndex = (currentIndex + 1) % smallImgs.length;
+//   showImg(smallImgs[currentIndex], currentIndex);
+// }
+
+// function prevImage() {
+//   currentIndex = (currentIndex - 1 + smallImgs.length) % smallImgs.length;
+//   showImg(smallImgs[currentIndex], currentIndex);
+// }
+
+// function scrollToThumb(index) {
+//   const container = document.getElementById("thumbScroll");
+//   const imgWidth = smallImgs[0].offsetWidth + 8; // 8px là khoảng cách gap
+//   const scrollPos = imgWidth * index - container.clientWidth / 2 + imgWidth / 2;
+//   container.scrollTo({ left: scrollPos, behavior: "smooth" });
+// }
+
+let MainImg = document.getElementById("MainImg");
+let smallImgs = document.querySelectorAll(".small-img");
+let currentIndex = 0;
+
+function showImg(img, index) {
+  MainImg.style.opacity = 0;
+  setTimeout(() => {
+    MainImg.src = img.src;
+    MainImg.style.opacity = 1;
+  }, 150);
+  currentIndex = index;
+  setActiveThumbnail();
+  scrollToThumb(index);
 }
 
-smallimg[1].onclick = function(){
-    MainImg.src = smallimg[1].src;
+function setActiveThumbnail() {
+  smallImgs.forEach(img => img.classList.remove("active"));
+  smallImgs[currentIndex].classList.add("active");
 }
 
-smallimg[2].onclick = function(){
-    MainImg.src = smallimg[2].src;
+function nextImage() {
+  currentIndex = (currentIndex + 1) % smallImgs.length;
+  showImg(smallImgs[currentIndex], currentIndex);
 }
 
-smallimg[3].onclick = function(){
-    MainImg.src = smallimg[3].src;
+function prevImage() {
+  currentIndex = (currentIndex - 1 + smallImgs.length) % smallImgs.length;
+  showImg(smallImgs[currentIndex], currentIndex);
+}
+
+function scrollToThumb(index) {
+  const container = document.getElementById("thumbScroll");
+  const imgWidth = smallImgs[0].offsetWidth + 8; // 8px là khoảng cách gap
+  const scrollPos = imgWidth * index - container.clientWidth / 2 + imgWidth / 2;
+  container.scrollTo({ left: scrollPos, behavior: "smooth" });
 }
