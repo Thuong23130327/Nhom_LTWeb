@@ -499,3 +499,8 @@ main {
         margin-top: 10px;
     }
 }
+.footer-container{
+    
+    width: 100%;
+    box-sizing: border-box;
+}
