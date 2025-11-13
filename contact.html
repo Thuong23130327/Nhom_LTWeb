@@ -20,7 +20,9 @@
 </head>
 
 <body>
-
+    <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
+        <i class="bi bi-caret-up-fill"></i>
+    </button>
     <header>
         <div class="header-container content">
             <div class="head-left">
@@ -58,10 +60,10 @@
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
                 <a class="a-nodecor" href="index.html">
-                    <div class="home active">
+                    <div class="home">
                         Trang chủ</div>
                 </a>
-                <a class="a-nodecor" href="contact.html">
+                <a class="a-nodecor active" href="contact.html">
                     <div class="contact">
                         Liên hệ</div>
                 </a>
@@ -112,7 +114,7 @@
         <div class="mobile-menu-item">
             <a href="login.html" class="nav-login-btn">Đăng nhập</a>
         </div>
-        <div class="mobile-menu-item">
+        <div class="mobile-menu-item active">
             <a href="contact.html">Liên hệ</a>
         </div>
         <div class="mobile-menu-item">
@@ -236,7 +238,7 @@
 
         </div>
     </footer>
-
+<script src="script.js"></script>
 </body>
 
 </html>
