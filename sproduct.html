@@ -130,18 +130,6 @@
                     <div class="thumb-container">
                         <button class="scroll-btn left" onclick="prevImage()">&#10094;</button>
 
-                        <!-- <div class="small-img-col">
-                            <img src="img/Sony/6.webp" width="100%" class="small-img" alt="">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="img/Sony/7.webp" width="100%" class="small-img" alt="">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="img/Sony/8.webp" width="100%" class="small-img" alt="">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="img/Sony/9.webp" width="100%" class="small-img" alt="">
-                        </div> -->
                         <div class="small-img-group" id="thumbScroll">
                             <img src="img/Sony/6.webp" class="small-img active" onclick="showImg(this, 0)">
                             <img src="img/Sony/7.webp" class="small-img" onclick="showImg(this, 1)">
@@ -168,15 +156,41 @@
                     <i class='bx bxs-star'></i>
                 </div>
                 <h2>998.000 VNĐ</h2>
-                <select class="my-3">
-                    <option value=""> Select color</option>
-                    <option value=""> Đen </option>
-                    <option value=""> Trắng </option>
-                    <option value=""> Vàng </option>
-                    <option value=""> Hồng </option>
-                </select>
-                <input type="number" value="1">
-                <button class="buy-btn">Add to cart</button>
+               
+                <div class="product-options">
+                    <h4>Màu sắc: </h4>
+                    <div class="color-options">
+                        <div class="color-item active" onclick="selectColor(this)" data-img="img/Sony/1.webp">
+                        <img src="img/Sony/1.webp" alt="">
+                        <span>Đen</span>
+                    </div>
+                    <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/2.webp">
+                        <img src="img/Sony/2.webp" alt="">
+                        <span>Xanh đen</span>
+                    </div>
+                    <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/3.webp">
+                        <img src="img/Sony/3.webp" alt="">
+                        <span>Hồng</span>
+                    </div>
+                    <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/4.webp">
+                        <img src="img/Sony/4.webp" alt="">
+                        <span>Vàng</span>
+                    </div>
+                    <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/5.webp">
+                        <img src="img/Sony/5.webp" alt="">
+                        <span>Trắng</span>
+                    </div>
+                </div>
+                
+                <div class="product-quantity">
+                    <h4>Số lượng: </h4>
+                    <input type="number" value="1">
+                </div>
+
+                <div class="btn">
+                    <button class="buy-btn">Add to cart</button>
+                    <button class="buy-btn">Buy now</button>
+                </div>                
                 <h4 class="mt-5 mb-4">Product Details</h4>
                 <span>Tai nghe Sony WH-CH520 sở hữu âm thanh kỹ thuật số DSEE giúp mang lại âm thanh chân thực cùng
                     với đó là pin cho thời gian sử dụng tới 40 giờ. Bên cạnh đó, sản phẩm tai nghe Sony này sở hữu thiết
@@ -184,7 +198,6 @@
                     Trải nghiệm lắng nghe dành riêng cho bạn. Cơ chế tăng cường âm thanh kỹ thuật số (DSEE) 
                     khôi phục các hòa âm và độ sống động bị mất trong quá trình nén nhạc thông thường, mang lại âm thanh trung thực hơn.</span>
                 </div>
-
             </div>
         </section>
 
