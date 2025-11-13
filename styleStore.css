@@ -7,7 +7,7 @@ body {
     max-width: 1200px;
     margin: 2rem auto;
     background-color: #fff;
-  padding: 2rem;
+    padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
@@ -66,6 +66,73 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.product-badge.discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--white);
+    background-color: red;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+.new-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+}
+
+.old-price {
+    font-size: 12px;
+    color: gray;
+    text-decoration: line-through;
+}
+
+.product-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    font-size: 13px;
+    color: gray;
+    padding-top: 8px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.rating .bi-star-fill {
+    color: #f5c518;
+    font-size: 14px;
+}
+
+.favorite {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #555;
+}
+
+.favorite .bi-heart {
+    font-size: 14px;
+    color: #d70018;
+}
+
+.product-card-info h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 .product-card img {
     width: 100%;
     object-fit: contain;
@@ -89,11 +156,6 @@ h1 {
     text-overflow: ellipsis;
 }
 
-.product-card-info p {
-    font-size: 15px;
-    font-weight: bold;
-    color: red
-}
 
 .pagination {
     display: flex;
