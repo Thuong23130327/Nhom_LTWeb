@@ -1,0 +1,396 @@
+
+
+body {
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: 'Poppins', sans-serif;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;  
+  background-color: var(--white);
+}
+
+.info h6{
+    color: #a0a0a0;
+}
+
+.info h3{
+    font-weight: 700;
+}
+
+.info h2{
+    font-weight: 500;
+}
+
+.small-img-col{
+    flex-basis: 24%;
+    cursor: pointer;
+}
+
+.small-img {
+  width: 100%;
+  /* border: 1px solid var(--black); */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--white);
+}
+
+.img-primary{
+    background-color: var(--white);
+    border: 1px solid var(--black);
+}
+
+.sproduct select{
+    display: block;
+    padding: 5px 10px;
+    border: 2px solid #a0a0a0;
+    border-radius: 10px;
+}
+
+.sproduct input{
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 2px solid #a0a0a0;
+}
+
+.sproduct input:focus{
+    outline: auto;
+}
+
+.buy-btn{
+    background-color: var(--theme-color-primary);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 20px;
+    margin: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.buy-btn:hover{
+    color: var(--white);
+    background: var(--theme-gradient-button);
+    transition: all 0.3s ease;
+    transform: scale(1.1);
+}
+
+/* 
+.single-product{
+    margin-top: 80px;
+}
+
+.single-product .col-2 img{
+    padding: 0;
+}
+
+.single-product .col-2{
+    padding: 20px;
+}
+
+.single-product h4{
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.single-product select{
+    display: block;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.single-product input{
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    border: 1px solid #dddddd;
+}
+
+input:focus{
+    outline: none;
+
+} */
+
+/* .small-img-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.small-img-col{
+    flex-basis: 24%;
+    cursor: pointer;
+} */
+
+
+.gallery-container {
+  text-align: center;
+  max-width: 400px;
+  margin: auto;
+}
+
+.main-img {
+  width: 100%;
+  border-radius: 10px;
+  transition: opacity 0.3s ease;
+}
+
+.thumb-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.small-img-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin: 10px 0 10px;
+  overflow: hidden; 
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background-color: #eeeeee;
+}
+
+.small-img-group::-webkit-scrollbar {
+  display: none;    
+}
+
+
+.small-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: 0.3s;
+  flex-shrink: 0;
+  margin: 10px 0 10px;
+}
+
+.small-img:hover {
+  transform: scale(1.05);
+}
+
+.small-img.active {
+  border-color: var(--theme-color-primary);
+}
+
+.scroll-btn {
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.3s;
+  flex-shrink: 0;
+}
+
+.scroll-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.scroll-btn.left {
+  margin-right: 5px;
+  left: -10px;
+}
+
+.scroll-btn.right {
+  margin-left: 5px;
+  right: -10px;
+}
+
+.product-options {
+  margin-top: 20px;
+}
+
+.product-options h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--black);
+}
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px;
+}
+
+.color-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  width: max-content;  /* vừa với nội dung */
+  flex: 0 0 auto;     /* không giãn ra trong container flex */
+}
+
+.color-item img {
+  width: 35px;
+  height: 35px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.color-item span {
+  font-size: 14px;
+  color: #333;
+}
+
+.color-item:hover {
+  border-color: var(--theme-gradient-button);
+  /* transform: scale(1.03); */
+}
+
+.color-item.active {
+  border-color: var(--theme-color-primary);
+  position: relative;
+}
+
+.color-item.active::after {
+  content: "✓";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--theme-gradient-icon);
+  color: var(--white);
+  font-size: 12px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.main-img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  margin-top: 20px;
+  transition: opacity 0.4s ease;
+  display: block;
+}
+
+.product-quantity {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* === Desktop / General Style === */
+.specs-container {
+    margin-top: 30px;
+}
+
+.specs-container h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.specs-table tr {
+    border-bottom: 1px solid #ededed;
+}
+
+.specs-table tr:last-child {
+    border-bottom: none;
+}
+
+.specs-table td {
+    padding: 14px 18px;
+    vertical-align: top;
+}
+
+.specs-table .spec-title {
+    background-color: #f8f8f8;
+    width: 30%;
+    font-weight: 600;
+    color: #444;
+}
+
+
+
+/* === Mobile Responsive === */
+/* Chuyển từ bảng -> dạng block */
+@media (max-width: 768px) {
+    .specs-table,
+    .specs-table tr,
+    .specs-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .specs-table tr {
+        padding: 12px 0;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .specs-table .spec-title {
+        background-color: transparent;
+        font-weight: 700;
+        padding-bottom: 4px;
+        color: #333;
+        border: none;
+        width: 100%;
+    }
+
+    .specs-table td {
+        padding: 6px 18px;
+    }
+
+    .specs-table tr:last-child {
+        border-bottom: none;
+    }
+
+    /* Tăng khoảng cách giữa các mục để dễ đọc */
+    .specs-table tr {
+        margin-bottom: 10px;
+    }
+}
+
+.equal-columns {
+    display: flex;
+    align-items: stretch;   /* Hai container cao bằng nhau */
+    gap: 20px;              /* Khoảng cách giữa hai cột */
+}
+
+.equal-columns > div {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+
+
