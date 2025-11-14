@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nhóm Lập Trình Web</title>
-    <link rel="stylesheet" href="styleHome.css">
-    <link rel="stylesheet" href="styleProduct.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -17,7 +15,11 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
+
+ <link rel="stylesheet" href="styleHome.css">
+<link rel="stylesheet" href="styleProduct.css">
+   
+    </head>
 
 <body>
     <header>
@@ -123,7 +125,6 @@
     <main>
         <section class="container sproduct my-5 pt-5">
             <div class="row">
-
                 <div class="gallery-container col-lg-5 col-md-12 col-12">
                     <img class="main-img img-fluid w-100 pb-1" src="img/Sony/6.webp" width="100%" id="MainImg">
 
@@ -146,108 +147,117 @@
                 </div>
 
                 <div class="info col-lg-6 col-md-12 col-12">
-                <h6>Home / SONY </h6>
-                <h3>Tai nghe Bluetooth chụp tai Sony WH-CH520</h3>
-                <div class="star">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                </div>
-                <h2>998.000 VNĐ</h2>
-               
-                <div class="product-options">
-                    <h4>Màu sắc: </h4>
-                    <div class="color-options">
-                        <div class="color-item active" onclick="selectColor(this)" data-img="img/Sony/1.webp">
-                        <img src="img/Sony/1.webp" alt="">
-                        <span>Đen</span>
+                    <h6>Home / SONY </h6>
+                    <h3>Tai nghe Bluetooth chụp tai Sony WH-CH520</h3>
+                    <div class="star">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
                     </div>
-                    <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/2.webp">
-                        <img src="img/Sony/2.webp" alt="">
-                        <span>Xanh đen</span>
-                    </div>
-                    <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/3.webp">
-                        <img src="img/Sony/3.webp" alt="">
-                        <span>Hồng</span>
-                    </div>
-                    <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/4.webp">
-                        <img src="img/Sony/4.webp" alt="">
-                        <span>Vàng</span>
-                    </div>
-                    <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/5.webp">
-                        <img src="img/Sony/5.webp" alt="">
-                        <span>Trắng</span>
-                    </div>
-                </div>
+                    <h2>998.000 VNĐ</h2>
                 
-                <div class="product-quantity">
-                    <h4>Số lượng: </h4>
-                    <input type="number" value="1">
-                </div>
+                    <div class="product-options">
+                        <h4>Màu sắc: </h4>
+                        <div class="color-options">
+                            <div class="color-item active" onclick="selectColor(this)" data-img="img/Sony/1.webp">
+                            <img src="img/Sony/1.webp" alt="">
+                            <span>Đen</span>
+                        </div>
+                        <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/2.webp">
+                            <img src="img/Sony/2.webp" alt="">
+                            <span>Xanh đen</span>
+                        </div>
+                        <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/3.webp">
+                            <img src="img/Sony/3.webp" alt="">
+                            <span>Hồng</span>
+                        </div>
+                        <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/4.webp">
+                            <img src="img/Sony/4.webp" alt="">
+                            <span>Vàng</span>
+                        </div>
+                        <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/5.webp">
+                            <img src="img/Sony/5.webp" alt="">
+                            <span>Trắng</span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-quantity">
+                        <h4>Số lượng: </h4>
+                        <input type="number" value="1">
+                    </div>
 
-                <div class="btn">
-                    <button class="buy-btn">Add to cart</button>
-                    <button class="buy-btn">Buy now</button>
-                </div>                
-                <h4 class="mt-5 mb-4">Product Details</h4>
-                <span>Tai nghe Sony WH-CH520 sở hữu âm thanh kỹ thuật số DSEE giúp mang lại âm thanh chân thực cùng
-                    với đó là pin cho thời gian sử dụng tới 40 giờ. Bên cạnh đó, sản phẩm tai nghe Sony này sở hữu thiết
-                    kế khá gọn nhẹ cùng với thiết kế tích hợp micro vô cùng tiện lợi. Thưởng thức âm thanh chất lượng cao suốt cả ngày.
-                    Trải nghiệm lắng nghe dành riêng cho bạn. Cơ chế tăng cường âm thanh kỹ thuật số (DSEE) 
-                    khôi phục các hòa âm và độ sống động bị mất trong quá trình nén nhạc thông thường, mang lại âm thanh trung thực hơn.</span>
+                    <div class="btn">
+                        <button class="buy-btn">Add to cart</button>
+                        <button class="buy-btn">Buy now</button>
+                    </div>                 
+                </div>   
+            </div>
+        </section>
+
+
+        <section class="container my-5 pt-5">
+            <div class="row equal-columns">
+                <div class="describe col-lg-6 col-md-12 col-12">
+                    <div class="specs-container">
+                        <h3>Thông số kỹ thuật</h3>
+
+                        <table class="specs-table">
+                            <tr>
+                                <td class="spec-title">Kích thước</td>
+                                <td>Dài 22.8 cm - Rộng 17.2 cm - Cao 4.4 cm</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-title">Trọng lượng</td>
+                                <td>147 gram</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-title">Công nghệ âm thanh</td>
+                                <td>
+                                Âm thanh kỹ thuật số<br>
+                                Công nghệ ENC<br>
+                                360 Reality Audio<br>
+                                DSEE<br>
+                                Equalizer
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spec-title">Micro</td>
+                                <td>Có</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-title">Thời lượng pin</td>
+                                <td>50 giờ</td>
+                                </tr>
+                            <tr>
+                                <td class="spec-title">Điều khiển</td>
+                                <td>Nút bấm vật lý</td>
+                            </tr>
+                            <tr>
+                                <td class="spec-title">Tính năng khác</td>
+                                <td>
+                                    Sạc nhanh<br>
+                                    Chống ồn đàm thoại
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="spec-title">Hãng sản xuất</td>
+                                <td>Sony</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-12">
+                    <h4 class="mt-5 mb-4">Mô tả sản phẩm</h4>
+                    <span>Tai nghe Sony WH-CH520 sở hữu âm thanh kỹ thuật số DSEE giúp mang lại âm thanh chân thực cùng
+                        với đó là pin cho thời gian sử dụng tới 40 giờ. Bên cạnh đó, sản phẩm tai nghe Sony này sở hữu thiết
+                        kế khá gọn nhẹ cùng với thiết kế tích hợp micro vô cùng tiện lợi. Thưởng thức âm thanh chất lượng cao suốt cả ngày.
+                        Trải nghiệm lắng nghe dành riêng cho bạn. Cơ chế tăng cường âm thanh kỹ thuật số (DSEE) 
+                        khôi phục các hòa âm và độ sống động bị mất trong quá trình nén nhạc thông thường, mang lại âm thanh trung thực hơn.</span>
+                   
                 </div>
             </div>
-
-            <div class="specs-container">
-                <h3>Thông số kỹ thuật</h3>
-
-                <table class="specs-table">
-                    <tr>
-                        <td class="spec-title">Kích thước</td>
-                        <td>Dài 22.8 cm - Rộng 17.2 cm - Cao 4.4 cm</td>
-                    </tr>
-                    <tr>
-                        <td class="spec-title">Trọng lượng</td>
-                        <td>147 gram</td>
-                    </tr>
-                    <tr>
-                        <td class="spec-title">Công nghệ âm thanh</td>
-                        <td>
-                        Âm thanh kỹ thuật số<br>
-                        Công nghệ ENC<br>
-                        360 Reality Audio<br>
-                        DSEE<br>
-                        Equalizer
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="spec-title">Micro</td>
-                        <td>Có</td>
-                    </tr>
-                    <tr>
-                        <td class="spec-title">Thời lượng pin</td>
-                        <td>50 giờ</td>
-                        </tr>
-                    <tr>
-                        <td class="spec-title">Điều khiển</td>
-                        <td>Nút bấm vật lý</td>
-                    </tr>
-                    <tr>
-                        <td class="spec-title">Tính năng khác</td>
-                        <td>
-                            Sạc nhanh<br>
-                            Chống ồn đàm thoại
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="spec-title">Hãng sản xuất</td>
-                        <td>Sony</td>
-                    </tr>
-                </table>
-            </div>
-
         </section>
 
         <section id="Headphone" class="my-5 pb-5">
@@ -314,6 +324,7 @@
                 </div>
             </div>
         </section>
+        
     </main>
 
     <!-- <div class="small-container single-product">

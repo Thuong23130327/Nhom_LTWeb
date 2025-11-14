@@ -1,15 +1,16 @@
 
 
 body {
-    margin: 0;
-    background-color: var(--white);
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f0f0f0;
+  font-family: 'Poppins', sans-serif;
 }
 
 main {
-  max-width: 1200px; 
-  margin: 0 auto;      
-  padding: 0;   
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;  
+  background-color: var(--white);
 }
 
 .info h6{
@@ -377,6 +378,18 @@ input:focus{
     .specs-table tr {
         margin-bottom: 10px;
     }
+}
+
+.equal-columns {
+    display: flex;
+    align-items: stretch;   /* Hai container cao bằng nhau */
+    gap: 20px;              /* Khoảng cách giữa hai cột */
+}
+
+.equal-columns > div {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
 }
 
 
