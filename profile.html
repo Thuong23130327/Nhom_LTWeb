@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhóm Lập Trình Web</title>
+    <title>Thông tin cá nhân - AuraSound</title>
     <link rel="stylesheet" href="assets/css/styleHome.css">
-    <link rel="stylesheet" href="assets/css/styleContact.css">
+    <link rel="stylesheet" href="assets/css/styleProfile.css">
+    <link rel="stylesheet" href="assets/css/styleProfile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -14,15 +15,14 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
-    <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
-        <i class="bi bi-caret-up-fill"></i>
-    </button>
     <header>
         <div class="header-container content">
             <div class="head-left">
@@ -44,7 +44,7 @@
         <div class="nav-container content">
 
             <div class="nav-left">
-                <a class="a-nodecor logo-container " href="index.html">
+                <a class="a-nodecor logo-container" href="index.html">
                     <div class="logo-wave">
                         <div class="sound-wave wave1"></div>
                         <div class="sound-wave wave2"></div>
@@ -60,10 +60,10 @@
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
                 <a class="a-nodecor" href="index.html">
-                    <div class="home">
+                    <div class="home active">
                         Trang chủ</div>
                 </a>
-                <a class="a-nodecor active" href="contact.html">
+                <a class="a-nodecor" href="contact.html">
                     <div class="contact">
                         Liên hệ</div>
                 </a>
@@ -75,8 +75,9 @@
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
                 </a>
-                <a class="a-nodecor" href="login.html">
-                    <div class="login">Đăng nhập</div>
+                <a class="a-nodecor active" href="profile.html">
+                    <div class="profile"> <i class="bi bi-"></i>
+                        Giỏ hàng</div>
                 </a>
                 <div id="hamburger-icon">
                     <i class="bi bi-list"></i>
@@ -107,14 +108,13 @@
                 <a href="#"><i class="ri-search-line"></i></a>
             </div>
         </div>
-
+        <div class="mobile-menu-item">
+            <a href="index.html" class="nav-home-btn">Trang chủ</a>
+        </div>
         <div class="mobile-menu-item">
             <a href="cart.html">Giỏ hàng</a>
         </div>
         <div class="mobile-menu-item">
-            <a href="login.html" class="nav-login-btn">Đăng nhập</a>
-        </div>
-        <div class="mobile-menu-item active">
             <a href="contact.html">Liên hệ</a>
         </div>
         <div class="mobile-menu-item">
@@ -123,47 +123,128 @@
     </div>
     <div class="overlay" id="menu-overlay"></div>
 
-    <main>
-        <section id="page-header" class="contact-header">
-            <h2>#let's_talk</h2>
-            <p>LEAVE A MESSAGE,We love to hear from you</p>
-        </section>
+    <!-- section profile -->
+    <main class="profile-page-main">
+        <div class="profile-container">
 
-        <section id="form-details">
-            <form action="">
-                <span>LEAVE A MESSAGE</span>
-                <h2>We love to hear from you</h2>
-                <input type="text" placeholder="Your name">
-                <input type="text" placeholder="E-mail">
-                <input type="text" placeholder="Subject">
-                <textarea name="" id="" cols="30" rows="10" placeholder="Your message"></textarea>
-                <button>Submit</button>
-            </form>
+            <div class="profile-sidebar" id="profileSidebar">
+                <div class="user-info">
+                    <img class="img-profile" src="/img/avatar/HoaiThuong.png" alt="Avatar">
+                    <h5 class="user-name">Chào, Nguyễn Văn A</h5>
+                    <p class="user-email">nguyenvana@gmail.com</p>
+                </div>
 
-            <div class="people">
-                <div>
-                    <img src="assets/img/Contact/img1.jpg" alt="">
-                    <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323
-                        <br> E-mail: NHThuong@AuraSound.com
-                    </p>
+                <div class="side-menu mobile-hidden" id="sideMenuContent">
+                    <ul class="nav-list" id="profileTabs"></ul>
                 </div>
-                <div>
-                    <img src="assets/img/Contact/img1.jpg" alt="">
-                    <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323
-                        <br> E-mail: NHThuong@AuraSound.com
-                    </p>
-                </div>
-                <div>
-                    <img src="assets/img/Contact/img1.jpg" alt="">
-                    <p><span>Nguyễn Hoài Thương</span> Senior Maketing Manager <br> Phone: 0909 232 323
-                        <br> E-mail: NHThuong@AuraSound.com
-                    </p>
+
+                <div class="side-menu">
+                    <ul class="nav-list" id="profileTabs">
+                        <li data-tab="account-info">
+                            <a class="nav-link active" href="#" onclick="showTab('account-info')">
+                                <i class="fa-solid fa-user icon"></i> Thông tin tài khoản
+                            </a>
+                        </li>
+                        <li data-tab="favorites">
+                            <a class="nav-link" href="#" onclick="showTab('favorites')">
+                                <i class="fa-solid fa-heart icon"></i> Sản phẩm đã yêu thích
+                            </a>
+                        </li>
+
+                        <li data-tab="order-shipping">
+                            <a class="nav-link" href="#" onclick="showTab('order-shipping')">
+                                <i class="fa-solid fa-truck icon"></i> Đang vận chuyển
+                            </a>
+                        </li>
+                        <li data-tab="order-pending">
+                            <a class="nav-link" href="#" onclick="showTab('order-pending')">
+                                <i class="fa-solid fa-clock icon"></i> Đang chờ duyệt
+                            </a>
+                        </li>
+                        <li data-tab="order-cancelled">
+                            <a class="nav-link" href="#" onclick="showTab('order-cancelled')">
+                                <i class="fa-solid fa-ban icon"></i> Đã hủy
+                            </a>
+                        </li>
+                        <li data-tab="order-history">
+                            <a class="nav-link" href="#" onclick="showTab('order-history')">
+                                <i class="fa-solid fa-history icon"></i> Lịch sử mua hàng
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
 
+            <div class="profile-content">
 
+                <div id="account-info" class="tab-content active">
+                    <h3 class="title">Thông tin cá nhân</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="fullName">Họ và Tên</label>
+                            <input type="text" id="fullName" value="Nguyễn Văn A">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" value="nguyenvana@gmail.com" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" id="phone" value="0987xxxxxx">
+                        </div>
+                        <button type="submit" class="btn-primary">Cập nhật thông tin</button>
+                    </form>
+                </div>
+
+                <div id="favorites" class="tab-content">
+                    <h3 class="title">Sản phẩm yêu thích</h3>
+                    <div class="list-item">
+                        <div class="item-product">
+                            Loa Bluetooth Aura X1 - <span class="price">1.500.000₫</span>
+                        </div>
+                        <div class="item-product">
+                            Tai nghe SoundWave 5 - <span class="price">2.800.000₫</span>
+                        </div>
+                        <p class="note">... và các sản phẩm khác.</p>
+                    </div>
+                </div>
+
+                <div id="order-shipping" class="tab-content">
+                    <h3 class="title">Đơn hàng đang vận chuyển</h3>
+                    <div class="list-item">
+                        <div class="item-order shipping">
+                            #AS1002 - Loa SoundPro. Ngày giao dự kiến: 15/12
+                        </div>
+                    </div>
+                </div>
+
+                <div id="order-pending" class="tab-content">
+                    <h3 class="title">Đơn hàng đang chờ duyệt</h3>
+                    <p class="note">Bạn có 1 đơn hàng đang chờ xác nhận từ hệ thống.</p>
+                </div>
+
+                <div id="order-cancelled" class="tab-content">
+                    <h3 class="title">Đơn hàng đã hủy</h3>
+                    <p class="note">Không có đơn hàng nào bị hủy gần đây.</p>
+                </div>
+
+                <div id="order-history" class="tab-content">
+                    <h3 class="title">Lịch sử mua hàng</h3>
+                    <div class="list-item">
+                        <div class="item-order history">
+                            #AS0891 - Hoàn tất: 12/10/2025
+                        </div>
+                        <div class="item-order history">
+                            #AS0780 - Hoàn tất: 01/08/2025
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </main>
+
+    <!-- footer -->
     <footer class="footer-container">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-3 col-md-6 col-12">
@@ -237,7 +318,10 @@
 
         </div>
     </footer>
-    <script src="assets/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="assets/js/scriptProfile.js"></script>
 </body>
 
 </html>
