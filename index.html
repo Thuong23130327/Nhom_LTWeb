@@ -21,6 +21,9 @@
 </head>
 
 <body>
+    <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
+        <i class="bi bi-caret-up-fill"></i>
+    </button>
     <header>
         <div class="header-container content">
             <div class="head-left">
@@ -57,7 +60,7 @@
                     <input type="text" placeholder="Tìm kiếm">
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
-                <a class="a-nodecor" href="index.html">
+                <a class="a-nodecor active" href="index.html">
                     <div class="home active">
                         Trang chủ</div>
                 </a>
@@ -120,6 +123,9 @@
         </div>
     </div>
     <div class="overlay" id="menu-overlay"></div>
+
+    <!-- HẾT PHẦN HEAD, NAV, MENU = -->
+
     <!-- Section -->
     <main class="home-container content">
         <section id="home">
@@ -354,20 +360,21 @@
             crossorigin="anonymous"></script>
 
     </main>
-
+    <!-- footer -->
     <footer class="footer-container">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-3 col-md-6 col-12">
-                <div class="logo-container a-nodecor">
-                    <a href="index.html">
+                <a class=" a-nodecor" href="index.html">
+                    <div class="logo-container">
                         <div class="logo-wave">
                             <div class="sound-wave wave1"></div>
                             <div class="sound-wave wave2"></div>
                             <div class="sound-wave wave3"></div>
                         </div>
                         <span class="logo-text">AuraSound</span>
-                    </a>
-                </div>
+                    </div>
+                </a>
+
                 <p class="pt-3">Với Aura Sound, âm nhạc không chỉ để nghe – mà là để cảm nhận. Mỗi nhịp điệu, mỗi giai
                     điệu đều
                     được
