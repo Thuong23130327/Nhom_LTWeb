@@ -12,7 +12,7 @@ Thương */
 
 body {
     margin: 0;
-    background-color: black;
+    background-color: #f0f0f0;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -41,6 +41,11 @@ header {
 .content {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+main{
+    background-color: var(--white);
+    border-radius: 8px;
 }
 
 /* Đã */
