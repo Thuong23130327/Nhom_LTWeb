@@ -299,4 +299,85 @@ input:focus{
   margin-bottom: 20px;
 }
 
+/* === Desktop / General Style === */
+.specs-container {
+    margin-top: 30px;
+}
+
+.specs-container h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.specs-table tr {
+    border-bottom: 1px solid #ededed;
+}
+
+.specs-table tr:last-child {
+    border-bottom: none;
+}
+
+.specs-table td {
+    padding: 14px 18px;
+    vertical-align: top;
+}
+
+.specs-table .spec-title {
+    background-color: #f8f8f8;
+    width: 30%;
+    font-weight: 600;
+    color: #444;
+}
+
+
+
+/* === Mobile Responsive === */
+/* Chuyển từ bảng -> dạng block */
+@media (max-width: 768px) {
+    .specs-table,
+    .specs-table tr,
+    .specs-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .specs-table tr {
+        padding: 12px 0;
+        border-bottom: 1px solid #eaeaea;
+    }
+
+    .specs-table .spec-title {
+        background-color: transparent;
+        font-weight: 700;
+        padding-bottom: 4px;
+        color: #333;
+        border: none;
+        width: 100%;
+    }
+
+    .specs-table td {
+        padding: 6px 18px;
+    }
+
+    .specs-table tr:last-child {
+        border-bottom: none;
+    }
+
+    /* Tăng khoảng cách giữa các mục để dễ đọc */
+    .specs-table tr {
+        margin-bottom: 10px;
+    }
+}
+
+
 
