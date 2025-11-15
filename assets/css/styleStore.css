@@ -136,12 +136,19 @@ h1 {
 
 .product-card-info h4 {
     font-size: 16px;
-    margin-bottom: 5px;
-    white-space: nowrap;
+    /* Hoặc 14px */
+    margin-bottom: 10px;
+    /* white-space: nowrap; <-- Bỏ dòng này */
     overflow: hidden;
     text-overflow: ellipsis;
-}
 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Giới hạn 2 dòng */
+    -webkit-box-orient: vertical;
+    line-height: 1.2;
+    height: calc(1.2em * 2);
+}
 
 .product-card img {
     width: 100%;
@@ -160,13 +167,6 @@ h1 {
     display: none;
 }
 
-.product-card-info h4 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
 
 
 .pagination {
@@ -196,7 +196,7 @@ h1 {
 
 /* response */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
     }

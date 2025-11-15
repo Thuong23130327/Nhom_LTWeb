@@ -22,6 +22,9 @@
 </head>
 
 <body>
+    <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
+        <i class="bi bi-caret-up-fill"></i>
+    </button>
     <header>
         <div class="header-container content">
             <div class="head-left">
@@ -34,16 +37,15 @@
             </div>
             <div class="head-right">
                 <div class="info-item"><a href="">Cửa hàng gần đây</a></div>
-                <div class="info-item order-status"><a href="order-status.html">Tra cứu đơn hàng</a></div>
+                <div class="info-item"><a href="">Tra cứu đơn hàng</a></div>
                 <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
             </div>
         </div>
     </header>
     <nav>
         <div class="nav-container content">
-
             <div class="nav-left">
-                <a class="a-nodecor logo-container " href="index.html">
+                <a class="a-nodecor logo-container" href="index.html">
                     <div class="logo-wave">
                         <div class="sound-wave wave1"></div>
                         <div class="sound-wave wave2"></div>
@@ -52,24 +54,37 @@
                     <span class="logo-text">AuraSound</span>
                 </a>
             </div>
-
             <div class="nav-right">
                 <div class="searchBar">
                     <input type="text" placeholder="Tìm kiếm">
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
                 <a class="a-nodecor" href="index.html">
-                    <div class="home active"></i>
+                    <div class="home">
                         Trang chủ</div>
                 </a>
                 <a class="a-nodecor" href="contact.html">
-                    <div class="contact"></i>
+                    <div class="contact">
                         Liên hệ</div>
                 </a>
-                <a class="a-nodecor" href="store.html">
-                    <div class="store"></i>
-                        Sản phẩm</div>
-                </a>
+                <div class="nav-item-dropdown">
+                    <a class="a-nodecor active" href="store.html">
+                        <div class="store">
+                            Sản phẩm
+                            <i class="bi bi-chevron-compact-down"></i>
+                        </div>
+                    </a>
+
+                    <div class="menu-product">
+                        <a class="a-nodecor" href="speakers.html">
+                            <div>Loa</div>
+                        </a>
+                        <a class="a-nodecor" href="headphones.html">
+                            <div>Tai nghe</div>
+                        </a>
+                    </div>
+                </div>
+
                 <a class="a-nodecor" href="cart.html">
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
@@ -116,11 +131,13 @@
         <div class="mobile-menu-item">
             <a href="contact.html">Liên hệ</a>
         </div>
-        <div class="mobile-menu-item">
+        <div class="mobile-menu-item active">
             <a href="store.html">Sản phẩm</a>
         </div>
     </div>
     <div class="overlay" id="menu-overlay"></div>
+
+    <!-- HẾT PHẦN HEAD, NAV, MENU = -->
 
     <main>
         <section class="container sproduct my-5 pt-5">
@@ -157,40 +174,40 @@
                         <i class='bx bxs-star'></i>
                     </div>
                     <h2>998.000 VNĐ</h2>
-                
+
                     <div class="product-options">
                         <h4>Màu sắc: </h4>
                         <div class="color-options">
                             <div class="color-item active" onclick="selectColor(this)" data-img="img/Sony/1.webp">
-                            <img src="assets/img/Sony/1.webp" alt="">
-                            <span>Đen</span>
+                                <img src="assets/img/Sony/1.webp" alt="">
+                                <span>Đen</span>
+                            </div>
+                            <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/2.webp">
+                                <img src="assets/img/Sony/2.webp" alt="">
+                                <span>Xanh đen</span>
+                            </div>
+                            <div class="small-img-col">
+                                <img src="assets/img/Sony/2.webp" width="100%" class="small-img" alt="">
+                            </div>
+                            <div class="small-img-col">
+                                <img src="assets/img/Sony/4.webp" width="100%" class="small-img" alt="">
+                            </div>
+                            <div class="small-img-col">
+                                <img src="assets/img/Sony/5.webp" width="100%" class="small-img" alt="">
+                            </div>
                         </div>
-                        <div class="color-item" onclick="selectColor(this)" data-img="img/Sony/2.webp">
-                            <img src="assets/img/Sony/2.webp" alt="">
-                            <span>Xanh đen</span>
-                        </div>
-                        <div class="small-img-col">
-                            <img src="assets/img/Sony/2.webp" width="100%" class="small-img" alt="">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="assets/img/Sony/4.webp" width="100%" class="small-img" alt="">
-                        </div>
-                        <div class="small-img-col">
-                            <img src="assets/img/Sony/5.webp" width="100%" class="small-img" alt="">
-                        </div>
-                    </div>
 
-                    <div class="product-quantity">
-                        <h4>Số lượng: </h4>
-                        <input type="number" value="1">
-                    </div>
+                        <div class="product-quantity">
+                            <h4>Số lượng: </h4>
+                            <input type="number" value="1">
+                        </div>
 
-                    <div class="btn">
-                        <button class="buy-btn">Add to cart</button>
-                        <button class="buy-btn">Buy now</button>
+                        <div class="btn">
+                            <button class="buy-btn">Add to cart</button>
+                            <button class="buy-btn">Buy now</button>
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
 
 
@@ -384,7 +401,7 @@
             </div>
         </div>
     </div> -->
-  
+
     <footer class="footer-container">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-3 col-md-6 col-12">

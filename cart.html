@@ -16,7 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    </head>
+</head>
 
 <body>
     <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
@@ -34,16 +34,15 @@
             </div>
             <div class="head-right">
                 <div class="info-item"><a href="">Cửa hàng gần đây</a></div>
-                <div class="info-item order-status"><a href="order-status.html">Tra cứu đơn hàng</a></div>
+                <div class="info-item"><a href="">Tra cứu đơn hàng</a></div>
                 <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
             </div>
         </div>
     </header>
     <nav>
         <div class="nav-container content">
-
             <div class="nav-left">
-                <a class="a-nodecor logo-container " href="index.html">
+                <a class="a-nodecor logo-container" href="index.html">
                     <div class="logo-wave">
                         <div class="sound-wave wave1"></div>
                         <div class="sound-wave wave2"></div>
@@ -52,24 +51,37 @@
                     <span class="logo-text">AuraSound</span>
                 </a>
             </div>
-
             <div class="nav-right">
                 <div class="searchBar">
                     <input type="text" placeholder="Tìm kiếm">
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
                 <a class="a-nodecor" href="index.html">
-                    <div class="home active"></i>
+                    <div class="home">
                         Trang chủ</div>
                 </a>
                 <a class="a-nodecor" href="contact.html">
-                    <div class="contact"></i>
+                    <div class="contact">
                         Liên hệ</div>
                 </a>
-                <a class="a-nodecor" href="store.html">
-                    <div class="store"></i>
-                        Sản phẩm</div>
-                </a>
+                <div class="nav-item-dropdown">
+                    <a class="a-nodecor" href="store.html">
+                        <div class="store">
+                            Sản phẩm
+                            <i class="bi bi-chevron-compact-down"></i>
+                        </div>
+                    </a>
+
+                    <div class="menu-product">
+                        <a class="a-nodecor" href="speakers.html">
+                            <div>Loa</div>
+                        </a>
+                        <a class="a-nodecor" href="headphones.html">
+                            <div>Tai nghe</div>
+                        </a>
+                    </div>
+                </div>
+
                 <a class="a-nodecor active" href="cart.html">
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
@@ -120,8 +132,9 @@
             <a href="store.html">Sản phẩm</a>
         </div>
     </div>
-
     <div class="overlay" id="menu-overlay"></div>
+
+    <!-- HẾT PHẦN HEAD, NAV, MENU = -->
     <main class="cart-container">
         <div class="user-container">
             <i class="bi bi-person-circle"></i>
@@ -275,10 +288,12 @@
             <span class="subtotal-price">16.880.000₫</span>
         </div>
         <div class="checkout-button-container">
-            <button class="checkout-button-tgdd">
-                ĐẶT HÀNG
-                <span>(Giao hàng từ 2h - 12h)</span>
-            </button>
+            <a href="checkout.html">
+                <button class="checkout-button-tgdd">
+                    ĐẶT HÀNG
+                    <span>(Giao hàng từ 2h - 12h)</span>
+                </button>
+            </a>
         </div>
     </main>
     <footer class="footer-container">
@@ -355,7 +370,7 @@
         </div>
     </footer>
     <script src="assets/js/script.js"></script>
-    
+
 </body>
 
 </html>

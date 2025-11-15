@@ -13,16 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentFilter = 'all';
 
     const allProducts = document.querySelectorAll('.product-card');
-
-    const filterButtons = document.querySelectorAll('#filter-buttons .filter-btn');
     const pageButtons = document.querySelectorAll('#pagination-buttons .page-btn');
 
     if (allProducts.length === 0) {
         console.error("Lỗi: Không tìm thấy sản phẩm nào ('.product-card').");
-        return;
-    }
-    if (filterButtons.length === 0) {
-        console.error("Lỗi: Không tìm thấy nút lọc ('#filter-buttons .filter-btn').");
         return;
     }
     if (pageButtons.length === 0) {
@@ -47,24 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            console.log("Đã click nút lọc.");
-
-            currentFilter = button.getAttribute('data-filter');
-            currentPage = 1;
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            pageButtons.forEach(btn => {
-                if (parseInt(btn.getAttribute('data-page')) === 1) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            updateDisplay();
-        });
-    });
     pageButtons.forEach(button => {
         button.addEventListener('click', () => {
             console.log("Đã click nút phân trang.");            // Lấy số trang từ nút

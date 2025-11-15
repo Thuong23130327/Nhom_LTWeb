@@ -11,18 +11,19 @@ Thương */
 }
 
 * {
-    box-sizing: border-box !important; /* Đảm bảo được áp dụng */
-    margin: 0; 
-    padding: 0; 
+    box-sizing: border-box !important;
+    /* Đảm bảo được áp dụng */
+    margin: 0;
+    padding: 0;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100%;
     background-color: #f0f0f0;
     font-family: 'Poppins', sans-serif;
-    overflow-x: hidden !important;
 }
 
 /* Head phan loop va chuc nang */
@@ -52,7 +53,7 @@ header {
     margin: 0 auto;
 }
 
-main{
+main {
     background-color: var(--white);
     border-radius: 8px;
 }
@@ -124,6 +125,7 @@ nav {
     border-radius: 0 0 20px 20px;
     backdrop-filter: blur();
     border: 1px solid rgba(255, 255, 255, 0.18);
+
 }
 
 /* Đã */
@@ -303,6 +305,7 @@ nav {
     border-radius: 15px;
 }
 
+.home,
 .cart,
 .contact,
 .store {
@@ -313,6 +316,7 @@ nav {
     border-radius: 15px;
 }
 
+.home:hover,
 .cart:hover,
 .contact:hover,
 .store:hover {
@@ -336,43 +340,6 @@ nav {
     color: var(--theme-color-primary);
 }
 
-
-
-@media (max-width: 900px) {
-    .head-right {
-        display: none;
-    }
-
-    .head-left {
-        width: 100%;
-    }
-
-    .contact,
-    .store,
-    .cart,
-    .searchBar {
-        display: none;
-    }
-
-    #hamburger-icon {
-        display: block;
-    }
-
-    .nav-login-btn {
-        font-size: 15px;
-        white-space: nowrap;
-        padding: 0;
-    }
-
-    nav {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-
-    .mobile-menu-item .searchBar {
-        display: flex;
-    }
-}
 
 
 .overlay {
@@ -470,6 +437,89 @@ nav {
     transform: translateY(-5px);
     scale: calc(1.1);
     box-shadow: 0 2px 10px lightskyblue;
+}
+
+
+/* --- CSS cho Menu Sản Phẩm (Dropdown) --- */
+
+.nav-item-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.store {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.menu-product {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 90;
+    border: 1px solid #eee;
+}
+
+.menu-product a {
+    display: block;
+    padding: 12px 15px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.menu-product a:hover {
+    background-color: #f0f0f0;
+    color: var(--theme-color-primary);
+}
+
+.nav-item-dropdown:hover .menu-product {
+    display: block;
+}
+
+@media (max-width: 1000px) {
+    .head-right {
+        display: none;
+    }
+
+    .head-left {
+        width: 100%;
+    }
+
+    .contact,
+    .store,
+    .cart,
+    .searchBar,
+    .home {
+        display: none;
+    }
+
+    #hamburger-icon {
+        display: block;
+    }
+
+    .nav-login-btn {
+        font-size: 15px;
+        white-space: nowrap;
+        padding: 0;
+    }
+
+    nav {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .mobile-menu-item .searchBar {
+        display: flex;
+    }
 }
 
 /* ---Thương END--- */
@@ -824,7 +874,7 @@ footer .copyright a:hover {
     width: 100%;
     height: 100%;
     z-index: 1;
-    display: flex; 
+    display: flex;
     transition: transform 0.5s ease-out;
 }
 
@@ -833,12 +883,12 @@ footer .copyright a:hover {
     width: 100%;
     height: 100%;
     overflow: visible;
-    background-size: cover; 
-    background-position: center center;  
-    transform: scale(1.05); 
+    background-size: cover;
+    background-position: center center;
+    transform: scale(1.05);
 }
 
-.slideshow-overlay{
+.slideshow-overlay {
     width: 100%;
     height: 70vh;
     background-size: cover;
@@ -849,7 +899,7 @@ footer .copyright a:hover {
 }
 
 .hero-content {
-    z-index: 3; 
+    z-index: 3;
     text-align: left;
     color: var(--white);
     position: absolute;
@@ -865,14 +915,14 @@ footer .copyright a:hover {
 }
 
 .hero-content .main-title-slide {
-    font-size: 4rem; 
+    font-size: 4rem;
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 15px;
 }
 
 .hero-content .main-title-slide span {
-    color: var(--theme-color-secondary); 
+    color: var(--theme-color-secondary);
 }
 
 .hero-content .description {
@@ -881,12 +931,13 @@ footer .copyright a:hover {
 }
 
 /* Nút Điều hướng (Prev/Next) */
-.prev, .next {
+.prev,
+.next {
     cursor: pointer;
     position: absolute;
     top: 50%;
     width: auto;
-    padding: 16px; 
+    padding: 16px;
     margin-top: -22px;
     color: white;
     font-weight: bold;
@@ -898,16 +949,20 @@ footer .copyright a:hover {
 }
 
 .prev {
-    left: 0; /* Căn sát mép trái */
-    padding-left: 20px; /* Thêm padding một chút để không bị dính sát mép quá */
+    left: 0;
+    /* Căn sát mép trái */
+    padding-left: 20px;
+    /* Thêm padding một chút để không bị dính sát mép quá */
 }
 
 .next {
-    right: 0; /* Căn sát mép phải */
+    right: 0;
+    /* Căn sát mép phải */
     padding-right: 20px;
 }
 
-.prev:hover, .next:hover {
+.prev:hover,
+.next:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
