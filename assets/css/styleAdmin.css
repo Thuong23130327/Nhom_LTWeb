@@ -12,7 +12,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--white);
+    background-color: var(--white) !important;
     color: var(--black);
 }
 
@@ -150,4 +150,10 @@ main {
     font-size: 0.95rem;
     padding: 10px 15px;
     border-color: var(--white);
+}
+
+/* Admin background override: ensure full-page white background for admin pages */
+html, body {
+    background-color: var(--white) !important;
+    min-height: 100vh;
 }
