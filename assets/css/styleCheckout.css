@@ -225,7 +225,6 @@
     color: var(--theme-color-primary);
 }
 
-/* Phương thức thanh toán */
 .payment-methods {
     margin-top: 20px;
     border-top: 1px solid #ddd;
