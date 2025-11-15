@@ -302,9 +302,29 @@ input:focus{
   margin-bottom: 20px;
 }
 
-/* === Desktop / General Style === */
+  /* === Desktop / General Style === */
+.equal-columns {
+  display: flex;
+  align-items: flex-start;  
+  gap: 20px;
+}
+
+.equal-columns > div {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;   
+  height: 100%;
+}
+
+.equal-columns h3 {
+  margin-top: 0 !important;
+}
+
+
 .specs-container {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .specs-container h3 {
@@ -312,41 +332,54 @@ input:focus{
   margin-bottom: 15px;
 }
 
+.describe-container h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+
+
+/* Table */
+
+
 .specs-table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 15px;
-  background-color: #fff;
-  border: 1px solid #eaeaea;
+  border-collapse: separate;
+  border-spacing: 0;
   border-radius: 12px;
   overflow: hidden;
+  border: 1px solid #e6e6e6;    /* Viền ngoài */
+  background: #fff;
+  font-size: 15px;
 }
 
-.specs-table tr {
-  border-bottom: 1px solid #ededed;
+/* Ô trong bảng (td) */
+.specs-table td {
+  padding: 14px 16px;
+  vertical-align: top;
+  border-bottom: 1px solid #e6e6e6;   /* Viền từng dòng */
 }
 
-.specs-table tr:last-child {
+/* Bỏ viền dòng cuối */
+.specs-table tr:last-child td {
   border-bottom: none;
 }
 
-.specs-table td {
-  padding: 14px 18px;
-  vertical-align: top;
-}
-
+/* Cột tiêu đề bên trái */
 .specs-table .spec-title {
-  background-color: #f8f8f8;
-  width: 30%;
+  background: #fafafa;
   font-weight: 600;
+  width: 30%;
+  border-right: 1px solid #e6e6e6;    /* Viền dọc */
   color: #444;
 }
 
-
-
 /* === Mobile Responsive === */
-/* Chuyển từ bảng -> dạng block */
 @media (max-width: 768px) {
+
+  .equal-columns {
+    flex-direction: column;
+  }
 
   .specs-table,
   .specs-table tr,
@@ -358,6 +391,7 @@ input:focus{
   .specs-table tr {
     padding: 12px 0;
     border-bottom: 1px solid #eaeaea;
+    margin-bottom: 10px;
   }
 
   .specs-table .spec-title {
@@ -376,23 +410,220 @@ input:focus{
   .specs-table tr:last-child {
     border-bottom: none;
   }
-
-  /* Tăng khoảng cách giữa các mục để dễ đọc */
-  .specs-table tr {
-    margin-bottom: 10px;
-  }
 }
 
-.equal-columns {
-  display: flex;
-  align-items: stretch;
-  /* Hai container cao bằng nhau */
-  gap: 20px;
-  /* Khoảng cách giữa hai cột */
+
+/* -------------------------------
+   KHUNG CHÍNH
+--------------------------------*/
+.boxReview {
+    background: #fff;
+    padding: 25px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border: 1px solid #e3e3e3;
 }
 
-.equal-columns>div {
-  background: #fff;
-  border-radius: 12px;
-  padding: 20px;
+
+.boxReview-head h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333;
+}
+
+/* -------------------------------
+   BỐ CỤC 3 CỘT
+--------------------------------*/
+.boxReview-review {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr 1fr;
+    gap: 28px;
+}
+
+/* -------------------------------
+   CỘT TRÁI – OVERVIEW SCORE
+--------------------------------*/
+.boxReview-overView {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.score .average {
+    font-size: 52px;
+    font-weight: 700;
+    color: #333;
+}
+
+.score {
+    color: #666;
+    text-align: center;
+}
+
+.score .star i {
+    font-size: 22px;
+}
+
+.score p {
+    font-size: 15px;
+    color: #666;
+
+}
+
+.btn-review{
+  background-color: var(--theme-color-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 20px;
+  margin: 20px;
+  font-weight: 600;
+  width: fit-content;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.btn-review:hover{
+  color: var(--white);
+  background: var(--theme-gradient-button);
+  transition: all 0.3s ease;
+  transform: scale(1.1);
+}
+
+/* -------------------------------
+   CỘT GIỮA – RATING BAR
+--------------------------------*/
+.boxReview-rating {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 40px 0;
+}
+
+.rating-level {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.star-count {
+    width: 30px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Progress giống TGDD */
+.progress {
+    width: 50%;
+    height: 8px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+    background: #eee;
+    border-radius: 5px;
+}
+
+progress::-webkit-progress-value {
+    background: var(--theme-color-primary);
+    border-radius: 5px;
+}
+
+progress::-moz-progress-bar {
+    background: var(--theme-color-primary);
+}
+
+/* -------------------------------
+   CỘT PHẢI – TRẢI NGHIỆM
+--------------------------------*/
+
+
+.boxReview-experience {
+    padding-left: 20px;
+    border-left: 1px solid #e3e3e3;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.boxReview-experience h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.experience-review-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-title {
+    font-size: 16px;
+    color: #333;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.item-point {
+    font-weight: 600;
+    font-size: 13px;
+    color: #333;
+}
+
+.item-review-count {
+    color: #999;
+    font-size: 14px;
+}
+
+/* -------------------------------------
+    RESPONSIVE – TABLET
+--------------------------------------*/
+@media (max-width: 900px) {
+    .boxReview-review {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .boxReview-experience {
+        grid-column: span 2;
+        border-left: none;
+        padding-left: 0;
+        padding-top: 15px;
+        border-top: 1px solid #e3e3e3;
+    }
+}
+
+/* -------------------------------------
+    RESPONSIVE – MOBILE
+--------------------------------------*/
+@media (max-width: 600px) {
+    .boxReview-review {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .experience-review-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    button.review {
+        width: 100%;  /* giống mobile TGDD */
+        text-align: center;
+    }
 }
