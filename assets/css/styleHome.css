@@ -20,7 +20,7 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: black;
+    background-color: #f0f0f0;
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden !important;
 }
