@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function performLogoutNav() {
         try { localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authToken'); sessionStorage.removeItem('authToken'); } catch(e){}
-        // If we're on index, just update UI and don't redirect
         const onIndex = location.pathname.endsWith('index.html') || location.pathname === '/' || location.pathname === '';
         if (onIndex) {
             updateAuthUI();
