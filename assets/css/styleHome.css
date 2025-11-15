@@ -689,7 +689,7 @@ hr {
     padding: 10px 0;
 }
 
-#brand .row::-webkit-scrollbar {
+/* #brand .row::-webkit-scrollbar {
     height: 8px;
     cursor: pointer;
 }
@@ -697,7 +697,7 @@ hr {
     background-color: #ccc;
     border-radius: 10px;
     cursor: pointer;
-}
+} */
 
 
 #brand img {
@@ -737,7 +737,7 @@ hr {
 
 /* Ẩn thanh cuộn mặc định (tùy chọn) */
 
-#featured .row::-webkit-scrollbar,
+/* #featured .row::-webkit-scrollbar,
 #Speaker .row::-webkit-scrollbar,
 #Headphone .row::-webkit-scrollbar {
     height: 8px;
@@ -749,7 +749,7 @@ hr {
     background-color: #ccc;
     border-radius: 10px;
     cursor: pointer;
-}
+} */
 
 .product {
     flex: 0 0 280px; 
