@@ -44,7 +44,6 @@
     </header>
     <nav>
         <div class="nav-container content">
-
             <div class="nav-left">
                 <a class="a-nodecor logo-container" href="index.html">
                     <div class="logo-wave">
@@ -55,24 +54,37 @@
                     <span class="logo-text">AuraSound</span>
                 </a>
             </div>
-
             <div class="nav-right">
                 <div class="searchBar">
                     <input type="text" placeholder="Tìm kiếm">
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
                 <a class="a-nodecor active" href="index.html">
-                    <div class="home active">
+                    <div class="home">
                         Trang chủ</div>
                 </a>
                 <a class="a-nodecor" href="contact.html">
                     <div class="contact">
                         Liên hệ</div>
                 </a>
-                <a class="a-nodecor" href="store.html">
-                    <div class="store">
-                        Sản phẩm</div>
-                </a>
+                <div class="nav-item-dropdown">
+                    <a class="a-nodecor active" href="store.html">
+                        <div class="store">
+                            Sản phẩm
+                            <i class="bi bi-chevron-compact-down"></i>
+                        </div>
+                    </a>
+
+                    <div class="menu-product">
+                        <a class="a-nodecor" href="speakers.html">
+                            <div>Loa</div>
+                        </a>
+                        <a class="a-nodecor" href="headphones.html">
+                            <div>Tai nghe</div>
+                        </a>
+                    </div>
+                </div>
+
                 <a class="a-nodecor" href="cart.html">
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
@@ -119,7 +131,7 @@
         <div class="mobile-menu-item">
             <a href="contact.html">Liên hệ</a>
         </div>
-        <div class="mobile-menu-item">
+        <div class="mobile-menu-item ">
             <a href="store.html">Sản phẩm</a>
         </div>
     </div>
@@ -128,33 +140,33 @@
     <!-- HẾT PHẦN HEAD, NAV, MENU = -->
 
     <!-- Section -->
-    
-        <section id="home">
-            <div class="slideshow-container">
-                <div class="slideshow-overlay"></div>
-        
-                <div class="slide active" style="background-image: url('assets/img/banner/banner.jpg');"></div>
-                <div class="slide" style="background-image: url('assets/img/banner/banner_1.png');"></div>
-                <div class="slide" style="background-image: url('assets/img/banner/banner_2.png');"></div>
-            </div>
 
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <section id="home">
+        <div class="slideshow-container">
+            <div class="slideshow-overlay"></div>
 
-            <div class="container hero-content">
-                <p class="subtitle">Sản phẩm</p>
-                <h1 class="main-title-slide"><span>Giá tốt</span> năm nay</h1>
-                <p class="description">Chính hãng 100% - Bảo hành toàn quốc - Free Ship</p>
-                <button class="buyNow-button">Mua Ngay</button>
-            </div>
+            <div class="slide active" style="background-image: url('assets/img/banner/banner.jpg');"></div>
+            <div class="slide" style="background-image: url('assets/img/banner/banner_1.png');"></div>
+            <div class="slide" style="background-image: url('assets/img/banner/banner_2.png');"></div>
+        </div>
 
-            <div class="dots-container">
-                <span class="dot active" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-            </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-        </section>
+        <div class="container hero-content">
+            <p class="subtitle">Sản phẩm</p>
+            <h1 class="main-title-slide"><span>Giá tốt</span> năm nay</h1>
+            <p class="description">Chính hãng 100% - Bảo hành toàn quốc - Free Ship</p>
+            <button class="buyNow-button">Mua Ngay</button>
+        </div>
+
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+
+    </section>
     <main class="home-container content">
         <section id="brand" class="container">
             <div class="row m-0 py5">
@@ -437,7 +449,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a> 
+                    <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
