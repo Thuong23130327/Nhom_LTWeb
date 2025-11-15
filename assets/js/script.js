@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function next() { goTo(current + 1); }
     function prev() { goTo(current - 1); }
 
-    // Attach buttons robustly: find any .slide-btn and decide by class
+
     const btns = document.querySelectorAll('.slideshow-container .slide-btn');
     btns.forEach(btn => {
         if (btn.classList.contains('next')) {
@@ -129,7 +129,6 @@ document.addEventListener('DOMContentLoaded', function () {
     container.addEventListener('mouseenter', stopTimer);
     container.addEventListener('mouseleave', startTimer);
 
-    // initialize
     goTo(0);
     startTimer();
 });
@@ -138,4 +137,5 @@ const icon = document.querySelector('.searchBar i');
 
 icon.addEventListener('click', () => {
     searchBar.classList.toggle('active');
+
 });
