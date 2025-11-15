@@ -52,6 +52,11 @@ header {
     margin: 0 auto;
 }
 
+main{
+    background-color: var(--white);
+    border-radius: 8px;
+}
+
 /* Đã */
 @keyframes scroll-left {
     0% {
