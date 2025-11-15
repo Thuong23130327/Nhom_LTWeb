@@ -167,6 +167,18 @@ nav {
     scale: calc(1.1);
 }
 
+/* Avatar tài khoản */
+.nav-account { position: relative; display: flex; align-items: center; gap: 10px; }
+.nav-account .login-link .login { padding: 6px 10px; background: linear-gradient(90deg,#7b61ff,#ff6fd8); color:var(--white); border-radius:20px; }
+.account-avatar { position: relative; cursor: pointer; }
+.account-avatar .avatar-link img { width:40px; height:40px; object-fit:cover; border-radius:50%; display:block; }
+.account-menu { position: absolute; top: calc(100% + 8px); right: 0; background: var(--white); box-shadow: 0 6px 18px rgba(0,0,0,0.08); border-radius:8px; display: none; min-width:180px; z-index:1200; overflow:hidden; }
+.account-menu .account-menu-item { display:block; padding:10px 14px; color:var(--black); text-decoration:none; border-bottom:1px solid var(--white); }
+.account-menu .account-menu-item:last-child { border-bottom:0; }
+.account-menu .account-menu-item:hover { background: var(--white); }
+
+.account-avatar:hover .account-menu { display:block; }
+
 
 /* Đã */
 .a-nodecor {

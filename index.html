@@ -91,9 +91,23 @@
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
                 </a>
-                <a class="a-nodecor" href="login.html">
-                    <div class="login">Đăng nhập</div>
-                </a>
+                <div class="nav-account">
+                    <!-- hiện khi chưa đăng nhập -->
+                    <a class="a-nodecor login-link" href="/login.html">
+                        <div class="login">Đăng nhập</div>
+                    </a>
+
+                    <!-- hiện khi đã đăng nhập -->
+                    <div class="account-avatar" style="display:none;">
+                        <a href="/profileM/profile.html" class="avatar-link">
+                            <img src="/assets/img/avatar/HoaiThuong.png" alt="Avatar">
+                        </a>
+                        <div class="account-menu">
+                            <a class="account-menu-item" href="/profileM/profile.html">Thông tin tài khoản</a>
+                            <a class="account-menu-item" href="/login.html" id="navLogout">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
                 <div id="hamburger-icon">
                     <i class="bi bi-list"></i>
                 </div>

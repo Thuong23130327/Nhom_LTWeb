@@ -28,6 +28,57 @@ document.addEventListener("DOMContentLoaded", function () {
         overlay.addEventListener('click', closeMenu);
     }
 
+// Xử lí đăng nhập/xuát
+    function updateAuthUI() {
+        const isLogged = localStorage.getItem('isLoggedIn') === 'true';
+        const loginLink = document.querySelector('.nav-right .login-link');
+        const accountAvatar = document.querySelector('.nav-right .account-avatar');
+        if (isLogged) {
+            if (loginLink) loginLink.style.display = 'none';
+            if (accountAvatar) accountAvatar.style.display = 'flex';
+        } else {
+            if (loginLink) loginLink.style.display = 'inline-flex';
+            if (accountAvatar) accountAvatar.style.display = 'none';
+        }
+    }
+
+
+    function performLogoutNav() {
+        try { localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authToken'); sessionStorage.removeItem('authToken'); } catch(e){}
+        // If we're on index, just update UI and don't redirect
+        const onIndex = location.pathname.endsWith('index.html') || location.pathname === '/' || location.pathname === '';
+        if (onIndex) {
+            updateAuthUI();
+            return;
+        }
+        window.location.href = 'login.html';
+    }
+
+    document.addEventListener('click', function(e){
+        const logoutEl = e.target.closest('#navLogout');
+        if (logoutEl) {
+            e.preventDefault();
+            performLogoutNav();
+        }
+    });
+
+    const loginLinkEl = document.querySelector('.nav-right .login-link');
+    if (loginLinkEl) {
+        loginLinkEl.addEventListener('click', function(e){
+            if (e.shiftKey || e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                localStorage.setItem('isLoggedIn', 'true');
+                updateAuthUI();
+            }
+        });
+    }
+
+    window.addEventListener('storage', (ev) => {
+        if (ev.key === 'isLoggedIn') updateAuthUI();
+    });
+
+    updateAuthUI();
+
 });
 
 // SlideShow 
