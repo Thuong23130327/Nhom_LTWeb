@@ -42,6 +42,8 @@
             </div>
         </div>
     </header>
+
+   
     <nav>
         <div class="nav-container content">
             <div class="nav-left">
@@ -140,33 +142,29 @@
     <!-- HẾT PHẦN HEAD, NAV, MENU = -->
 
     <!-- Section -->
-
-    <section id="home">
-        <div class="slideshow-container">
-            <div class="slideshow-overlay"></div>
-
-            <div class="slide active" style="background-image: url('assets/img/banner/banner.jpg');"></div>
-            <div class="slide" style="background-image: url('assets/img/banner/banner_1.png');"></div>
-            <div class="slide" style="background-image: url('assets/img/banner/banner_2.png');"></div>
+<!-- SlideShow ở đây -->
+    <!-- Slideshow Section -->
+    <div class="slideshow-container">
+        <div class="slides-track">
+            <div class="slide">
+                <img src="assets/img/banner/banner.jpg" alt="Banner 1">
+            </div>
+            <div class="slide">
+                <img src="assets/img/banner/banner_1.png" alt="Banner 2">
+            </div>
+            <div class="slide">
+                <img src="assets/img/banner/banner_2.png" alt="Banner 3">
+            </div>
         </div>
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-        <div class="container hero-content">
-            <p class="subtitle">Sản phẩm</p>
-            <h1 class="main-title-slide"><span>Giá tốt</span> năm nay</h1>
-            <p class="description">Chính hãng 100% - Bảo hành toàn quốc - Free Ship</p>
-            <button class="buyNow-button">Mua Ngay</button>
+        <button class="slide-btn prev">&#10094;</button>
+        <button class="slide-btn next">&#10095;</button>
+        <div class="slide-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
         </div>
-
-        <div class="dots-container">
-            <span class="dot active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
-
-    </section>
+    </div>
+<!-- Phần thân trang -->
     <main class="home-container content">
         <section id="brand" class="container">
             <div class="row m-0 py5">
@@ -238,7 +236,7 @@
                         <i class='bx bxs-star'></i>
                         <i class='bx bxs-star'></i>
                     </div>
-                    <h5 class="p-name">Loa JBL</h5>
+                    <h5 class="p-name">Loa JBL Flip</h5>
                     <h4 class="p-price">11.000.000vnd</h4>
                     <button class="buy-btn">Mua Ngay</button>
                 </div>
