@@ -6,42 +6,145 @@
     <title>Admin Dashboard Hoàn Chỉnh - AuraSound</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/styleAdmin.css" rel="stylesheet">
+    <link href="assets/css/styleHome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* CSS tạm thời để ẩn các phần nội dung khác */
-        .content-section:not(.active) {
-            display: none;
-        }
-    </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container-fluid">
-            <a href="index.html" class="navbar-brand">
-                <i class="fas fa-tachometer-alt"></i> Trang Admin
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link"><i class="fas fa-bell"></i> Thông báo (5)</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-user-circle"></i> Tài khoản</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" style="color: var(--white) !important;" href="login.html"><i
-                                class="fas fa-sign-out-alt"></i> Đăng xuất</a>
-                    </li>
-                </ul>
+    <!-- header -->
+
+<button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
+        <i class="bi bi-caret-up-fill"></i>
+    </button>
+    <header>
+        <div class="header-container content">
+            <div class="head-left">
+                <div class="head-scroll">
+                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
+                    <div class="text-item">Chuyên các loại Loa, Tai nghe chính hãng</div>
+                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
+                    <div class="text-item">Bảo hành 1 đổi 1 trong 1 tháng</div>
+                </div>
+            </div>
+            <div class="head-right">
+                <div class="info-item"><a href="">Cửa hàng gần đây</a></div>
+                <div class="info-item"><a href="">Tra cứu đơn hàng</a></div>
+                <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
             </div>
         </div>
+    </header>
+
+   
+    <nav>
+        <div class="nav-container content">
+            <div class="nav-left">
+                <a class="a-nodecor logo-container" href="index.html">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="searchBar">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <a href="#"><i class="bi bi-search"></i></a>
+                </div>
+                <a class="a-nodecor active" href="index.html">
+                    <div class="home">
+                        Trang chủ</div>
+                </a>
+                <a class="a-nodecor" href="contact.html">
+                    <div class="contact">
+                        Liên hệ</div>
+                </a>
+                <div class="nav-item-dropdown">
+                    <a class="a-nodecor active" href="store.html">
+                        <div class="store">
+                            Sản phẩm
+                            <i class="bi bi-chevron-compact-down"></i>
+                        </div>
+                    </a>
+
+                    <div class="menu-product">
+                        <a class="a-nodecor" href="speakers.html">
+                            <div>Loa</div>
+                        </a>
+                        <a class="a-nodecor" href="headphones.html">
+                            <div>Tai nghe</div>
+                        </a>
+                    </div>
+                </div>
+
+                <a class="a-nodecor" href="cart.html">
+                    <div class="cart"> <i class="bi bi-cart"></i>
+                        Giỏ hàng</div>
+                </a>
+                <div class="nav-account">
+                    <!-- hiện khi chưa đăng nhập -->
+                    <a class="a-nodecor login-link" href="/login.html">
+                        <div class="login">Đăng nhập</div>
+                    </a>
+                    <!-- hiện khi đã đăng nhập -->
+                    <div class="account-avatar" >
+                        <a href="/profileM/profile.html" class="avatar-link">
+                            <img src="/assets/img/avatar/HoaiThuong.png" alt="Avatar">
+                        </a>
+                        <div class="account-menu">
+                            <a class="account-menu-item" href="/profileM/profile.html">Thông tin tài khoản</a>
+                            <a class="account-menu-item" href="/login.html" id="navLogout">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="hamburger-icon">
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+
+        </div>
     </nav>
+
+    <div class="mobile-menu" id="mobile-menu-container">
+        <div class="mobile-menu-header">
+            <div class="logo-container">
+                <a href="index.html" class="a-nodecor">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
+                </a>
+            </div>
+            <i class="bi bi-x-lg" id="mobile-menu-close"></i>
+        </div>
+
+        <div class="mobile-menu-item">
+            <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-item">
+            <a href="cart.html">Giỏ hàng</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="login.html" class="nav-login-btn">Đăng nhập</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="contact.html">Liên hệ</a>
+        </div>
+        <div class="mobile-menu-item ">
+            <a href="store.html">Sản phẩm</a>
+        </div>
+    </div>
+    <div class="overlay" id="menu-overlay"></div>
+
+    <!-- section -->
 
     <div class="container-fluid">
         <div class="row">
@@ -72,7 +175,7 @@
                 </div>
             </nav>
 
-            <maina class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2" id="main-title"><i class="fas fa-chart-area"></i> Admin Chính</h1>
@@ -189,189 +292,7 @@
                         </div>
                     </div>
                 </div>
-               
-                <!-- Quản lý người dùng -->
-                <div id="users" class="content-section">
-                    <p class="text-muted">Đây là khu vực quản lý tài khoản người dùng, chỉnh sửa, khóa hoặc xem chi tiết hoạt động.</p>
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <table class="table table-striped table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Tên</th>
-                                        <th>Email</th>
-                                        <th>Vai trò</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
 
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Nguyễn Hoài Thương</td>
-                                        <td>23130327@st.hcmuaf.edu.vn</td>
-                                        <td>
-                                            <span class="badge bg-danger">Quản trị viên</span>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning">Sửa</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Vũ Châu Hoài Phong</td>
-                                        <td>23130238@st.hcmuaf.edu.vn</td>
-                                        <td>
-                                            <span class="badge bg-primary">Khách hàng</span>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info">Xem</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Thòng Lý Tiểu Yến</td>
-                                        <td>23130397@st.hcmuaf.edu.vn</td>
-                                        <td>
-                                            <span class="badge bg-primary">Khách hàng</span>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info">Xem</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quản lý đơn hàng -->
-                <div id="orders" class="content-section">
-                    <p class="text-muted">Quản lý các trạng thái đơn hàng: Chờ duyệt, Đang giao, Đã hoàn thành, Đã hủy.</p>
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <table class="table table-striped table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Mã đơn hàng</th>
-                                        <th>Khách hàng</th>
-                                        <th>trạng thái</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>#1212</td>
-                                        <td>Tô Tấn Phát</td>
-                                        <td>
-                                            <span class="badge bg-warning">Chờ duyệt</span>
-                                        </td>
-                                        <td>1.500.000vnđ</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info">Chi tiết</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>#1223</td>
-                                        <td>Nguyễn Trường Vũ</td>
-                                        <td>
-                                            <span class="badge bg-success">Đang giao</span>
-                                        </td>
-                                        <td>3.200.000vnđ</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-info">Chi tiết</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>Lý Đại Vỷ</td>
-                                        <td>
-                                            <span class="badge bg-secondary">Đã giao</span>
-                                        </td>
-                                        <td>700.000vnđ</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-secondary">Xem</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Quản lý sản phẩm -->
-                <div id="products" class="content-section">
-                    <p class="text-muted">Thêm, sửa, xóa sản phẩm và quản lý tồn kho.</p>
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <table class="table table-striped table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Mã sản phẩm</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Tồn kho</th>
-                                        <th>Giá</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <td>SP001</td>
-                                        <td>Tai nghe Sony WH-CH520</td>
-                                        <td>15</td>
-                                        <td>900.000vnđ</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning">Sửa</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>SP002</td>
-                                        <td>Loa Bluetooth JBL Flip 6</td>
-                                        <td>8</td>
-                                        <td>2.500.000vnđ</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning">Sửa</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Thêm Sản phẩm Mới</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Báo cáo & Thống kê -->
-                <div id="reports" class="content-section">
-                    <p class="text-muted">Các báo cáo chi tiết về doanh thu, khách hàng và hiệu suất bán hàng.</p>
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-header bg-white">Báo Cáo Doanh Thu Tháng</div>
-                            <div class="card-body">
-                                <p>Tổng doanh thu: 100,000,000vnđ</p>
-                                <p>Tỷ lệ chuyển đổi: 30,000,000vnđ</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="card shadow-sm">
-                            <div class="card-header bg-white">Báo Cáo Khách Hàng Mới</div>
-                            <div class="card-body">
-                                <p>Số lượng khách hàng mới: 250</p>
-                                <p>Tỷ lệ chuyển đổi: 5,5%</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 </main>
         </div>
     </div>
