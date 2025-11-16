@@ -689,6 +689,8 @@ hr {
     padding: 10px 0;
 }
 
+/* Ẩn webkit trả giao diện mặc định cho thanh cuộn */
+
 /* #brand .row::-webkit-scrollbar {
     height: 8px;
     cursor: pointer;
@@ -735,7 +737,7 @@ hr {
     width: 100%;
 }
 
-/* Ẩn thanh cuộn mặc định (tùy chọn) */
+/* Ẩn webkit trả giao diện mặc định cho thanh cuộn */
 
 /* #featured .row::-webkit-scrollbar,
 #Speaker .row::-webkit-scrollbar,
