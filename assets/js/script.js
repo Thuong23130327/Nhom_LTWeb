@@ -1,9 +1,3 @@
-const searchBar = document.querySelector('.searchBar');
-const icon = document.querySelector('.searchBar i');
-
-icon.addEventListener('click', () => {
-    searchBar.classList.toggle('active');
-});
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -34,126 +28,114 @@ document.addEventListener("DOMContentLoaded", function () {
         overlay.addEventListener('click', closeMenu);
     }
 
-    // Hàm kiểm tra trạng thái đăng nhập và cập nhật UI
-    function checkLoginStatus() {
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-
-        const loginLink = document.getElementById('login-button-link');
-        const profileSection = document.getElementById('profile-section');
-
-        const mobileLoginSection = document.getElementById('mobile-login-section');
-        const mobileProfileSection = document.getElementById('mobile-profile-section');
-
-        if (isLoggedIn === 'true') {
-            // Đã đăng nhập: Ẩn nút Đăng nhập, Hiện Icon Profile
+// Xử lí đăng nhập/xuát
+    function updateAuthUI() {
+        const isLogged = localStorage.getItem('isLoggedIn') === 'true';
+        const loginLink = document.querySelector('.nav-right .login-link');
+        const accountAvatar = document.querySelector('.nav-right .account-avatar');
+        if (isLogged) {
             if (loginLink) loginLink.style.display = 'none';
-            if (profileSection) profileSection.style.display = 'flex';
-
-            if (mobileLoginSection) mobileLoginSection.style.display = 'none';
-            if (mobileProfileSection) mobileProfileSection.style.display = 'flex'; // Dùng flex để bố cục các mục con
+            if (accountAvatar) accountAvatar.style.display = 'flex';
         } else {
-            // Chưa đăng nhập: Hiện nút Đăng nhập, Ẩn Icon Profile
-            if (loginLink) loginLink.style.display = 'flex'; // Trả về display ban đầu
-            if (profileSection) profileSection.style.display = 'none';
-
-            if (mobileLoginSection) mobileLoginSection.style.display = 'block'; // Trả về display ban đầu
-            if (mobileProfileSection) mobileProfileSection.style.display = 'none';
+            if (loginLink) loginLink.style.display = 'inline-flex';
+            if (accountAvatar) accountAvatar.style.display = 'none';
         }
     }
 
-    // Hàm xử lý Đăng xuất
-    function logout() {
-        // Xóa cờ trạng thái đăng nhập
-        localStorage.removeItem('isLoggedIn');
-        // Chuyển hướng về trang chủ để UI được cập nhật (hoặc về trang login)
-        window.location.href = "index.html";
+
+    function performLogoutNav() {
+        try { localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authToken'); sessionStorage.removeItem('authToken'); } catch(e){}
+        const onIndex = location.pathname.endsWith('index.html') || location.pathname === '/' || location.pathname === '';
+        if (onIndex) {
+            updateAuthUI();
+            return;
+        }
+        window.location.href = 'login.html';
     }
 
-
-    // Chạy hàm kiểm tra trạng thái khi DOM đã tải xong
-    // (Sử dụng hàm này để thêm logic vào khối DOMContentLoaded đã có)
-    document.addEventListener("DOMContentLoaded", function () {
-
-        checkLoginStatus();
+    document.addEventListener('click', function(e){
+        const logoutEl = e.target.closest('#navLogout');
+        if (logoutEl) {
+            e.preventDefault();
+            performLogoutNav();
+        }
     });
+
+    const loginLinkEl = document.querySelector('.nav-right .login-link');
+    if (loginLinkEl) {
+        loginLinkEl.addEventListener('click', function(e){
+            if (e.shiftKey || e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                localStorage.setItem('isLoggedIn', 'true');
+                updateAuthUI();
+            }
+        });
+    }
+
+    window.addEventListener('storage', (ev) => {
+        if (ev.key === 'isLoggedIn') updateAuthUI();
+    });
+
+    updateAuthUI();
+
 });
 
-let mybutton = document.getElementById("back-top-btn");
-
-// Lắng nghe sự kiện cuộn trang
-window.onscroll = function () {
-    scrollFunction();
-};
-
-function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        mybutton.style.display = "block";
-    } else {
-        mybutton.style.display = "none";
-    }
-}
-function backTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-let slideIndex = 0; // Bắt đầu từ index 0
-let slideshowTimer;
-
-// Hàm chính để hiển thị slide và điều khiển vị trí trượt
-function showSlides(n) {
-    const slides = document.querySelectorAll('#home .slide');
+// SlideShow 
+document.addEventListener('DOMContentLoaded', function () {
+    const slidesTrack = document.querySelector('.slideshow-container .slides-track');
+    const slides = document.querySelectorAll('.slideshow-container .slide');
+    const dots = document.querySelectorAll('.slideshow-container .dot');
+    const prevBtn = document.querySelector('.slideshow-container .prev');
+    const nextBtn = document.querySelector('.slideshow-container .next');
     const container = document.querySelector('.slideshow-container');
-    const dots = document.querySelectorAll('.dots-container .dot');
+    let current = 0;
+    const total = slides.length;
+    const intervalMs = 5000; // 5s
+    let autoSlide;
 
-    if (slides.length === 0 || !container) return;
-
-    // Tính toán Index mới (đảm bảo quay vòng)
-    if (n >= slides.length) { slideIndex = 0 }
-    else if (n < 0) { slideIndex = slides.length - 1 }
-    else { slideIndex = n }
-
-    // Chiều rộng của mỗi slide chính là chiều rộng của container
-    const slideWidth = container.clientWidth; 
-    
-    // Tính toán vị trí trượt bằng PIXEL (slideIndex * chiều rộng 1 slide)
-    const offsetInPixels = slideIndex * slideWidth;
-    
-    // Áp dụng hiệu ứng trượt ngang bằng PIXEL
-    container.style.transform = `translateX(-${offsetInPixels}px)`;
-
-    // Cập nhật các chấm chỉ báo
-    dots.forEach(dot => {
-        dot.classList.remove('active');
-    });
-    // Đảm bảo dots[slideIndex] tồn tại trước khi truy cập
-    if (dots[slideIndex]) {
-        dots[slideIndex].classList.add('active');
+    function goTo(idx) {
+        if (!slidesTrack) return;
+        idx = (idx + total) % total;
+        slidesTrack.style.transform = `translateX(-${idx * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        current = idx;
     }
-    
-    // Đặt lại bộ đếm thời gian tự động chuyển slide
-    clearTimeout(slideshowTimer);
-    slideshowTimer = setTimeout(autoShowSlides, 5000); 
-}
 
-// Xử lý khi nhấn nút Prev/Next
-function plusSlides(n) {
-    showSlides(slideIndex + n);
-}
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
 
-// Xử lý khi nhấn vào chấm chỉ báo
-function currentSlide(n) {
-    //  dot index bắt đầu từ 1, slide index bắt đầu từ 0
-    showSlides(n - 1); 
-}
 
-// Hàm tự động chuyển slide
-function autoShowSlides() {
-    showSlides(slideIndex + 1);
-}
+    const btns = document.querySelectorAll('.slideshow-container .slide-btn');
+    btns.forEach(btn => {
+        if (btn.classList.contains('next')) {
+            btn.addEventListener('click', () => { next(); resetTimer(); });
+        } else if (btn.classList.contains('prev')) {
+            btn.addEventListener('click', () => { prev(); resetTimer(); });
+        }
+    });
+    dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetTimer(); }));
 
-// Khởi tạo Slideshow khi trang được tải
-document.addEventListener("DOMContentLoaded", function() {
-    
-    //Slideshow lần đầu
-    showSlides(slideIndex);
+    function startTimer() {
+        autoSlide = setInterval(next, intervalMs);
+    }
+    function stopTimer() {
+        clearInterval(autoSlide);
+    }
+    function resetTimer() {
+        stopTimer();
+        startTimer();
+    }
+
+    container.addEventListener('mouseenter', stopTimer);
+    container.addEventListener('mouseleave', startTimer);
+
+    goTo(0);
+    startTimer();
+});
+const searchBar = document.querySelector('.searchBar');
+const icon = document.querySelector('.searchBar i');
+
+icon.addEventListener('click', () => {
+    searchBar.classList.toggle('active');
+
 });

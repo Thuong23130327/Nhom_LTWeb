@@ -76,4 +76,39 @@ document.addEventListener('DOMContentLoaded', () => {
             closeMenu();
         }
     });
+    // XỬ LÝ ĐĂNG XUẤT
+    function performLogout() {
+        try {
+
+            localStorage.removeItem('authToken');
+            sessionStorage.removeItem('authToken');
+        } catch (e) {}
+
+        window.location.href = '/login.html';
+    }
+
+    const logoutTop = document.getElementById('logoutTop');
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutTop) {
+        logoutTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            performLogout();
+        });
+    }
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            performLogout();
+        });
+    }
+    // top-nav logout links (multiple pages)
+    const navLogoutLinks = document.querySelectorAll('.nav-logout-link');
+    if (navLogoutLinks.length) {
+        navLogoutLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                performLogout();
+            });
+        });
+    }
 });
