@@ -12,9 +12,9 @@
 </head>
 
 <body>
-
+ 
     <!-- header -->
-
+     
     <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
         <i class="bi bi-caret-up-fill"></i>
     </button>
@@ -35,8 +35,6 @@
             </div>
         </div>
     </header>
-
-
     <nav>
         <div class="nav-container content">
             <div class="nav-left">
@@ -54,7 +52,7 @@
                     <input type="text" placeholder="Tìm kiếm">
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
-                <a class="a-nodecor active" href="../index.html">
+                <a class="a-nodecor" href="../index.html">
                     <div class="home">
                         Trang chủ</div>
                 </a>
@@ -84,22 +82,6 @@
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
                 </a>
-                <div class="nav-account">
-                    <!-- hiện khi chưa đăng nhập -->
-                    <a class="a-nodecor login-link" href="../login.html">
-                        <div class="login">Đăng nhập</div>
-                    </a>
-                    <!-- hiện khi đã đăng nhập -->
-                    <div class="account-avatar">
-                        <a href="../profileM/profile.html" class="avatar-link">
-                            <img src="../assets/img/avatar/HoaiThuong.png" alt="Avatar">
-                        </a>
-                        <div class="account-menu">
-                            <a class="account-menu-item" href="../profileM/profile.html">Thông tin tài khoản</a>
-                            <a class="account-menu-item" href="../login.html" id="navLogout">Đăng xuất</a>
-                        </div>
-                    </div>
-                </div>
                 <div id="hamburger-icon">
                     <i class="bi bi-list"></i>
                 </div>
@@ -131,16 +113,20 @@
         </div>
 
         <div class="mobile-menu-item">
-            <a href="../cart.html">Giỏ hàng</a>
+            <a href="../index.html">Trang chủ</a>
         </div>
         <div class="mobile-menu-item">
-            <a href="../login.html" class="nav-login-btn">Đăng nhập</a>
+            <a href="../cart.html">Giỏ hàng</a>
         </div>
         <div class="mobile-menu-item">
             <a href="../contact.html">Liên hệ</a>
         </div>
-        <div class="mobile-menu-item ">
+        <div class="mobile-menu-item">
             <a href="../store.html">Sản phẩm</a>
+        </div>
+
+        <div class="mobile-menu-footer">
+            <a href="../login.html" id="logoutBtn" class="logout-btn">Đăng xuất</a>
         </div>
     </div>
     <div class="overlay" id="menu-overlay"></div>
