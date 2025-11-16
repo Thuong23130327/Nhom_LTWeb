@@ -8,9 +8,16 @@
     margin-bottom: 2rem;
     align-items: flex-start;
     /* Giữ 2 cột align-top */
+    padding: 10px;
 }
 
-/* --- Cột bên trái: Form thông tin --- */
+.customer-details {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
 .customer-details h2 {
     font-size: 22px;
     font-weight: 600;
@@ -38,10 +45,8 @@
 
 .form-row .form-group {
     flex: 1;
-    /* 2 cột bằng nhau */
 }
 
-/* Style cho các ô input */
 .form-group {
     margin-bottom: 18px;
 }
@@ -74,16 +79,13 @@
     box-shadow: 0 0 5px rgba(74, 107, 255, 0.3);
 }
 
-/* --- Cột bên phải: Tóm tắt đơn hàng --- */
 .order-summary {
-    background-color: #f9f9f9;
-    padding: 25px;
+    background-color: rgb(250, 245, 255);
+    padding: 30px;
     border-radius: 8px;
     border: 1px solid #eee;
-    /* Quan trọng: giữ cho cột này "dính" lại khi cuộn */
     position: sticky;
     top: 90px;
-    /* Dính bên dưới nav của bạn */
 }
 
 .order-summary h2 {
@@ -93,14 +95,12 @@
     border-bottom: 1px solid #ddd;
 }
 
-/* Danh sách sản phẩm */
 .product-list {
     list-style: none;
     max-height: 300px;
-    /* Giới hạn chiều cao, cho phép cuộn */
     overflow-y: auto;
     padding-right: 10px;
-    /* Thêm padding để thanh cuộn đẹp hơn */
+    padding-top: 10px;
 }
 
 .product-item {
@@ -145,6 +145,13 @@
     justify-content: center;
 }
 
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .product-info {
     flex-grow: 1;
 }
@@ -166,7 +173,6 @@
     font-size: 15px;
 }
 
-/* Mã giảm giá */
 .promo-code {
     display: flex;
     gap: 10px;
@@ -219,7 +225,6 @@
     color: var(--theme-color-primary);
 }
 
-/* Phương thức thanh toán */
 .payment-methods {
     margin-top: 20px;
     border-top: 1px solid #ddd;
@@ -267,7 +272,6 @@
 }
 
 input[type="radio"]:checked+label {
-    /* (Bạn có thể thêm style cho label khi radio được chọn ở đây) */
 }
 
 
@@ -293,12 +297,12 @@ input[type="radio"]:checked+label {
 
 /* --- Responsive --- */
 @media (max-width: 900px) {
+
     .checkout-container {
         grid-template-columns: 1fr;
     }
 
     .order-summary {
-        grid-row: 1;
         position: static;
     }
 
