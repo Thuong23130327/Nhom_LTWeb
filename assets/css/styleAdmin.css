@@ -11,29 +11,43 @@
 }
 
 body {
+    height: 100%;
     font-family: 'Poppins', sans-serif;
     background-color: var(--white) !important;
     color: var(--black);
 }
 
-/* Navbar */
-.navbar {
-    background: var(--theme-gradient-icon) !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);    
+body . {
+    overflow: hidden;
+    height: 100vh;
 }
 
 
+/* Navbar */
+.navbar {
+    position: fixed;
+    background: var(--theme-gradient-icon) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   
+    position: fixed;
+    width: 100%; 
+    top: 0; 
+    z-index: 9999 !important;
+}
 
-/* Tùy chỉnh slideBar */
+/* Tùy chỉnh sideBar */
 .sidebar {
     position: fixed;
-    top: 56px;
+    top: 110px;
     bottom: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 100;
     padding: 48px 0 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+    box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.1);
     background-color: var(--white);
+}
+
+.sidebar #hamburger-icon::after {
+    overflow: hidden;
 }
 
 .sidebar .nav-link {
@@ -56,15 +70,14 @@ body {
 }
 
 /* Tiêu đề chính */
-.h2{
-    font-weight: 700;
-    background: var(--theme-gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+.h2 {
+    font-weight: 600; 
+    color: var(--black); 
+    margin-bottom: 1.5rem; 
+    border-bottom: 2px solid var(--theme-color-primary); 
+    padding-bottom: 0.5rem;
+    display: inline-block;
 }
-
 /* Tùy chỉnh nút */
 
 .btn-toolbar button {
@@ -93,6 +106,10 @@ main {
     border-radius: 12px;
 }
 
+.card-body {
+    padding: 1.25rem !important; 
+}
+
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
@@ -100,10 +117,13 @@ main {
 
 .card .card-text.h3 {
     font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
 }
 
 .card .fa-3x {
     opacity: 0.7;
+    font-size: 2.2em;
 }
 
 /* Bảng */
