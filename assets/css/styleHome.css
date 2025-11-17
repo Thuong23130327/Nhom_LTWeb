@@ -1102,3 +1102,39 @@ footer .copyright a:hover {
 .account-menu:hover {
     display: block;
 }
+/* Thêm banner giảm giá */
+#promo-banner {
+    background-color: var(--theme-color-primary);
+    color: var(--white);
+    padding: 60px 20px;
+    margin: 40px 0;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(90deg, var(--theme-color-primary), var(--theme-color-secondary));
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#promo-banner:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+}
+
+#promo-banner h2, #promo-banner h4 {
+    color: var(--white);
+}
+
+#promo-banner .buy-btn {
+    background-color: var(--white);
+    color: var(--theme-color-primary);
+    border: 2px solid var(--white);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 10px 40px;
+    transition: all 0.3s ease;
+}
+
+#promo-banner .buy-btn:hover {
+    background-color: transparent;
+    color: var(--white);
+}
