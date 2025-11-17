@@ -21,7 +21,6 @@
 </head>
 
 <body>
-
     <!-- header -->
 
     <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
@@ -44,10 +43,12 @@
             </div>
         </div>
     </header>
+
+
     <nav>
         <div class="nav-container content">
             <div class="nav-left">
-                <a class="a-nodecor logo-container" href="../index.html">
+                <a class="a-nodecor logo-container" href="index.html">
                     <div class="logo-wave">
                         <div class="sound-wave wave1"></div>
                         <div class="sound-wave wave2"></div>
@@ -61,16 +62,16 @@
                     <input type="text" placeholder="Tìm kiếm">
                     <a href="#"><i class="bi bi-search"></i></a>
                 </div>
-                <a class="a-nodecor" href="../index.html">
+                <a class="a-nodecor " href="index.html">
                     <div class="home">
                         Trang chủ</div>
                 </a>
-                <a class="a-nodecor" href="../contact.html">
+                <a class="a-nodecor active" href="contact.html">
                     <div class="contact">
                         Liên hệ</div>
                 </a>
                 <div class="nav-item-dropdown">
-                    <a class="a-nodecor active" href="../store.html">
+                    <a class="a-nodecor" href="store.html">
                         <div class="store">
                             Sản phẩm
                             <i class="bi bi-chevron-compact-down"></i>
@@ -78,19 +79,35 @@
                     </a>
 
                     <div class="menu-product">
-                        <a class="a-nodecor" href="../speakers.html">
+                        <a class="a-nodecor" href="speakers.html">
                             <div>Loa</div>
                         </a>
-                        <a class="a-nodecor" href="../headphones.html">
+                        <a class="a-nodecor" href="headphones.html">
                             <div>Tai nghe</div>
                         </a>
                     </div>
                 </div>
 
-                <a class="a-nodecor" href="../cart.html">
+                <a class="a-nodecor" href="cart.html">
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
                 </a>
+                <div class="nav-account">
+                    <!-- hiện khi chưa đăng nhập -->
+                    <a class="a-nodecor login-link" href="login.html">
+                        <div class="login">Đăng nhập</div>
+                    </a>
+                    <!-- hiện khi đã đăng nhập -->
+                    <div class="account-avatar">
+                        <a href="profileM/profile.html" class="avatar-link">
+                            <img src="assets/img/avatar/HoaiThuong.png" alt="Avatar">
+                        </a>
+                        <div class="account-menu">
+                            <a class="account-menu-item" href="profileM/profile.html">Thông tin tài khoản</a>
+                            <a class="account-menu-item" href="login.html" id="navLogout">Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
                 <div id="hamburger-icon">
                     <i class="bi bi-list"></i>
                 </div>
@@ -102,7 +119,7 @@
     <div class="mobile-menu" id="mobile-menu-container">
         <div class="mobile-menu-header">
             <div class="logo-container">
-                <a href="../index.html" class="a-nodecor">
+                <a href="index.html" class="a-nodecor">
                     <div class="logo-wave">
                         <div class="sound-wave wave1"></div>
                         <div class="sound-wave wave2"></div>
@@ -122,20 +139,16 @@
         </div>
 
         <div class="mobile-menu-item">
-            <a href="../index.html">Trang chủ</a>
+            <a href="cart.html">Giỏ hàng</a>
         </div>
         <div class="mobile-menu-item">
-            <a href="../cart.html">Giỏ hàng</a>
+            <a href="login.html" class="nav-login-btn">Đăng nhập</a>
         </div>
-        <div class="mobile-menu-item">
-            <a href="../contact.html">Liên hệ</a>
+        <div class="mobile-menu-item active">
+            <a href="contact.html">Liên hệ</a>
         </div>
-        <div class="mobile-menu-item">
-            <a href="../store.html">Sản phẩm</a>
-        </div>
-
-        <div class="mobile-menu-footer">
-            <a href="../login.html" id="logoutBtn" class="logout-btn">Đăng xuất</a>
+        <div class="mobile-menu-item ">
+            <a href="store.html">Sản phẩm</a>
         </div>
     </div>
     <div class="overlay" id="menu-overlay"></div>
@@ -174,7 +187,10 @@
             </div>
 
             <div class="map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2145255165465!2d106.78918141043681!3d10.8712816573926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2sNong%20Lam%20University!5e0!3m2!1sen!2s!4v1763230325191!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2145255165465!2d106.78918141043681!3d10.8712816573926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2sNong%20Lam%20University!5e0!3m2!1sen!2s!4v1763230325191!5m2!1sen!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
 
