@@ -1,6 +1,25 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    let mybutton = document.getElementById("back-top-btn");
+
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    function scrollTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const mobileMenu = document.getElementById('mobile-menu-container');
     const closeIcon = document.getElementById('mobile-menu-close');
@@ -28,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         overlay.addEventListener('click', closeMenu);
     }
 
-// Xử lí đăng nhập/xuát
+    // Xử lí đăng nhập/xuát
     function updateAuthUI() {
         const isLogged = localStorage.getItem('isLoggedIn') === 'true';
         const loginLink = document.querySelector('.nav-right .login-link');
@@ -44,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function performLogoutNav() {
-        try { localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authToken'); sessionStorage.removeItem('authToken'); } catch(e){}
+        try { localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authToken'); sessionStorage.removeItem('authToken'); } catch (e) { }
         const onIndex = location.pathname.endsWith('index.html') || location.pathname === '/' || location.pathname === '';
         if (onIndex) {
             updateAuthUI();
@@ -53,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = 'login.html';
     }
 
-    document.addEventListener('click', function(e){
+    document.addEventListener('click', function (e) {
         const logoutEl = e.target.closest('#navLogout');
         if (logoutEl) {
             e.preventDefault();
@@ -63,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const loginLinkEl = document.querySelector('.nav-right .login-link');
     if (loginLinkEl) {
-        loginLinkEl.addEventListener('click', function(e){
+        loginLinkEl.addEventListener('click', function (e) {
             if (e.shiftKey || e.ctrlKey || e.metaKey) {
                 e.preventDefault();
                 localStorage.setItem('isLoggedIn', 'true');
@@ -137,5 +156,4 @@ const icon = document.querySelector('.searchBar i');
 
 icon.addEventListener('click', () => {
     searchBar.classList.toggle('active');
-
 });

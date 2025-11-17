@@ -4,25 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giỏ hàng - AuraSound</title>
+    <title>Chi tiết Đơn hàng - AuraSound</title>
     <link rel="stylesheet" href="assets/css/styleHome.css">
     <link rel="stylesheet" href="assets/css/styleProfile.css">
-    <link rel="stylesheet" href="assets/css/styleCart.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
 </head>
 
 <body>
 
     <!-- header -->
-
     <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
         <i class="bi bi-caret-up-fill"></i>
     </button>
@@ -88,7 +87,7 @@
                     </div>
                 </div>
 
-                <a class="a-nodecor active" href="cart.html">
+                <a class="a-nodecor" href="cart.html">
                     <div class="cart"> <i class="bi bi-cart"></i>
                         Giỏ hàng</div>
                 </a>
@@ -138,7 +137,7 @@
             </div>
         </div>
 
-        <div class="mobile-menu-item active">
+        <div class="mobile-menu-item">
             <a href="cart.html">Giỏ hàng</a>
         </div>
         <div class="mobile-menu-item">
@@ -154,167 +153,113 @@
     <div class="overlay" id="menu-overlay"></div>
 
     <!-- HẾT PHẦN HEAD, NAV, MENU = -->
-    <main class="cart-container">
-        <div class="user-container">
-            <i class="bi bi-person-circle"></i>
-            <div>
-                <strong>Người nhận: Anh NGUYỄN HOÀI THƯƠNG - 0909123456</strong>
-                <p>43 Quốc Lộ 1K, Khu phố 2, Phường Linh Xuân, Thành phố Thủ Đức,...</p>
-            </div>
-            <i class="bi bi-arrow-right-circle"></i>
-        </div>
 
-        <div class="cart-items-list">
-            <div class="cart-item">
-                <div class="item-main">
-                    <img class="item-img"
-                        src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/333575/oppo-reno13-white-1-638711560052523670-750x500.jpg"
-                        alt="Sản phẩm">
-                    <div class="item-details">
-                        <h4>Điện thoại OPPO Reno13 5G 12GB/512GB</h4>
-                        <div class="item-variant">
-                            <span>Màu: Trắng</span>
-                            <i class="bi bi-chevron-compact-down"></i>
-                        </div>
-                        <div class="item-promo">
-                            <i class="bi bi-ticket-perforated-fill"></i>
-                            <span> 6 Khuyến mãi</span>
-                            <i class="bi bi-chevron-compact-down"></i>
-                        </div>
-                    </div>
-                    <div class="item-price-col">
-                        <span class="item-price">16.690.000₫</span>
-                    </div>
+    <main class="profile-page-main">
+        <div class="profile-container">
+
+            <div class="profile-sidebar" id="profileSidebar">
+                <div class="user-info">
+                    <img class="img-profile" src="assets/img/avatar/HoaiThuong.png" alt="Avatar">
+                    <h5 class="user-name">Chào, Nguyễn Văn A</h5>
+                    <p class="user-email">nguyenvana@gmail.com</p>
                 </div>
-                <div class="item-actions">
-                    <span class="item-delete">Xoá</span>
-                    <div class="quantity-control">
-                        <button class="quantity-btn" aria-label="Giảm">-</button>
-                        <input class="quantity-input" type="text" value="1" aria-label="Số lượng">
-                        <button class="quantity-btn" aria-label="Tăng">+</button>
-                    </div>
+
+                <div class="side-menu mobile-hidden" id="sideMenuContent">
+                    <ul class="nav-list">
+                        <li><a class="nav-link" href="profileM/profile.html"><i class="fa-solid fa-user icon"></i> Thông
+                                tin tài khoản</a></li>
+                        <li><a class="nav-link" href="profileM/favorites.html"><i class="fa-solid fa-heart icon"></i>
+                                Sản
+                                phẩm đã
+                                yêu thích</a></li>
+                        <li><a class="nav-link" href="profileM/order-shipping.html"><i
+                                    class="fa-solid fa-truck icon"></i> Đang
+                                vận chuyển</a></li>
+                        <li><a class="nav-link" href="profileM/order-pending.html"><i
+                                    class="fa-solid fa-clock icon"></i> Đang
+                                chờ duyệt</a></li>
+                        <li><a class="nav-link" href="profileM/order-cancelled.html"><i
+                                    class="fa-solid fa-ban icon"></i> Đã
+                                hủy</a></li>
+                        <li><a class="nav-link active" href="profileM/order-history.html"><i
+                                    class="fa-solid fa-history icon"></i> Lịch
+                                sử mua hàng</a></li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="cart-item">
-                <div class="item-main">
-                    <img class="item-img"
-                        src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/333575/oppo-reno13-blue-1-638711561368890602-750x500.jpg"
-                        alt="Sản phẩm">
-                    <div class="item-details">
-                        <h4>Điện thoại OPPO Reno13 5G 12GB/512GB</h4>
-                        <div class="item-variant">
-                            <span>Màu: Xanh Dương</span>
-                            <i class="bi bi-chevron-compact-down"></i>
-                        </div>
-                        <div class="item-promo">
-                            <i class="bi bi-ticket-perforated-fill"></i>
-                            <span> 6 Khuyến mãi</span>
-                            <i class="bi bi-chevron-compact-down"></i>
-                        </div>
-                    </div>
-                    <div class="item-price-col">
-                        <span class="item-price">16.690.000₫</span>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <span class="item-delete">Xoá</span>
-                    <div class="quantity-control">
-                        <button class="quantity-btn" aria-label="Giảm">-</button>
-                        <input class="quantity-input" type="text" value="1" aria-label="Số lượng">
-                        <button class="quantity-btn" aria-label="Tăng">+</button>
-                    </div>
-                </div>
-            </div>
+            <div class="profile-content">
+                <a href="order-history.html" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i> TRỞ LẠI
+                </a>
 
-            <div class="upsell-section">
-                <div class="upsell-header">
-                    <i class="ri-shoppin g-bag-3-line"></i>
-                    <strong>Mua kèm giảm giá 20%</strong>
-                    <i class="ri-arrow-down-s-line arrow-icon"></i>
+                <div class="order-detail-header">
+                    <h3 class="title" style="margin-bottom: 0; border-bottom: none;">Chi tiết đơn hàng #AS0780</h3>
+                    <span class="order-status completed">
+                        <i class="fa-solid fa-check-circle"></i> Hoàn tất
+                    </span>
                 </div>
-                <div class="upsell-body">
-                    <div class="upsell-tabs">
-                        <button class="upsell-tab active">Tai nghe</button>
-                        <button class="upsell-tab">Sạc dự phòng</button>
-                        <button class="upsell-tab">Phụ kiện</button>
-                    </div>
-                    <div class="upsell-items">
-                        <div class="upsell-item">
-                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tai-nghe-bluetooth-true-wireless-oppo-enco-buds-3_3_.png"
-                                alt="Tai nghe">
-                            <span class="upsell-discount">-20%</span>
-                            <p class="upsell-name">Tai nghe Bluetooth True Wireless OPPO Enco Buds3</p>
-                            <span class="upsell-new-price">710.000₫</span>
-                            <span class="upsell-old-price">800.000₫</span>
-                            <button class="upsell-add-btn">Chọn mua</button>
-                        </div>
-                        <div class="upsell-item">
-                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/_/_/____product-images__white__front_cover_opening_cmyk.png"
-                                alt="Tai nghe">
-                            <span class="upsell-discount">-20%</span>
-                            <p class="upsell-name">Tai nghe Bluetooth True Wireless OPPO Enco Buds 2</p>
-                            <span class="upsell-new-price">1.560.000₫</span>
-                            <span class="upsell-old-price">1.950.000₫</span>
-                            <button class="upsell-add-btn">Chọn mua</button>
-                        </div>
-                        <div class="upsell-item">
-                            <img src="https://cdn.tgdd.vn/Products/Images/54/326589/tai-nghe-co-day-ep-ava-livebass-e1-trang-1-1-750x500.jpg"
-                                alt="Tai nghe">
-                            <span class="upsell-discount">-20%</span>
-                            <p class="upsell-name">Tai nghe Có dây AVA+ LiveBass E1</p>
-                            <span class="upsell-new-price">190.000₫</span>
-                            <span class="upsell-old-price">240.000₫</span>
-                            <button class="upsell-add-btn">Chọn mua</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="cart-item">
-                <div class="item-main">
-                    <img class="item-img"
-                        src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/54/330709/tai-nghe-bluetooth-true-wireless-ava-go-p310-trang-1-638642413611048035-750x500.jpg"
-                        alt="Sản phẩm">
-                    <div class="item-details">
-                        <h4>Tai nghe Bluetooth AVA+ Go P310</h4>
-                        <div class="item-variant">
-                            <span>Màu: Màu be</span>
-                            <i class="ri-arrow-down-s-line"></i>
-                        </div>
-                        <div class="item-promo-flashsale">
-                            <i class="ri-flashlight-line"></i>
-                            <span>Flashsale kết thúc sau: 07:01:09</span>
-                            <i class="ri-arrow-down-s-line"></i>
-                        </div>
-                    </div>
-                    <div class="item-price-col">
-                        <span class="item-price">190.000₫</span>
-                    </div>
-                </div>
-                <div class="item-actions">
-                    <span class="item-delete">Xoá</span>
-                    <div class="quantity-control">
-                        <button class="quantity-btn" aria-label="Giảm">-</button>
-                        <input class="quantity-input" type="text" value="1" aria-label="Số lượng">
-                        <button class="quantity-btn" aria-label="Tăng">+</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="cart-subtotal">
-            <span>Tạm tính (2 sản phẩm):</span>
-            <span class="subtotal-price">16.880.000₫</span>
-        </div>
-        <div class="checkout-button-container">
-            <a href="checkout.html">
-                <button class="checkout-button-tgdd">
-                    ĐẶT HÀNG
-                    <span>(Giao hàng từ 2h - 12h)</span>
-                </button>
-            </a>
+                <div class="order-detail-block">
+                    <h4>Sản phẩm</h4>
+                    <div class="block-content">
+                        <div class="product-item-detail">
+                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/l/o/loa-bluetooth-harman-kardon-aura-studio-5-den_7_.png"
+                                alt="Sản phẩm 1">
+                            <div class="product-info">
+                                <p class="product-name">Loa Bluetooth Harman Kardon Aura Studio 5</p>
+                                <p class="product-qty">x 1</p>
+                            </div>
+                            <div class="product-price">8.400.000₫</div>
+                        </div>
+
+                        <div class="order-total">
+                            <span>Thành tiền:</span>
+                            <span class="total-price">8.400.000₫</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-detail-block">
+                    <h4>Thông tin đơn hàng</h4>
+                    <div class="block-content">
+                        <ul class="order-info-list">
+                            <li>
+                                <strong>Mã đơn hàng:</strong>
+                                <span>#AS0780</span>
+                            </li>
+                            <li>
+                                <strong>Ngày đặt:</strong>
+                                <span>01-08-2025 10:15</span>
+                            </li>
+                            <li>
+                                <strong>Ngày giao hàng:</strong>
+                                <span>03-08-2025 14:00</span>
+                            </li>
+                            <li>
+                                <strong>Trạng thái:</strong>
+                                <span>Đã giao hàng thành công</span>
+                            </li>
+                            <li>
+                                <strong>Phương thức thanh toán:</strong>
+                                <span>COD</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="order-detail-block">
+                    <h4>Địa chỉ nhận hàng</h4>
+                    <div class="block-content address-info">
+                        <strong>Nguyễn Văn A</strong>
+                        <p>0987xxxxxx</p>
+                        <p>123 Đường ABC, Phường XYZ, Quận 1, TP. Hồ Chí Minh</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+
     <footer class="footer-container">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-3 col-md-6 col-12">
@@ -328,7 +273,6 @@
                         <span class="logo-text">AuraSound</span>
                     </div>
                 </a>
-
                 <p class="pt-3">Với Aura Sound, âm nhạc không chỉ để nghe – mà là để cảm nhận. Mỗi nhịp điệu, mỗi giai
                     điệu đều
                     được
@@ -388,8 +332,12 @@
 
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="assets/js/scriptProfile.js"></script>
     <script src="assets/js/script.js"></script>
-    <script src="../assets/js/scriptProfile.js"></script>
 </body>
 
 </html>
