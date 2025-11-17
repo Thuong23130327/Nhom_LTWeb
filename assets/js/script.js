@@ -157,3 +157,25 @@ const icon = document.querySelector('.searchBar i');
 icon.addEventListener('click', () => {
     searchBar.classList.toggle('active');
 });
+
+// Thông báo đã nhập thành công
+document.addEventListener("DOMContentLoaded", function () {
+    const newsletterForm = document.getElementById('newsletter-form');
+
+    if (newsletterForm) {
+        // Bắt sự kiện 'submit' của form
+        newsletterForm.addEventListener('submit', function(event) {
+            // Ngăn chặn hành vi gửi form mặc định (tránh reload trang)
+            event.preventDefault();
+
+            // Hiển thị thông báo theo yêu cầu
+            alert("Đã đăng kí nhận thông tin mới nhất từ trang web");
+
+            // Xóa nội dung input để tạo cảm giác đăng ký thành công
+            const emailInput = newsletterForm.querySelector('input[type="email"]');
+            if (emailInput) {
+                emailInput.value = '';
+            }
+        });
+    }
+});
