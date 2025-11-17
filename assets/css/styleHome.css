@@ -234,22 +234,6 @@ nav {
     animation-delay: -0.9s;
 }
 
-/*  */
-.mobile-menu-item .nav-login-btn {
-    background: var(--theme-gradient-icon);
-    padding: 5px 10px;
-    border-radius: 33px;
-    color: var(--white);
-}
-
-.mobile-menu-item .nav-login-btn:hover {
-    background: var(--theme-gradient-button);
-    transform: scale(1.02);
-    padding: 5px 10px;
-    transition: color 0.3s ease, transform 0.2s ease;
-    color: var(--white);
-}
-
 .nav-right.active {
     color: var(--theme-color-secondary);
 }
@@ -925,24 +909,28 @@ hr {
 }
 
 .mobile-menu-footer {
+    font-weight: 600;
     margin-top: auto;
     padding: 16px;
 }
 
 .mobile-menu-footer .logout-btn,
-.mobile-menu-item .nav-logout-btn {
+.mobile-menu-item  {
     display: inline-block;
     width: 100%;
     text-align: center;
     padding: 10px 12px;
-    background: linear-gradient(90deg, #7b61ff, #ff6fd8);
-    color: #fff;
     border-radius: 8px;
     text-decoration: none;
 }
 
-.mobile-menu-footer .logout-btn:hover,
-.mobile-menu-item .nav-logout-btn:hover {
+#logoutBtn:hover{
+    color: var(--price);
+}
+
+.mobile-menu-footer .logout-btn:hover, .nav-logout-btn:hover {
+    scale: 1.05;
+    color: var(--price);
     opacity: 0.95;
 }
 
