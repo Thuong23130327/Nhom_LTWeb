@@ -206,9 +206,8 @@ nav {
 
 /*  */
 .mobile-menu-item .nav-home-btn {
-    background-color: var(--theme-color-primary);
     color: var(--black);
-    background-color: transparent !important;
+    background-color: transparent;
 }
 
 
@@ -329,6 +328,11 @@ nav {
         font-size: 15px;
         white-space: nowrap;
         padding: 0;
+    }
+
+    .logout-btn{
+        background-color: transparent;
+        color: red;
     }
 
     nav {
@@ -647,6 +651,7 @@ main.profile-page-main {
 .nav-right .searchBar {
     display: flex; 
 }
+
 /* Tablet và Mobile */
 @media (max-width: 991px) {
   
@@ -656,6 +661,13 @@ main.profile-page-main {
         cursor: pointer;
         margin-left: 15px;
         z-index: 1001;
+    }
+
+    .nav-logout-link, 
+    #logoutTop, 
+    #logoutBtn {
+        background-color: transparent !important;
+        color: var(--black);
     }
 
     /* Ẩn các links Navigation và thanh tìm kiếm trên Header mobile */
