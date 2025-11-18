@@ -40,16 +40,14 @@ body {
 
 .back-btn-custom {
     display: inline-block; 
-    margin: 5px 0 15px 20px; 
-    
-    /* === THUỘC TÍNH BUỘC ÁP DỤNG === */
-    background: var(--theme-gradient-button) !important; /* BUỘC GRADIENT */
-    color: var(--white) !important; /* BUỘC CHỮ TRẮNG */
-    border: none !important; /* BUỘC BỎ BORDER */
-    font-weight: 600 !important; /* BUỘC IN ĐẬM */
-    padding: 8px 15px !important; /* BUỘC PADDING */
-    border-radius: 30px !important; /* BUỘC BO TRÒN */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important; /* BUỘC SHADOW */
+    margin: 5px 0 15px 20px;
+    background: var(--theme-gradient-button) !important; 
+    color: var(--white) !important;
+    border: none !important;
+    font-weight: 600 !important;
+    padding: 8px 15px !important; 
+    border-radius: 30px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
     
     transition: all 0.3s ease;
     text-decoration: none;
