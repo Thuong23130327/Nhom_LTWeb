@@ -169,3 +169,45 @@ html, body {
     background-color: var(--white) !important;
     min-height: 100vh;
 }
+
+/* nút mail */
+
+.btn-mail-feedback {
+    position: relative !important; 
+    display: inline-flex;
+    align-items: center; 
+    justify-content: center; 
+    width: 35px; 
+    height: 35px; 
+    padding: 0.375rem !important; 
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; 
+}
+
+.btn-mail-feedback:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.btn-mail-feedback .badge-counter {
+    position: absolute !important; 
+    top: 0 !important; 
+    right: 0 !important; 
+    bottom: auto !important; 
+    left: auto !important;
+    transform: translate(50%, -50%); 
+    
+    z-index: 5;
+    min-width: 20px; 
+    height: 20px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    
+    padding: 0; 
+    font-size: 0.65rem; 
+    font-weight: bold;
+    line-height: 1; 
+    
+    border: 2px solid var(--white); 
+    border-radius: 50%; 
+}
