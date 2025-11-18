@@ -24,7 +24,7 @@ function showTab(tabId) {
     if (clickedLink) {
         clickedLink.classList.add('active');
     }
-    
+
 }
 
 // HÀM MỚI ĐỂ CHUYỂN ĐỔI MENU MOBILE
@@ -39,7 +39,84 @@ function toggleMobileMenu() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    // --- KHAI BÁO BIẾN ---
+    const btnOpenEdit = document.getElementById('btnOpenEdit');
+    const modal = document.getElementById('modal-edit-profile');
+    const overlay = document.getElementById('menu-overlay'); // Dùng lại overlay cũ
+    const btnCloseIcon = document.getElementById('closeIcon');
+    const btnCancel = document.getElementById('btnCancel');
+    const btnSave = document.getElementById('btnSave');
+
+    // Biến cho phần Upload ảnh
+    const imageUpload = document.getElementById('imageUpload');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const mainAvatar = document.querySelector('.img-profile'); // Ảnh ở sidebar
+
+    // --- HÀM XỬ LÝ ---
+
+    // 1. Mở Modal
+    function openModal() {
+        modal.classList.add('active');
+        overlay.classList.add('active'); // Hiện overlay nền tối
+    }
+
+    // 2. Đóng Modal
+    function closeModal() {
+        modal.classList.remove('active');
+        overlay.classList.remove('active'); // Ẩn overlay
+    }
+
+    // --- GÁN SỰ KIỆN ---
+
+    if (btnOpenEdit) btnOpenEdit.addEventListener('click', openModal);
+    if (btnCloseIcon) btnCloseIcon.addEventListener('click', closeModal);
+    if (btnCancel) btnCancel.addEventListener('click', closeModal);
+
+    // Đóng khi click ra ngoài (click vào overlay)
+    if (overlay) overlay.addEventListener('click', closeModal);
+
+    // 3. Xử lý xem trước ảnh (Preview Image)
+    if (imageUpload) {
+        imageUpload.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    // Gán ảnh mới vào thẻ img trong modal
+                    avatarPreview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+
+    // 4. Xử lý nút Lưu (Giả lập)
+    if (btnSave) {
+        btnSave.addEventListener('click', function () {
+            // Lấy giá trị từ input
+            const newName = document.getElementById('editName').value;
+            const newPhone = document.getElementById('editPhone').value;
+
+            // Cập nhật ra ngoài giao diện chính (Demo)
+            document.querySelector('.user-name').innerText = "Chào, " + newName;
+            document.getElementById('fullName').value = newName;
+            document.getElementById('phone').value = newPhone;
+
+            // Cập nhật avatar chính nếu có thay đổi
+            if (avatarPreview.src !== mainAvatar.src) {
+                mainAvatar.src = avatarPreview.src;
+            }
+
+            alert("Đã lưu thông tin thành công!");
+            closeModal();
+        });
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
+
+
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const closeButton = document.getElementById('mobile-menu-close');
     const mobileMenu = document.getElementById('mobile-menu-container');
@@ -69,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (overlay) {
         overlay.addEventListener('click', closeMenu);
     }
-    
+
     // Tự động đóng menu khi resize lên desktop
     window.addEventListener('resize', () => {
         if (window.innerWidth > 991 && mobileMenu.classList.contains('open')) {
@@ -82,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             localStorage.removeItem('authToken');
             sessionStorage.removeItem('authToken');
-        } catch (e) {}
+        } catch (e) { }
 
         window.location.href = '/login.html';
     }

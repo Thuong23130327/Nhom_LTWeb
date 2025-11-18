@@ -6,8 +6,6 @@
     box-sizing: border-box;
 }
 
-
-
 .cart:hover {
     box-shadow: lightgrey 0 2px 10px;
     color: white;
