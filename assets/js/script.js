@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 2000);
         });
     }
-
     let mybutton = document.getElementById("back-top-btn");
 
     window.onscroll = function () {
@@ -22,17 +21,15 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     function scrollFunction() {
+        // Thêm dòng kiểm tra này để tránh lỗi nếu trang không có nút back-top
+        if (!mybutton) return;
+
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             mybutton.style.display = "block";
         } else {
             mybutton.style.display = "none";
         }
     }
-
-    function scrollTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
 
     const hamburgerIcon = document.getElementById('hamburger-icon');
     const mobileMenu = document.getElementById('mobile-menu-container');
@@ -193,3 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+function backTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
