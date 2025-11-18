@@ -30,7 +30,7 @@ body #hamburger-icon::after {
     top: 110px;
     bottom: 0;
     left: 0;
-    z-index: 100;
+    z-index: 98;
     padding: 48px 0 0;
     box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.1);
     background-color: var(--white);

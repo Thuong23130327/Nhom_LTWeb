@@ -8,14 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (btnDatHang && successPopup) {
         btnDatHang.addEventListener('click', function (e) {
             e.preventDefault(); // Chặn load lại trang
-
-            // 1. Hiện Popup
             successPopup.classList.add('show');
-
-            // 2. Đợi 2.5 giây rồi chuyển trang
             setTimeout(function () {
-                // Kiểm tra lại đường dẫn index.html cho đúng
-                // Nếu file checkout nằm trong thư mục con thì dùng "../index.html"
                 window.location.href = "profileM/order-history.html";
             }, 2000);
         });
