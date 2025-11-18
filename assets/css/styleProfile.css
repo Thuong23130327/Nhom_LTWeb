@@ -745,11 +745,6 @@ main.profile-page-main {
     font-weight: 500;
 }
 
-/* =========================================== */
-/* === BỔ SUNG CHO TRANG CHI TIẾT ĐƠN HÀNG === */
-/* =========================================== */
-
-/* Link "TRỞ LẠI" */
 .back-link {
     display: inline-block;
     text-decoration: none;

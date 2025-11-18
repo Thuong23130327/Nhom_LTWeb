@@ -692,7 +692,7 @@ hr {
     flex-shrink: 0;
     flex-grow: 0;
     width: 250px;
-    height:150px;
+    height: 150px;
     object-fit: contain;
     padding: 10px;
     filter: grayscale(100%);
@@ -722,23 +722,8 @@ hr {
     margin-left: 0;
     margin-right: 0;
     width: 100%;
+    align-items: flex-start;
 }
-
-/* Ẩn webkit trả giao diện mặc định cho thanh cuộn */
-
-/* #featured .row::-webkit-scrollbar,
-#Speaker .row::-webkit-scrollbar,
-#Headphone .row::-webkit-scrollbar {
-    height: 8px;
-    cursor: pointer;
-}
-#featured .row::-webkit-scrollbar-thumb,
-#Speaker .row::-webkit-scrollbar-thumb,
-#Headphone .row::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 10px;
-    cursor: pointer;
-} */
 
 .product {
     flex: 0 0 280px;
@@ -749,22 +734,6 @@ hr {
     scroll-snap-align: start;
     padding: 15px;
     background-color: var(--white);
-    text-align: center;
-}
-
-.product .p-name {
-    font-size: 1rem;
-    font-weight: 500;
-    height: 3em;
-    overflow: hidden;
-    margin-bottom: 5px;
-}
-
-.product .p-price {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--price);
-    margin-bottom: 15px;
 }
 
 .product:hover {
@@ -774,7 +743,6 @@ hr {
 
 .product img {
     transition: 0.3s all;
-    height: 200px;
     width: 100%;
     object-fit: contain;
     margin-bottom: 10px;
@@ -791,11 +759,13 @@ hr {
     font-size: 15px;
     border: none;
     font-weight: 500;
-    transform: translateY(20px);
+    transform: translateY(15px);
     opacity: 0;
     transition: 0.3s all;
     padding: 5px 30px;
     border-radius: 30px;
+    display: block;
+    margin: 0 auto;
 }
 
 
@@ -915,7 +885,7 @@ hr {
 }
 
 .mobile-menu-footer .logout-btn,
-.mobile-menu-item  {
+.mobile-menu-item {
     display: inline-block;
     width: 100%;
     text-align: center;
@@ -924,11 +894,12 @@ hr {
     text-decoration: none;
 }
 
-#logoutBtn:hover{
+#logoutBtn:hover {
     color: var(--price);
 }
 
-.mobile-menu-footer .logout-btn:hover, .nav-logout-btn:hover {
+.mobile-menu-footer .logout-btn:hover,
+.nav-logout-btn:hover {
     scale: 1.05;
     color: var(--price);
     opacity: 0.95;
@@ -1102,6 +1073,7 @@ footer .copyright a:hover {
 .account-menu:hover {
     display: block;
 }
+
 /* Thêm banner giảm giá */
 #promo-banner {
     background-color: var(--theme-color-primary);
@@ -1120,7 +1092,8 @@ footer .copyright a:hover {
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
 }
 
-#promo-banner h2, #promo-banner h4 {
+#promo-banner h2,
+#promo-banner h4 {
     color: var(--white);
 }
 
@@ -1131,6 +1104,7 @@ footer .copyright a:hover {
     font-size: 1rem;
     font-weight: 600;
     padding: 10px 40px;
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
@@ -1143,13 +1117,13 @@ footer .copyright a:hover {
 #service-commitment {
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    background-color: var(--white); 
+    background-color: var(--white);
 }
 
 .feature-box {
     padding: 20px;
     border-right: 1px solid #eee;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; 
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     border-radius: 5px;
 }
 
@@ -1160,8 +1134,8 @@ footer .copyright a:hover {
 .feature-box i {
     font-size: 3rem;
     background: var(--theme-gradient-icon);
-    background-clip: text; 
-    color: transparent; 
+    background-clip: text;
+    color: transparent;
     display: inline-block;
     margin-bottom: 10px;
 }
@@ -1169,7 +1143,7 @@ footer .copyright a:hover {
 .feature-box h5 {
     font-weight: 600;
     font-size: 1rem;
-    color: var(--theme-color-primary); 
+    color: var(--theme-color-primary);
 }
 
 .feature-box p {
@@ -1179,7 +1153,7 @@ footer .copyright a:hover {
 
 @media (max-width: 991px) {
     .feature-box {
-        border-right: none; 
+        border-right: none;
         border-bottom: 1px solid #eee;
     }
 
@@ -1198,12 +1172,12 @@ footer .copyright a:hover {
 
 #quick-contact {
     position: fixed;
-    right: 20px; 
-    bottom: 80px; 
+    right: 20px;
+    bottom: 80px;
     display: flex;
     flex-direction: column;
-    gap: 10px; 
-    z-index: 999; 
+    gap: 10px;
+    z-index: 999;
 }
 
 .contact-btn {
@@ -1217,38 +1191,38 @@ footer .copyright a:hover {
     font-size: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     transition: background 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 /* Hotline */
 
 .hotline-btn {
-    background-color: var(--theme-color-primary); 
+    background-color: var(--theme-color-primary);
 }
 
 /* Zalo */
 
 .zalo-btn {
-    background-color: var(--theme-color-primary); 
+    background-color: var(--theme-color-primary);
 }
 
 /* Messenger */
 
 .messenger-btn {
-    background-color: var(--theme-color-primary); 
+    background-color: var(--theme-color-primary);
 }
 
 .contact-btn:hover {
-    transform: scale(1.15); 
-    background: var(--theme-gradient-button); 
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4); 
+    transform: scale(1.15);
+    background: var(--theme-gradient-button);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
 }
 
 /* phần đăng kí nhận bảng tin */
 
 #newsletter {
-    color: var(--black); 
-    padding: 50px 20px; 
+    color: var(--black);
+    padding: 50px 20px;
 }
 
 #newsletter h2 {
@@ -1257,29 +1231,28 @@ footer .copyright a:hover {
 }
 
 #newsletter p {
-    color: rgba(0, 0, 0, 0.5); 
+    color: rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
 }
 
 /* form và input */
 #newsletter form input[type="email"] {
-    padding: 8px 15px; 
+    padding: 8px 15px;
     border-radius: 5px;
     border: 1px solid lightgray;
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
 }
 
 /* nút đăng ký */
 #newsletter form button[type="submit"] {
-    background-color: var(--price); 
+    background-color: var(--price);
     border-color: var(--price);
-    padding: 8px 20px; 
+    padding: 8px 20px;
     font-weight: 600;
-    font-size: 0.9rem; 
-    transition: all 0.2s ease-in-out; 
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
 }
 
 #newsletter form button[type="submit"]:hover {
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
 }
-
