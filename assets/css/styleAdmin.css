@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-:root {
-    --theme-color-primary: #4a6fff;
-    --theme-color-secondary: #b76bff;
-    --black: #000000;
-    --white: #ffffff;
-    --theme-gradient-button: linear-gradient(135deg, var(--theme-color-secondary), var(--theme-color-primary));
-    --theme-gradient-icon: linear-gradient(135deg, var(--theme-color-primary), var(--theme-color-secondary));
-    --theme-gradient-text: linear-gradient(90deg, var(--theme-color-secondary), var(--theme-color-primary));
-}
-
 body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
