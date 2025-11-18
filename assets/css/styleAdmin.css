@@ -211,3 +211,8 @@ html, body {
     border: 2px solid var(--white); 
     border-radius: 50%; 
 }
+
+footer{
+    z-index: 1000 !important;
+    display: flex !important;
+}
