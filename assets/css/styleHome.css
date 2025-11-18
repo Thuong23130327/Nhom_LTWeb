@@ -734,6 +734,7 @@ hr {
     scroll-snap-align: start;
     padding: 15px;
     background-color: var(--white);
+    border-radius: 8px;
 }
 
 .product:hover {
@@ -781,7 +782,6 @@ hr {
     background-size: cover;
     background-position: top 10px center;
     background-repeat: no-repeat;
-
     display: flex;
     flex-direction: column;
     justify-content: center;

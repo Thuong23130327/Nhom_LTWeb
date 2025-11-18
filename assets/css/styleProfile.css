@@ -21,12 +21,11 @@
     background: #fff;
     width: 450px;
     max-width: 90%;
-    padding: 5px 15px;
+    padding: 15px;
     border-radius: 12px;
     z-index: 1000;
     /* Cao hơn overlay (z-index: 99) */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    padding: 0;
     visibility: hidden;
     opacity: 0;
     transition: all 0.3s ease-in-out;
@@ -193,14 +192,9 @@
     width: 100%;
 }
 
-/* --- ĐỊNH DẠNG CHUNG --- */
-* {
-    box-sizing: border-box;
-}
 
 body {
-    background: var(--profile-background-light);
-    margin: 0;
+    background-color: #f0f0f0 !important;
 }
 
 /* Thêm mới vào cuối file CSS */
@@ -596,40 +590,30 @@ main.profile-page-main {
 
 .order-status.cancelled {
     background-color: #fbebeb;
-    /* Màu nền đỏ nhạt */
     color: #d9534f;
-    /* Màu chữ đỏ đậm */
 }
 
 .order-status.shipping {
     background-color: #fdf5e7;
-    /* Màu nền cam nhạt */
     color: var(--profile-shipping-border, #f39c12);
-    /* Dùng biến màu cam của bạn */
 }
 
 .order-status.completed {
     background-color: #eaf7eb;
-    /* Màu nền xanh nhạt */
     color: var(--profile-history-border, #2ecc71);
-    /* Dùng biến màu xanh của bạn */
 }
 
 .order-status.pending {
     background-color: #f0f0f0;
-    /* Màu nền xám nhạt */
     color: #555;
-    /* Màu chữ xám đậm */
 }
 
-/* Khối nội dung chi tiết (Dùng chung) */
 .order-detail-block {
     background: var(--white);
     border: 1px solid var(--profile-border-light, #eee);
     border-radius: 4px;
     margin-bottom: 20px;
     overflow: hidden;
-    /* Để bo góc h4 */
 }
 
 .order-detail-block h4 {

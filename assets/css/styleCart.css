@@ -1,9 +1,15 @@
+body {
+    background-color: #f0f0f0 !important;
+}
 
 .cart-container {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 10px;
+    margin: 2rem auto;
+    padding: 10px;
     box-sizing: border-box;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
 .cart:hover {
@@ -114,7 +120,6 @@
     margin-left: 5px;
 }
 
-/* Deal khi mua kèm */
 .item-promo,
 .item-promo-flashsale {
     font-size: 0.9rem;
@@ -139,6 +144,7 @@
     font-weight: 600;
     color: #e74c3c;
 }
+
 /* thao tác sluong */
 .item-actions {
     display: flex;
@@ -214,26 +220,6 @@
     padding: 10px 0 15px 0;
 }
 
-.upsell-tabs {
-    display: flex;
-    gap: 10px;
-    padding: 0 15px 10px 15px;
-}
-
-.upsell-tab {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 15px;
-    padding: 5px 12px;
-    font-size: 0.9rem;
-    cursor: pointer;
-}
-
-.upsell-tab.active {
-    border-color: var(--theme-color-primary, #4a6fff);
-    color: var(--theme-color-primary, #4a6fff);
-    background-color: #f0f3ff;
-}
 
 .upsell-items {
     display: flex;
@@ -406,7 +392,6 @@
         flex-basis: 0;
         flex-grow: 1;
     }
-
     .item-price-col {
         flex-basis: 100%;
         text-align: left;
@@ -422,8 +407,57 @@
         margin-top: 10px;
     }
 }
-.footer-container{
-    
+
+.footer-container {
     width: 100%;
     box-sizing: border-box;
+}
+
+.item-variant {
+    position: relative;
+    user-select: none;
+}
+
+.variant-dropdown {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    min-width: 150px;
+    z-index: 100;
+    padding: 5px 0;
+}
+
+.variant-dropdown.show {
+    display: block;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.variant-option {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.variant-option:hover {
+    background-color: #f1f8fe;
+    color: var(--theme-color-primary, #4a6fff);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
