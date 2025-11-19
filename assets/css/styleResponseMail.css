@@ -1,24 +1,80 @@
-/* styleResponseMail.css */
 
-/* ... Các style hiện tại của bạn ... */
+.mail-manager-main {
+    width: 100%;
+    background-color: var(--white);
+    padding-top: 10px;
+    padding-bottom: 20px;
+    min-height: 100vh;
+}
 
-/* === ICON GRADIENT (Đã cập nhật theo yêu cầu) === */
-/* Áp dụng gradient cho các icon thông tin mail */
-.mail-header .mail-info i,
-.mail-content .mail-attachment i,
-/* Áp dụng cho icon checkmark của modal thông báo */
-#successModal .modal-body i.fas {
-    /* Sử dụng gradient tương tự như icon admin */
-    background: var(--theme-gradient-icon); /* Đã định nghĩa trong styleHome.css */
-    /* Kỹ thuật để làm cho màu nền gradient hiển thị trên chữ/icon */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent; /* Fallback, nhưng -webkit-text-fill-color sẽ ưu tiên */
+/* Nút quay lại Mailbox */
+
+.back-btn-custom {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0 15px 0;
+    background: var(--theme-gradient-button) !important;
+    color: var(--white) !important;
+    border: none !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    border-radius: 30px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
-/* === CSS CHO THÔNG BÁO THÀNH CÔNG (MODAL) === */
+.back-btn-custom:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Phần chi tiết mail của khách hàng */
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+/* Tiêu đề và thông tin mail */
+
+.mail-info-header {
+    border-bottom: 2px solid var(--white);
+}
+
+.mail-info-header h4 {
+    color: var(--black);
+    font-weight: 600;
+}
+
+.mail-body {
+    line-height: 1.8;
+    color: var(--black);
+}
+
+/* Nút gửi phản hồi */
+
+.reply-btn {
+    min-width: 200px;
+    background: var(--theme-gradient-button);
+    color: var(--white) !important;
+    border: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.reply-btn:hover {
+    opacity: 0.95;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    transform: translateY(-1px);
+    color: var(--white);
+}
+
+/* Thông báo thành công */
+
 .modal-content {
     border-radius: 15px;
     border: none;
@@ -34,4 +90,24 @@
     color: var(--black);
 }
 
-/* ... Các style khác ... */
+/* Áp dụng màu cho các Icon trong mail info, icon trong modal thông báo, và icon trong form  */
+
+.mail-detail-card .mail-info p i.fas,
+.mail-info p i.fas,
+.mail-attachment i.fas {
+    background: var(--theme-gradient-icon) !important;
+    background-clip: text !important;
+    color: transparent !important;
+    font-size: 1em !important; 
+    transition: all 0.3s ease;
+}
+
+.mail-header .mail-info i,
+#successModal .modal-body i.fas,
+#responseForm .form-label i.fas {
+    background: var(--theme-gradient-icon) !important; 
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    color: transparent !important;    
+    transition: all 0.3s ease;
+}
