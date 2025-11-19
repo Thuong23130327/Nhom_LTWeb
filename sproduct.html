@@ -239,7 +239,7 @@
                                         <i class="fa fa-check"></i>
                                     </div>
                                     <h3>Thành công!</h3>
-                                    <p>Đã thêm thành công sản phẩm vào giỏ hàng</p>
+                                    <p>Đã thêm thành công </p>
                                     <div class="btn">
                                         <button type="button" class="close-btn">Ok</button>
                                     </div>
@@ -324,8 +324,6 @@
             </div>
         </section>
 
-        <!-- <hr class="mx-auto lines"> -->
-
         <section class="boxReview">
             <div class="boxReview-head">
                 <h3>Đánh giá</h3>
@@ -343,7 +341,31 @@
                         </div>
                         <p>23 lượt đánh giá</p>
                     </div>
+
+                   
                     <button class="btn-review">Viết đánh giá</button>
+                    <div class="over-lay"></div>
+                    <div class="wrapper">
+                        
+                        <h3>Đánh giá sản phẩm</h3>
+                        <form action="#">
+                            <div class="rating">
+                                <input type="number" name="rating" hidden>
+                                <i class='bx bx-star star'></i>
+                                <i class='bx bx-star star'></i>
+                                <i class='bx bx-star star'></i>
+                                <i class='bx bx-star star'></i>
+                                <i class='bx bx-star star'></i>
+                            </div>
+                            <textarea name="opinion" cols="30" rows="5" placeholder="Your opinion..."></textarea>
+                            <div class="btn-group">
+                                <button type="submit" class="btn submit">Gửi</button>
+                                <button class="btn cancel">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+
                 </div>
 
                 <div class="boxReview-rating">
@@ -580,7 +602,6 @@
     </footer>
 
     <script src="assets/js/scriptProduct.js"></script>
-    <script src="assets/js/scriptProfile.js"></script>
 
 </body>
 
