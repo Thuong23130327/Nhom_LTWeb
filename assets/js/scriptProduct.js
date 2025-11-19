@@ -58,3 +58,20 @@ function selectColor(element) {
   }, 200);
 }
 
+
+//
+const modalBtn = document.querySelector(".popup");
+const mainmodal = document.querySelector(".main-modal");
+const closeBtn = document.querySelector(".close-btn");
+
+// mở modal
+modalBtn.addEventListener("click", () => {
+  mainmodal.classList.add("active");
+});
+
+// đóng modal
+closeBtn.addEventListener("click", () => {
+  mainmodal.classList.remove("active");
+});
+
+
