@@ -31,8 +31,7 @@
     font-weight: 600 !important;
     padding: 8px 15px !important; 
     border-radius: 30px !important;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
-    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important; 
     transition: all 0.3s ease;
     text-decoration: none;
 }
@@ -69,14 +68,14 @@
 /* Thẻ mail chung */
 
 .mail-item {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid whitesmoke;
     cursor: pointer;
     transition: background-color 0.2s ease;
     align-items: center;
 }
 
 .mail-item:hover {
-    background-color: #f5f5f5;
+    background-color: whitesmoke;
 }
 
 .mail-item:last-child {
@@ -104,7 +103,7 @@
 /* Định dạng Mail ĐÃ ĐỌC (CŨ) */
 
 .read-mail {
-    background-color: #fafafa;
+    background-color: whitesmoke;
 }
 
 .read-mail .mail-sender,

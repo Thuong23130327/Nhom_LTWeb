@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mail-Box</title>
-    <link rel="stylesheet" href="../assets/css/styleMail.css">
+    <link rel="stylesheet" href="../assets/css/styleResponseMail.css">
     <link rel="stylesheet" href="../assets/css/styleHome.css">
     <link rel="stylesheet" href="../assets/css/styleProfile.css">
     <link rel="stylesheet" href="../assets/css/styleAdmin.css"> 
@@ -144,123 +144,86 @@
     <div class="overlay" id="menu-overlay"></div>
 
     <!-- section -->
-    <main class="mail-manager-main pt-5">
-        
-        <a href="admin.html" class="btn btn-sm back-btn-custom">
-            <i class="fas fa-arrow-left me-2"></i> Quay lại Admin
-        </a>
-
-        <div class="mail-content-center-wrapper mx-auto">
-            
-            <div class="d-flex justify-content-center flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 mt-4">
-                <h1 class="h2">Quản lý Thư Liên hệ</h1>
-            </div>
-
-            <div class="card shadow-sm mail-manager-container">
-                
-                <div id="mail-list" class="list-group list-group-flush mail-list-scroll">
-                    
-                    <div class="list-group-item mail-item unread-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Nguyễn Văn A</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Về vấn đề đặt hàng online</div>
-                            <div class="mail-time flex-grow-0 text-muted small">09:30 AM | 10/11/2025</div>
-                        </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
-                    </div>
-                    
-                    <div class="list-group-item mail-item unread-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Trần Thị B</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Yêu cầu hỗ trợ kỹ thuật sản phẩm X12</div>
-                            <div class="mail-time flex-grow-0 text-muted small">Hôm qua | 14:00 PM</div>
-                        </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
+    
+    <main class="col-12 px-md-4 mail-response-container">
+                <div class="mail-response-main-content">
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2"><i class="fas fa-reply me-2"></i> Phản hồi Thư Khách hàng</h1>
                     </div>
 
-                    <div class="list-group-item mail-item unread-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Lê Hoàng D</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Thông tin về chính sách bảo hành</div>
-                            <div class="mail-time flex-grow-0 text-muted small">08:00 AM | 09/11/2025</div>
-                        </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
-                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12"> 
+                            <div class="card mail-card">
+                                
+                                <!-- Header thông tin mail -->
 
-                    <div class="list-group-item mail-item read-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Phạm Văn C</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Hợp tác đại lý phân phối sản phẩm</div>
-                            <div class="mail-time flex-grow-0 text-muted small">2 ngày trước</div>
-                        </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
-                    </div>
+                                <div class="mail-header">
+                                    <h4 class="mb-3">Về vấn đề đặt hàng sản phẩm JBL Flip 6 bị lỗi</h4>
+                                    <div class="row mail-info">
+                                        <div class="col-md-6 mb-2">
+                                            <i class="fas fa-user-circle me-2"></i> <strong>Người gửi:</strong> Nguyễn Văn A
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <i class="fas fa-envelope me-2"></i> <strong>Email:</strong> <a href="mailto:van.a@gmail.com" class="text-decoration-none">van.a@gmail.com</a>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <i class="fas fa-clock me-2"></i> <strong>Thời gian:</strong> 15:30, 20/11/2025
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <i class="fas fa-tags me-2"></i> <strong>Chủ đề:</strong> Lỗi Sản phẩm
+                                        </div>
+                                    </div>
+                                </div>
 
-                    <div class="list-group-item mail-item read-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Customer Support</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Góp ý về giao diện website và trải nghiệm người dùng</div>
-                            <div class="mail-time flex-grow-0 text-muted small">07:45 AM | 09/11/2025</div>
-                        </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
-                    </div>
-                    
-                    <div class="list-group-item mail-item read-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Võ Thanh E</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Hỏi về giá sỉ loa X</div>
-                            <div class="mail-time flex-grow-0 text-muted small">06/11/2025</div>
-                        </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
-                    </div>
+                                <!-- Nội dung mail gốc -->
 
-                    <div class="list-group-item mail-item read-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Bùi Văn G</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Xác nhận đã nhận hàng #1180</div>
-                            <div class="mail-time flex-grow-0 text-muted small">05/11/2025</div>
-                        </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
-                    </div>
+                                <div class="mail-body">
+                                    <h5>Nội dung thư gốc:</h5>
+                                    <div class="mail-content-original">
+                                        Chào AuraSound,
+                                        
+                                        Tôi là Nguyễn Văn A, tôi đã mua sản phẩm Loa JBL Flip 6 (mã đơn hàng #12345) vào tuần trước. Tuy nhiên, khi sử dụng, tôi nhận thấy loa bị rè và âm thanh không ổn định khi bật lớn.
+                                        
+                                        Tôi đã thử khởi động lại nhưng tình trạng vẫn không thay đổi. Xin vui lòng hướng dẫn tôi cách xử lý hoặc quy trình bảo hành sản phẩm này.
+                                        
+                                        Xin cảm ơn.
+                                    </div>
+                                </div>
+                                
+                                <!-- Khu vực Phản hồi -->
 
-                    <div class="list-group-item mail-item read-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Hà Kiều H</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Khiếu nại về chất lượng âm thanh</div>
-                            <div class="mail-time flex-grow-0 text-muted small">04/11/2025</div>
+                                <form id="replyForm" class="reply-section">
+                                    <div class="mb-4">
+                                        <label for="replySubject" class="form-label"><i class="fas fa-bookmark me-1"></i> Tiêu đề Phản hồi</label>
+                                        <input type="text" class="form-control" id="replySubject" value="[Phản hồi] Về vấn đề JBL Flip 6 bị lỗi - AuraSound" required>
+                                    </div>
+                                    
+                                    <div class="mb-4">
+                                        <label for="replyContent" class="form-label"><i class="fas fa-pencil-alt me-1"></i> Nội dung Phản hồi</label>
+                                        <textarea class="form-control form-control-response" id="replyContent" placeholder="Nhập nội dung phản hồi của admin tại đây..." required></textarea>
+                                    </div>
+                                    
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-send-reply">
+                                            <i class="fas fa-paper-plane me-2"></i> Gửi Phản hồi
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
-                    </div>
-
-                    <div class="list-group-item mail-item read-mail d-flex justify-content-between p-3">
-                        <div class="mail-info d-flex align-items-center w-100">
-                            <div class="mail-sender flex-grow-0 me-3">Ngô Đình K</div>
-                            <div class="mail-subject flex-grow-1 text-truncate me-3">Đề nghị hợp tác quảng cáo</div>
-                            <div class="mail-time flex-grow-0 text-muted small">03/11/2025</div>
-                        </div>
-                        <button class="btn btn-sm btn-primary reply-btn ms-3">
-                            <i class="ri-eye-line me-1"></i> Xem chi tiết & Phản hồi
-                        </button>
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body text-center">
+                                <i class="fas fa-check-circle fa-3x mb-3"></i>
+                                <p id="modalMessage" class="h6"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </main>
 
     <!-- footer -->
@@ -342,7 +305,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/script.js"></script>
     <script src="../assets/js/scriptAdmin.js"></script>
-    <script src="../assets/js/scriptProfile.js"></script>
+    <script src="../assets/js/scriptResponseMail.js"></script>
 
 </body>
 </html>
+

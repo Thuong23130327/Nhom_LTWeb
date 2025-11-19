@@ -1,0 +1,37 @@
+/* styleResponseMail.css */
+
+/* ... Các style hiện tại của bạn ... */
+
+/* === ICON GRADIENT (Đã cập nhật theo yêu cầu) === */
+/* Áp dụng gradient cho các icon thông tin mail */
+.mail-header .mail-info i,
+.mail-content .mail-attachment i,
+/* Áp dụng cho icon checkmark của modal thông báo */
+#successModal .modal-body i.fas {
+    /* Sử dụng gradient tương tự như icon admin */
+    background: var(--theme-gradient-icon); /* Đã định nghĩa trong styleHome.css */
+    /* Kỹ thuật để làm cho màu nền gradient hiển thị trên chữ/icon */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent; /* Fallback, nhưng -webkit-text-fill-color sẽ ưu tiên */
+    transition: all 0.3s ease;
+}
+
+/* === CSS CHO THÔNG BÁO THÀNH CÔNG (MODAL) === */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+#modalMessage {
+    font-weight: 600;
+    color: var(--black);
+}
+
+/* ... Các style khác ... */
