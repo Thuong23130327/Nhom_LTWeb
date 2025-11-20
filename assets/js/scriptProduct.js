@@ -74,4 +74,50 @@ closeBtn.addEventListener("click", () => {
   mainmodal.classList.remove("active");
 });
 
+//---------------
+// đánh giá sp
+const allStar = document.querySelectorAll('.rating .star')
+
+allStar.forEach((item, idx)=>{
+  item.addEventListener('click', function (){
+    allStar.forEach(i=> {
+      i.classList.replace('bxs-star','bx-star')
+    })
+    for(let i=0; i<allStar.length; i++){
+      if(i<=idx){
+        allStar[i].classList.replace('bx-star', 'bxs-star');
+      }
+    }
+  })
+})
+
+const openBtn = document.querySelector('.btn-review');
+const wrapper = document.querySelector('.wrapper');
+const overlay = document.querySelector('.over-lay');
+const cancelBtn = document.querySelector('.btn.cancel');
+const submitBtn = document.querySelector('.btn.submit');
+
+
+// Mở form
+openBtn.addEventListener('click', () => {
+    wrapper.classList.add('active');
+    overlay.classList.add('active');
+});
+
+// Đóng form khi bấm Cancel
+cancelBtn.addEventListener('click', () => {
+    wrapper.classList.remove('active');
+    overlay.classList.remove('active');
+});
+
+//
+submitBtn.addEventListener('click',()=>{
+  wrapper.classList.remove('active');
+  overlay.classList.remove('active');
+  mainmodal.classList.add("active");
+})
+
+
+
+
 
