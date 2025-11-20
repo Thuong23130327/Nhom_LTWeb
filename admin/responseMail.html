@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sản phẩm đã yêu thích - AuraSound</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response-Mail</title>
+    <link rel="stylesheet" href="../assets/css/styleResponseMail.css">
     <link rel="stylesheet" href="../assets/css/styleHome.css">
-    <link rel="stylesheet" href="../assets/css/styleStore.css">
     <link rel="stylesheet" href="../assets/css/styleProfile.css">
+    <link rel="stylesheet" href="../assets/css/styleAdmin.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -16,6 +17,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
@@ -38,8 +41,8 @@
                 </div>
             </div>
             <div class="head-right">
-                <div class="info-item"><a href="../contact.html">Cửa hàng gần đây</a></div>
-                <div class="info-item"><a href="order-history.html">Tra cứu đơn hàng</a></div>
+                <div class="info-item"><a href="">Cửa hàng gần đây</a></div>
+                <div class="info-item"><a href="">Tra cứu đơn hàng</a></div>
                 <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
             </div>
         </div>
@@ -141,161 +144,84 @@
     <div class="overlay" id="menu-overlay"></div>
 
     <!-- section -->
+    
+    <main class="mail-manager-main pt-5">
+        <div class="container content">
+            <div class="d-flex justify-content-start">
+                <a href="../admin/mailBox.html" class="btn btn-sm back-btn-custom">
+                    <i class="fas fa-arrow-left"></i> Quay lại Hộp thư
+                </a>
+            </div>
 
-    <main class="profile-page-main">
-        <div class="profile-container">
-            <div class="profile-sidebar">
-                <div class="user-info"><img class="img-profile" src="../assets/img/avatar/HoaiThuong.png" alt="Avatar">
-                    <h5 class="user-name">Chào, Nguyễn Văn A</h5>
-                    <p class="user-email">nguyenvana@gmail.com</p>
-                </div>
-                <div class="side-menu">
-                    <ul class="nav-list">
-                        <li><a class="nav-link" href="profile.html"><i class="fa-solid fa-user icon"></i> Thông tin tài
-                                khoản</a></li>
-                        <li><a class="nav-link active" href="favorites.html"><i class="fa-solid fa-heart icon"></i> Sản
-                                phẩm đã yêu thích</a></li>
-                        <li><a class="nav-link" href="order-shipping.html"><i class="fa-solid fa-truck icon"></i> Đang
-                                vận chuyển</a></li>
-                        <li><a class="nav-link" href="order-pending.html"><i class="fa-solid fa-clock icon"></i> Đang
-                                chờ duyệt</a></li>
-                        <li><a class="nav-link" href="order-cancelled.html"><i class="fa-solid fa-ban icon"></i> Đã
-                                hủy</a></li>
-                        <li><a class="nav-link" href="order-history.html"><i class="fa-solid fa-history icon"></i> Lịch
-                                sử mua hàng</a></li>
-                    </ul>
+            <div class="card mail-detail-card mt-3">
+                <div class="card-body">
+                    <div class="mail-info-header pb-3 mb-3">
+                        <h4 class="mb-3">Vấn đề: Đặt hàng sản phẩm JBL Flip 6 bị lỗi</h4>
+                        <div class="d-flex justify-content-between align-items-center mail-info">
+                            <div>
+                                <p class="mb-1"><i class="fas fa-user-alt me-2"></i> **Người gửi:** Nguyễn Văn B</p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i> **Thời gian:** 10:30 AM, 25/08/2025</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mail-content mail-body">
+                        <p>Kính gửi bộ phận hỗ trợ,</p>
+                        <p>Tôi đã nhận được đơn hàng số 123456789 mua loa JBL Flip 6. Tuy nhiên, sau khi sử dụng được 2 ngày, loa bắt đầu có hiện tượng rè và đôi khi bị mất kết nối Bluetooth.</p>
+                        <p>Tôi xin gửi kèm hóa đơn và video chứng minh lỗi sản phẩm. Mong quý công ty sớm có biện pháp hỗ trợ đổi trả hoặc bảo hành.</p>
+                        <p>Trân trọng cảm ơn.</p>
+                    </div>
+
+                    <div class="mail-attachment mt-3 pt-3 border-top">
+                        <i class="fas fa-paperclip me-2"></i> Tệp đính kèm: 
+                        <a href="#" class="ms-2">HoaDon_123456789.pdf</a>,
+                        <a href="#" class="ms-2">VideoLoi.mp4</a>
+                    </div>
                 </div>
             </div>
 
-            <section class="profile-content">
-                <h3 class="title">Sản phẩm yêu thích</h3>
-
-                <div class="product-grid" id="product-grid">
-                    <a href="../sproduct.html" class="product-card" data-brand="sony" data-type="chup-tai"
-                        data-feature="bluetooth chong-on" data-price="7990000">
-                        <div class="product-badge discount">
-                            Giảm 18%
+            <div class="card response-card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Phản hồi lại người dùng:</h5>
+                    <form id="responseForm">
+                        <div class="mb-3">
+                            <label for="responseSubject" class="form-label">
+                                <i class="fas fa-tag me-2"></i> Chủ đề:
+                            </label>
+                            <input type="text" class="form-control" id="responseSubject"
+                                value="Re: Về vấn đề đặt hàng sản phẩm JBL Flip 6 bị lỗi" required>
                         </div>
-                        <img src="https://salt.tikicdn.com/cache/750x750/ts/product/ac/cf/71/908237eb3f6dfd93ee494866616de085.jpg.webp"
-                            alt="Sony WH-1000XM5">
-
-                        <!-- Thông tin sản phẩm -->
-                        <div class="product-card-info">
-                            <h4>Sony WH-1000XM5</h4>
-
-                            <div class="price-block">
-                                <span class="new-price">7.990.000đ</span>
-                                <span class="old-price">9.690.000đ</span>
-                            </div>
-
-                            <div class="product-bottom-row">
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <span>4.7</span>
-                                </div>
-                                <div class="favorite">
-                                    <i style="display: block;" class="bi bi-heart-fill"></i>
-                                    <span>Yêu thích</span>
-                                </div>
-                            </div>
+                        <div class="mb-3">
+                            <label for="responseBody" class="form-label">
+                                <i class="fas fa-edit me-2"></i> Nội dung phản hồi:
+                            </label>
+                            <textarea class="form-control" id="responseBody" rows="8" required></textarea>
                         </div>
-                    </a>
-
-                    <a href="../sproduct.html" class="product-card" data-brand="ava" data-type="truewireless"
-                        data-feature="bluetooth" data-price="200000">
-
-                        <!-- Tag giảm giá -->
-                        <div class="product-badge discount">
-                            Giảm 20%
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn reply-btn" id="replyBtn">
+                                <i class="fas fa-paper-plane me-2"></i> Phản hồi
+                            </button>
                         </div>
-                        <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/54/330709/tai-nghe-bluetooth-true-wireless-ava-go-p310-trang-1-638642413611048035-750x500.jpg"
-                            alt="Sony WH-1000XM5">
-
-                        <!-- Thông tin sản phẩm -->
-                        <div class="product-card-info">
-                            <h4>Tai nghe Bluetooth True Wireless AVA+ Go P310 </h4>
-
-                            <div class="price-block">
-                                <span class="new-price">200.000đ</span>
-                                <span class="old-price">250.000đ</span>
-                            </div>
-
-                            <div class="product-bottom-row">
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <span>4.7</span>
-                                </div>
-                                <div class="favorite">
-                                    <i style="display: block;" class="bi bi-heart-fill"></i>
-
-                                    <span>Yêu thích</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="../sproduct.html" class="product-card" data-brand="ava" data-type="truewireless"
-                        data-feature="bluetooth" data-price="200000">
-
-                        <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/54/332455/tai-nghe-tws-jbl-wave-beam-2-den-3-638682176208572620-750x500.jpg"
-                            alt="Tai nghe Bluetooth True Wireless JBL Wave Beam 2 ">
-
-                        <!-- Thông tin sản phẩm -->
-                        <div class="product-card-info">
-                            <h4>Tai nghe Bluetooth True Wireless JBL Wave Beam 2 </h4>
-
-                            <div class="price-block">
-                                <span class="new-price">1.390.000đ</span>
-                            </div>
-
-                            <div class="product-bottom-row">
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <span>4.2</span>
-                                </div>
-                                <div class="favorite">
-                                    <i style="display: block;" class="bi bi-heart-fill"></i>
-
-                                    <span>Yêu thích</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-
-                    <a href="../sproduct.html" class="product-card" data-brand="sony" data-type="truewireless"
-                        data-feature="bluetooth" data-price="1390000">
-
-                        <img
-                            src="https://cdn.tgdd.vn/Products/Images/54/313694/tai-nghe-bluetooth-chup-tai-sony-wh-ch520-kem-1-750x500.jpg">
-
-                        <!-- Thông tin sản phẩm -->
-                        <div class="product-card-info">
-                            <h4>Tai nghe Bluetooth Chụp Tai Sony WH-CH520 </h4>
-
-                            <div class="price-block">
-                                <span class="new-price">990.000đ</span>
-                            </div>
-
-                            <div class="product-bottom-row">
-                                <div class="rating">
-                                    <i class="bi bi-star-fill"></i>
-                                    <span>4.5</span>
-                                </div>
-                                <div class="favorite">
-                                    <i style="display: block;" class="bi bi-heart-fill"></i>
-
-                                    <span>Yêu thích</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    </form>
                 </div>
-            </section>
+            </div>
+
+            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <i class="fas fa-check-circle fa-3x mb-3"></i> 
+                            <p id="modalMessage" class="h6"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </main>
 
     <!-- footer -->
-     
+
     <footer class="footer-container">
         <div class="row container mx-auto pt-5">
             <div class="footer-one col-lg-3 col-md-6 col-12">
@@ -369,13 +295,13 @@
 
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <script src="../assets/js/scriptProfile.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/script.js"></script>
-    <script src="../assets/js/scriptStore.js"></script>
+    <script src="../assets/js/scriptAdmin.js"></script>
+    <script src="../assets/js/scriptProfile.js"></script>
+    <script src="../assets/js/scriptResponseMail.js"></script>
 
 </body>
-
 </html>
+
