@@ -1,0 +1,67 @@
+
+/* Style chung cho các nút hành động */
+.btn-back-to-list,
+.btn-update-status,
+.btn-save-note {
+    background: var(--theme-gradient-button) !important; 
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: white !important;
+    transition: all 0.2s ease;
+}
+
+/* Thêm hiệu ứng hover */
+
+.btn-back-to-list:hover,
+.btn-update-status:hover,
+.btn-save-note:hover {
+    background: linear-gradient(135deg, #a05bff, #3a5aff) !important; 
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-gradient-action {
+    /* Class này giữ lại để tránh xung đột với các class cụ thể phía trên */
+}
+
+/* --- ĐỒNG NHẤT MÀU CARD HEADER VỚI THÔNG TIN KHÁCH HÀNG --- */
+
+/* Style cho Card Header: Thông tin Khách hàng */
+.card-header-customer {
+    background: var(--theme-gradient-icon) !important;
+}
+
+/* Thông tin Giao hàng & Thanh toán */
+.card-header-shipping {
+    background: var(--theme-gradient-icon) !important; 
+}
+
+/* Danh sách Sản phẩm (Success) */
+.card-header-products {
+    background: var(--theme-gradient-icon) !important;
+}
+
+ /* Ghi chú Khách hàng  */
+.card-header-customer-note {
+    background: var(--theme-gradient-icon) !important; 
+    color: white !important;
+}
+
+ /* Ghi chú Nội bộ  */
+.card-header-admin-note {
+    background: var(--theme-gradient-icon) !important;
+    color: white !important;
+}
+
+/* Tổng cộng */
+.text-gradient-total {
+    font-weight: 700; 
+    background: var(--theme-gradient-text); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+}
+
+/* Trạng thái (kích thước) */
+.badge-status {
+    font-size: 0.9em;
+}

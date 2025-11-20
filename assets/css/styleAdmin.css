@@ -217,38 +217,3 @@ footer{
     display: flex !important;
 }
 
-/* TRẠNG THÁI TRANG HIỆN HÀNH TRÊN SIDEBAR (Yêu cầu 1) */
-
-.sidebar .nav-link.sidebar-item-active,
-/* Quan trọng: áp dụng cả cho icon bên trong liên kết */
-.sidebar .nav-link.sidebar-item-active i { 
-    /* Màu chính đã được định nghĩa trong styleHome.css (#4a6fff) */
-    color: var(--theme-color-primary) !important; 
-    font-weight: 600; 
-    background-color: #e0f7fa; /* Màu nền nhẹ, có thể điều chỉnh */
-    border-radius: 5px; 
-}
-
-/* ĐỔI MÀU CÁC ICON Ở TIÊU ĐỀ CHÍNH THÀNH GRADIENT (Yêu cầu 2) */
-
-.main-header-icons .btn-mail-feedback,
-.main-header-icons .dropdown-toggle {
-    /* Đảm bảo nút không có màu nền mặc định nếu có */
-    background: none !important; 
-    border: none !important;
-}
-
-.main-header-icons .btn-mail-feedback i,
-.main-header-icons .dropdown-toggle i {
-    /* Áp dụng Gradient cho Icon */
-    background: var(--theme-gradient-icon); 
-    -webkit-background-clip: text; /* Cắt nền Gradient theo hình dạng text/icon */
-    -webkit-text-fill-color: transparent; /* Làm cho text/icon trong suốt để thấy nền Gradient */
-    color: transparent; /* Fallback cho các trình duyệt cũ */
-    font-weight: bold; /* Tăng độ đậm của icon (nếu là font icon) */
-}
-
-/* Đảm bảo trạng thái hover không làm mất Gradient */
-.main-header-icons .dropdown-toggle:hover {
-    background-color: #f0f0f0; 
-}
