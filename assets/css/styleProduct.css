@@ -82,56 +82,6 @@ main {
   transform: scale(1.1);
 }
 
-/* 
-.single-product{
-    margin-top: 80px;
-}
-
-.single-product .col-2 img{
-    padding: 0;
-}
-
-.single-product .col-2{
-    padding: 20px;
-}
-
-.single-product h4{
-    margin: 20px 0;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.single-product select{
-    display: block;
-    padding: 10px;
-    margin-top: 20px;
-}
-
-.single-product input{
-    width: 50px;
-    height: 40px;
-    padding-left: 10px;
-    font-size: 20px;
-    margin-right: 10px;
-    border: 1px solid #dddddd;
-}
-
-input:focus{
-    outline: none;
-
-} */
-
-/* .small-img-row{
-    display: flex;
-    justify-content: space-between;
-}
-
-.small-img-col{
-    flex-basis: 24%;
-    cursor: pointer;
-} */
-
-
 .gallery-container {
   text-align: center;
   max-width: 400px;
