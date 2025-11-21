@@ -117,6 +117,7 @@ main {
 }
 
 /* Bảng */
+
 .table th{
     font-weight: 600;
 }
@@ -164,7 +165,6 @@ main {
     border-color: var(--white);
 }
 
-/* Admin background override: ensure full-page white background for admin pages */
 html, body {
     background-color: var(--white) !important;
     min-height: 100vh;
@@ -216,3 +216,4 @@ footer{
     z-index: 1000 !important;
     display: flex !important;
 }
+
