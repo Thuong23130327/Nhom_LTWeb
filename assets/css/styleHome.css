@@ -119,12 +119,12 @@ main {
 nav {
     box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
     position: sticky;
     top: 0;
     z-index: 98;
     border-radius: 0 0 20px 20px;
-    backdrop-filter: blur();
+    backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.18);
 
 }
@@ -141,9 +141,9 @@ nav {
 .nav-left {
     max-width: 40%;
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
-    padding: 15px 25px;
+    padding: 10px 20px;
     box-sizing: border-box;
 }
 
@@ -151,8 +151,8 @@ nav {
 .nav-right {
     display: flex;
     justify-content: flex-end;
-    gap: 20px;
-    max-width: 60%;
+    gap: 10px;
+    max-width: 70%;
     white-space: nowrap;
     align-items: center;
 }
@@ -256,7 +256,7 @@ nav {
     display: flex;
     align-items: center;
     height: 30px;
-    width: 500px;
+    width: 600px;
     border-radius: 70px;
     background-color: var(--white);
     padding: 10px 15px;
@@ -268,7 +268,6 @@ nav {
 .searchBar input {
     width: 0;
     opacity: 0;
-    height: 100%;
     border: none;
     outline: none;
     font-size: 12px;
@@ -407,7 +406,7 @@ nav {
 
     box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.1);
     border-radius: 20px 20px 8px 8px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
@@ -419,11 +418,44 @@ nav {
 }
 
 
-#back-top-btn:hover {
+#back-top-btn:hover,
+.contact-btn:hover {
     background: var(--theme-gradient-button);
     transform: translateY(-5px);
     scale: calc(1.1);
     box-shadow: 0 2px 10px lightskyblue;
+}
+
+
+/* phần hotline */
+
+#quick-contact {
+    position: fixed;
+    right: 30px;
+    bottom: 95px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 97;
+}
+
+.contact-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 40%;
+    color: var(--white);
+    font-size: 1.5rem;
+
+    background-color: rgba(0, 123, 255, 0.6);
+    box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    text-decoration: none;
+
 }
 
 
@@ -674,7 +706,7 @@ hr {
     cursor: grab;
     align-items: center;
     justify-content: flex-start;
-    gap: 30px;
+    gap: 20px;
     padding: 10px 0;
 }
 
@@ -1124,10 +1156,9 @@ footer .copyright a:hover {
 }
 
 .feature-box {
-    padding: 20px;
-    border-right: 1px solid #eee;
+    padding: 10px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .feature-box:last-child {
@@ -1168,42 +1199,4 @@ footer .copyright a:hover {
 .feature-box:hover {
     transform: translateY(-5%);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-/* phần hotline */
-
-#quick-contact {
-    position: fixed;
-    right: 30px;
-    bottom: 95px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 97;
-}
-
-.contact-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 40%;
-    color: var(--white);
-    font-size: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    text-decoration: none;
-}
-
-.hotline-btn, .zalo-btn, .messenger-btn  {
-    background-color: var(--theme-color-primary);
-}
-
-
-.contact-btn:hover {
-    transform: scale(1.15);
-    background: var(--theme-gradient-button);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
 }

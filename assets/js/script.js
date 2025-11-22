@@ -1,19 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Tìm nút đặt hàng và popup
-    const btnDatHang = document.getElementById('btn-dat-hang');
-    const successPopup = document.getElementById('success-popup');
 
-    if (btnDatHang && successPopup) {
-        btnDatHang.addEventListener('click', function (e) {
-            e.preventDefault(); // Chặn load lại trang
-            successPopup.classList.add('show');
-            setTimeout(function () {
-                window.location.href = "profileM/order-history.html";
-            }, 2000);
-        });
-    }
     let mybutton = document.getElementById("back-top-btn");
 
     window.onscroll = function () {
@@ -35,6 +23,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const mobileMenu = document.getElementById('mobile-menu-container');
     const closeIcon = document.getElementById('mobile-menu-close');
     const overlay = document.getElementById('menu-overlay');
+    const btnDatHang = document.getElementById('btn-dat-hang');
+    const successPopup = document.getElementById('success-popup');
+
+    function openPopup() {
+        if (successPopup) {
+            successPopup.classList.add('show');
+            overlay.classList.add('active');
+        }
+    }
+
+    function closePopup() {
+        if (successPopup) {
+            successPopup.classList.remove('show');
+        }
+
+    }
+
+    if (btnDatHang && successPopup) {
+        btnDatHang.addEventListener('click', openPopup);
+
+        if (closeIcon) {
+            closeIcon.addEventListener('click', closePopup);
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', closePopup);
+        }
+    }
+
+
 
     function openMenu() {
         mobileMenu.classList.add('active');
