@@ -1,17 +1,27 @@
-
 document.addEventListener("DOMContentLoaded", function () {
 
+    // --- KHAI BÁO CÁC PHẦN TỬ CHUNG ---
+    const mybutton = document.getElementById("back-top-btn");
+    const hamburgerIcon = document.getElementById('hamburger-icon');
+    const mobileMenu = document.getElementById('mobile-menu-container');
+    const overlay = document.getElementById('menu-overlay');
+    const allCloseIcons = document.querySelectorAll('.bi-x-lg');
 
-    let mybutton = document.getElementById("back-top-btn");
+    // Các phần tử cho trang Checkout 
+    const btnDatHang = document.getElementById('btn-dat-hang');
+    const successPopup = document.getElementById('success-popup');
+
+    // Thêm: Lấy phần tử nội dung popup để chặn propagation
+    const popupContent = document.querySelector('#success-popup .popup-content');
+
+    // --- 1. CHỨC NĂNG BACK-TO-TOP ---
 
     window.onscroll = function () {
         scrollFunction();
     };
 
     function scrollFunction() {
-        // Thêm dòng kiểm tra này để tránh lỗi nếu trang không có nút back-top
         if (!mybutton) return;
-
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             mybutton.style.display = "block";
         } else {
@@ -19,12 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    const hamburgerIcon = document.getElementById('hamburger-icon');
-    const mobileMenu = document.getElementById('mobile-menu-container');
-    const closeIcon = document.getElementById('mobile-menu-close');
-    const overlay = document.getElementById('menu-overlay');
-    const btnDatHang = document.getElementById('btn-dat-hang');
-    const successPopup = document.getElementById('success-popup');
+    // --- 2. HÀM XỬ LÝ POPUP ĐẶT HÀNG ---
 
     function openPopup() {
         if (successPopup) {
@@ -36,23 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
     function closePopup() {
         if (successPopup) {
             successPopup.classList.remove('show');
-        }
-
-    }
-
-    if (btnDatHang && successPopup) {
-        btnDatHang.addEventListener('click', openPopup);
-
-        if (closeIcon) {
-            closeIcon.addEventListener('click', closePopup);
-        }
-
-        if (overlay) {
-            overlay.addEventListener('click', closePopup);
+            if (!(mobileMenu && mobileMenu.classList.contains('active'))) {
+                overlay.classList.remove('active');
+            }
         }
     }
 
-
+    // --- 3. HÀM XỬ LÝ MENU MOBILE ---
 
     function openMenu() {
         mobileMenu.classList.add('active');
@@ -60,33 +55,85 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function closeMenu() {
-        mobileMenu.classList.remove('active');
-        overlay.classList.remove('active');
+        if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+            if (!(successPopup && successPopup.classList.contains('show'))) {
+                overlay.classList.remove('active');
+            }
+        }
     }
 
+
+    // --- 4. GÁN SỰ KIỆN TƯƠNG TÁC (Listeners) ---
+
+    // Mở Menu khi click Hamburger
     if (hamburgerIcon) {
         hamburgerIcon.addEventListener('click', openMenu);
     }
 
-    if (closeIcon) {
-        closeIcon.addEventListener('click', closeMenu);
+    // Nút Đặt hàng mở Popup
+    if (btnDatHang) {
+        btnDatHang.addEventListener('click', openPopup);
+    }
+    allCloseIcons.forEach(icon => {
+        icon.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const parentPopup = event.target.closest('#success-popup');
+            const parentMenu = event.target.closest('#mobile-menu-container');
+
+            if (parentPopup) {
+                closePopup();
+            }
+            if (parentMenu) {
+                closeMenu();
+            }
+        });
+    });
+
+    // FIX CHÍNH: Xử lý Overlay và Popup một cách riêng biệt
+
+    // A. Xử lý click vào nền xám của Popup (đóng Popup)
+    if (successPopup) {
+        successPopup.addEventListener('click', function (event) {
+            // Kiểm tra: Nếu click đích danh vào container ngoài (tức là nền xám của Popup)
+            // Hoặc click đích danh vào overlay (nền xám chung)
+            if (event.target === successPopup || event.target === overlay) {
+                // Đảm bảo không đóng Menu nếu chỉ muốn đóng Popup
+                if (successPopup.classList.contains('show')) {
+                    closePopup();
+                }
+            }
+        });
     }
 
+    // B. Xử lý click vào Overlay (đóng Menu Mobile)
     if (overlay) {
-        overlay.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', function (event) {
+            // Nếu Popup không mở, và Menu đang mở -> Đóng Menu
+            if (!(successPopup && successPopup.classList.contains('show')) && mobileMenu && mobileMenu.classList.contains('active')) {
+                closeMenu();
+            }
+        });
     }
 
-    // Xử lí đăng nhập/xuát
+    // --- 5. LOGIC ĐĂNG NHẬP/ĐĂNG XUẤT ---
+
     function updateAuthUI() {
         const isLogged = localStorage.getItem('isLoggedIn') === 'true';
         const loginLink = document.querySelector('.nav-right .login-link');
         const accountAvatar = document.querySelector('.nav-right .account-avatar');
+        const mobileLoginBtn = document.querySelector('.mobile-menu .nav-login-btn');
+
         if (isLogged) {
             if (loginLink) loginLink.style.display = 'none';
             if (accountAvatar) accountAvatar.style.display = 'flex';
+            if (mobileLoginBtn) mobileLoginBtn.textContent = 'Thông tin tài khoản';
+            if (mobileLoginBtn) mobileLoginBtn.href = 'profileM/profile.html';
         } else {
             if (loginLink) loginLink.style.display = 'inline-flex';
             if (accountAvatar) accountAvatar.style.display = 'none';
+            if (mobileLoginBtn) mobileLoginBtn.textContent = 'Đăng nhập';
+            if (mobileLoginBtn) mobileLoginBtn.href = 'login.html';
         }
     }
 
@@ -126,15 +173,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateAuthUI();
 
-});
+    // --- 6. LOGIC THANH SEARCH BAR ---
+    const searchBar = document.querySelector('.searchBar');
+    const searchIcon = document.querySelector('.searchBar i.bi-search');
 
-// SlideShow 
-document.addEventListener('DOMContentLoaded', function () {
+    if (searchIcon) {
+        searchIcon.addEventListener('click', () => {
+            searchBar.classList.toggle('active');
+        });
+    }
+
+    // --- 7. LOGIC NEWSLETTER ---
+    const newsletterForm = document.getElementById('newsletter-form');
+
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            alert("Đã đăng kí nhận thông tin mới nhất từ trang web");
+            const emailInput = newsletterForm.querySelector('input[type="email"]');
+            if (emailInput) {
+                emailInput.value = '';
+            }
+        });
+    }
+
+    // --- BẮT ĐẦU LOGIC SLIDESHOW TRONG KHỐI DOMContentLoaded CHUNG ---
+
     const slidesTrack = document.querySelector('.slideshow-container .slides-track');
     const slides = document.querySelectorAll('.slideshow-container .slide');
     const dots = document.querySelectorAll('.slideshow-container .dot');
-    const prevBtn = document.querySelector('.slideshow-container .prev');
-    const nextBtn = document.querySelector('.slideshow-container .next');
     const container = document.querySelector('.slideshow-container');
     let current = 0;
     const total = slides.length;
@@ -174,41 +241,18 @@ document.addEventListener('DOMContentLoaded', function () {
         startTimer();
     }
 
-    container.addEventListener('mouseenter', stopTimer);
-    container.addEventListener('mouseleave', startTimer);
+    if (container) {
+        container.addEventListener('mouseenter', stopTimer);
+        container.addEventListener('mouseleave', startTimer);
+    }
 
-    goTo(0);
-    startTimer();
-});
-const searchBar = document.querySelector('.searchBar');
-const icon = document.querySelector('.searchBar i');
-
-icon.addEventListener('click', () => {
-    searchBar.classList.toggle('active');
-});
-
-// Thông báo đã nhập thành công
-document.addEventListener("DOMContentLoaded", function () {
-    const newsletterForm = document.getElementById('newsletter-form');
-
-    if (newsletterForm) {
-        // Bắt sự kiện 'submit' của form
-        newsletterForm.addEventListener('submit', function (event) {
-            // Ngăn chặn hành vi gửi form mặc định (tránh reload trang)
-            event.preventDefault();
-
-            // Hiển thị thông báo theo yêu cầu
-            alert("Đã đăng kí nhận thông tin mới nhất từ trang web");
-
-            // Xóa nội dung input để tạo cảm giác đăng ký thành công
-            const emailInput = newsletterForm.querySelector('input[type="email"]');
-            if (emailInput) {
-                emailInput.value = '';
-            }
-        });
+    if (slides.length > 0) {
+        goTo(0);
+        startTimer();
     }
 });
 
+// Hàm global backTop (Giữ nguyên bên ngoài DOMContentLoaded)
 function backTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
