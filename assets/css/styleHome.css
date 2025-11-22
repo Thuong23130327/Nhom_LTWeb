@@ -392,9 +392,11 @@ nav {
 }
 
 #back-top-btn {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border: none;
+    padding: 0;
+
     background-color: rgba(0, 123, 255, 0.8);
     bottom: 30px;
     right: 30px;
@@ -402,9 +404,10 @@ nav {
     position: fixed;
     display: none;
     transition: all 0.3s ease;
+
     box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.1);
     border-radius: 20px 20px 8px 8px;
-    backdrop-filter: blur();
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
@@ -1172,12 +1175,12 @@ footer .copyright a:hover {
 
 #quick-contact {
     position: fixed;
-    right: 20px;
-    bottom: 80px;
+    right: 30px;
+    bottom: 95px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    z-index: 999;
+    z-index: 97;
 }
 
 .contact-btn {
@@ -1186,7 +1189,7 @@ footer .copyright a:hover {
     align-items: center;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 40%;
     color: var(--white);
     font-size: 1.5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
@@ -1194,65 +1197,13 @@ footer .copyright a:hover {
     text-decoration: none;
 }
 
-/* Hotline */
-
-.hotline-btn {
+.hotline-btn, .zalo-btn, .messenger-btn  {
     background-color: var(--theme-color-primary);
 }
 
-/* Zalo */
-
-.zalo-btn {
-    background-color: var(--theme-color-primary);
-}
-
-/* Messenger */
-
-.messenger-btn {
-    background-color: var(--theme-color-primary);
-}
 
 .contact-btn:hover {
     transform: scale(1.15);
     background: var(--theme-gradient-button);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
-}
-
-/* phần đăng kí nhận bảng tin */
-
-#newsletter {
-    color: var(--black);
-    padding: 50px 20px;
-}
-
-#newsletter h2 {
-    color: var(--black);
-    font-weight: 600;
-}
-
-#newsletter p {
-    color: rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
-}
-
-/* form và input */
-#newsletter form input[type="email"] {
-    padding: 8px 15px;
-    border-radius: 5px;
-    border: 1px solid lightgray;
-    font-size: 0.9rem;
-}
-
-/* nút đăng ký */
-#newsletter form button[type="submit"] {
-    background-color: var(--price);
-    border-color: var(--price);
-    padding: 8px 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.2s ease-in-out;
-}
-
-#newsletter form button[type="submit"]:hover {
-    transform: translateY(-5px);
 }
