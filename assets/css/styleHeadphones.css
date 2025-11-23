@@ -212,19 +212,6 @@
         color: #555;
     }
 
-    /* Lớp phủ mờ (giống menu mobile) */
-    .filter-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
 
     .filter-overlay.active {
         opacity: 1;
@@ -232,8 +219,6 @@
     }
 }
 
-/* Sửa lại grid từ store.css (nếu cần) */
-/* Ví dụ: trên desktop bạn muốn 4 cột thay vì 5 */
 @media (min-width: 901px) {
     .product-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -243,5 +228,56 @@
 @media (min-width: 1200px) {
     .product-grid {
         grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    width: 100%;
+}
+
+.page-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #dce0e4;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.page-btn:hover {
+    border-color: var(--theme-color-primary, #4a6fff);
+    color: var(--theme-color-primary, #4a6fff);
+    background-color: #f0f4ff;
+    transform: translateY(-2px);
+}
+
+.page-btn.active {
+    background: var(--theme-gradient-button, linear-gradient(135deg, #b76bff, #4a6fff));
+    color: var(--white, #ffffff);
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(74, 111, 255, 0.3);
+}
+
+@media (max-width: 576px) {
+    .page-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
     }
 }

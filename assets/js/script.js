@@ -7,12 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const overlay = document.getElementById('menu-overlay');
     const allCloseIcons = document.querySelectorAll('.bi-x-lg');
 
-    // Các phần tử cho trang Checkout 
+    // Các phần tử liên quan đến Popup
     const btnDatHang = document.getElementById('btn-dat-hang');
+    const cartBtn = document.getElementById('cart-btn'); // <--- ĐÃ THÊM MỚI
     const successPopup = document.getElementById('success-popup');
 
     // Thêm: Lấy phần tử nội dung popup để chặn propagation
+    // Lưu ý: Chỉ cần nếu bạn muốn chặn click nội dung bên trong Popup
     const popupContent = document.querySelector('#success-popup .popup-content');
+
 
     // --- 1. CHỨC NĂNG BACK-TO-TOP ---
 
@@ -71,10 +74,17 @@ document.addEventListener("DOMContentLoaded", function () {
         hamburgerIcon.addEventListener('click', openMenu);
     }
 
-    // Nút Đặt hàng mở Popup
+    // Nút Đặt hàng mở Popup (trang checkout.html)
     if (btnDatHang) {
         btnDatHang.addEventListener('click', openPopup);
     }
+
+    // Nút Thêm vào giỏ hàng mở Popup (trang sproduct.html) <--- ĐÃ THÊM LISTENER
+    if (cartBtn) {
+        cartBtn.addEventListener('click', openPopup);
+    }
+
+    // Xử lý TẤT CẢ các icon đóng (class: .bi-x-lg)
     allCloseIcons.forEach(icon => {
         icon.addEventListener('click', function (event) {
             event.stopPropagation();
@@ -90,15 +100,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // FIX CHÍNH: Xử lý Overlay và Popup một cách riêng biệt
-
     // A. Xử lý click vào nền xám của Popup (đóng Popup)
     if (successPopup) {
         successPopup.addEventListener('click', function (event) {
             // Kiểm tra: Nếu click đích danh vào container ngoài (tức là nền xám của Popup)
-            // Hoặc click đích danh vào overlay (nền xám chung)
             if (event.target === successPopup || event.target === overlay) {
-                // Đảm bảo không đóng Menu nếu chỉ muốn đóng Popup
                 if (successPopup.classList.contains('show')) {
                     closePopup();
                 }
@@ -197,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- BẮT ĐẦU LOGIC SLIDESHOW TRONG KHỐI DOMContentLoaded CHUNG ---
+    // --- LOGIC SLIDESHOW ---
 
     const slidesTrack = document.querySelector('.slideshow-container .slides-track');
     const slides = document.querySelectorAll('.slideshow-container .slide');
