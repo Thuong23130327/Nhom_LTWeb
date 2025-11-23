@@ -401,14 +401,15 @@ main.profile-page-main {
 
 .item-product,
 .item-order {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     background-color: var(--white);
-    border: 1px solid var(--profile-border-light);
+    border: 1px solid lightgrey;
     padding: 15px;
     border-radius: 4px;
     margin-bottom: 10px;
     font-size: 15px;
-    color: var(--profile-text-dark);
-    transition: border-left 0.3s;
+    color: var(--black);
+    transition: all 0.3s ease;
 }
 
 .item-product:hover,
@@ -436,6 +437,17 @@ main.profile-page-main {
 .item-order.history {
     border-left: 4px solid #2ecc71;
     /* Xanh lá - Hoàn tất */
+}
+
+
+.item-order.pending {
+    border-left: 4px solid lightgray;
+    /* Xám là đang chờ duyệt */
+}
+
+.item-order.cancelled {
+    border-left: 4px solid red;
+    /* Đỏ là đã hủy */
 }
 
 .profile-sidebar .user-info {
