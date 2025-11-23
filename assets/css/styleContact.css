@@ -165,3 +165,86 @@ button:hover {
     font-weight: 600;
     color: var(--black);
 }
+
+@media (max-width: 1200px) {
+    main {
+        width: 100%; 
+        padding: 0 20px; 
+        margin: 30px auto;
+    }
+
+    #contact-details, 
+    #form-details {
+        margin: 20px 0; 
+    }
+}
+
+@media (max-width: 991px) {
+    .contact-header {
+        height: auto; 
+        min-height: 250px; 
+        padding: 40px 20px;
+    }
+
+    /* Phần thông tin và bản đồ */
+    #contact-details {
+        flex-direction: column; 
+        padding: 25px;
+    }
+
+    #contact-details .details {
+        width: 100%; 
+        margin-bottom: 30px; 
+    }
+
+    #contact-details .map {
+        width: 100%;
+        height: 350px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-header h2 {
+        font-size: 24px; 
+    }
+
+
+    #form-details {
+        padding: 20px; 
+    }
+
+    #form-details form h2 {
+        font-size: 22px;
+        line-height: 1.3;
+    }
+
+    #form-details button {
+        width: 100%; 
+        padding: 10px;
+    }
+
+  
+    #contact-details {
+        margin: 15px 0;
+        padding: 20px;
+    }
+
+    #contact-details .details h2 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header {
+        min-height: 200px;
+    }
+
+    #contact-details .map {
+        height: 250px; 
+    }
+
+    #form-details form input, 
+    #form-details form textarea {
+        padding: 10px; 
+    }
+}
