@@ -974,6 +974,12 @@ footer p {
     font-size: 0.8rem;
 }
 
+
+footer h6 {
+    color: lightgrey;
+    font-size: 0.9rem;
+}
+
 footer .copyright a {
     color: var(--black);
     width: 38px;
