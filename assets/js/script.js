@@ -189,20 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- 7. LOGIC NEWSLETTER ---
-    const newsletterForm = document.getElementById('newsletter-form');
-
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            alert("Đã đăng kí nhận thông tin mới nhất từ trang web");
-            const emailInput = newsletterForm.querySelector('input[type="email"]');
-            if (emailInput) {
-                emailInput.value = '';
-            }
-        });
-    }
-
+    
     // --- LOGIC SLIDESHOW ---
 
     const slidesTrack = document.querySelector('.slideshow-container .slides-track');
