@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Thông báo
 
                     alert("Vấn đề của bạn đã được gửi, chúng tôi sẽ xem xét và phản hồi trong thời gian sớm nhất.");
-                    
+
+                    // Reset form sau khi gửi
+
                     contactForm.reset(); 
                 });
             }
