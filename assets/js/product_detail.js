@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault(); 
             
             // Thông báo
+            // Dùng notifyRedirect thay vì alert để sau 1 khoảng thời gian sẽ chuyển hướng 
 
             notifyAndRedirect("Đã xóa sản phẩm");
         });
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault(); 
                 
                 // Thông báo
+                // Dùng notifyRedirect thay vì alert để sau 1 khoảng thời gian sẽ chuyển hướng 
 
                 notifyAndRedirect("Đã lưu sản phẩm");
             });

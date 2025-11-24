@@ -14,6 +14,7 @@ loginBtn.addEventListener("click", () => {
 });
 
 // Xử lí đăng kí, đăng nhập
+// Thay vì dùng thẻ a thì phải dùng button để có thể gắn sự kiện xử lý tài khoản sau khi đăng nhập, đăng kí
 signUpBtn.addEventListener("click", () =>{
   localStorage.setItem('isLoggedIn', 'true');
     window.location.href = "index.html";
