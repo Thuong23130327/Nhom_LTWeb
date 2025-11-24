@@ -23,6 +23,49 @@ main {
   font-weight: 500;
 }
 
+/* Xử lí nút số lượng */
+
+.info .product-options {
+  margin-top: 20px;
+  width: 100%;
+  display: block;
+}
+
+.info .product-options .product-quantity {
+    background-color: transparent;
+    display: block;
+    float: left; 
+    align-items: center;
+    margin-top: 15px; 
+    margin-bottom: 20px;
+    position: static;
+    width: 100%;  
+}
+
+.info .product-options .product-quantity h4 {
+    margin: 0; 
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Các style căn chỉnh con */
+.info .product-options .product-quantity h4 {
+    margin: 0;
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.info .product-options .product-quantity input {
+    width: 70px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    float: left !important;
+}
+/* --- */
 .small-img-col {
   flex-basis: 24%;
   cursor: pointer;

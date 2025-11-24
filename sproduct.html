@@ -18,11 +18,10 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/styleProduct.css">
     <link rel="stylesheet" href="assets/css/styleHome.css">
     <link rel="stylesheet" href="assets/css/styleStore.css">
-        <link rel="stylesheet" href="assets/css/styleCheckout.css">
-
+    <link rel="stylesheet" href="assets/css/styleCheckout.css">
+    <link rel="stylesheet" href="assets/css/styleProduct.css">
 
 </head>
 
@@ -201,56 +200,55 @@
                         <h4>Màu sắc: </h4>
                         <div class="color-options">
 
-                            <div class="color-item active" onclick="selectColor(this)"
-                                data-img="assets/img/Sony/1.webp">
-                                <img src="assets/img/Sony/1.webp" alt="Đen">
-                                <span>Đen</span>
-                            </div>
-
-                            <div class="color-item" onclick="selectColor(this)" data-img="assets/img/Sony/2.webp">
-                                <img src="assets/img/Sony/2.webp" alt="Xanh đen">
-                                <span>Xanh đen</span>
-                            </div>
-
-                            <div class="color-item" onclick="selectColor(this)" data-img="assets/img/Sony/3.webp">
-                                <img src="assets/img/Sony/3.webp" alt="Hồng">
-                                <span>Hồng</span>
-                            </div>
-
-                            <div class="color-item" onclick="selectColor(this)" data-img="assets/img/Sony/4.webp">
-                                <img src="assets/img/Sony/4.webp" alt="Vàng">
-                                <span>Vàng</span>
-                            </div>
-
-                            <div class="color-item" onclick="selectColor(this)" data-img="assets/img/Sony/5.webp">
-                                <img src="assets/img/Sony/5.webp" alt="Trắng">
-                                <span>Trắng</span>
-                            </div>
-
+                            <div class="color-item active" onclick="selectColor(this)" data-img="assets/img/Sony/1.webp">
+                            <img src="assets/img/Sony/1.webp" alt="Đen">
+                            <span>Đen</span>
                         </div>
 
-                        <div class="product-quantity">
-                            <h4>Số lượng: </h4>
-                            <input type="number" value="1">
+                        <div class="color-item" onclick="selectColor(this)" data-img="assets/img/Sony/2.webp">
+                            <img src="assets/img/Sony/2.webp" alt="Xanh đen">
+                            <span>Xanh đen</span>
                         </div>
 
-                        <div class="btn">
-                            <button class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
-                            <div id="success-popup" class="popup-content-wrap">
-                                <div class="popup-content">
-                                    <button class="popup-close-btn" id="popup-close">
-                                        <i class="bi bi-x-lg"></i>
-                                    </button>
-                                    <div class="icon-box">
-                                        <i class="bi bi-check-lg"></i>
-                                    </div>
-                                    <h3>Đã thêm vào giỏ hàng thành công!</h3>
-                                    </p>
+                        <div class="color-item" onclick="selectColor(this)" data-img="assets/img/Sony/3.webp">
+                            <img src="assets/img/Sony/3.webp" alt="Hồng">
+                            <span>Hồng</span>
+                        </div>
+
+                        <div class="color-item" onclick="selectColor(this)" data-img="assets/img/Sony/4.webp">
+                            <img src="assets/img/Sony/4.webp" alt="Vàng">
+                            <span>Vàng</span>
+                        </div>
+
+                        <div class="color-item" onclick="selectColor(this)" data-img="assets/img/Sony/5.webp">
+                            <img src="assets/img/Sony/5.webp" alt="Trắng">
+                            <span>Trắng</span>
+                        </div>
+
+                    </div>
+
+                    <div class="product-quantity">
+                        <h4>Số lượng: </h4>
+                        <input type="number" value="1">
+                    </div>
+
+                    <div class="btn">
+                        <button class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
+                        <div id="success-popup" class="popup-content-wrap">
+                            <div class="popup-content">
+                                <button class="popup-close-btn" id="popup-close">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                                <div class="icon-box">
+                                    <i class="bi bi-check-lg"></i>
                                 </div>
+                                <h3>Đã thêm vào giỏ hàng thành công!</h3>
+                                </p>
                             </div>
-
-                            <a href="cart.html"><a href="checkout.html"><button class="buy-btn">Mua Ngay</button></a></a>
                         </div>
+
+                        <a href="cart.html"><a href="checkout.html"><button class="buy-btn">Mua Ngay</button></a></a>
+                    </div>
 
 
 
@@ -875,6 +873,7 @@
         </div>
     </footer>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/scriptProfile.js"></script>
     <script src="assets/js/scriptProduct.js"></script>
 
 </body>
