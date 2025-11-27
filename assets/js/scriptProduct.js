@@ -91,32 +91,32 @@ allStar.forEach((item, idx)=>{
   })
 })
 
+
 const openBtn = document.querySelector('.btn-review');
 const wrapper = document.querySelector('.wrapper');
-const overlay = document.querySelector('.over-lay');
+const overLay = document.querySelector('.over-lay');
 const cancelBtn = document.querySelector('.btn.cancel');
 const submitBtn = document.querySelector('.btn.submit');
 
-
-// Mở form
+// Mở popup
 openBtn.addEventListener('click', () => {
     wrapper.classList.add('active');
-    overlay.classList.add('active');
+    overLay.classList.add('active');
 });
 
-// Đóng form khi bấm Cancel
-cancelBtn.addEventListener('click', () => {
+// Đóng popup khi bấm Cancel
+cancelBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     wrapper.classList.remove('active');
-    overlay.classList.remove('active');
+    overLay.classList.remove('active');
 });
 
-//
-submitBtn.addEventListener('click',()=>{
-  wrapper.classList.remove('active');
-  overlay.classList.remove('active');
-  mainmodal.classList.add("active");
-})
-
+// Đóng popup khi bấm Submit
+submitBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // Ngăn reload trang
+    wrapper.classList.remove('active');
+    overLay.classList.remove('active');
+});
 
 
 

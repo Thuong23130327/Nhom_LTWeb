@@ -722,11 +722,9 @@ progress::-moz-progress-bar {
   z-index: 90;
 }
 
-
 .over-lay.active {
   display: block;
 }
-
 
 .wrapper h3 {
   font-size: 1.5rem;
