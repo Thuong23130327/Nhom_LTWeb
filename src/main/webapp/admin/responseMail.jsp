@@ -1,0 +1,307 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %><!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Response-Mail</title>
+    <link rel="stylesheet" href="../assets/css/styleResponseMail.css">
+    <link rel="stylesheet" href="../assets/css/styleHome.css">
+    <link rel="stylesheet" href="../assets/css/styleProfile.css">
+    <link rel="stylesheet" href="../assets/css/styleAdmin.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <!-- header -->
+
+    <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
+        <i class="bi bi-caret-up-fill"></i>
+    </button>
+    <header>
+        <div class="header-container content">
+            <div class="head-left">
+                <div class="head-scroll">
+                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
+                    <div class="text-item">Chuyên các loại Loa, Tai nghe chính hãng</div>
+                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
+                    <div class="text-item">Bảo hành 1 đổi 1 trong 1 tháng</div>
+                </div>
+            </div>
+            <div class="head-right">
+                <div class="info-item"><a href="">Cửa hàng gần đây</a></div>
+                <div class="info-item"><a href="">Tra cứu đơn hàng</a></div>
+                <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <div class="nav-container content">
+            <div class="nav-left">
+                <a class="a-nodecor logo-container" href="../index.jsp">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
+                </a>
+            </div>
+            <div class="nav-right">
+                <div class="searchBar">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <a href="#"><i class="bi bi-search"></i></a>
+                </div>
+                <a class="a-nodecor" href="../index.jsp">
+                    <div class="home">
+                        Trang chủ</div>
+                </a>
+                <a class="a-nodecor" href="../contact.jsp">
+                    <div class="contact">
+                        Liên hệ</div>
+                </a>
+                <div class="nav-item-dropdown">
+                    <a class="a-nodecor active" href="../store.jsp">
+                        <div class="store">
+                            Sản phẩm
+                            <i class="bi bi-chevron-compact-down"></i>
+                        </div>
+                    </a>
+
+                    <div class="menu-product">
+                        <a class="a-nodecor" href="../speakers.jsp">
+                            <div>Loa</div>
+                        </a>
+                        <a class="a-nodecor" href="../headphones.jsp">
+                            <div>Tai nghe</div>
+                        </a>
+                    </div>
+                </div>
+
+                <a class="a-nodecor" href="../cart.jsp">
+                    <div class="cart"> <i class="bi bi-cart"></i>
+                        Giỏ hàng</div>
+                </a>
+                <div id="hamburger-icon">
+                    <i class="bi bi-list"></i>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu-container">
+        <div class="mobile-menu-header">
+            <div class="logo-container">
+                <a href="../index.jsp" class="a-nodecor">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
+                </a>
+            </div>
+            <i class="bi bi-x-lg" id="mobile-menu-close"></i>
+        </div>
+
+        <div class="mobile-menu-item">
+            <div class="searchBar">
+                <input type="text" placeholder="Tìm kiếm">
+                <a href="#"><i class="ri-search-line"></i></a>
+            </div>
+        </div>
+
+        <div class="mobile-menu-item">
+            <a href="../index.jsp">Trang chủ</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="../cart.jsp">Giỏ hàng</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="../contact.jsp">Liên hệ</a>
+        </div>
+        <div class="mobile-menu-item">
+            <a href="../store.jsp">Sản phẩm</a>
+        </div>
+
+        <div class="mobile-menu-footer">
+            <a href="../login.jsp" id="logoutBtn" class="logout-btn">Đăng xuất</a>
+        </div>
+    </div>
+    <div class="overlay" id="menu-overlay"></div>
+
+    <!-- section -->
+    
+    <main class="mail-manager-main pt-5">
+        <div class="container content">
+            <div class="d-flex justify-content-start">
+                <a href="html" class="btn btn-sm back-btn-custom">
+                    <i class="fas fa-arrow-left"></i> Quay lại Hộp thư
+                </a>
+            </div>
+
+            <div class="card mail-detail-card mt-3">
+                <div class="card-body">
+                    <div class="mail-info-header pb-3 mb-3">
+                        <h4 class="mb-3">Vấn đề: Đặt hàng sản phẩm JBL Flip 6 bị lỗi</h4>
+                        <div class="d-flex justify-content-between align-items-center mail-info">
+                            <div>
+                                <p class="mb-1"><i class="fas fa-user-alt me-2"></i> **Người gửi:** Nguyễn Văn B</p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i> **Thời gian:** 10:30 AM, 25/08/2025</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mail-content mail-body">
+                        <p>Kính gửi bộ phận hỗ trợ,</p>
+                        <p>Tôi đã nhận được đơn hàng số 123456789 mua loa JBL Flip 6. Tuy nhiên, sau khi sử dụng được 2 ngày, loa bắt đầu có hiện tượng rè và đôi khi bị mất kết nối Bluetooth.</p>
+                        <p>Tôi xin gửi kèm hóa đơn và video chứng minh lỗi sản phẩm. Mong quý công ty sớm có biện pháp hỗ trợ đổi trả hoặc bảo hành.</p>
+                        <p>Trân trọng cảm ơn.</p>
+                    </div>
+
+                    <div class="mail-attachment mt-3 pt-3 border-top">
+                        <i class="fas fa-paperclip me-2"></i> Tệp đính kèm: 
+                        <a href="#" class="ms-2">HoaDon_123456789.pdf</a>,
+                        <a href="#" class="ms-2">VideoLoi.mp4</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card response-card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Phản hồi lại người dùng:</h5>
+                    <form id="responseForm">
+                        <div class="mb-3">
+                            <label for="responseSubject" class="form-label">
+                                <i class="fas fa-tag me-2"></i> Chủ đề:
+                            </label>
+                            <input type="text" class="form-control" id="responseSubject"
+                                value="Re: Về vấn đề đặt hàng sản phẩm JBL Flip 6 bị lỗi" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="responseBody" class="form-label">
+                                <i class="fas fa-edit me-2"></i> Nội dung phản hồi:
+                            </label>
+                            <textarea class="form-control" id="responseBody" rows="8" required></textarea>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="submit" class="btn reply-btn" id="replyBtn">
+                                <i class="fas fa-paper-plane me-2"></i> Phản hồi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <i class="fas fa-check-circle fa-3x mb-3"></i> 
+                            <p id="modalMessage" class="h6"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- footer -->
+
+    <footer class="footer-container">
+        <div class="row container mx-auto pt-5">
+            <div class="footer-one col-lg-3 col-md-6 col-12">
+                <a class=" a-nodecor" href="../index.jsp">
+                    <div class="logo-container">
+                        <div class="logo-wave">
+                            <div class="sound-wave wave1"></div>
+                            <div class="sound-wave wave2"></div>
+                            <div class="sound-wave wave3"></div>
+                        </div>
+                        <span class="logo-text">AuraSound</span>
+                    </div>
+                </a>
+
+                <p class="pt-3">Với Aura Sound, âm nhạc không chỉ để nghe – mà là để cảm nhận. Mỗi nhịp điệu, mỗi giai
+                    điệu đều
+                    được
+                    tái hiện chân thực, giúp bạn thể hiện phong cách và cá tính qua từng thanh âm.</p>
+            </div>
+            <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+                <h5 class="pb-2">Featured</h5>
+                <ul class="text-uppercase list-unstyled">
+                    <li><a href="#">Tai nghe thể thao</a></li>
+                    <li><a href="#">Tai nghe cao cấp</a></li>
+                    <li><a href="#">Loa cao cấp</a></li>
+                    <li><a href="#">Tai nghe SONY</a></li>
+                    <li><a href="#">Loa JBL</a></li>
+                </ul>
+            </div>
+            <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+                <h5 class="pb-2">Liên Hệ</h5>
+                <div>
+                    <h6 class="text-uppercase">Địa chỉ</h6>
+                    <p>Nong Lam University, VQCR+GP6, khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh</p>
+                </div>
+                <div>
+                    <h6 class="text-uppercase">Phone</h6>
+                    <p>1900 1010</p>
+                </div>
+                <div>
+                    <h6 class="text-uppercase">Email</h6>
+                    <p>EXAMPLE@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-one col-lg-3 col-md-6 col-12">
+                <h5 class="pb-2">Instagram</h5>
+                <div class="row">
+                    <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img1.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img10.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img2.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img5.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img6.jpg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright mt-5">
+            <div class="row container mx-auto">
+                <div class="col-lg-3 col-md-6 col-12 mb-4">
+                    <img src="../assets/img/Payment/payment.png" alt="">
+                </div>
+                <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
+                    <p>© 2025 Công Ty Cổ Phần AuraSound </p>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/scriptAdmin.js"></script>
+    <script src="../assets/js/scriptProfile.js"></script>
+    <script src="../assets/js/scriptResponseMail.js"></script>
+
+</body>
+</html>
+
