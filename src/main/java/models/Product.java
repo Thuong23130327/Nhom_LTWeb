@@ -9,10 +9,10 @@ public class Product {
     private int cateID;
 
 //Constructor
-public Product() {
-}
+    public Product() {
+    }
 
-public Product(int id, String name, double price, String image, String description, int cateID) {
+    public Product(int id, String name, double price, String image, String description, int cateID) {
         this.id = id;
         this.name = name;
         this.price = price;

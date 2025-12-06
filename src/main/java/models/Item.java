@@ -34,4 +34,9 @@ public class Item {
     public void setPrice(double price) {
         this.price = price;
     }
+
+//Tính tổng tiền món hàng * số lượng
+    public double getTotalPrice(){
+        return this.price * this.quantity;
+    }
 }
