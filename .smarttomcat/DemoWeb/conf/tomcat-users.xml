@@ -20,9 +20,9 @@
               xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
               version="1.0">
 <!--
-  By default, no user is included in the "manager-gui" role required
+  By default, no models.user is included in the "manager-gui" role required
   to operate the "/manager/html" web application.  If you wish to use this app,
-  you must define such a user - the username and password are arbitrary.
+  you must define such a models.user - the username and password are arbitrary.
 
   Built-in Tomcat manager roles:
     - manager-gui    - allows access to the HTML GUI and the status pages
@@ -36,11 +36,11 @@
   will also need to set the passwords to something appropriate.
 -->
 <!--
-  <user username="admin" password="<must-be-changed>" roles="manager-gui"/>
-  <user username="robot" password="<must-be-changed>" roles="manager-script"/>
+  <models.user username="admin" password="<must-be-changed>" roles="manager-gui"/>
+  <models.user username="robot" password="<must-be-changed>" roles="manager-script"/>
 -->
 <!--
-  The sample user and role entries below are intended for use with the
+  The sample models.user and role entries below are intended for use with the
   examples web application. They are wrapped in a comment and thus are ignored
   when reading this file. If you wish to configure these users for use with the
   examples web application, do not forget to remove the <!.. ..> that surrounds
@@ -49,8 +49,8 @@
 <!--
   <role rolename="tomcat"/>
   <role rolename="role1"/>
-  <user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
-  <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
-  <user username="role1" password="<must-be-changed>" roles="role1"/>
+  <models.user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
+  <models.user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
+  <models.user username="role1" password="<must-be-changed>" roles="role1"/>
 -->
 </tomcat-users>
