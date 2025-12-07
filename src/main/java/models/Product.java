@@ -1,6 +1,12 @@
 package models;
 
 public class Product {
+    private int id;
+    private String name;
+    private double price;
+    private String image;
+    private String description;
+    private int cateID;
 
     public Product() {
     }
@@ -61,8 +67,6 @@ public class Product {
     public void setCateID(int cateID) {
         this.cateID = cateID;
     }
-
-
 
 
 }
