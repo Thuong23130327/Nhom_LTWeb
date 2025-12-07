@@ -1,14 +1,7 @@
 package models;
 
 public class Product {
-    private int id;
-    private String name;
-    private double price;
-    private String image;       // Đường dẫn ảnh
-    private String description;
-    private int cateID;
 
-//Constructor
     public Product() {
     }
 
@@ -20,7 +13,7 @@ public class Product {
         this.description = description;
         this.cateID = cateID;
     }
-//Getters & Setters
+
     public int getId() {
         return id;
     }
@@ -68,4 +61,8 @@ public class Product {
     public void setCateID(int cateID) {
         this.cateID = cateID;
     }
+
+
+
+
 }

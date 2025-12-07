@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 // 1. Nếu chạy được dòng này thì Servlet OK
 @WebServlet(name = "TestServlet", value = "/check-he-thong")
 public class TestServlet extends HttpServlet {

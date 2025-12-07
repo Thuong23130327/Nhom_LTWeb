@@ -284,7 +284,6 @@
             </div>
         </section>
 
-
         <section id="featured" class="my-5 pb-5">
             <div class="container text-center">
                 <h3>Sản phẩm nổi bật</h3>
