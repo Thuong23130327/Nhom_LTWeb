@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="LapTrinhWeb">
+    <output-path>$PROJECT_DIR$/out/artifacts/LapTrinhWeb</output-path>
+    <root id="root" />
+  </artifact>
+</component>
