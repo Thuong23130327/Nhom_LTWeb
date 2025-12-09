@@ -37,7 +37,7 @@
        Documentation at /docs/jndi-resources-howto.html
   -->
   <GlobalNamingResources>
-    <!-- Editable models.user database that can also be used by
+    <!-- Editable model.User database that can also be used by
          UserDatabaseRealm to authenticate users
     -->
     <Resource name="UserDatabase" auth="Container"
@@ -129,7 +129,7 @@
       <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
       -->
 
-      <!-- Use the LockOutRealm to prevent attempts to guess models.user passwords
+      <!-- Use the LockOutRealm to prevent attempts to guess model.User passwords
            via a brute-force attack -->
       <Realm className="org.apache.catalina.realm.LockOutRealm">
         <!-- This Realm uses the UserDatabase configured in the global JNDI

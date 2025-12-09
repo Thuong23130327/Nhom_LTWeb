@@ -1,3 +1,5 @@
+package controller;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,7 +9,7 @@ import java.io.IOException;
 
 
 // 1. Nếu chạy được dòng này thì Servlet OK
-@WebServlet(name = "TestServlet", value = "/check-he-thong")
+@WebServlet(name = "controller.TestServlet", value = "/check")
 public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
