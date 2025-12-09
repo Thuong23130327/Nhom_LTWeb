@@ -1,23 +1,32 @@
 package model;
+import java.time.LocalDate;
 
 public class Product {
+
     private int id;
+    private String sku;
     private String name;
-    private double price;
-    private String image;
     private String description;
-    private int cateID;
+    private float avgRating;
+    private int soldCount;
+    private Brand brandId;
+    private Category categoriesId;
+    private boolean isActive;
+    private LocalDate createdAt;
 
-    public Product() {
-    }
-
-    public Product(int id, String name, double price, String image, String description, int cateID) {
+    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, Brand brandId,
+                   Category categoriesId, boolean isActive, LocalDate createdAt) {
+        super();
         this.id = id;
+        this.sku = sku;
         this.name = name;
-        this.price = price;
-        this.image = image;
         this.description = description;
-        this.cateID = cateID;
+        this.avgRating = avgRating;
+        this.soldCount = soldCount;
+        this.brandId = brandId;
+        this.categoriesId = categoriesId;
+        this.isActive = isActive;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -28,28 +37,20 @@ public class Product {
         this.id = id;
     }
 
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getDescription() {
@@ -60,13 +61,54 @@ public class Product {
         this.description = description;
     }
 
-    public int getCateID() {
-        return cateID;
+    public float getAvgRating() {
+        return avgRating;
     }
 
-    public void setCateID(int cateID) {
-        this.cateID = cateID;
+    public void setAvgRating(float avgRating) {
+        this.avgRating = avgRating;
     }
+
+    public int getSoldCount() {
+        return soldCount;
+    }
+
+    public void setSoldCount(int soldCount) {
+        this.soldCount = soldCount;
+    }
+
+    public Brand getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Brand brandId) {
+        this.brandId = brandId;
+    }
+
+    public Category getCategoriesId() {
+        return categoriesId;
+    }
+
+    public void setCategoriesId(Category categoriesId) {
+        this.categoriesId = categoriesId;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public LocalDate getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
+    }
+
 
 
 }
