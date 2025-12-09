@@ -4,96 +4,110 @@ import java.time.LocalDateTime;
 
 public class User {
 
-    private int userId;
-    private String email;
-    private String passwordHash;
-    private String fullName;
-    private String phone;
-    private String avatarUrl;
-    private Role role; // ENUM role "Customer/Admin"
-    private boolean isLocked;
-    private LocalDateTime createdAt;
+	private int id;
+	private String email;
+	private String passwordHash;
+	private String fullName;
+	private String phone;
+	private String avatarUrl;
+	private Role role; // ENUM role "Customer/Admin"
+	private boolean isLocked;
+	private LocalDateTime createdAt;
 
-    public User() {
-    }
+	public User() {
+	}
 
-    public User(String email, String passwordHash, String fullName, String phone, String avatarUrl, Role role, boolean isLocked, LocalDateTime createdAt) {
+    public User(String email, String passwordHash) {
         this.email = email;
         this.passwordHash = passwordHash;
-        this.fullName = fullName;
-        this.phone = phone;
-        this.avatarUrl = avatarUrl;
+        this.fullName = "New User";
+        this.phone = null;
+        this.avatarUrl = null;
         this.role = Role.Customer;
-        this.isLocked = isLocked;
-        this.createdAt = LocalDateTime.now();
+        this.isLocked = false;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+	public User(String email, String passwordHash, String fullName, String phone, String avatarUrl, Role role,
+			boolean isLocked, LocalDateTime createdAt) {
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.fullName = fullName;
+		this.phone = phone;
+		this.avatarUrl = avatarUrl;
+		this.role = Role.Customer;
+		this.isLocked = isLocked;
+		this.createdAt = LocalDateTime.now();
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
+	public String getPasswordHash() {
+		return passwordHash;
+	}
 
-    public String getFullName() {
-        return fullName;
-    }
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+	public String getFullName() {
+		return fullName;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
 
-    public Role getRole() {
-        return role;
-    }
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+	public Role getRole() {
+		return role;
+	}
 
-    public boolean isLocked() {
-        return isLocked;
-    }
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
+	public boolean isLocked() {
+		return isLocked;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+    enum Role {
+        Customer, Admin
     }
 }

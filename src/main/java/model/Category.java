@@ -2,45 +2,47 @@ package model;
 
 public class Category {
 
-    private int id;
-    private String name;
-    private int parentID;
+	private int id;
+	private String name;
+	private int parentID;
 
-    public Category(int id, String name) {
-        super();
-        this.id = id;
-        this.name = name;
-    }
+	public Category() {
 
-    public Category(int id, String name, int parentID) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.parentID = parentID;
-    }
+	}
 
-    public int getId() {
-        return id;
-    }
+	public Category(String name) {
+		super();
+		this.name = name;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public Category(String name, int parentID) {
+		super();
+		this.name = name;
+		this.parentID = parentID;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getParentID() {
-        return parentID;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setParentID(int parentID) {
-        this.parentID = parentID;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getParentID() {
+		return parentID;
+	}
+
+	public void setParentID(int parentID) {
+		this.parentID = parentID;
+	}
 
 }

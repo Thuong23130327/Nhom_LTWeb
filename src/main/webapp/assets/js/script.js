@@ -74,12 +74,12 @@ document.addEventListener("DOMContentLoaded", function () {
         hamburgerIcon.addEventListener('click', openMenu);
     }
 
-    // Nút Đặt hàng mở Popup (trang checkout.html)
+    // Nút Đặt hàng mở Popup (trang checkout.jsp)
     if (btnDatHang) {
         btnDatHang.addEventListener('click', openPopup);
     }
 
-    // Nút Thêm vào giỏ hàng mở Popup (trang sproduct.html) <--- ĐÃ THÊM LISTENER
+    // Nút Thêm vào giỏ hàng mở Popup (trang sproduct.jsp) <--- ĐÃ THÊM LISTENER
     if (cartBtn) {
         cartBtn.addEventListener('click', openPopup);
     }
@@ -134,24 +134,24 @@ document.addEventListener("DOMContentLoaded", function () {
             if (loginLink) loginLink.style.display = 'none';
             if (accountAvatar) accountAvatar.style.display = 'flex';
             if (mobileLoginBtn) mobileLoginBtn.textContent = 'Thông tin tài khoản';
-            if (mobileLoginBtn) mobileLoginBtn.href = 'profileM/profile.html';
+            if (mobileLoginBtn) mobileLoginBtn.href = 'profileM/profile.jsp';
         } else {
             if (loginLink) loginLink.style.display = 'inline-flex';
             if (accountAvatar) accountAvatar.style.display = 'none';
             if (mobileLoginBtn) mobileLoginBtn.textContent = 'Đăng nhập';
-            if (mobileLoginBtn) mobileLoginBtn.href = 'login.html';
+            if (mobileLoginBtn) mobileLoginBtn.href = 'login.jsp';
         }
     }
 
 
     function performLogoutNav() {
         try { localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authToken'); sessionStorage.removeItem('authToken'); } catch (e) { }
-        const onIndex = location.pathname.endsWith('index.html') || location.pathname === '/' || location.pathname === '';
+        const onIndex = location.pathname.endsWith('index.jsp') || location.pathname === '/' || location.pathname === '';
         if (onIndex) {
             updateAuthUI();
             return;
         }
-        window.location.href = 'login.html';
+        window.location.href = 'login.jsp';
     }
 
     document.addEventListener('click', function (e) {
