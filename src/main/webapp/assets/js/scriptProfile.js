@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.removeItem('authToken');
         } catch (e) { }
 
-        window.location.href = '/login.html';
+        window.location.href = '/login.jsp';
     }
 
     const logoutTop = document.getElementById('logoutTop');

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Chuyển hướng sau 0.5s
 
         setTimeout(() => {
-            window.location.href = 'products.html'; 
+            window.location.href = 'products.jsp'; 
         }, 500);
     }
 

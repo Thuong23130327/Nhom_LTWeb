@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const modalMessage = document.getElementById('modalMessage');
         
         // Đường dẫn chuyển hướng về giao diện chính MailBox.
-        // Dựa trên các file của bạn, chúng ta sẽ chuyển về admin.html
+        // Dựa trên các file của bạn, chúng ta sẽ chuyển về admin.jsp
 
-        const mailboxURL = '../admin/mailBox.html'; 
+        const mailboxURL = '../admin/mailBox.jsp'; 
 
         if (responseForm) {
             responseForm.addEventListener('submit', function (e) {
