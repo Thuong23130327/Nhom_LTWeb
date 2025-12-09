@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--white) !important;
+    color: var(--black);
+}
+
+body #hamburger-icon::after {
+    overflow: hidden;
+    height: 100vh;
+}
+
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    background: var(--theme-gradient-icon) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   
+    position: fixed;
+    width: 100%; 
+    top: 0; 
+    z-index: 9999 !important;
+}
+
+/* Tùy chỉnh sideBar */
+.sidebar {
+    position: fixed;
+    top: 110px;
+    bottom: 0;
+    left: 0;
+    z-index: 98;
+    padding: 48px 0 0;
+    box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.1);
+    background-color: var(--white);
+}
+
+.sidebar #hamburger-icon::after {
+    overflow: hidden;
+}
+
+.sidebar .nav-link {
+    font-weight: 500;
+    color: var(--black);
+    transition: all 0.3s;
+}
+
+.sidebar .nav-link:hover {
+    color: var(--theme-color-primary);
+    background-color: var(--white);
+}
+
+.sidebar .nav-link.active {
+    color: var(--white);
+    background: var(--theme-gradient-button);
+    font-weight: 600;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* Tiêu đề chính */
+.h2 {
+    font-weight: 600; 
+    color: var(--black); 
+    margin-bottom: 1.5rem; 
+    border-bottom: 2px solid var(--theme-color-primary); 
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+/* Tùy chỉnh nút */
+
+.btn-toolbar button {
+    background: var(--theme-gradient-button);
+    border: none;
+    color: var(--white);
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(74, 111, 255, 0.3);
+    transition: all 0.3s;
+}
+
+.btn-toolbar button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Đảm bảo nội dung chính không bị sidebar che */
+main {
+    padding-top: 56px;
+}
+
+/* Tùy chỉnh cho card */
+.card {
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-radius: 12px;
+}
+
+.card-body {
+    padding: 1.25rem !important; 
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card .card-text.h3 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+}
+
+.card .fa-3x {
+    opacity: 0.7;
+    font-size: 2.2em;
+}
+
+/* Bảng */
+
+.table th{
+    font-weight: 600;
+}
+
+/* CSS cho biểu đồ */
+.chart-container {
+    height: 250px;
+    padding: 20px 0;
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--black);
+}
+
+.bar-chart {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.bar {
+    width: 12%;
+    background: var(--theme-gradient-button);
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.bar::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: var(--black);
+    font-weight: 500;
+}
+
+/* Hoạt động gần đây */
+.activity-list .list-group-item{
+    font-size: 0.95rem;
+    padding: 10px 15px;
+    border-color: var(--white);
+}
+
+html, body {
+    background-color: var(--white) !important;
+    min-height: 100vh;
+}
+
+/* nút mail */
+
+.btn-mail-feedback {
+    position: relative !important; 
+    display: inline-flex;
+    align-items: center; 
+    justify-content: center; 
+    width: 35px; 
+    height: 35px; 
+    padding: 0.375rem !important; 
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out; 
+}
+
+.btn-mail-feedback:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.btn-mail-feedback .badge-counter {
+    position: absolute !important; 
+    top: 0 !important; 
+    right: 0 !important; 
+    bottom: auto !important; 
+    left: auto !important;
+    transform: translate(50%, -50%); 
+    
+    z-index: 5;
+    min-width: 20px; 
+    height: 20px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    
+    padding: 0; 
+    font-size: 0.65rem; 
+    font-weight: bold;
+    line-height: 1; 
+    
+    border: 2px solid var(--white); 
+    border-radius: 50%; 
+}
+
+footer{
+    z-index: 1000 !important;
+    display: flex !important;
+}
+

@@ -1,0 +1,271 @@
+
+
+.product-detail-page {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card {
+    border-radius: 1rem; 
+    border: none; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09); 
+    margin-bottom: 2rem;
+    overflow: hidden; 
+}
+
+.card-header {
+    background: var(--theme-gradient-icon) !important;
+    color: var(--white);
+    font-weight: 600;
+    padding: 1.25rem 1.5rem;
+    border-bottom: none;
+}
+
+.d-flex.align-items-center.mb-4.pb-3.border-bottom {
+    border-bottom: 1px solid #dee2e6 !important; 
+}
+
+/* Màu chữ Tiêu đề lớn */
+
+.h5.header-title {
+    color: black !important; 
+    font-weight: 600;
+}
+
+/* Màu Icon Tiêu đề lớn */
+
+.main-header-icon {
+    color: var(--theme-color-primary) !important; 
+}
+
+.form-label {
+    font-weight: 500;
+    color: lightslategray; 
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+}
+
+/* Tiêu đề nhỏ trong Card */
+
+h1.card-title {
+    color: var(--theme-color-primary) !important; 
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    font-size: 1.75rem;
+}
+
+.product-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--price); 
+    display: block; 
+    margin-bottom: 1rem;
+}
+
+/* Tiêu đề Section (Mục 1, 2, 3) */
+
+.section-title {
+    color: var(--theme-color-primary) !important; 
+    font-weight: 700 !important; 
+    font-size: 1.25rem; 
+    margin-bottom: 1.5rem;
+    display: flex; 
+    align-items: center;
+}
+
+/* Icon của Tiêu đề Section */
+
+.section-title i {
+    font-size: 1.4rem;
+    color: var(--theme-color-primary) !important; 
+    margin-right: 0.5rem;
+}
+
+/* Tiêu đề Section */
+
+.section-title span {
+    font-weight: 700;
+    color: var(--theme-color-primary) !important; 
+    margin-right: 0.25rem;
+}
+
+/* Mô tả */
+
+.product-description-short {
+    font-size: 1rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.form-control,
+.form-select {
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: var(--white);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--theme-color-primary);
+    box-shadow: 0 0 0 0.25rem rgba(74, 111, 255, 0.25); 
+}
+
+textarea.form-control {
+    min-height: 150px;
+}
+
+.product-image-container:hover {
+    background-color: #f1f3f5; 
+    border-color: var(--theme-color-secondary);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: #adb5bd;
+    margin-bottom: 0.5rem;
+}
+
+.image-gallery-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 15px;
+}
+
+.gallery-item {
+    position: relative;
+    width: 100px; 
+    height: 100px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: var(--price);
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 0.9rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.remove-image-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* --- Buttons --- */
+
+/* Nút Lưu Thay Đổi */
+
+.btn-primary.btn-gradient {
+    background: var(--theme-gradient-button) !important;
+    border: none !important;
+    color: var(--white) !important;
+    font-weight: 600;
+    border-radius: 0.75rem; 
+    padding: 0.65rem 2rem;
+    box-shadow: 0 4px 10px rgba(74, 111, 255, 0.3); 
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    letter-spacing: 0.5px;
+}
+
+.btn-primary.btn-gradient:hover {
+    box-shadow: 0 8px 15px rgba(74, 111, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Nút quay lại */
+
+.btn-primary.btn-gradient.btn-sm {
+    padding: 0.35rem 1rem !important;
+    font-size: 0.85rem; 
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(74, 111, 255, 0.2); 
+    transform: none; 
+}
+
+/* hover cho nút nhỏ */
+
+.btn-primary.btn-gradient.btn-sm:hover {
+    box-shadow: 0 4px 8px rgba(74, 111, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Nút Xóa Sản Phẩm */
+
+.btn-outline-danger.btn-accent {
+    color: var(--price) !important;
+    border-color: var(--price) !important;
+    background-color: transparent !important;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    padding: 0.65rem 2rem;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.btn-outline-danger.btn-accent:hover {
+    color: var(--white) !important;
+    background-color: var(--price) !important;
+    border-color: var(--price) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(217, 83, 79, 0.4);
+}
+
+@media (max-width: 767px) {
+    .product-detail-page {
+        padding-top: 10px;
+    }
+    .card {
+        margin-bottom: 1rem;
+        border-radius: 0.75rem;
+    }
+    .card-header {
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+    h1.card-title {
+        font-size: 1.5rem;
+    }
+    .product-price {
+        font-size: 1.5rem;
+    }
+    .btn-primary.btn-gradient,
+    .btn-outline-danger.btn-accent {
+        width: 100%;
+        margin-right: 0 !important;
+        margin-bottom: 10px !important;
+        padding: 0.5rem 1rem;
+    }
+    .d-flex.flex-column.flex-sm-row {
+        flex-direction: column !important;
+    }
+    .image-gallery-preview {
+        justify-content: center;
+    }
+    .gallery-item {
+        width: 80px; 
+        height: 80px;
+    }
+}
