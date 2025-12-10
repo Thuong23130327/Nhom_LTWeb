@@ -1,6 +1,6 @@
 package model;
 
-public enum ListType {
+public enum git cListType {
     CART,
     WISHLIST
 }

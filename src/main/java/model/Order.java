@@ -10,7 +10,7 @@ public class Order {
     private String orderCode;
     private LocalDateTime orderDate;
     private String status;
-    private String paymentStatus;
+    private PaymentStatus paymentStatus;
     private double totalProductsPrice;
     private double shippingFee;
     private double discountAmount;
@@ -20,7 +20,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, Integer usersId, Integer vouchersId, String orderCode, LocalDateTime orderDate, String status, String paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount, double finalAmount) {
+    public Order(int id, Integer usersId, Integer vouchersId, String orderCode, LocalDateTime orderDate, String status, PaymentStatus paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount, double finalAmount) {
         this.id = id;
         this.usersId = usersId;
         this.vouchersId = vouchersId;
@@ -82,11 +82,11 @@ public class Order {
         this.status = status;
     }
 
-    public String getPaymentStatus() {
+    public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 
