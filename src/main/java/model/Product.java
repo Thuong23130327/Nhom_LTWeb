@@ -9,13 +9,13 @@ public class Product {
     private String description;
     private float avgRating;
     private int soldCount;
-    private Brand brandId;
-    private Category categoriesId;
+    private int brandId;
+    private int categoriesId;
     private boolean isActive;
     private LocalDate createdAt;
 
-    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, Brand brandId,
-                   Category categoriesId, boolean isActive, LocalDate createdAt) {
+    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId,
+                   int categoriesId, boolean isActive, LocalDate createdAt) {
         super();
         this.id = id;
         this.sku = sku;
@@ -77,19 +77,19 @@ public class Product {
         this.soldCount = soldCount;
     }
 
-    public Brand getBrandId() {
+    public int getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Brand brandId) {
+    public void setBrandId(int brandId) {
         this.brandId = brandId;
     }
 
-    public Category getCategoriesId() {
+    public int getCategoriesId() {
         return categoriesId;
     }
 
-    public void setCategoriesId(Category categoriesId) {
+    public void setCategoriesId(int categoriesId) {
         this.categoriesId = categoriesId;
     }
 
@@ -108,6 +108,7 @@ public class Product {
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
+
 
 
 
