@@ -15,6 +15,24 @@ import java.io.IOException;
 @WebServlet("/Cart")
 public class CartServlet extends HttpServlet {
 
+//Xem và tính tổng tiền cho Cart
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+
+        if (cart == null) {
+            cart = new Cart();
+        }
+
+// Tính tổng tiền cho toàn bộ giỏ hàng từ logic Model
+        double totalMoney = cart.getTotalMoney();
+
+// Gửi dữ liệu và chuyển hướng sang trang hiển thị
+        request.setAttribute("totalMoney", totalMoney);
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
+    }
+
 // DoPost xử lý hành động "Thêm vào giỏ hàng"
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,6 +44,7 @@ public class CartServlet extends HttpServlet {
         if (cart == null) {
             cart = new Cart();
         }
+
         try {
             int variantId = Integer.parseInt(request.getParameter("variantId"));
 //Thêm vào giỏ hàng
