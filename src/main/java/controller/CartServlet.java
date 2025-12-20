@@ -1,7 +1,7 @@
 package controller;
 
-import com.aurasound.model.Cart;
-import com.aurasound.model.CartItem;
+import model.Cart;
+import  model.CartItem;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
