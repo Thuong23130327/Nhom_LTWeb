@@ -26,39 +26,46 @@ public class CartServlet extends HttpServlet {
         if (cart == null) {
             cart = new Cart();
         }
-// Logic Mockup: Lấy giá và tên (sau này thay bằng DB)
-        double price = 1000000.0;
-        String productName = "Tai nghe Bose QuietComfort";
-// Thêm vào giỏ
-        CartItem newItem = new CartItem(variantId, productName, quantity, price);
-        cart.addItem(newItem);
+        try {
+            int variantId = Integer.parseInt(request.getParameter("variantId"));
+//Thêm vào giỏ hàng
+            if ("add".equals(action)) {
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
 
-        session.setAttribute("cart", cart);
-        response.sendRedirect("cart.jsp");
-    }
+                // Thông tin Mockup (Thực tế sẽ lấy từ Database)
+                double price = 1000000.0;
+                String productName = "Tai nghe Bose QuietComfort";
 
-// Lấy thông tin từ Request (giả định form gửi variantId và quantity)
-        int variantId = Integer.parseInt(request.getParameter("variantId"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
+                CartItem newItem = new CartItem(variantId, productName, quantity, price);
+                cart.addItem(newItem);
 
-// Đã có logic truy vấn DB để lấy giá và tên theo variantId ***
-        double price = 1000000.0; // Giá bán (Mock)
-        String productName = "Tai nghe Bose QuietComfort (Xanh Navy)"; // Tên SP (Mock)
+            }
+//Cập nhật số lượng
+            else if ("update".equals(action)) {
+                int newQuantity = Integer.parseInt(request.getParameter("quantity"));
 
-// Lấy đối tượng Cart từ Session
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
+                if (cart.getItems().containsKey(variantId) && newQuantity > 0) {
+                    cart.getItems().get(variantId).setQuantity(newQuantity);
+                }
+
+            }
+//Xóa sản phẩm
+            else if ("removeOne".equals(action)) {
+//Giảm số lượng
+                CartItem tempItem = new CartItem();
+                tempItem.setVariantId(variantId);
+                tempItem.setQuantity(1); // Giảm đi 1 đơn vị
+                cart.removeItem(tempItem);
+
+            } else if ("delete".equals(action)) {
+//Xóa hẳn một món đồ khỏi giỏ
+                cart.getItems().remove(variantId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-// Tạo CartItem và thêm vào giỏ
-        CartItem newItem = new CartItem(variantId, productName, quantity, price);
-        cart.addItem(newItem);
-
-// Lưu lại đối tượng Cart đã cập nhật vào Session
         session.setAttribute("cart", cart);
-
-// Chuyển hướng người dùng về trang giỏ hàng
-        response.sendRedirect(request.getContextPath() + "/cart?action=view");
+//Sau khi xử lý xong (Thêm/Sửa/Xóa), quay lại trang giỏ hàng
+        response.sendRedirect("Cart");
     }
 }
