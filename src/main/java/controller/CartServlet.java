@@ -20,6 +20,22 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        String action = request.getParameter("action");
+// Lấy giỏ hàng từ Session, nếu chưa có thì tạo mới
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+        }
+// Logic Mockup: Lấy giá và tên (sau này thay bằng DB)
+        double price = 1000000.0;
+        String productName = "Tai nghe Bose QuietComfort";
+// Thêm vào giỏ
+        CartItem newItem = new CartItem(variantId, productName, quantity, price);
+        cart.addItem(newItem);
+
+        session.setAttribute("cart", cart);
+        response.sendRedirect("cart.jsp");
+    }
 
 // Lấy thông tin từ Request (giả định form gửi variantId và quantity)
         int variantId = Integer.parseInt(request.getParameter("variantId"));
