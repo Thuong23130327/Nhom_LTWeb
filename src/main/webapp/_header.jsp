@@ -19,16 +19,16 @@
         <c:when test="${not empty customCss}">
             ${customCss}
             <c:if test="${keepDefaultCss == true}">
-                <link rel="stylesheet" href="assets/css/styleStore.css">
-                <link rel="stylesheet" href="assets/css/styleHome.css">
-                <link rel="stylesheet" href="assets/css/styleProfile.css">
+                <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">
+                <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+                <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProfile.css">
             </c:if>
         </c:when>
 
         <c:otherwise>
-            <link rel="stylesheet" href="assets/css/styleStore.css">
-            <link rel="stylesheet" href="assets/css/styleHome.css">
-            <link rel="stylesheet" href="assets/css/styleProfile.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProfile.css">
         </c:otherwise>
     </c:choose>
 </head>
@@ -73,18 +73,18 @@
                 <input type="text" placeholder="Tìm kiếm">
                 <a href="#"><i class="bi bi-search"></i></a>
             </div>
-            <a class="a-nodecor active" href="index.jsp">
+            <a class="a-nodecor ${activePage =='home'?'active':''}" href="index.jsp">
                 <div class="home">Trang chủ</div>
             </a>
-            <a class="a-nodecor" href="contact.jsp">
-                <div class="contact">Liên hệ</div>
+            <a class="a-nodecor ${activePage =='contact'?'active':''}" " href="contact.jsp">
+            <div class="contact">Liên hệ</div>
             </a>
             <div class="nav-item-dropdown">
-                <a class="a-nodecor" href="store.jsp">
-                    <div class="store">
-                        Sản phẩm
-                        <i class="bi bi-chevron-compact-down"></i>
-                    </div>
+                <a class="a-nodecor ${activePage =='product'?'active':''}" " href="store.jsp">
+                <div class="store">
+                    Sản phẩm
+                    <i class="bi bi-chevron-compact-down"></i>
+                </div>
                 </a>
                 <div class="menu-product">
                     <a class="a-nodecor" href="speakers.jsp">
@@ -96,8 +96,8 @@
                 </div>
             </div>
 
-            <a class="a-nodecor" href="cart.jsp">
-                <div class="cart"><i class="bi bi-cart"></i> Giỏ hàng</div>
+            <a class="a-nodecor ${activePage =='cart'?'active':''}" " href="cart.jsp">
+            <div class="cart"><i class="bi bi-cart"></i> Giỏ hàng</div>
             </a>
 
             <div class="nav-account">
@@ -147,8 +147,8 @@
             <div class="mobile-menu-item"><a href="login.jsp" class="nav-login-btn">Đăng nhập</a></div>
         </c:otherwise>
     </c:choose>
-    <div class="mobile-menu-item"><a href="cart.jsp">Giỏ hàng</a></div>
-    <div class="mobile-menu-item"><a href="contact.jsp">Liên hệ</a></div>
-    <div class="mobile-menu-item "><a href="store.jsp">Sản phẩm</a></div>
+    <div class="mobile-menu-item ${activePage =='cart'?'active':''}"><a href="cart.jsp">Giỏ hàng</a></div>
+    <div class="mobile-menu-item ${activePage =='contact'?'active':''}"><a href="contact.jsp">Liên hệ</a></div>
+    <div class="mobile-menu-item ${activePage =='product'?'active':''}"><a href="store.jsp">Sản phẩm</a></div>
 </div>
 <div class="overlay" id="menu-overlay"></div>
