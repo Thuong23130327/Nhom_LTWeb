@@ -165,48 +165,43 @@
 
 <!-- HẾT PHẦN HEAD, NAV, MENU = -->
 
-<main>
-    <section class="container sproduct my-5 pt-5">
-        <div class="row">
-            <div class="gallery-container col-lg-5 col-md-12 col-12">
-                <img class="main-img img-fluid w-100 pb-1" src="${product.mainImageUrl} width=" 100%" id="MainImg">
+<main><section class="container sproduct my-5 pt-5">
+    <div class="row">
+        <div class="gallery-container col-lg-5 col-md-12 col-12">
+            <%-- Ảnh chính - Giữ nguyên class và id --%>
+            <img class="main-img img-fluid w-100 pb-1" src="${product.mainImageUrl}" width="100%" id="MainImg">
 
-                <div class="thumb-container">
-                    <button class="scroll-btn left" onclick="prevImage()">&#10094;</button>
+            <div class="thumb-container">
+                <button class="scroll-btn left" onclick="prevImage()">&#10094;</button>
 
-                    <div class="small-img-group" id="thumbScroll">
-                        <c:forEach var="imgUrl" items="${images}">
+                <div class="small-img-group" id="thumbScroll">
+                    <c:forEach var="imgUrl" items="${images}" varStatus="status">
                         <div class="small-img-col">
-                            <img src="${imgUrl}" width="100%" class="small-img" alt="">
+                            <img src="${imgUrl}" width="100%" class="small-img ${status.first ? 'active' : ''}"
+                                 onclick="showImg(this, ${status.index})">
                         </div>
-                        </c:forEach>
-                    </div>
+                    </c:forEach>
                 </div>
+
                 <button class="scroll-btn right" onclick="nextImage()">&#10095;</button>
             </div>
         </div>
 
         <div class="info col-lg-6 col-md-12 col-12">
-            <h6>Home / SONY </h6>
+            <h6>Home / ${product.categoryName}</h6>
             <h3>${product.productName}</h3>
-            <div class="star">
-                <i class='bx bxs-star'></i>
-                <i class='bx bxs-star'></i>
-                <i class='bx bxs-star'></i>
-                <i class='bx bxs-star'></i>
-                <i class='bx bxs-star'></i>
-            </div>
             <h2>${product.basePrice} VNĐ</h2>
+
             <div class="product-options">
                 <h4>Màu sắc: </h4>
                 <div class="color-options">
                     <c:forEach var="v" items="${variants}">
-                        <div class="color-item">
-                            <span>${v.colorName}</span> - <span>${v.sellPrice} VNĐ</span>
+                        <div class="color-item" onclick="selectColor(this)" data-img="${v.mainImageUrl}">
+                            <img src="${v.mainImageUlr}" alt="${v.colorName}">
+                            <span>${v.colorName} - ${v.sellPrice} VNĐ</span>
                         </div>
-                    </c:forEach></div>
-
-
+                    </c:forEach>
+                </div>
             </div>
 
             <div class="product-quantity">
@@ -216,41 +211,21 @@
 
             <div class="btn">
                 <button class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
-                <div id="success-popup" class="popup-content-wrap">
-                    <div class="popup-content">
-                        <button class="popup-close-btn" id="popup-close">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                        <div class="icon-box">
-                            <i class="bi bi-check-lg"></i>
-                        </div>
-                        <h3>Đã thêm vào giỏ hàng thành công!</h3>
-                        </p>
-                    </div>
-                </div>
-
-                <a href="cart.jsp"><a href="checkout.jsp">
-                    <button class="buy-btn">Mua Ngay</button>
-                </a></a>
+                <a href="checkout.jsp"><button class="buy-btn">Mua Ngay</button></a>
             </div>
-
-
         </div>
-        </div>
-        </div>
-
-    </section>
+    </div>
+</section>
 
     <section class="container my-5 pt-5">
         <div class="row equal-columns">
             <div class="describe col-lg-6 col-md-12 col-12">
                 <div class="specs-container">
                     <h3>Thông số kỹ thuật</h3>
-
                     <table class="specs-table">
                         <c:forEach var="s" items="${specs}">
                             <tr>
-                                <td>${s.specName}</td>
+                                <td class="spec-title">${s.specName}</td>
                                 <td>${s.specValue}</td>
                             </tr>
                         </c:forEach>
