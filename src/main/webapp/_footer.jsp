@@ -48,11 +48,11 @@
             <div class="footer-one col-lg-3 col-md-6 col-12">
                 <h5 class="pb-2">Instagram</h5>
                 <div class="row">
-                    <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img1.jpg" alt="">
-                    <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img10.jpg" alt="">
-                    <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img2.jpg" alt="">
-                    <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img5.jpg" alt="">
-                    <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img6.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img1.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img10.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img2.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img5.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img6.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="copyright mt-5">
             <div class="row container mx-auto">
                 <div class="col-lg-3 col-md-6 col-12 mb-4">
-                    <img src="assets/img/Payment/payment.png" alt="">
+                    <img src="${pageContext.request.contextPath}/assets/img/Payment/payment.png" alt="">
                 </div>
                 <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
                     <p>© 2025 Công Ty Cổ Phần AuraSound </p>
@@ -76,13 +76,23 @@
     </footer>
 </c:if>
 
-<script src="assets/js/script.js"></script>
-<script src="assets/js/scriptProfile.js"></script>
-<script src="assets/js/scriptStore.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
-<c:if test="${not empty customJsBlock}">
-    ${customJsBlock}
-</c:if>
+<c:choose>
+    <c:when test="${not empty customJs}">
+        ${customJs}
+        <c:if test="${keepDefaultJs == true}">
+            <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/js/scriptProfile.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/js/scriptStore.js"></script>
+        </c:if>
+    </c:when>
+
+    <c:otherwise>
+        <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/scriptProfile.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/scriptStore.js"></script>
+    </c:otherwise>
+</c:choose>

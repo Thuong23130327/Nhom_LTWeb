@@ -1,12 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<c:set var="pageTitle" value="Trang chủ - AuraSound" scope="request"/>
+<%
+    request.setAttribute("pageTitle", "Trang chủ - AuraSound");
+    request.setAttribute("activePage", "home");
+%>
+<%@ include file="_header.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<%@ include file="_header.jsp" %>
 
 <div class="slideshow-container">
     <div class="slides-track">
@@ -56,6 +59,7 @@
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
             crossorigin="anonymous"></script>
 </main>
-<jsp:include page="_footer.jsp"/>
+
+<%@ include file="_footer.jsp" %>
 </body>
 </html>
