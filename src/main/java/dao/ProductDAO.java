@@ -26,9 +26,7 @@ public class ProductDAO {
         String sql = """
         SELECT id, sku, name, description, avg_rating, sold_count,
                brand_id, categories_id, is_active, created_at
-        FROM Products
-        ORDER BY created_at DESC
-        LIMIT ?
+        FROM Products WHERE id = ?
     """;
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
