@@ -3,14 +3,19 @@
 <%
     request.setAttribute("pageTitle", "Tên sp - AuraSound");
     request.setAttribute("activePage", "product");
+    request.setAttribute("keepDefaultCss", true);
 %>
+
+<c:set var="customCss" scope="request">
+    <script src="assets/js/scriptProduct.js"></script>
+</c:set>
 <%@ include file="_header.jsp" %>
 <main>
     <section class="container sproduct my-5 pt-5">
         <div class="row">
             <div class="gallery-container col-lg-5 col-md-12 col-12">
                 <%-- Ảnh chính - Giữ nguyên class và id --%>
-                <img class="main-img img-fluid w-100 pb-1" src="${product.mainImageUrl}" width="100%" id="MainImg">
+                <img class="main-img img-fluid w-100 pb-1" src="${prod.mainImageUrl}" width="100%" id="MainImg">
 
                 <div class="thumb-container">
                     <button class="scroll-btn left" onclick="prevImage()">&#10094;</button>
