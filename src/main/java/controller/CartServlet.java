@@ -1,7 +1,7 @@
 package controller;
 
 import model.Cart;
-import  model.CartItem;
+import model.CartItem;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/Cart")
 public class CartServlet extends HttpServlet {
 
-//Xem và tính tổng tiền cho Cart
+    //Xem và tính tổng tiền cho Cart
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -33,7 +33,7 @@ public class CartServlet extends HttpServlet {
         request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
-// DoPost xử lý hành động "Thêm vào giỏ hàng"
+    // DoPost xử lý hành động "Thêm vào giỏ hàng"
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
