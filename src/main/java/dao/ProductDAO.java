@@ -5,6 +5,7 @@ import model.Product;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +13,38 @@ public class ProductDAO {
 
     private Connection conn;
 
-    public  ProductDAO() {
+    public  ProductDAO() throws SQLException {
         conn = DBConnect.getConnection();
     }
 
-	public Product getById(int i) {
-		return null;
-	}
+    public Product getById(int id) {
+        String sql = "SELECT * FROM Products WHERE id = ?";
+// Lấy kết nối trực tiếp để tự động trả về Pool
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+// Giữ nguyên logic khởi tạo Product
+                    return new Product(
+                            rs.getInt("id"),
+                            rs.getString("sku"),
+                            rs.getString("name"),
+                            rs.getString("description"),
+                            rs.getFloat("avg_rating"),
+                            rs.getInt("sold_count"),
+                            rs.getInt("brand_id"),
+                            rs.getInt("categories_id"),
+                            rs.getBoolean("is_active"),
+                            rs.getDate("created_at").toLocalDate()
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public List<Product> getNewArrivals(int limit) {
         List<Product> list = new ArrayList<>();
