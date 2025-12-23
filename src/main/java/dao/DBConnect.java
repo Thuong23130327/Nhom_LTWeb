@@ -1,39 +1,29 @@
 package dao;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnect {
-	private static final String URL = "jdbc:mysql://localhost:3306/aurasound_db?" + "useSSL=false&"
-			+ "serverTimezone=Asia/Ho_Chi_Minh&" + "allowPublicKeyRetrieval=true";
+	private static DataSource dataSource;
 
-	private static final String USER = "root";
-	private static final String PASS = "";
-
-	public static Connection getConnection() {
-		Connection conn = null;
+	static {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			conn = DriverManager.getConnection(URL, USER, PASS);
-		} catch (ClassNotFoundException e) {
-			System.err.println("❌ Lỗi: Thiếu Driver MySQL (Cần add file .jar vào lib)");
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.err.println("❌ Lỗi: Kết nối thất bại. Kiểm tra lại URL, User, Pass hoặc MySQL đã bật chưa?");
-			e.printStackTrace();
+			Context initContext = new InitialContext();
+			Context envContext = (Context) initContext.lookup("java:/comp/env");
+			dataSource = (DataSource) envContext.lookup("jdbc/AuraSoundDB");
+		} catch (NamingException e) {
+			System.err.println("❌ Lỗi cấu hình JNDI: " + e.getMessage());
 		}
-		return conn;
 	}
 
-	public static void main(String[] args) {
-		try (Connection c = getConnection()) {
-			if (c != null) {
-				System.out.println("✅ Kết nối thành công đến database: " + c.getCatalog());
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public static Connection getConnection() throws SQLException {
+		if (dataSource == null) {
+			throw new SQLException("❌ DataSource không khả dụng.");
 		}
+		return dataSource.getConnection();
 	}
 }
