@@ -1,5 +1,6 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +15,10 @@ public class ProductDetailService {
 	private SpecDAO specDAO = new SpecDAO();
 	private GalleryDAO galleryDAO = new GalleryDAO();
 
-	public Map<String, Object> getFullProductDetail(int productId) {
+    public ProductDetailService() throws SQLException {
+    }
+
+    public Map<String, Object> getFullProductDetail(int productId) {
 		Map<String, Object> detail = new HashMap<>();
 
 		detail.put("product", productDAO.getById(productId));
