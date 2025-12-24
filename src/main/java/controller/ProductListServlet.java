@@ -8,6 +8,7 @@ import model.Product;
 import service.ProductService;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProductListServlet extends HttpServlet {
@@ -15,7 +16,11 @@ public class ProductListServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        productService = new ProductService();
+        try {
+            productService = new ProductService();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

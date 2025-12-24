@@ -1,32 +1,67 @@
 package dao;
 
-
 import model.User;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class UserDAO {
 
-    // Phương thức B1
-    public User getUserByEmail(String email) {
+    public User checkLogin(String email, String password) {
         User user = null;
-        String sql = "SELECT id, email, password_hash, full_name, role FROM Users WHERE email = ?";
+        String sql = "SELECT * FROM Users WHERE email = ? AND password_hash = ?";
 
-        try {
-            // 1. Lấy kết nối DB
-            // 2. Chuẩn bị câu lệnh và SET tham số email (ps.setString(1, email))
-            // 3. Thực thi truy vấn và ánh xạ sang Model User
-            /*
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
                 user = new User();
                 user.setId(rs.getInt("id"));
                 user.setEmail(rs.getString("email"));
-                user.setPasswordHash(rs.getString("password_hash"));
                 user.setFullName(rs.getString("full_name"));
-                // Chuyển đổi String/Enum (rs.getString("role")) sang User.Role
+
+                String roleStr = rs.getString("role");
+                try {
+                    user.setRole(model.User.Role.valueOf(roleStr));
+                } catch (Exception e) {
+                    // Mặc định là Customer nếu lỗi
+                    user.setRole(model.User.Role.Customer);
+                }
             }
-            */
         } catch (Exception e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public boolean register(User user) {
+        String sql = "INSERT INTO Users (email, password_hash, full_name, role, is_locked, created_at) " +
+                "VALUES (?, ?, ?, ?, ?, NOW())";
+
+        // 2. Mở kết nối
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPasswordHash());
+            ps.setString(3, user.getFullName());
+
+            ps.setString(4, user.getRole().name());
+
+            ps.setBoolean(5, false);
+
+            int rowsAffected = ps.executeUpdate();
+
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

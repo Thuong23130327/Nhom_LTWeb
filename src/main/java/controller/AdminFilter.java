@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/admin/admin.jsp", description = "filter cho login")
+@WebFilter(urlPatterns = "/admin/*", description = "filter cho login")
 
 public class AdminFilter implements Filter {
     @Override
