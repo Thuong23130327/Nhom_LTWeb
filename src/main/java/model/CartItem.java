@@ -1,36 +1,31 @@
 package model;
 
-public class CartItem {
-	private int variantId;
-	private String productName;
+import java.io.Serializable;
+
+public class CartItem implements Serializable {
+	private Product product;
 	private int quantity;
 	private double price;
 
-	public CartItem(int variantId, String productName, int quantity, double price) {
-		super();
-		this.variantId = variantId;
-		this.productName = productName;
+	public CartItem() {
+	}
+	public CartItem(Product product, int quantity, double price) {
+		this.product = product;
 		this.quantity = quantity;
 		this.price = price;
 	}
 
-	public CartItem() {
+	public CartItem(int variantId, String productName, int quantity, double price) {
 	}
 
-	public int getVariantId() {
-		return variantId;
+
+
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setVariantId(int variantId) {
-		this.variantId = variantId;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public int getQuantity() {
@@ -55,5 +50,24 @@ public class CartItem {
 	public double getTotalItemPrice() {
 		return this.price * this.quantity;
 	}
+	public void upQuantity(int quantity){
+		this.quantity += quantity;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
