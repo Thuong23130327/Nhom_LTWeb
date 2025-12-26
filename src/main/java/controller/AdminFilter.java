@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.User;
 
 import java.io.IOException;
 
@@ -20,15 +21,11 @@ public class AdminFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+
         HttpSession session = request.getSession();
-        boolean loggedIn = false;
-        if (session.getAttribute("loggedIn") != null) {
-            loggedIn = (boolean) session.getAttribute("loggedIn");
-            if (loggedIn) {
-                response.sendRedirect(request.getContextPath() + "/admin/admin.jsp");
-            } else {
-                response.sendRedirect(request.getContextPath() + "/login.jsp");
-            }
+        User user = (User) session.getAttribute("author");
+        if (user != null && (user.getRole()== User.Role.Admin) ) {
+            filterChain.doFilter(servletRequest, servletResponse);
         } else {
             response.sendRedirect(request.getContextPath() + "/login.jsp");
         }

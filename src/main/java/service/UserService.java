@@ -5,7 +5,7 @@ import model.User;
 
 public class UserService {
 
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     public UserService() {
         this.userDAO = new UserDAO();

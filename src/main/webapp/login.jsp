@@ -19,13 +19,13 @@
 
 <%
     String password = request.getAttribute("password") == null ? "" : request.getAttribute("password") + "";
-    String username = request.getAttribute("username") == null ? "" : request.getAttribute("username") + "";
+    String email = request.getAttribute("email") == null ? "" : request.getAttribute("email") + "";
     String error = request.getAttribute("error") == null ? "" : request.getAttribute("error") + "";
 
 %>
 <div class="container" id="container">
     <div class="form-container sign-up">
-        <form>
+        <form action="register" method="post">
             <h1>Đăng ký</h1>
             <div class="social-icons">
                 <a href="#" class="icon">
@@ -42,12 +42,13 @@
                 </a>
             </div>
             <span>hoặc dùng email để đăng ký</span>
-            <input type="text" placeholder="Name"/>
-            <input type="email" placeholder="Email"/>
-            <input type="password" placeholder="Password"/>
-            <input type="password" placeholder="Nhập lại password"/>
-
-            <button type="button" id="signUp">Đăng Ký</button>
+            <input type="text" name="regisFullname" placeholder="Họ và tên" required />
+            <input type="email" name ="regisEmail" placeholder="Email"/>
+            <input type="password" name ="regisPassword"placeholder="Password"/>
+            <input type="password" name ="repassword" placeholder="Nhập lại password"/>
+            <p class="text-danger">${registerError}</p>
+            <p class="text-success">${registerMessage}</p>
+            <button type="submit" id="signUp">Đăng Ký</button>
         </form>
     </div>
 
@@ -68,7 +69,7 @@
                     <i class="fa-brands fa-linkedin-in"></i>
                 </a>
             </div>
-            <input type="text" name="username" value="<%=username%>" placeholder="Nhập Username"/>
+            <input type="email" name="email" value="<%=email%>" placeholder="Nhập Email"/>
             <input type="password" name="password" value="<%=password%>"
                    placeholder="Password"/>
             <p class="text-danger"><%= error %>

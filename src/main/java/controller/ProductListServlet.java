@@ -20,6 +20,8 @@ public class ProductListServlet extends HttpServlet {
             productService = new ProductService();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

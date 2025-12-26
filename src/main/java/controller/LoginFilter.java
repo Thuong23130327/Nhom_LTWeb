@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.User;
 
 import java.io.IOException;
 
@@ -20,17 +21,12 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
-        boolean loggedIn = false;
-        if (session.getAttribute("loggedIn") != null) {
-            loggedIn = (boolean) session.getAttribute("loggedIn");
-            if (loggedIn) {
-                response.sendRedirect(request.getContextPath() + "/admin/admin.jsp");
-            }
-        }else {
+       User user = (User) session.getAttribute("authen");
+        if (user != null) {
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+        } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
-
-
     }
 
     @Override

@@ -10,12 +10,12 @@ import dao.SpecDAO;
 import dao.VariantDAO;
 
 public class ProductDetailService {
-	private ProductDAO productDAO = new ProductDAO(); 
+	private ProductDAO productDAO = new ProductDAO();
 	private VariantDAO variantDAO = new VariantDAO();
 	private SpecDAO specDAO = new SpecDAO();
 	private GalleryDAO galleryDAO = new GalleryDAO();
 
-    public ProductDetailService() throws SQLException {
+    public ProductDetailService() throws SQLException, ClassNotFoundException {
     }
 
     public Map<String, Object> getFullProductDetail(int productId) {
