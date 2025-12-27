@@ -42,6 +42,8 @@ public class CartServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(500, "Lỗi kết nối cơ sở dữ liệu");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
