@@ -1,32 +1,84 @@
 package dao;
 
-
 import model.User;
+import model.User.Role;
+import util.MD5;
+
+import java.security.NoSuchAlgorithmException;
+import java.sql.*;
 
 public class UserDAO {
 
-    // Phương thức B1
-    public User getUserByEmail(String email) {
-        User user = null;
-        String sql = "SELECT id, email, password_hash, full_name, role FROM Users WHERE email = ?";
+    public static boolean checkExistMail(String email) {
 
-        try {
-            // 1. Lấy kết nối DB
-            // 2. Chuẩn bị câu lệnh và SET tham số email (ps.setString(1, email))
-            // 3. Thực thi truy vấn và ánh xạ sang Model User
-            /*
-            if (rs.next()) {
-                user = new User();
-                user.setId(rs.getInt("id"));
-                user.setEmail(rs.getString("email"));
-                user.setPasswordHash(rs.getString("password_hash"));
-                user.setFullName(rs.getString("full_name"));
-                // Chuyển đổi String/Enum (rs.getString("role")) sang User.Role
-            }
-            */
+        String sql = "Select id from users where email =?";
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user;
+        return false;
+
+    }
+
+    public User checkLogin(String email, String passHash) throws NoSuchAlgorithmException, SQLException {
+        User user = null;
+
+
+        String sql = "SELECT * FROM Users WHERE email = ? AND password_hash = ?";
+
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ps.setString(2, passHash);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String dbEmail = rs.getString("email");
+                String dbPass = rs.getString("password_hash");
+                String dbName = rs.getString("full_name");
+                String dbPhone = rs.getString("phone");
+                String dbAvt = rs.getString("avatar_url");
+
+                String role = rs.getString("role");
+
+                boolean locked = rs.getBoolean("is_locked");
+                Timestamp created = rs.getTimestamp("created_at");
+
+                user = new User(id, dbEmail, dbPass, dbName, dbPhone, dbAvt, Role.valueOf(role), locked, created);
+            }
+            return user;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public boolean register(User user) {
+
+        String sql = "INSERT INTO Users (email, password_hash, full_name) VALUES (?, ?, ?)";
+
+        // 2. Mở kết nối
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPasswordHash());
+            ps.setString(3, user.getFullName());
+
+            int rowsAffected = ps.executeUpdate();
+
+            return rowsAffected > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public User getUserByEmail(String email) {
+        return null;
     }
 }

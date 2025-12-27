@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
-
     private Connection conn;
 
 //    public  ProductDAO() throws SQLException {
@@ -74,6 +73,7 @@ public class ProductDAO {
                             rs.getInt("id"),
                             rs.getString("sku"),
                             rs.getString("name"),
+                            rs.getDouble("price"),
                             rs.getString("description"),
                             rs.getFloat("avg_rating"),
                             rs.getInt("sold_count"),
@@ -86,6 +86,8 @@ public class ProductDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
@@ -110,6 +112,7 @@ public class ProductDAO {
                         rs.getInt("id"),
                         rs.getString("sku"),
                         rs.getString("name"),
+                        rs.getDouble("price"),
                         rs.getString("description"),
                         rs.getFloat("avg_rating"),
                         rs.getInt("sold_count"),
@@ -147,6 +150,7 @@ public class ProductDAO {
                         rs.getInt("id"),
                         rs.getString("sku"),
                         rs.getString("name"),
+                        rs.getDouble("price"),
                         rs.getString("description"),
                         rs.getFloat("avg_rating"),
                         rs.getInt("sold_count"),

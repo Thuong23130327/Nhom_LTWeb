@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import dao.ProductDAO;
@@ -49,6 +50,10 @@ public class ProductDetailServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace();
             response.sendRedirect("home");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }

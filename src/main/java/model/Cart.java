@@ -1,20 +1,21 @@
 package model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
-public class Cart {
+public class Cart implements Serializable {
 	private Map<Integer, CartItem> items;
 
-//Constructor
-	public Cart(Map<Integer, CartItem> items) {
-		super();
-		this.items = items;
+	//Constructor
+	public Cart() {
+		this.items = new HashMap<Integer, CartItem>();
 	}
 
-	public Cart() {
-		this.items = new HashMap<>();
-	}
 
 	public Map<Integer, CartItem> getItems() {
 		return items;
@@ -24,34 +25,45 @@ public class Cart {
 		this.items = items;
 	}
 
-	// Thêm hàng vào giỏ, nếu có sẵn sản phẩm sẽ cộng dồn
-	public void addItem(CartItem newItem) {
-		int id = newItem.getVariantId();
-		if (items.containsKey(id)) {
-			CartItem existItem = items.get(id);
-			existItem.setQuantity(existItem.getQuantity() + newItem.getQuantity());
+// Thêm hàng vào giỏ, nếu có sẵn sản phẩm sẽ cộng dồn
+	public void addItem(Product product, int quantity) {
+		if (quantity <= 0) {
+			quantity = 1;
+		}
+		if (!items.containsKey(product.getId())) {
+			items.put(product.getId(), new CartItem(product, quantity, product.getPrice()));
 		} else {
-			items.put(id, newItem);
+			items.get(product.getId()).upQuantity(quantity);
 		}
 	}
-
-	// Giảm số lượng sản phẩm
-	public void removeItem(CartItem newItem) {
-		int id = newItem.getVariantId();
-		if (items.containsKey(id)) {
-			CartItem existItem = items.get(id);
-			if (existItem.getQuantity() > 1) {
-				existItem.setQuantity(existItem.getQuantity() - newItem.getQuantity());
-			}
-		}
+//Cập nhật sp
+	public void updateItems(Product product, int quantity) {
+//		todo
 	}
-
-	// Tính tổng tiền cả giỏ hàng
-	public double getTotalMoney() {
-		double total = 0;
-		for (CartItem item : items.values()) {
-			total += item.getTotalItemPrice();
-		}
-		return total;
+//Xóa sp
+	public CartItem deleteItem(int id) {
+		return items.remove(id);
+	}
+//Xóa toàn bộ sp ở giỏ
+	public List<CartItem> deleteAllItems() {
+		List<CartItem> allItems = new ArrayList<CartItem>(items.values());
+		items.clear();
+		return allItems;
+    }
+//Lấy ds sản phẩm
+	public List<CartItem> getListItems(){
+		return new ArrayList<>(items.values());
+	}
+//Lấy tổng số lượng sp
+	public int getTotalQuantity(){
+		AtomicInteger total = new AtomicInteger();
+		items.values().forEach((CartItem c) -> total.addAndGet(c.getQuantity()));
+		return total.get();
+	}
+//Lấy tổng giá tiền
+	public double getTotalPrice(){
+		AtomicReference<Double> sum = new AtomicReference<>((double) 0);
+		items.values().forEach(c-> sum.updateAndGet(v -> v + (c.getPrice() * c.getQuantity())));
+		return sum.get();
 	}
 }

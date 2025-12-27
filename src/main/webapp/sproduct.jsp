@@ -12,10 +12,11 @@
 <%@ include file="_header.jsp" %>
 <main>
     <section class="container sproduct my-5 pt-5">
+<%--Thông tin sản phẩm--%>
         <div class="row">
             <div class="gallery-container col-lg-5 col-md-12 col-12">
                 <%-- Ảnh chính - Giữ nguyên class và id --%>
-                <img class="main-img img-fluid w-100 pb-1" src="${prod.mainImageUrl}" width="100%" id="MainImg">
+                <img class="main-img img-fluid w-100 pb-1" src="${prod.mainImageUrl}" id="MainImg">
 
                 <div class="thumb-container">
                     <button class="scroll-btn left" onclick="prevImage()">&#10094;</button>
@@ -23,8 +24,7 @@
                     <div class="small-img-group" id="thumbScroll">
                         <c:forEach var="imgUrl" items="${images}" varStatus="status">
                             <div class="small-img-col">
-                                <img src="${imgUrl}" width="100%" class="small-img ${status.first ? 'active' : ''}"
-                                     onclick="showImg(this, ${status.index})">
+                                <img src="${imgUrl}" class="small-img ${status.first ? 'active' : ''}" onclick="showImg(this, ${status.index})">
                             </div>
                         </c:forEach>
                     </div>
@@ -34,47 +34,60 @@
             </div>
 
             <div class="info col-lg-6 col-md-12 col-12">
-                <h6>Home / ${product.categoryName}</h6>
-                <h3>${product.productName}</h3>
-                <h2>${product.basePrice} VNĐ</h2>
+                <h6 class="breadcrumb-text">Trang chủ / ${product.categoryName}</h6>
+                <h3 class="product-name-detail">${product.productName}</h3>
+
+                <div class="rating-stars-detail">
+                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                    <span>(124 Đánh giá)</span>
+                </div>
+
+                <h2 class="product-price-detail">${product.basePrice} VNĐ</h2>
 
                 <div class="product-options">
-                    <h4>Màu sắc: </h4>
-                    <div class="color-options">
+                    <h4 class="option-title">Màu sắc:</h4>
+                    <div class="color-options-grid">
                         <c:forEach var="v" items="${variants}">
-                            <div class="color-item" onclick="selectColor(this)" data-img="${v.mainImageUrl}">
+                            <div class="color-item" onclick="selectColor(this)" data-variant-id="${v.variantId}" data-img="${v.mainImageUrl}">
                                 <img src="${v.mainImageUlr}" alt="${v.colorName}">
-                                <span>${v.colorName} - ${v.sellPrice} VNĐ</span>
+                                <span>${v.colorName}</span>
+                                <div class="check-mark"><i class='bx bx-check'></i></div>
                             </div>
                         </c:forEach>
                     </div>
                 </div>
 
-                <div class="product-quantity">
-                    <h4>Số lượng: </h4>
-                    <input type="number" value="1">
+                <div class="quantity-section mt-4">
+                    <h4 class="option-title mb-3">Số lượng:</h4>
+                    <div class="quantity-input-group d-flex align-items-center mb-4">
+                        <%-- Nút trừ/cộng giúp tăng UX trên mobile --%>
+                        <button class="qty-btn minus" onclick="changeQty(-1)">-</button>
+                        <input type="number" value="1" min="1" class="qty-input" id="productQty">
+                        <button class="qty-btn plus" onclick="changeQty(1)">+</button>
+                    </div>
                 </div>
 
-                <div class="btn">
-                    <button class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
-                    <a href="checkout.jsp">
-                        <button class="buy-btn">Mua Ngay</button>
-                    </a>
+                <div class="action-btns d-flex gap-3">
+                    <button class="btn-add-cart flex-grow-1" onclick="addToCart('${product.productId}')">
+                        <i class='bx bx-cart-add'></i> Thêm vào giỏ hàng
+                    </button>
+                    <button class="btn-buy-now flex-grow-1" onclick="buyNow('${product.productId}')">
+                        Mua Ngay
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="container my-5 pt-5">
-        <div class="row equal-columns">
-            <div class="describe col-lg-6 col-md-12 col-12">
-                <div class="specs-container">
-                    <h3>Thông số kỹ thuật</h3>
+            <div class="row g-4 equal-height-row"> <div class="col-lg-6 col-md-12">
+                <div class="info-card h-100">
+                    <h3 class="section-title">Thông số kỹ thuật</h3>
                     <table class="specs-table">
                         <c:forEach var="s" items="${specs}">
                             <tr>
                                 <td class="spec-title">${s.specName}</td>
-                                <td>${s.specValue}</td>
+                                <td class="spec-value">${s.specValue}</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -101,140 +114,148 @@
     </section>
 
     <section class="boxReview">
-        <div class="boxReview-head">
-            <h3>Đánh giá</h3>
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="boxReview-container">
+                    <div class="boxReview-head">
+                        <h3>Đánh giá & Nhận xét</h3>
+                    </div>
+
+                    <div class="boxReview-review">
+                        <div class="boxReview-overView d-flex align-items-center justify-content-between">
+                            <div class="score-wrapper d-flex align-items-center">
+                                <div class="score-big">
+                                    <span class="average">5.0</span><span class="max-score">/5</span>
+                                </div>
+                                <div class="score-details ms-4">
+                                    <div class="star-group">
+                                        <i class='bx bxs-star'></i>
+                                        <i class='bx bxs-star'></i>
+                                        <i class='bx bxs-star'></i>
+                                        <i class='bx bxs-star'></i>
+                                        <i class='bx bxs-star'></i>
+                                    </div>
+                                    <p class="mb-0 text-muted">23 lượt đánh giá</p>
+                                </div>
+                            </div>
+
+                            <button class="btn-review">
+                                <i class='bx bx-edit'></i> Viết đánh giá
+                            </button>
+                        </div>
+
+                        <div class="review-modal-wrapper">
+                            <div class="over-lay"></div>
+                            <div class="wrapper">
+                                <h3>Đánh giá sản phẩm</h3>
+                                <form action="#" id="reviewForm">
+                                    <div class="rating">
+                                        <input type="number" name="rating" hidden>
+                                        <i class='bx bx-star star' style="--i: 0;"></i>
+                                        <i class='bx bx-star star' style="--i: 1;"></i>
+                                        <i class='bx bx-star star' style="--i: 2;"></i>
+                                        <i class='bx bx-star star' style="--i: 3;"></i>
+                                        <i class='bx bx-star star' style="--i: 4;"></i>
+                                    </div>
+                                    <textarea name="opinion" cols="30" rows="5" placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm..."></textarea>
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn submit">Gửi đánh giá</button>
+                                        <button type="button" class="btn cancel">Hủy bỏ</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="boxReview-review">
-            <div class="boxReview-overView">
-                <div class="score">
-                    <span class="average">5.0</span>/5
+
+        <div class="boxReview-rating">
+            <div class="rating-level">
+                <div class="star-count">
+                    <div>5</div>
+                    <i class='bx bxs-star' style="color: goldenrod;"></i>
+                </div>
+                <progress class="progress" value="${percent5}" max="100"></progress>
+                <span>${count5} đánh giá</span>
+            </div>
+            <div class="rating-level">
+                <div class="star-count">
+                    <div>4</div>
+                    <i class='bx bxs-star' style="color: goldenrod;"></i>
+                </div>
+                <progress class="progress" value="${percent4}" max="100"></progress>
+                <span>${count4} đánh giá</span>
+            </div>
+            <div class="rating-level">
+                <div class="star-count">
+                    <div>3</div>
+                    <i class='bx bxs-star' style="color: goldenrod;"></i>
+                </div>
+                <progress class="progress" value="${percent3}" max="100"></progress>
+                <span>${count3} đánh giá</span>
+            </div>
+            <div class="rating-level">
+                <div class="star-count">
+                    <div>2</div>
+                    <i class='bx bxs-star' style="color: goldenrod;"></i>
+                </div>
+                <progress class="progress" value="${percent2}" max="100"></progress>
+                <span>${count2} đánh giá</span>
+            </div>
+            <div class="rating-level">
+                <div class="star-count">
+                    <div>1</div>
+                    <i class='bx bxs-star' style="color: goldenrod;"></i>
+                </div>
+                <progress class="progress" value="${percent1}" max="100"></progress>
+                <span>${count1} đánh giá</span>
+            </div>
+        </div>
+
+        <div class="boxReview-experience">
+            <h4>Đánh giá theo trải nghiệm</h4>
+
+            <div class="experience-review-item">
+                <div class="item-title">Thời lượng pin</div>
+                <div class="result-item">
                     <div class="star">
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
-                        <i class='bx bxs-star'></i>
+                        <%-- Logic hiển thị sao dựa trên số điểm batteryPoint (Ví dụ: 5) --%>
+                        <c:forEach begin="1" end="5" var="i">
+                            <i class='bx ${i <= batteryPoint ? "bxs-star" : "bx-star"}'></i>
+                        </c:forEach>
                     </div>
-                    <p>23 lượt đánh giá</p>
-                </div>
-
-
-                <button class="btn-review">Viết đánh giá</button>
-                <div class="over-lay"></div>
-                <div class="wrapper">
-
-                    <h3>Đánh giá sản phẩm</h3>
-                    <form action="#">
-                        <div class="rating">
-                            <input type="number" name="rating" hidden>
-                            <i class='bx bx-star star'></i>
-                            <i class='bx bx-star star'></i>
-                            <i class='bx bx-star star'></i>
-                            <i class='bx bx-star star'></i>
-                            <i class='bx bx-star star'></i>
-                        </div>
-                        <textarea name="opinion" cols="30" rows="5" placeholder="Đánh giá của bạn..."></textarea>
-                        <div class="btn-group">
-                            <button type="submit" class="btn submit">Gửi</button>
-                            <button class="btn cancel">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-
-
-            </div>
-
-            <div class="boxReview-rating">
-                <div class="rating-level">
-                    <div class="star-count">
-                        <div>5</div>
-                        <i class='bx bxs-star' style="color: goldenrod;"></i>
-                    </div>
-                    <progress class="progress" value="100" max="100"></progress>
-                    <span>23 đánh giá</span>
-                </div>
-                <div class="rating-level">
-                    <div class="star-count">
-                        <div>4</div>
-                        <i class='bx bxs-star' style="color: goldenrod;"></i>
-                    </div>
-                    <progress class="progress" value="0" max="100"></progress>
-                    <span>0 đánh giá</span>
-                </div>
-                <div class="rating-level">
-                    <div class="star-count">
-                        <div>3</div>
-                        <i class='bx bxs-star' style="color: goldenrod;"></i>
-                    </div>
-                    <progress class="progress" value="0" max="100"></progress>
-                    <span>0 đánh giá</span>
-                </div>
-                <div class="rating-level">
-                    <div class="star-count">
-                        <div>2</div>
-                        <i class='bx bxs-star' style="color: goldenrod;"></i>
-                    </div>
-                    <progress class="progress" value="0" max="100"></progress>
-                    <span>0 đánh giá</span>
-                </div>
-                <div class="rating-level">
-                    <div class="star-count">
-                        <div>1</div>
-                        <i class='bx bxs-star' style="color: goldenrod;"></i>
-                    </div>
-                    <progress class="progress" value="0" max="100"></progress>
-                    <span>0 đánh giá</span>
+                    <div class="item-point">${batteryPoint}/5</div>
+                    <div class="item-review-count">(${batteryReviewCount} đánh giá)</div>
                 </div>
             </div>
 
-            <div class="boxReview-experience">
-                <h4>Đánh giá theo trải nghiệm</h4>
-                <div class="experience-review-item">
-                    <div class="item-title">Thời lượng pin</div>
-                    <div class="result-item">
-                        <div class="star">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="item-point">5/5</div>
-                        <div class="item-review-count">(19 đánh giá)</div>
+            <div class="experience-review-item">
+                <div class="item-title">Cảm giác đeo</div>
+                <div class="result-item">
+                    <div class="star">
+                        <c:forEach begin="1" end="5" var="i">
+                            <i class='bx ${i <= comfortPoint ? "bxs-star" : "bx-star"}'></i>
+                        </c:forEach>
                     </div>
+                    <div class="item-point">${comfortPoint}/5</div>
+                    <div class="item-review-count">(${comfortReviewCount} đánh giá)</div>
                 </div>
-                <div class="experience-review-item">
-                    <div class="item-title">Cảm giác đeo</div>
-                    <div class="result-item">
-                        <div class="star">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="item-point">5/5</div>
-                        <div class="item-review-count">(19 đánh giá)</div>
+            </div>
+
+            <div class="experience-review-item">
+                <div class="item-title">Chất âm</div>
+                <div class="result-item">
+                    <div class="star">
+                        <c:forEach begin="1" end="5" var="i">
+                            <i class='bx ${i <= soundPoint ? "bxs-star" : "bx-star"}'></i>
+                        </c:forEach>
                     </div>
-                </div>
-                <div class="experience-review-item">
-                    <div class="item-title">Chất âm</div>
-                    <div class="result-item">
-                        <div class="star">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="item-point">5/5</div>
-                        <div class="item-review-count">(19 đánh giá)</div>
-                    </div>
+                    <div class="item-point">${soundPoint}/5</div>
+                    <div class="item-review-count">(${soundReviewCount} đánh giá)</div>
                 </div>
             </div>
         </div>
-
-
     </section>
 
     <section id="featured" class="my-5 pb-5">
