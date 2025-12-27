@@ -23,9 +23,8 @@ public class UserDAO {
 
     }
 
-    public User checkLogin(String email, String password) throws NoSuchAlgorithmException, SQLException {
+    public User checkLogin(String email, String passHash) throws NoSuchAlgorithmException, SQLException {
         User user = null;
-        String passHash = MD5.getMd5(password);
 
 
         String sql = "SELECT * FROM Users WHERE email = ? AND password_hash = ?";
@@ -56,6 +55,7 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
     }
+
 
     public boolean register(User user) {
 

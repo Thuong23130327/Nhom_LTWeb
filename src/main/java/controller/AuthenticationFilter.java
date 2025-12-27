@@ -9,9 +9,8 @@ import model.User;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/admin/*", description = "filter cho login")
-
-public class AdminFilter implements Filter {
+//@WebFilter(urlPatterns = {"/admin/*", "/profileM/*"})
+public class AuthenticationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
@@ -23,14 +22,15 @@ public class AdminFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("author");
-        if (user != null && (user.getRole()== User.Role.Admin) ) {
+
+        User user = (User) session.getAttribute("auth");
+        if (user != null) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             response.sendRedirect(request.getContextPath() + "/login.jsp");
+
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
 
     }
 
