@@ -12,9 +12,17 @@ import java.util.List;
 public class ProductDAO {
     private Connection conn;
 
-    public  ProductDAO() throws SQLException, ClassNotFoundException {
-        conn = DBConnect.getConnection();
+//    public  ProductDAO() throws SQLException {
+//        conn = DBConnect.getConnection();
+//    }
+    public ProductDAO() {
+        try {
+            conn = DBConnect.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
@@ -89,17 +97,18 @@ public class ProductDAO {
 
         String sql = """
         SELECT id, sku, name, description, avg_rating, sold_count,
-               brand_id, categories_id, is_active, created_at
-        FROM Products WHERE id = ?
+               brand_id, categories_id, is_active, created_at, img, price
+        FROM Products
+        ORDER BY created_at DESC
+        LIMIT ?
     """;
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, limit); // gán giá trị cho LIMIT
-
+            ps.setInt(1, limit);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Product p = new Product(
+                list.add(new Product(
                         rs.getInt("id"),
                         rs.getString("sku"),
                         rs.getString("name"),
@@ -110,14 +119,14 @@ public class ProductDAO {
                         rs.getInt("brand_id"),
                         rs.getInt("categories_id"),
                         rs.getBoolean("is_active"),
-                        rs.getDate("created_at").toLocalDate()
-                );
-                list.add(p);
+                        rs.getDate("created_at").toLocalDate(),
+                        rs.getString("img"),
+                        rs.getDouble("price")
+                ));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return list;
     }
 

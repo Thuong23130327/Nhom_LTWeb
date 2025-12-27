@@ -14,6 +14,23 @@ public class Product {
     private int categoriesId;
     private boolean isActive;
     private LocalDate createdAt;
+    private String img;
+    private double price;
+
+    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId, int categoriesId, boolean isActive, LocalDate createdAt, String img, double price) {
+        this.id = id;
+        this.sku = sku;
+        this.name = name;
+        this.description = description;
+        this.avgRating = avgRating;
+        this.soldCount = soldCount;
+        this.brandId = brandId;
+        this.categoriesId = categoriesId;
+        this.isActive = isActive;
+        this.createdAt = createdAt;
+        this.img = img;
+        this.price = price;
+    }
 
     public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId, int categoriesId, boolean isActive, LocalDate createdAt) {
     }
@@ -118,5 +135,21 @@ public class Product {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
