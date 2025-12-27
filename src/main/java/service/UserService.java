@@ -2,10 +2,14 @@ package service;
 
 import dao.UserDAO;
 import model.User;
+import util.MD5;
+
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 public class UserService {
 
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     public UserService() {
         this.userDAO = new UserDAO();
@@ -14,5 +18,22 @@ public class UserService {
     public User findUserByEmail(String email) {
         return userDAO.getUserByEmail(email);
     }
+
+    public User login(String email, String password) throws NoSuchAlgorithmException, SQLException {
+        String passHash = MD5.getMd5(password);
+        User user = userDAO.checkLogin(email, passHash);
+        return user;
+    }
+
+    public boolean register(String email, String passwordRaw, String fullname) throws NoSuchAlgorithmException {
+        String passHash = MD5.getMd5(passwordRaw);
+        User newUser = new User(email, passHash, fullname);
+        return userDAO.register(newUser);
+    }
+
+    public boolean checkExistMail(String password) {
+        return UserDAO.checkExistMail(password);
+    }
+
 
 }

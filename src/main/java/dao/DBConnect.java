@@ -1,29 +1,30 @@
+
 package dao;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnect {
-	private static DataSource dataSource;
 
-	static {
-		try {
-			Context initContext = new InitialContext();
-			Context envContext = (Context) initContext.lookup("java:/comp/env");
-			dataSource = (DataSource) envContext.lookup("jdbc/AuraSoundDB");
-		} catch (NamingException e) {
-			System.err.println("❌ Lỗi cấu hình JNDI: " + e.getMessage());
-		}
-	}
+    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+        String url = "jdbc:mysql://" + Property.HOST + ":" + Property.PORT + "/" + Property.DBName;
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
-	public static Connection getConnection() throws SQLException {
-		if (dataSource == null) {
-			throw new SQLException("❌ DataSource không khả dụng.");
-		}
-		return dataSource.getConnection();
-	}
+        Connection conn = DriverManager.getConnection(url, Property.USER, Property.PASS);
+        return conn;
+    }
+
+    public static void main(String[] args) {
+        try {
+            DBConnect db = new DBConnect();
+            Connection conn = db.getConnection();
+            if (conn != null) {
+                System.out.println( Property.DBName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

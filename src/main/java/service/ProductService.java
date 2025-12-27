@@ -10,11 +10,9 @@ public class ProductService {
 
     private ProductDAO productDao;
 
-    public ProductService() throws SQLException {
+    public ProductService() throws SQLException, ClassNotFoundException {
         productDao = new ProductDAO();
     }
-
-    public List<Product> getAllProduct(){ return productDao.getAllProduct();}
 
     public List<Product> getNewArrivals(int limit) {
         return productDao.getNewArrivals(limit);
@@ -24,4 +22,11 @@ public class ProductService {
         return productDao.getProductsByCategory(categoryId);
     }
 
+    public Product getProduct(int id) {
+        return null;
+    }
+
+    public List<Product> getAllProduct() {
+        return null;
+    }
 }

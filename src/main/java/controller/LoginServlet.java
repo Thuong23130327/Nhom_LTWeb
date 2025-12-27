@@ -1,5 +1,6 @@
 package controller;
 
+import dao.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,33 +8,66 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.User;
+import service.UserService;
+import util.MD5;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String url;
-        String error;
-        HttpSession session = request.getSession();
-        if (username.equals("admin") && password.equals("13052005")) {
-            url = "/admin/admin.jsp";
-            session.setAttribute("loggedIn", true);
-        } else {
-            url = "/login.jsp";
-            error = "Tên đăng nhập hoặc mật khẩu không đúng?";
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.setAttribute("error", error);
-        }
-        RequestDispatcher rd = request.getRequestDispatcher(url);
-        rd.forward(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
+
     }
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        UserService userService = new UserService();
+
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String url = "/login.jsp";
+        String error = "";
+        request.setAttribute("registerMessage", null);
+        request.setAttribute("registerError", null);
+
+
+        User user = null;
+        try {
+            user = userService.login(email, password);
+            if (user != null) {
+                if (user.isLocked()) {
+                    request.setAttribute(error, "Tài khoản của bạn đã bị khóa");
+                    request.setAttribute("loginEmail", email);
+                    request.getRequestDispatcher(url).forward(request, response);
+                    return;
+                }
+
+                HttpSession session = request.getSession();
+                session.setAttribute("auth", user);
+                if (user.getRole() == User.Role.Admin) {
+                    response.sendRedirect("admin/admin.jsp");
+                } else {
+                    response.sendRedirect("index.jsp");
+                }
+                return;
+            } else if (!userService.checkExistMail(email)) {
+                request.setAttribute("regEmail", email);
+                request.setAttribute("error", "Email chưa có tài khoản, vui lòng chọn Đăng kí");
+            } else {
+                request.setAttribute("loginEmail", email);
+                request.setAttribute("error", "Mật khẩu không đúng");
+            }
+            request.getRequestDispatcher(url).forward(request, response);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }

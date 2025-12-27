@@ -1,3 +1,4 @@
+<%@ page import="model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%
@@ -15,7 +16,19 @@
     <p>Bạn muốn để lại lời nhắn hay hợp tác công việc? Đừng ngần ngại điền form bên dưới nhé!</p>
 </section>
 <main>
+    <%
+        User user = (User) session.getAttribute("auth");
 
+        String myEmail = "";
+        String myPhone = "";
+        String myName = "";
+
+        if (user != null) {
+            myEmail = (user.getEmail() != null) ? user.getEmail() : "";
+            myPhone = (user.getPhone() != null) ? user.getPhone() : "";
+            myName = (user.getFullName() != null) ? user.getFullName() : "";
+        }
+    %>
     <section id="contact-details" class="section-p1">
         <div class="details">
             <h3>LIÊN HỆ</h3>
@@ -36,7 +49,7 @@
                 </li>
                 <li>
                     <i class="fal fa-clock"></i>
-                    <p>Từ thứ Hai đến Chủ Nhật: 9:00-21:00</p>
+                    <p>Từ thứ Hai đến Chủ Nhật: 9:00-22:00</p>
                 </li>
             </div>
         </div>
@@ -50,27 +63,39 @@
     </section>
 
     <section id="form-details">
-        <form action="">
+        <form action="contact" method="post">
+            <% if (user != null) { %>
+            <div style="margin-bottom: 15px;">
+                <button type="button" onclick="autoFill()">
+                    Sử dụng thông tin của tôi
+                </button>
+            </div>
+            <% } %>
+            <span class="text-success">${successMessage}</span>
+            <span class="text-danger">${errorMessage}</span>
             <span>ĐỂ LẠI LỜI NHẮN</span>
             <h2>Aurasound luôn lắng nghe bạn</h2>
-            <input type="text" placeholder="Họ tên">
-            <input type="text" placeholder="E-mail">
-            <input type="text" placeholder="Số điện thoại">
-            <textarea name="" id="" cols="30" rows="10" placeholder="Lời nhắn"></textarea>
-            <button class="send-btn">Gửi</button>
+            <input type="text" name="name" value="<%=myName%>" placeholder="Họ tên">
+            <input type="email" name="email" value="<%=myEmail%>" placeholder="E-mail">
+            <input type="text" name="phone" value="<%=myPhone%>" placeholder="Số điện thoại">
+            <textarea name="message" id="" cols="30" rows="10" placeholder="Lời nhắn"></textarea>
+            <button type="submit" class="send-btn">Gửi</button>
         </form>
+        <script>
+            function autoFill() {
+                var uName = "<%= myName %>";
+                var uEmail = "<%= myEmail %>";
+                var uPhone = "<%= myPhone %>";
+
+                document.getElementById("txtName").value = uName;
+                document.getElementById("txtEmail").value = uEmail;
+                document.getElementById("txtPhone").value = uPhone;
+            }
+        </script>
     </section>
 
 
 </main>
-<%
-    request.setAttribute("keepDefaultJs", true);
-%>
-
-<c:set var="customJs" scope="request">
-    <script src="assets/js/scriptContact.js"></script>
-</c:set>
-
 <%@ include file="_footer.jsp" %>
 
 </body>

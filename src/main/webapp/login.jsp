@@ -19,35 +19,23 @@
 
 <%
     String password = request.getAttribute("password") == null ? "" : request.getAttribute("password") + "";
-    String username = request.getAttribute("username") == null ? "" : request.getAttribute("username") + "";
+    String regEmail = request.getAttribute("regEmail") == null ? "" : request.getAttribute("regEmail") + "";
+    String loginEmail = request.getAttribute("loginEmail") == null ? "" : request.getAttribute("loginEmail") + "";
     String error = request.getAttribute("error") == null ? "" : request.getAttribute("error") + "";
-
+    String regError = (String) request.getAttribute("registerError");
+    String regMsg = (String) request.getAttribute("registerMessage");
+    String fullname = request.getAttribute("fullname") == null ? "" : request.getAttribute("fullname") + "";
 %>
 <div class="container" id="container">
     <div class="form-container sign-up">
-        <form>
+        <form action="register" method="post">
             <h1>Đăng ký</h1>
-            <div class="social-icons">
-                <a href="#" class="icon">
-                    <i class="fa-brands fa-google-plus-g"></i>
-                </a>
-                <a href="#" class="icon">
-                    <i class="fa-brands fa-facebook-f"></i>
-                </a>
-                <a href="admin.jsp" class="icon">
-                    <i class="fa-brands fa-github"></i>
-                </a>
-                <a href="#" class="icon">
-                    <i class="fa-brands fa-linkedin-in"></i>
-                </a>
-            </div>
-            <span>hoặc dùng email để đăng ký</span>
-            <input type="text" placeholder="Name"/>
-            <input type="email" placeholder="Email"/>
-            <input type="password" placeholder="Password"/>
-            <input type="password" placeholder="Nhập lại password"/>
-
-            <button type="button" id="signUp">Đăng Ký</button>
+            <input type="text" name="fullname" value="<%=fullname%>" placeholder=" Họ và tên" required/>
+            <input type="email" name="email" value="<%=regEmail%>" placeholder=" Email" required/>
+            <input type="password" name="password" placeholder="Password" required/>
+            <input type="password" name="repassword" placeholder="Nhập lại password" required/>
+            <span class="text-danger">${registerError}</span>
+            <button type="submit" id="signUp">Đăng Ký</button>
         </form>
     </div>
 
@@ -68,12 +56,13 @@
                     <i class="fa-brands fa-linkedin-in"></i>
                 </a>
             </div>
-            <input type="text" name="username" value="<%=username%>" placeholder="Nhập Username"/>
+            <input type="email" name="email" value="<%=loginEmail%>" placeholder="Nhập Email"/>
             <input type="password" name="password" value="<%=password%>"
                    placeholder="Password"/>
             <p class="text-danger"><%= error %>
             </p>
             <a href="#">Quên mật khẩu?</a>
+            <span class="text-success">${registerMessage}</span>
             <button type="submit" id="signIn">Đăng Nhập</button>
             </a>
         </form>
@@ -99,8 +88,19 @@
         </div>
     </div>
 </div>
-
 <script src="assets/js/scriptLogin.js"></script>
-</body>
+<%
+    if (regError != null) {
+%>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById('container');
+        if (container) {
+            container.classList.add("active");
+        }
+    });
+</script>
+<% } %>
 
+</body>
 </html>

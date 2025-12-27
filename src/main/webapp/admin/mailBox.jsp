@@ -136,17 +136,6 @@
     </div>
 </main>
 
-<!-- footer -->
-
-<%
-    request.setAttribute("keepDefaultJs", true);
-%>
-
-<c:set var="customJs" scope="request">
-    <script src="/assets/js/scriptAdmin.js"></script>
-</c:set>
-
-<%@ include file="/_footer.jsp" %>
 
 
 </body>

@@ -96,8 +96,14 @@
                 </div>
             </div>
 
-            <a class="a-nodecor ${activePage =='cart'?'active':''}" " href="cart.jsp">
-            <div class="cart"><i class="bi bi-cart"></i> Giỏ hàng</div>
+            <a class="a-nodecor ${activePage =='cart'?'active':''}" href="cart.jsp">
+                <div class="cart">
+                    <i class="bi bi-cart"></i> Giỏ hàng
+                    <span id="cart-badge" class="badge bg-danger rounded-pill"
+                          style="font-size: 0.7rem; vertical-align: top; ${sessionScope.cart == null ? 'display:none' : ''}">
+                        ${sessionScope.cart != null ? sessionScope.cart.totalQuantity : 0}
+                    </span>
+                </div>
             </a>
 
             <div class="nav-account">

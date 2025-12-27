@@ -1,5 +1,6 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,12 +10,15 @@ import dao.SpecDAO;
 import dao.VariantDAO;
 
 public class ProductDetailService {
-	private ProductDAO productDAO = new ProductDAO(); 
+	private ProductDAO productDAO = new ProductDAO();
 	private VariantDAO variantDAO = new VariantDAO();
 	private SpecDAO specDAO = new SpecDAO();
 	private GalleryDAO galleryDAO = new GalleryDAO();
 
-	public Map<String, Object> getFullProductDetail(int productId) {
+    public ProductDetailService() throws SQLException, ClassNotFoundException {
+    }
+
+    public Map<String, Object> getFullProductDetail(int productId) {
 		Map<String, Object> detail = new HashMap<>();
 
 		detail.put("product", productDAO.getById(productId));
