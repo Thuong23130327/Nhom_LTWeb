@@ -20,6 +20,8 @@ public class ProductDAO {
             conn = DBConnect.getConnection();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -55,6 +57,8 @@ public class ProductDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return list;
@@ -108,7 +112,7 @@ public class ProductDAO {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                list.add(new Product(
+                list.add( new Product(
                         rs.getInt("id"),
                         rs.getString("sku"),
                         rs.getString("name"),
@@ -119,9 +123,7 @@ public class ProductDAO {
                         rs.getInt("brand_id"),
                         rs.getInt("categories_id"),
                         rs.getBoolean("is_active"),
-                        rs.getDate("created_at").toLocalDate(),
-                        rs.getString("img"),
-                        rs.getDouble("price")
+                        rs.getDate("created_at").toLocalDate()
                 ));
             }
         } catch (Exception e) {

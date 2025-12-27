@@ -15,7 +15,6 @@ public class Product {
     private boolean isActive;
     private LocalDate createdAt;
     private String img;
-    private double price;
 
     public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId, int categoriesId, boolean isActive, LocalDate createdAt, String img, double price) {
         this.id = id;
@@ -73,13 +72,6 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     public String getDescription() {
         return description;
