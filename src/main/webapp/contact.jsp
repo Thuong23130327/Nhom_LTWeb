@@ -63,7 +63,8 @@
     </section>
 
     <section id="form-details">
-        <form action="contact" method="post"><% if (user != null) { %>
+        <form action="contact" method="post">
+            <% if (user != null) { %>
             <div style="margin-bottom: 15px;">
                 <button type="button" onclick="autoFill()">
                     Sử dụng thông tin của tôi
