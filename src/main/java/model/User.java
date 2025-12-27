@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class User {
@@ -12,32 +13,7 @@ public class User {
 	private String avatarUrl;
 	private Role role; // ENUM role "Customer/Admin"
 	private boolean isLocked;
-	private LocalDateTime createdAt;
-
-	public User() {
-	}
-
-    public User(String email, String passwordHash) {
-        this.email = email;
-        this.passwordHash = passwordHash;
-        this.fullName = "New User";
-        this.phone = null;
-        this.avatarUrl = null;
-        this.role = Role.Customer;
-        this.isLocked = false;
-    }
-
-	public User(String email, String passwordHash, String fullName, String phone, String avatarUrl, Role role,
-			boolean isLocked, LocalDateTime createdAt) {
-		this.email = email;
-		this.passwordHash = passwordHash;
-		this.fullName = fullName;
-		this.phone = phone;
-		this.avatarUrl = avatarUrl;
-		this.role = Role.Customer;
-		this.isLocked = isLocked;
-		this.createdAt = LocalDateTime.now();
-	}
+	private Timestamp createdAt;
 
 	public int getId() {
 		return id;
@@ -99,15 +75,56 @@ public class User {
 		return isLocked;
 	}
 
-	public LocalDateTime getCreatedAt() {
+	public void setLocked(boolean isLocked) {
+		this.isLocked = isLocked;
+	}
+
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
-    public enum Role {
-        Customer, Admin
-    }
+	public User() {
+	}
+
+	public User(String email, String passwordHash, String fullName) {
+		super();
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.fullName = fullName;
+		this.isLocked = false;
+		this.avatarUrl = "";
+		this.role = Role.Customer;
+	}
+
+	public User(int id, String email, String passwordHash, String fullName, String phone, String avatarUrl, Role role,
+			boolean isLocked, Timestamp createdAt) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.fullName = fullName;
+		this.phone = phone;
+		this.avatarUrl = avatarUrl;
+		this.role = role;
+		this.isLocked = isLocked;
+		this.createdAt = createdAt;
+	}
+
+	public User(String email, String passwordHash) {
+		this.email = email;
+		this.passwordHash = passwordHash;
+		this.fullName = "New User";
+		this.phone = null;
+		this.avatarUrl = null;
+		this.role = Role.Customer;
+		this.isLocked = false;
+	}
+
+	public enum Role {
+		Customer, Admin
+	}
 }
