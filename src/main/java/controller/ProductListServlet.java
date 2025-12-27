@@ -37,10 +37,13 @@ public class ProductListServlet extends HttpServlet {
             int categoryId = Integer.parseInt(categoryIdParam);
             products = productService.getProductsByCategory(categoryId);
         } else {
-            products = productService.getNewArrivals(10);
+            products = productService.getAllProduct();
         }
 
         request.setAttribute("products", products);
         request.getRequestDispatcher("/store.jsp").forward(request, response);
     }
+
+
+
 }

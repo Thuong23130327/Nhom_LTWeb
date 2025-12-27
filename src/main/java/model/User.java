@@ -107,7 +107,7 @@ public class User {
 		this.createdAt = createdAt;
 	}
 
-    enum Role {
+    public enum Role {
         Customer, Admin
     }
 }

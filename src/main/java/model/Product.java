@@ -15,7 +15,7 @@ public class Product {
     private boolean isActive;
     private LocalDate createdAt;
 
-    public Product() {
+    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId, int categoriesId, boolean isActive, LocalDate createdAt) {
     }
 
     public Product(int id, String sku, String name, double price, String description, float avgRating, int soldCount, int brandId, int categoriesId, boolean isActive, LocalDate createdAt) {

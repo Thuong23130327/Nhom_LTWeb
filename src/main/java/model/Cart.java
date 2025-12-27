@@ -30,10 +30,10 @@ public class Cart implements Serializable {
 		if (quantity <= 0) {
 			quantity = 1;
 		}
-		if (items.containsKey(product.getId())) {
-			items.get(product.getId()).upQuantity(quantity);
-		} else {
+		if (!items.containsKey(product.getId())) {
 			items.put(product.getId(), new CartItem(product, quantity, product.getPrice()));
+		} else {
+			items.get(product.getId()).upQuantity(quantity);
 		}
 	}
 //Cập nhật sp

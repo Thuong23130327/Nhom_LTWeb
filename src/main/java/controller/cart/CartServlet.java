@@ -28,12 +28,16 @@ public class CartServlet extends HttpServlet {
                     cart = new Cart();
                 }
                 cart.addItem(product, quantity);
-
-// Cập nhật lại session sau khi thêm hàng
                 session.setAttribute("cart", cart);
+                response.setContentType("text/plain");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(String.valueOf(cart.getTotalQuantity()));
+// Cập nhật lại session sau khi thêm hàng
+                response.sendRedirect(request.getContextPath() + "/ProductListServlet");
             }
 
-            response.sendRedirect("ProductListServlet");
+            response.sendRedirect(request.getContextPath() + "/ProductListServlet");
+            return;
 
         } catch (SQLException e) {
             e.printStackTrace();
