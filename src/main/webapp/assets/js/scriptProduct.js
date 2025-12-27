@@ -58,6 +58,32 @@ function selectColor(element) {
   }, 200);
 }
 
+function addToCart(productId) {
+  let q = document.getElementById('quantity').value;
+  let url = "${pageContext.request.contextPath}/CartServlet?id=" + productId + "&q=" + q;
+
+  fetch(url)
+      .then(response => response.text()) // Nhận số lượng từ Servlet gửi về
+      .then(newTotal => {
+// Cập nhật con số trên Navbar bằng ID đã đặt
+        document.getElementById('cart-count').innerText = newTotal;
+
+// Hiển thị thông báo
+        showToast("Đã thêm " + q + " sản phẩm vào giỏ hàng!");
+      })
+      .catch(err => console.error("Lỗi giỏ hàng: ", err));
+}
+
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.innerHTML = message;
+  toast.style = "position:fixed; bottom:20px; right:20px; background:#28a745; color:#fff; padding:15px; border-radius:8px; z-index:9999;";
+  document.body.appendChild(toast);
+
+// Tự biến mất sau 2 giây
+  setTimeout(() => toast.remove(), 2000);
+}
+
 
 //
 const modalBtn = document.querySelector(".popup");

@@ -14,8 +14,6 @@ public class ProductService {
         productDao = new ProductDAO();
     }
 
-    public List<Product> getAllProduct(){ return productDao.getAllProduct();}
-
     public List<Product> getNewArrivals(int limit) {
         return productDao.getNewArrivals(limit);
     }
@@ -24,4 +22,11 @@ public class ProductService {
         return productDao.getProductsByCategory(categoryId);
     }
 
+    public Product getProduct(int id) {
+        return null;
+    }
+
+    public List<Product> getAllProduct() {
+        return null;
+    }
 }
