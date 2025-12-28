@@ -20,6 +20,7 @@ public class Product {
         this.id = id;
         this.sku = sku;
         this.name = name;
+        this.price = price;
         this.description = description;
         this.avgRating = avgRating;
         this.soldCount = soldCount;
