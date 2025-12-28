@@ -11,10 +11,6 @@
 </c:set>
 <%@ include file="_header.jsp" %>
 
-<section class="contact-header">
-    <h2>Liên Hệ Aurasound</h2>
-    <p>Bạn muốn để lại lời nhắn hay hợp tác công việc? Đừng ngần ngại điền form bên dưới nhé!</p>
-</section>
 <main>
     <%
         User user = (User) session.getAttribute("auth");
@@ -29,6 +25,45 @@
             myName = (user.getFullName() != null) ? user.getFullName() : "";
         }
     %>
+
+    <section id="form-details">
+        <form action="contact" method="post">
+            <% if (user != null) { %>
+            <div style="margin-bottom: 15px;">
+                <button type="button" onclick="autoFill()">
+                    Sử dụng thông tin của tôi
+                </button>
+            </div>
+            <% } %>
+            <span class="text-success">${successMessage}</span>
+            <span class="text-danger">${errorMessage}</span>
+            <span>ĐỂ LẠI LỜI NHẮN</span>
+            <h2>Aurasound luôn lắng nghe bạn</h2>
+            <input type="text" name="name" value="<%=myName%>" placeholder="Họ tên">
+            <input type="email" name="email" value="<%=myEmail%>" placeholder="E-mail">
+            <input type="text" name="phone" value="<%=myPhone%>" placeholder="Số điện thoại">
+            <textarea name="message" id="" cols="30" rows="10" placeholder="Lời nhắn"></textarea>
+            <button type="submit" class="send-btn">Gửi</button>
+        </form>
+        <script>
+            function autoFill() {
+                var uName = "<%= myName %>";
+                var uEmail = "<%= myEmail %>";
+                var uPhone = "<%= myPhone %>";
+
+                document.getElementById("txtName").value = uName;
+                document.getElementById("txtEmail").value = uEmail;
+                document.getElementById("txtPhone").value = uPhone;
+            }
+        </script>
+    </section>
+
+
+    <section class="contact-header">
+        <h2>Liên Hệ Aurasound</h2>
+        <p>Bạn muốn để lại lời nhắn hay hợp tác công việc? Đừng ngần ngại điền form nhé!</p>
+    </section>
+
     <section id="contact-details" class="section-p1">
         <div class="details">
             <h3>LIÊN HỆ</h3>
@@ -61,39 +96,6 @@
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
-
-    <section id="form-details">
-        <form action="contact" method="post"><% if (user != null) { %>
-            <div style="margin-bottom: 15px;">
-                <button type="button" onclick="autoFill()">
-                    Sử dụng thông tin của tôi
-                </button>
-            </div>
-            <% } %>
-            <span class="text-success">${successMessage}</span>
-            <span class="text-danger">${errorMessage}</span>
-            <span>ĐỂ LẠI LỜI NHẮN</span>
-            <h2>Aurasound luôn lắng nghe bạn</h2>
-            <input type="text" name="name" value="<%=myName%>" placeholder="Họ tên">
-            <input type="email" name="email" value="<%=myEmail%>" placeholder="E-mail">
-            <input type="text" name="phone" value="<%=myPhone%>" placeholder="Số điện thoại">
-            <textarea name="message" id="" cols="30" rows="10" placeholder="Lời nhắn"></textarea>
-            <button type="submit" class="send-btn">Gửi</button>
-        </form>
-        <script>
-            function autoFill() {
-                var uName = "<%= myName %>";
-                var uEmail = "<%= myEmail %>";
-                var uPhone = "<%= myPhone %>";
-
-                document.getElementById("txtName").value = uName;
-                document.getElementById("txtEmail").value = uEmail;
-                document.getElementById("txtPhone").value = uPhone;
-            }
-        </script>
-    </section>
-
-
 </main>
 <%@ include file="_footer.jsp" %>
 

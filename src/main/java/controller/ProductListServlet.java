@@ -31,21 +31,29 @@ public class ProductListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String categoryIdParam = request.getParameter("categoryId");
-
+        String category = request.getParameter("category");
         List<Product> products;
 
-        if (categoryIdParam != null) {
-            int categoryId = Integer.parseInt(categoryIdParam);
-            products = productService.getProductsByCategory(categoryId);
-        } else {
+        if (category == null) {
+            // /products → TẤT CẢ
             products = productService.getAllProduct();
+            request.setAttribute("title", "Tất cả sản phẩm");
+            request.getRequestDispatcher("/store.jsp").forward(request, response);
+            return;
         }
 
-        request.setAttribute("products", products);
-        request.getRequestDispatcher("/store.jsp").forward(request, response);
+        if (category.equals("headphones")) {
+            products = productService.getProductsByCategory(1);
+            request.setAttribute("title", "Tai nghe");
+            request.getRequestDispatcher("/headphones.jsp").forward(request, response);
+            return;
+        }
+
+        if (category.equals("speakers")) {
+            products = productService.getProductsByCategory(2);
+            request.setAttribute("title", "Loa");
+            request.getRequestDispatcher("/speakers.jsp").forward(request, response);
+        }
     }
-
-
 
 }

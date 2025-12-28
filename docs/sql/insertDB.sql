@@ -1,74 +1,87 @@
 USE AuraSound_DB;
-
--- Thêm brand từ tên brand trong bảng SP vô brands
-INSERT IGNORE INTO brands (`name`) SELECT DISTINCT
-  brandName
-FROM
-  temp_products
+SET SQL_SAFE_UPDATES = 0;
+UPDATE Temp_Products
+SET brandName = TRIM(brandName);
+UPDATE Temp_Products
+SET brandName = 'Samsung'
 WHERE
-  brandName IS NOT NULL
-  AND brandName != '';
-SELECT
-  *
-FROM
-  brands;
-INSERT IGNORE INTO categories (`name`) SELECT DISTINCT
-  category
-FROM
-  temp_products
+  brandName IN ('SS', 'SamSung');
+UPDATE Temp_Products
+SET brandName = 'Realme'
 WHERE
-  category IS NOT NULL
-  AND category != '';
-SELECT
-  *
-FROM
-  categories;
-SELECT
-  *
-FROM
-  products;
-INSERT IGNORE INTO Categories (NAME) SELECT DISTINCT
-  category
-FROM
-  temp_products
+  brandName IN ('RM', 'RealMe');
+UPDATE Temp_Products
+SET cat_child = 'Tai nghe chụp tai'
 WHERE
-  category IS NOT NULL
-  AND category != '';
-SELECT
-  *
+  cat_child IN ('Chụp tai', 'Tai chụp', 'Chụp tai/ Major', 'Chụp tai/ Minor', 'Headphone');
+UPDATE Temp_Products
+SET cat_child = 'Tai nghe nhét tai'
+WHERE
+  cat_child IN ('Nhét tai', 'Airpods', 'Nhét tai/ Minor', 'Nhét tai/ Redmi Buds', 'In-ear');
+UPDATE Temp_Products
+SET cat_child = 'Tai nghe kẹp tai'
+WHERE
+  cat_child IN ('Kẹp tai', 'Clip-on');
+UPDATE Temp_Products
+SET cat_child = 'Loa di động'
+WHERE
+  cat_child IN ('Loa Di động', 'Loa', 'Loa bluetooth');
+UPDATE Temp_Products
+SET cat_child = 'Loa Karaoke'
+WHERE
+  cat_child IN ('Loa kéo', 'Karaoke');
+INSERT INTO Categories (NAME, Categories_id) SELECT DISTINCT
+  tp.cat_parent,
+  NULL
 FROM
-  categories;
--- Thêm cột ID vào bảng tạm
-ALTER TABLE Temp_Products ADD COLUMN Brands_id INT,
-ADD COLUMN Categories_id INT;
--- Cập nhật Brands_id
-UPDATE Temp_Products AS tp
-INNER JOIN Brands AS b ON tp.brandName = b.NAME
-SET tp.Brands_id = b.id;
--- Cập nhật Categories_id
-UPDATE Temp_Products AS tp
-INNER JOIN Categories AS c ON tp.category = c.NAME
-SET tp.Categories_id = c.id;
-SELECT
-  *
+  Temp_Products tp
+WHERE
+  tp.cat_parent IS NOT NULL
+  AND tp.cat_parent != ''
+  AND NOT EXISTS (SELECT 1 FROM Categories c WHERE c.NAME = tp.cat_parent AND c.Categories_id IS NULL);
+INSERT INTO Categories (NAME, Categories_id) SELECT DISTINCT
+  tp.cat_child,
+  c_parent.id
 FROM
-  temp_products;
-INSERT IGNORE INTO Products (Brands_id, Categories_id, sku, NAME, description) SELECT
-  tp.Brands_id,
-  tp.Categories_id,
+  Temp_Products tp
+  JOIN Categories c_parent ON tp.cat_parent = c_parent.NAME
+WHERE
+  tp.cat_child IS NOT NULL
+  AND tp.cat_child != ''
+  AND c_parent.Categories_id IS NULL
+  AND NOT EXISTS (SELECT 1 FROM Categories c WHERE c.NAME = tp.cat_child AND c.Categories_id = c_parent.id);
+UPDATE Temp_Products tp
+JOIN Categories c_child ON tp.cat_child = c_child.
+NAME JOIN Categories c_parent ON tp.cat_parent = c_parent.NAME
+SET tp.mapped_cat_id = c_child.id
+WHERE
+  c_child.Categories_id = c_parent.id;
+INSERT INTO brands (`name`) SELECT DISTINCT
+  tp.brandName
+FROM
+  Temp_Products tp
+WHERE
+  tp.brandName IS NOT NULL
+  AND tp.brandName != ''
+  AND NOT EXISTS (SELECT 1 FROM brands b WHERE b.NAME = tp.brandName);
+UPDATE Products p
+JOIN Temp_Products tp ON p.sku = tp.sku
+SET p.Categories_id = tp.mapped_cat_id
+WHERE
+  tp.mapped_cat_id IS NOT NULL;
+INSERT IGNORE INTO Products (Brands_id, Categories_id, sku, NAME, description, is_active, created_at) SELECT
+  b.id,
+  tp.mapped_cat_id,
   tp.sku,
   tp.proName,
-  tp.script
+  tp.script,
+  TRUE,
+  NOW()
 FROM
-  Temp_Products AS tp
+  Temp_Products tp
+  JOIN Brands b ON tp.brandName = b.NAME
 WHERE
-  tp.Brands_id IS NOT NULL
-  AND tp.Categories_id IS NOT NULL;
-SELECT
-  *
-FROM
-  products;
-DROP TABLE productvariants;
+  tp.mapped_cat_id IS NOT NULL;
 INSERT IGNORE INTO ProductVariants (Products_id, variant_sku, color_name, main_image_url, market_price, sell_price, stock_quantity) SELECT
   p.id,
   CONCAT(
@@ -83,6 +96,8 @@ INSERT IGNORE INTO ProductVariants (Products_id, variant_sku, color_name, main_i
         'RED'
       WHEN t.color LIKE '%Xanh dương%' THEN
         'BLU'
+      WHEN t.color LIKE '%Xanh lá%' THEN
+        'GRE'
       WHEN t.color LIKE '%Vàng%' THEN
         'YEL'
       WHEN t.color LIKE '%Xám%' THEN
@@ -97,8 +112,6 @@ INSERT IGNORE INTO ProductVariants (Products_id, variant_sku, color_name, main_i
         'PUR'
       WHEN t.color LIKE '%Nâu%' THEN
         'BRN'
-      WHEN t.color LIKE '%Xanh lá%' THEN
-        'GRE'
       ELSE
         'VAR'
     END
@@ -109,36 +122,50 @@ INSERT IGNORE INTO ProductVariants (Products_id, variant_sku, color_name, main_i
   IFNULL(t.sellPrice, 0),
   IFNULL(t.soLuongCon, 0)
 FROM
-  Temp_variants AS t
-  JOIN Products AS p ON t.sku = p.sku
-WHERE
-  t.sku IS NOT NULL
-  AND t.sku <> ''
-  AND t.color IS NOT NULL
-  AND t.color <> ''
-  AND NOT EXISTS (SELECT 1 FROM ProductVariants pv WHERE pv.Products_id = p.id AND pv.color_name = t.color);
-SELECT
-  *
-FROM
-  productvariants;
-INSERT INTO ProductSpecs (Products_id, spec_name, spec_value) SELECT
+  Temp_variants t
+  JOIN Temp_Products tp ON t.sku = tp.sku
+  JOIN Products p ON p.sku = tp.sku;
+INSERT IGNORE INTO ProductSpecs (Products_id, spec_name, spec_value) SELECT
   p.id,
   ts.SpecName,
   ts.SpecValue
 FROM
-  Temp_Specs AS ts
-  INNER JOIN Products AS p ON ts.SKU = p.sku;
-INSERT INTO ProductGalleries (Products_id, image_url) SELECT
+  Temp_Specs ts
+  JOIN Products p ON ts.SKU = p.sku;
+INSERT IGNORE INTO ProductGalleries (Products_id, image_url) SELECT
   p.id,
   tg.Image
 FROM
-  Temp_Gallery AS tg
-  INNER JOIN Products AS p ON tg.SKU = p.sku;
+  Temp_Gallery tg
+  JOIN Products p ON tg.SKU = p.sku;
+SET SQL_SAFE_UPDATES = 1;
 SELECT
-  *
+  'Số lượng SP' AS Info,
+  COUNT(*) AS Count
 FROM
-  productgalleries;
+  Products UNION ALL
 SELECT
-  *
+  'Số lượng Biến thể',
+  COUNT(*)
 FROM
-  productspecs;
+  ProductVariants;
+  
+  -- check sp vo dung cate chua
+  SELECT 
+    c.id, 
+    c.name AS Ten_Category, 
+    IFNULL(parent.name, '--- GỐC ---') AS Category_Cha,
+    COUNT(p.id) AS So_Luong_SP
+FROM Categories c
+LEFT JOIN Categories parent ON c.Categories_id = parent.id
+LEFT JOIN Products p ON p.Categories_id = c.id
+GROUP BY c.id, c.name, parent.name
+ORDER BY c.id;
+
+   
+   SELECT p.id, p.sku, p.name 
+FROM Products p
+LEFT JOIN ProductVariants pv ON p.id = pv.Products_id
+WHERE pv.id IS NULL;
+
+-- sai loai:

@@ -50,10 +50,6 @@ public class ProductDetailServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             e.printStackTrace();
             response.sendRedirect("home");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
 
     }
