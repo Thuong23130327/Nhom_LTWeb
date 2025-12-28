@@ -88,7 +88,7 @@ CREATE TABLE ContactMails (
   Users_id INT NULL,
   sender_name VARCHAR (150) NOT NULL,
   sender_email VARCHAR (255) NOT NULL,
-  sender_phone VARCHAR(20),
+  sender_phone VARCHAR (20),
   message TEXT NOT NULL,
   reply_content TEXT NULL,
   STATUS ENUM ('New', 'Replied') DEFAULT 'New',
@@ -174,7 +174,16 @@ CREATE TABLE Banners (
 );
 
 -- Tạo các bảng tạm
-CREATE TABLE Temp_Products (sku VARCHAR (50), proName VARCHAR (255), brandName VARCHAR (255), category VARCHAR (255), script TEXT);
+CREATE TABLE Temp_Products (
+  sku VARCHAR (50),
+  proName VARCHAR (255),
+  brandName VARCHAR (255),
+  category VARCHAR (255),
+  script TEXT,
+  mapped_cat_id INT,
+  cat_parent VARCHAR (100),
+  cat_child VARCHAR (100)
+);
 CREATE TABLE Temp_Specs (SKU VARCHAR (50), SpecName VARCHAR (255), SpecValue VARCHAR (255));
 CREATE TABLE Temp_Gallery (SKU VARCHAR (50), Image VARCHAR (255));
 CREATE TABLE Temp_variants (

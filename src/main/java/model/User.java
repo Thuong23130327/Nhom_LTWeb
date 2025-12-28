@@ -3,6 +3,7 @@ package model;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+//KO SUA CUA TUI NHE
 public class User {
 
 	private int id;

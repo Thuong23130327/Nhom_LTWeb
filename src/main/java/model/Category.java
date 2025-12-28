@@ -21,6 +21,12 @@ public class Category {
 		this.parentID = parentID;
 	}
 
+	public Category(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -44,5 +50,12 @@ public class Category {
 	public void setParentID(int parentID) {
 		this.parentID = parentID;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [ id=" + id + ", name=" + name + ", parentID=" + parentID + " ]\n";
+	}
+	
+	
 
 }
