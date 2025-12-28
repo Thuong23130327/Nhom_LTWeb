@@ -88,6 +88,7 @@ CREATE TABLE ContactMails (
   Users_id INT NULL,
   sender_name VARCHAR (150) NOT NULL,
   sender_email VARCHAR (255) NOT NULL,
+  sender_phone VARCHAR(20),
   message TEXT NOT NULL,
   reply_content TEXT NULL,
   STATUS ENUM ('New', 'Replied') DEFAULT 'New',

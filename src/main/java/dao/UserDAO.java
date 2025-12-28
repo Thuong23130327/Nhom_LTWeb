@@ -1,59 +1,72 @@
 package dao;
 
 import model.User;
+import model.User.Role;
+import util.MD5;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.security.NoSuchAlgorithmException;
+import java.sql.*;
 
 public class UserDAO {
 
-    public User checkLogin(String email, String password) {
+    public static boolean checkExistMail(String email) {
+
+        String sql = "Select id from users where email =?";
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
+    public User checkLogin(String email, String passHash) throws NoSuchAlgorithmException, SQLException {
         User user = null;
+
+
         String sql = "SELECT * FROM Users WHERE email = ? AND password_hash = ?";
 
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, email);
-            ps.setString(2, password);
+            ps.setString(2, passHash);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                user = new User();
-                user.setId(rs.getInt("id"));
-                user.setEmail(rs.getString("email"));
-                user.setFullName(rs.getString("full_name"));
+                int id = rs.getInt("id");
+                String dbEmail = rs.getString("email");
+                String dbPass = rs.getString("password_hash");
+                String dbName = rs.getString("full_name");
+                String dbPhone = rs.getString("phone");
+                String dbAvt = rs.getString("avatar_url");
 
-                String roleStr = rs.getString("role");
-                try {
-                    user.setRole(model.User.Role.valueOf(roleStr));
-                } catch (Exception e) {
-                    // Mặc định là Customer nếu lỗi
-                    user.setRole(model.User.Role.Customer);
-                }
+                String role = rs.getString("role");
+
+                boolean locked = rs.getBoolean("is_locked");
+                Timestamp created = rs.getTimestamp("created_at");
+
+                user = new User(id, dbEmail, dbPass, dbName, dbPhone, dbAvt, Role.valueOf(role), locked, created);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return user;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        return user;
     }
 
+
     public boolean register(User user) {
-        String sql = "INSERT INTO Users (email, password_hash, full_name, role, is_locked, created_at) " +
-                "VALUES (?, ?, ?, ?, ?, NOW())";
+
+        String sql = "INSERT INTO Users (email, password_hash, full_name) VALUES (?, ?, ?)";
 
         // 2. Mở kết nối
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getPasswordHash());
             ps.setString(3, user.getFullName());
-
-            ps.setString(4, user.getRole().name());
-
-            ps.setBoolean(5, false);
 
             int rowsAffected = ps.executeUpdate();
 

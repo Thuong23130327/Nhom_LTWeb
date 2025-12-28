@@ -59,29 +59,34 @@ function selectColor(element) {
 }
 
 function addToCart(productId) {
-  let q = document.getElementById('quantity').value;
+  // 1. Lấy số lượng từ ô input id="productQty"
+  const qtyInput = document.getElementById('productQty');
+  let q = qtyInput ? qtyInput.value : 1;
+
   let url = "${pageContext.request.contextPath}/CartServlet?id=" + productId + "&q=" + q;
 
   fetch(url)
-      .then(response => response.text()) // Nhận số lượng từ Servlet gửi về
+      .then(response => response.text()) // Nhận con số tổng (ví dụ: "1") từ Servlet
       .then(newTotal => {
-// Cập nhật con số trên Navbar bằng ID đã đặt
-        document.getElementById('cart-count').innerText = newTotal;
+        // 2. Tìm đúng cái ID cart-badge bạn vừa gửi ở trên
+        const cartBadge = document.getElementById('cart-badge');
 
-// Hiển thị thông báo
-        showToast("Đã thêm " + q + " sản phẩm vào giỏ hàng!");
+        if (cartBadge) {
+          // Thay đổi con số bên trong
+          cartBadge.innerText = newTotal;
+
+          // QUAN TRỌNG: Hiện badge lên (vì lúc đầu giỏ trống nó bị display:none)
+          cartBadge.style.display = 'inline-block';
+
+          // Hiệu ứng để người dùng biết đã thêm thành công
+          cartBadge.style.transform = 'scale(1.3)';
+          setTimeout(() => cartBadge.style.transform = 'scale(1)', 200);
+        }
+
+        // Thông báo (nếu cần)
+        console.log("Đã cập nhật giỏ hàng: " + newTotal);
       })
       .catch(err => console.error("Lỗi giỏ hàng: ", err));
-}
-
-function showToast(message) {
-  const toast = document.createElement("div");
-  toast.innerHTML = message;
-  toast.style = "position:fixed; bottom:20px; right:20px; background:#28a745; color:#fff; padding:15px; border-radius:8px; z-index:9999;";
-  document.body.appendChild(toast);
-
-// Tự biến mất sau 2 giây
-  setTimeout(() => toast.remove(), 2000);
 }
 
 

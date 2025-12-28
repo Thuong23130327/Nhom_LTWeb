@@ -12,7 +12,7 @@ import java.util.List;
 public class ProductDAO {
     private Connection conn;
 
-    public  ProductDAO() throws SQLException {
+    public  ProductDAO() throws SQLException, ClassNotFoundException {
         conn = DBConnect.getConnection();
     }
 
@@ -47,6 +47,8 @@ public class ProductDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return list;
@@ -78,6 +80,8 @@ public class ProductDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }

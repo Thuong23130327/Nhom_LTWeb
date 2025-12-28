@@ -10,7 +10,7 @@ public class ProductService {
 
     private ProductDAO productDao;
 
-    public ProductService() throws SQLException {
+    public ProductService() throws SQLException, ClassNotFoundException {
         productDao = new ProductDAO();
     }
 
