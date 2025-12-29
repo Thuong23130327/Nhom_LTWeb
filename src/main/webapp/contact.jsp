@@ -13,56 +13,53 @@
 
 <main>
     <%
+        //Lấy user từ session
         User user = (User) session.getAttribute("auth");
-
-        String myEmail = "";
-        String myPhone = "";
-        String myName = "";
-
+        String myEmail = "", myPhone = "", myName = "";
         if (user != null) {
-            myEmail = (user.getEmail() != null) ? user.getEmail() : "";
+            myEmail = user.getEmail();
             myPhone = (user.getPhone() != null) ? user.getPhone() : "";
-            myName = (user.getFullName() != null) ? user.getFullName() : "";
+            myName = user.getFullName();
         }
     %>
 
+    <div class="contact-header">
+        <h2>Liên hệ AuraSound</h2>
+        Bạn muốn để lại lời nhắn hay hợp tác công việc? Đừng ngần ngại điền form nhé!
+    </div>
+
     <section id="form-details">
         <form action="contact" method="post">
-            <% if (user != null) { %>
-            <div style="margin-bottom: 15px;">
-                <button type="button" onclick="autoFill()">
-                    Sử dụng thông tin của tôi
-                </button>
-            </div>
-            <% } %>
+
             <span class="text-success">${successMessage}</span>
             <span class="text-danger">${errorMessage}</span>
-            <span>ĐỂ LẠI LỜI NHẮN</span>
-            <h2>Aurasound luôn lắng nghe bạn</h2>
-            <input type="text" name="name" value="<%=myName%>" placeholder="Họ tên">
-            <input type="email" name="email" value="<%=myEmail%>" placeholder="E-mail">
-            <input type="text" name="phone" value="<%=myPhone%>" placeholder="Số điện thoại">
-            <textarea name="message" id="" cols="30" rows="10" placeholder="Lời nhắn"></textarea>
+
+            <div class="input-group">
+                <input type="text" id="ContactName" name="name" value="<%=myName%>" placeholder="Họ tên"
+                       autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <input type="email" id="ContactEmail" name="email" value="<%=myEmail%>" placeholder="E-mail"
+                       autocomplete="off">
+                <small>Lỗi: Email không đúng định dạng</small>
+            </div>
+
+            <div class="input-group">
+                <input type="tel" id="ContactPhone" name="phone" value="<%=myPhone%>" placeholder="Số điện thoại"
+                       autocomplete="off">
+                <small>Lỗi: Số điện thoại sai</small>
+            </div>
+
+            <div class="input-group">
+                <textarea id="c-message" name="message" cols="30" rows="10" placeholder="Lời nhắn"></textarea>
+                <small>Vui lòng nhập lời nhắn</small>
+            </div>
             <button type="submit" class="send-btn">Gửi</button>
         </form>
-        <script>
-            function autoFill() {
-                var uName = "<%= myName %>";
-                var uEmail = "<%= myEmail %>";
-                var uPhone = "<%= myPhone %>";
 
-                document.getElementById("txtName").value = uName;
-                document.getElementById("txtEmail").value = uEmail;
-                document.getElementById("txtPhone").value = uPhone;
-            }
-        </script>
     </section>
 
-
-    <section class="contact-header">
-        <h2>Liên Hệ Aurasound</h2>
-        <p>Bạn muốn để lại lời nhắn hay hợp tác công việc? Đừng ngần ngại điền form nhé!</p>
-    </section>
 
     <section id="contact-details" class="section-p1">
         <div class="details">
@@ -96,6 +93,63 @@
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const nameEl = document.getElementById('ContactName');
+            const emailEl = document.getElementById('ContactEmail');
+            const phoneEl = document.getElementById('ContactPhone');
+            const messageEl = document.getElementById('c-message');
+
+            const showResult = (el, isValid) => {
+                const parent = el.parentElement;
+                const small = parent.querySelector('small');
+
+                if (isValid) {
+                    parent.classList.add('success');
+                    parent.classList.remove('error');
+                } else {
+                    parent.classList.add('error');
+                    parent.classList.remove('success');
+                    small.classList.add('active')
+                }
+            };
+
+            emailEl.addEventListener('input', function () {
+                const value = emailEl.value;
+
+                if (value == ''|| value.includes(' ')|| !value.includes('@') || !value.includes('.')){
+                    showResult(emailEl, false);
+                } else {
+                    showResult(emailEl, true);
+                }
+            });
+
+            messageEl.addEventListener('input', function () {
+                const value = messageEl.value.trim();
+                if (value === '') {
+                    showResult(messageEl, false);
+                } else {
+                    showResult(messageEl, true);
+                }
+            });
+        });
+
+        function validateFinal() {
+            const inputs = document.querySelectorAll('.input-group input, .input-group textarea');
+            inputs.forEach(input => {
+                input.dispatchEvent(new Event('input'));
+            });
+
+            const errors = document.querySelectorAll('.input-group.error');
+
+            if (errors.length > 0) {
+                alert("Thông tin chưa hợp lệ. Vui lòng kiểm tra các ô màu đỏ!");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </main>
 <%@ include file="_footer.jsp" %>
 
