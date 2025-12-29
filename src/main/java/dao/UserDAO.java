@@ -6,6 +6,8 @@ import util.MD5;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -78,7 +80,36 @@ public class UserDAO {
         return false;
     }
 
+    public List<User> getAllUser() {
+        List<User> users = new ArrayList<User>();
+        String sql = "SELECT * FROM Users";
+        try {
+            Connection conn = DBConnect.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String dbEmail = rs.getString(2);
+                String dbPass = rs.getString(3);
+                String dbName = rs.getString(4);
+//                String dbPass = rs.getString(5);
+//                String dbPass = rs.getString(6);
+                users.add(new User(id, dbEmail, dbPass, dbName));
+            }
+        } catch (Exception e) {
+
+        }
+        return users;
+    }
+
     public User getUserByEmail(String email) {
+
+
         return null;
+    }
+
+    public static void main(String[] args) {
+        UserDAO userDAO = new UserDAO();
+        System.out.println(userDAO.getAllUser());
     }
 }
