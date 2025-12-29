@@ -1,6 +1,6 @@
-CREATE DATABASE AuraSound_DB DEFAULT CHARACTER
+CREATE DATABASE AuraSound_Project_DB DEFAULT CHARACTER
 SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE AuraSound_DB;
+USE AuraSound_Project_DB;
 
 -- LIÊN QUAN SẢN PHẨM
 -- Thương hiệu

@@ -304,28 +304,7 @@ textarea.form-control {
     margin-top: 1.5rem;
 }
 
-.btn-add-cart {
-    flex: 1;
-    background-color: transparent;
-    color: var(--theme-color-primary);
-    border: 2px solid var(--theme-color-primary);
-    font-weight: 600;
-    border-radius: 0.75rem;
-    padding: 0.75rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.btn-add-cart:hover {
-    background-color: var(--theme-color-primary);
-    color: white;
-    transform: translateY(-2px);
-}
-
-.btn-buy-now {
+.btn-buy-now, .btn-add-cart {
     flex: 1;
     background: var(--theme-gradient-button) !important;
     border: none !important;
@@ -339,7 +318,7 @@ textarea.form-control {
     letter-spacing: 0.5px;
 }
 
-.btn-buy-now:hover {
+.btn-buy-now:hover, .btn-add-cart:hover {
     box-shadow: 0 8px 15px rgba(74, 111, 255, 0.4);
     transform: translateY(-3px);
 }

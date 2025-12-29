@@ -80,7 +80,7 @@
                         <div class="product-badge discount">
                             Giảm 50%
                         </div>
-                        <img src="${p.image}"
+                        <img src="${p.img}"
                             alt="${p.name}">
                         <div class="product-card-info">
                             <h4>"${p.name}"</h4>

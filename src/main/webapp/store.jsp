@@ -23,7 +23,7 @@
                <button class="filter-btn active">Tất cả</button>
            </a>
 
-           <a href="products?category=headphones">
+           <a href="products?category=headphones.jsp">
                <button class="filter-btn">Tai Nghe</button>
            </a>
 
