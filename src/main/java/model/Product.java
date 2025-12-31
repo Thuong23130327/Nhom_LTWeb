@@ -6,7 +6,6 @@ public class Product {
     private int id;
     private String sku;
     private String name;
-    private double price;
     private String description;
     private float avgRating;
     private int soldCount;
@@ -32,14 +31,12 @@ public class Product {
         this.price = price;
     }
 
-    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId, int categoriesId, boolean isActive, LocalDate createdAt) {
-    }
-
-    public Product(int id, String sku, String name, double price, String description, float avgRating, int soldCount, int brandId, int categoriesId, boolean isActive, LocalDate createdAt) {
+    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId,
+                   int categoriesId, boolean isActive, LocalDate createdAt) {
+        super();
         this.id = id;
         this.sku = sku;
         this.name = name;
-        this.price = price;
         this.description = description;
         this.avgRating = avgRating;
         this.soldCount = soldCount;
@@ -49,7 +46,7 @@ public class Product {
         this.createdAt = createdAt;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -71,14 +68,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getDescription() {
@@ -125,8 +114,8 @@ public class Product {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public LocalDate getCreatedAt() {
