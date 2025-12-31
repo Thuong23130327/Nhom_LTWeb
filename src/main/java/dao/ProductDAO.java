@@ -1,6 +1,7 @@
 package dao;
 
 import model.Product;
+import model.ProductDTO;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.PreparedBatch;
@@ -208,7 +209,7 @@ public class ProductDAO extends BaseDAO{
         return get().withHandle(h -> h.createQuery("select * from products").mapToBean(Product.class).list());
     }
     public Product getProduct(int id) {
-        return get().withHandle(h -> h.createQuery("select * from products where id = id").bind("id", id).mapToBean(Product.class).stream().findFirst().orElse(null));
+        return get().withHandle(h -> h.createQuery("select * from products where id = :id").bind("id", id).mapToBean(Product.class).stream().findFirst().orElse(null));
     }
     public void insert(List<Product> products){
         get().useHandle(h->{
@@ -234,10 +235,67 @@ public class ProductDAO extends BaseDAO{
         });
     }
 
+    public List<ProductDTO> getProductDTOs() {
+        return get().withHandle(handle -> {
+            String sql = "SELECT p.id, " +
+                    "p.NAME AS name, " + // Đổi NAME (DB) thành name (Java)
+                    "pv.main_image_url AS mainImageUrl, " + // Đổi gạch dưới thành CamelCase
+                    "pv.market_price AS marketPrice, " +
+                    "pv.sell_price AS sellPrice, " +
+                    "p.sold_count AS soldCount, " +
+                    "p.avg_rating AS avgRating " +
+                    "FROM products p " +
+                    "LEFT JOIN productvariants pv ON p.id = pv.Products_id " +
+                    "GROUP BY p.id";
+
+            return handle.createQuery(sql)
+                    .mapToBean(ProductDTO.class)
+                    .list();
+        });
+    }
+
+    public List<ProductDTO> getHeadphonesByPage(int limit, int offset) {
+        return get().withHandle(handle -> {
+            String sql = "SELECT p.id, " +
+                    "p.NAME AS name, " +
+                    "pv.main_image_url AS mainImageUrl, " +
+                    "pv.market_price AS marketPrice, " +
+                    "pv.sell_price AS sellPrice, " +
+                    "p.sold_count AS soldCount, " +
+                    "p.avg_rating AS avgRating " +
+                    "FROM products p " +
+                    "LEFT JOIN productvariants pv ON p.id = pv.Products_id " +
+                    "WHERE p.NAME LIKE 'Tai nghe%' " +
+                    "GROUP BY p.id " +
+                    "LIMIT :limit OFFSET :offset";
+
+            return handle.createQuery(sql)
+                    .bind("limit", limit)
+                    .bind("offset", offset)
+                    .mapToBean(ProductDTO.class)
+                    .list();
+        });
+    }
+
+    public int countTotalHeadphones() {
+        return get().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(DISTINCT id) FROM products WHERE NAME LIKE 'Tai nghe%'")
+                        .mapTo(Integer.class).one()
+        );
+    }
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        List<Product> products = dao.getListProduct();
+        List<Product> products = new ArrayList<>();
+        Product p = new Product();
+        p.setId(170);
+        p.setName("Sp_001");
+        p.setBrandId(1);
+        p.setCategoriesId(1);
+        p.setSku("SN-SN-99");
+        p.setCreatedAt(java.time.LocalDate.now());
+        products.add(p);
         dao.insert(products);
+        System.out.println("Insert thành công!");
     }
 }
 

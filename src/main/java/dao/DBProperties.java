@@ -26,8 +26,7 @@ public class DBProperties {
         }
     }
 
-    public static String username(){
-        return prop.get("db.username").toString();
+    public static String username(){return prop.get("db.username").toString();
     }
 
     public static String password(){
@@ -38,9 +37,7 @@ public class DBProperties {
         return prop.get("db.dbname").toString();
     }
 
-    public static String option(){
-        return prop.get("db.option").toString();
-    }
+    public static String option(){return prop.get("db.option").toString();}
 
     public static void main(String[] args) {
         System.out.println(host());

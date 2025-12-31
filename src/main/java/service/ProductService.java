@@ -2,6 +2,7 @@ package service;
 
 import dao.ProductDAO;
 import model.Product;
+import model.ProductDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -28,5 +29,18 @@ public class ProductService {
 
     public List<Product> getAllProduct() {
         return null;
+    }
+
+    public List<ProductDTO> getListProductDTO() {return productDao.getProductDTOs();
+    }
+
+    public List<ProductDTO> getHeadphonesPage(int page, int pageSize) {
+        int offset = (page - 1) * pageSize;
+        return productDao.getHeadphonesByPage(pageSize, offset);
+    }
+
+    public int getTotalHeadphonesPages(int pageSize) {
+        int total = productDao.countTotalHeadphones();
+        return (int) Math.ceil((double) total / pageSize);
     }
 }
