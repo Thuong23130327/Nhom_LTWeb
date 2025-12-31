@@ -8,7 +8,7 @@
 <c:set var="customCss">
     <link rel="stylesheet" href="assets/css/styleHeadphones.css">
 </c:set>
-<%@ include file="_header.jsp" %>
+<jsp:include page="/Header" />
 <main class="store-container content headphones-page-container">
 
     <aside class="filter-sidebar" id="filter-sidebar">
@@ -45,9 +45,11 @@
             <div class="filter-group">
                 <h4>Loại tai nghe</h4>
                 <div class="filter-options" data-filter-group="type">
-                    <button class="filter-option" data-filter="truewireless">True Wireless</button>
-                    <button class="filter-option" data-filter="chup-tai">Chụp tai</button>
-                    <button class="filter-option" data-filter="co-day">Có dây</button>
+                    <c:forEach items="${categoryList}" var="cate">
+                        <button class="filter-option" data-filter="${cate.name}">
+                                ${cate.name}
+                        </button>
+                    </c:forEach>
                 </div>
             </div>
 
@@ -75,42 +77,43 @@
         </div>
 
         <div class="product-grid" id="product-grid">
-            <c:forEach items="${products}" var="p">
+            <c:forEach items="${productList}" var="p">
                 <a href="sproduct.jsp" class="product-card">
-                    <div class="product-badge discount">
-                        Giảm 50%
-                    </div>
-                    <img src="${p.image}"
-                         alt="${p.name}">
+                    <div class="product-badge discount">Giảm 50%</div>
+
+                    <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/300x300?text=No+Image'">
+
                     <div class="product-card-info">
-                        <h4>"${p.name}"</h4>
+                        <h4>${p.name}</h4>
+
                         <div class="price-block">
-                                <span class="new-price">"${p.price}<"/span>
+                            <span class="new-price">${p.sellPrice}</span>
+                            <span class="old-price">${p.oldPrice}</span>
                         </div>
+
                         <div class="product-bottom-row">
                             <div class="rating">
                                 <i class="bi bi-star-fill"></i>
-                                <span>"${p.avgRating}"</span>
+                                <span>${p.avgRating}</span>
                             </div>
                             <div class="favorite">
                                 <i class="bi bi-heart"></i>
-                                <i class="bi bi-heart-fill"></i>
                                 <span>Yêu thích</span>
                             </div>
                         </div>
                     </div>
                 </a>
             </c:forEach>
-
-        </div>
-
-        <div class="pagination" id="pagination-buttons">
-            <button class="page-btn active" data-page="1">1</button>
-            <button class="page-btn" data-page="2">2</button>
-            <button class="page-btn" data-page="3">3</button>
         </div>
     </div>
+
 </main>
+
+<%--<div class="pagination" id="pagination-buttons">--%>
+<%--    <button class="page-btn" data-page="1">1</button>--%>
+<%--    <button class="page-btn" data-page="2">2</button>--%>
+<%--    <button class="page-btn" data-page="3">3</button>--%>
+<%--</div>--%>
 
 
 <%@ include file="_footer.jsp" %>

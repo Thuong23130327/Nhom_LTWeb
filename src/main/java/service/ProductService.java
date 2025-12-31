@@ -14,33 +14,40 @@ public class ProductService {
     public ProductService() throws SQLException, ClassNotFoundException {
         productDao = new ProductDAO();
     }
-
-    public List<Product> getNewArrivals(int limit) {
-        return productDao.getNewArrivals(limit);
-    }
-
-    public List<Product> getProductsByCategory(int categoryId) {
-        return productDao.getProductsByCategory(categoryId);
-    }
-
-    public Product getProduct(int id) {
-        return null;
-    }
-
+//
+//    public List<Product> getNewArrivals(int limit) {
+//        return productDao.getNewArrivals(limit);
+//    }
+//
+//    public List<Product> getProductsByCategory(int categoryId) {
+//        return productDao.getProductsByCategory(categoryId);
+//    }
+//
+//    public Product getProduct(int id) {
+//        return null;
+//    }
+//
+//    public List<ProductDTO> getListProductDTO() {
+//        return productDao.getProductDTOs();
+//    }
+//
+//    public List<ProductDTO> getHeadphonesPage(int page, int pageSize) {
+//        int offset = (page - 1) * pageSize;
+//        return productDao.getHeadphonesByPage(pageSize, offset);
+//    }
+//
+//    public int getTotalHeadphonesPages(int pageSize) {
+//        int total = productDao.countTotalHeadphones();
+//        return (int) Math.ceil((double) total / pageSize);
+//    }
+//Thuong done
     public List<Product> getAllProduct() {
-        return null;
+        return productDao.getAllProduct();
     }
 
-    public List<ProductDTO> getListProductDTO() {return productDao.getProductDTOs();
-    }
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        ProductService ps = new ProductService();
+        System.out.println(ps.getAllProduct());
 
-    public List<ProductDTO> getHeadphonesPage(int page, int pageSize) {
-        int offset = (page - 1) * pageSize;
-        return productDao.getHeadphonesByPage(pageSize, offset);
-    }
-
-    public int getTotalHeadphonesPages(int pageSize) {
-        int total = productDao.countTotalHeadphones();
-        return (int) Math.ceil((double) total / pageSize);
     }
 }

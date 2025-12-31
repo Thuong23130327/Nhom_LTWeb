@@ -87,12 +87,24 @@
                 </div>
                 </a>
                 <div class="menu-product">
-                    <a class="a-nodecor" href="speakers.jsp">
-                        <div>Loa</div>
-                    </a>
-                    <a class="a-nodecor" href="headphones.jsp">
-                        <div>Tai nghe</div>
-                    </a>
+                    <c:forEach items="${parentList}" var="par">
+                        <a class="a-nodecor" href="product">
+                            <div>${par.name}</div>
+                        </a>
+
+                        <ul class="submenu">
+                            <c:forEach items="${childList}" var="child">
+                                <c:if test="${child.parentId == par.id}">
+                                    <li>
+                                        <a href="products.jsp?cateId=${child.id}">
+                                                ${child.name}
+                                        </a>
+                                    </li>
+                                </c:if>
+
+                            </c:forEach>
+                        </ul>
+                    </c:forEach>
                 </div>
             </div>
 
