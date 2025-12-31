@@ -4,91 +4,33 @@ main {
     padding: 20px;
 }
 
+/*header gradianr*/
 .contact-header {
     background: var(--theme-gradient-button);
     width: 100%;
-    height: 50vh;
+    border-radius: 30px;
     background-size: cover;
     display: flex;
+    height: auto;
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    padding: 14px;
-    /* color: var(--white); */
-}
-
-.contact-header h2,
-.contact-header p {
+    padding: 10px;
     color: var(--white);
 }
 
-
-
-
-#contact-details {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: 1px solid #d3d3d3;
-    margin: 30px;
-    padding: 40px;
-    border-radius: 10px;
+/*chu Lien he AS*/
+.contact-header h2 {
+    font-size: 20px;
 }
 
-#contact-details .details {
-    width: 40%;
-}
-
-#contact-details .details span {
-    font-size: 16px;
-}
-
-#contact-details .details h2 {
-    font-size: 32px;
-    line-height: 38px;
-    padding: 20px 0;
+.fill-info {
 
 }
 
-#contact-details .details h2 {
-    font-size: 16px;
-    padding-bottom: 15px;
-}
-
-#contact-details .details li {
-    list-style: none;
-    display: flex;
-    padding: 10px 0;
-}
-
-#contact-details .details li i {
-    font-size: 14px;
-    padding-right: 22px;
-}
-
-#contact-details .details li p {
-    margin: 0;
-    font-size: 14px;
-}
-
-#contact-details .map {
-    width: 55%;
-    height: 400px;
-}
-
-#contact-details .map iframe {
-    width: 100%;
-    height: 100%;
-}
-
-
-
-/* ---- */
 #form-details {
-    display: flex;
-    justify-content: space-between;
-    margin: 30px;
-    padding: 40px;
+    margin: 15px;
+    padding: 20px;
     border: 1px solid #d3d3d3;
     border-radius: 10px;
 }
@@ -99,26 +41,12 @@ main {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: space-between;
 }
 
+/*tbao thanh cong or that bai*/
 #form-details form span {
-    font-size: 16px;
-}
-
-#form-details form h2 {
-    font-size: 32px;
-    line-height: 38px;
-    padding: 20px 0;
-}
-
-#form-details form input,
-#form-details form textarea {
-    width: 100%;
-    padding: 12px 15px;
-    outline: none;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    border: 1px solid #d3d3d3;
+    margin-bottom: 5px;
 }
 
 #form-details button {
@@ -128,102 +56,167 @@ main {
     border: none;
     font-weight: 500;
     padding: 5px 20px;
-    border-radius: 8px;
+    border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: 'Poppins', sans-serif;
 }
 
-button:hover {
+#form-details button:hover {
     background: var(--theme-gradient-button);
-    transform: scale(1.1);
+    transform: scale(1.01);
 }
 
-.people div {
-    padding-bottom: 25px;
+#contact-details {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #d3d3d3;
+    margin: 30px;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-.people div img {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-top: 15px;
+#contact-details .details {
+    width: 40%;
 }
 
-.people div p {
-    margin: 0;
-    font-size: 13px;
-    line-height: 25px;
+
+#contact-details .map {
+    width: 55%;
+    height: 400px;
 }
 
-.people div p span {
-    display: block;
+
+#contact-details .details h2, #contact-details .details li {
     font-size: 16px;
-    font-weight: 600;
-    color: var(--black);
+    padding-bottom: 15px;
+    line-height: 38px;
+    padding: 10px 0;
+    display: flex;
+
+}
+
+
+#contact-details .details li i {
+    padding-right: 22px;
+    color: var(--theme-color-secondary);
+    font-weight: 500;
+}
+
+#contact-details .details li p {
+    margin: 0;
+}
+
+
+#contact-details .map iframe {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+#form-details form input,
+#form-details form textarea {
+    width: 100%;
+    padding: 10px 10px;
+    outline: none;
+    margin-bottom: 5px;
+    border-radius: 8px;
+    border: 1px solid #d3d3d3;
+}
+
+/*.input-group small{*/
+/*    padding-right: 5px;*/
+/*    */
+/*}*/
+/*.input-group {*/
+/*    position: relative;*/
+/*    margin-bottom: 10px;*/
+/*    width: 100%;*/
+/*}*/
+
+.input-group.error input,
+.input-group.error textarea {
+    background-color: #f8eeee;
+}
+
+.input-group.success input,
+.input-group.success textarea {
+    background-color: #f3fff3;
+}
+
+.input-group small {
+    color: #e74c3c;
+    font-size: 13px;
+    position: absolute;
+    bottom: -22px;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.input-group.error small {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.input-group.error small:active {
+    visibility: visible;
+    opacity: 1;
 }
 
 @media (max-width: 1200px) {
     main {
-        width: 100%; 
-        padding: 0 20px; 
-        margin: 30px auto;
-    }
-
-    #contact-details, 
-    #form-details {
-        margin: 20px 0; 
-    }
-}
-
-@media (max-width: 991px) {
-    .contact-header {
-        height: auto; 
-        min-height: 250px; 
-        padding: 40px 20px;
-    }
-
-    /* Phần thông tin và bản đồ */
-    #contact-details {
-        flex-direction: column; 
-        padding: 25px;
-    }
-
-    #contact-details .details {
-        width: 100%; 
-        margin-bottom: 30px; 
-    }
-
-    #contact-details .map {
         width: 100%;
-        height: 350px; 
+        padding: 5px 10px;
+        margin: 15px auto;
+    }
+
+    #contact-details,
+    #form-details {
+        margin: 15px 0;
     }
 }
 
 @media (max-width: 768px) {
-    .contact-header h2 {
-        font-size: 24px; 
-    }
-
-
-    #form-details {
-        padding: 20px; 
-    }
-
-    #form-details form h2 {
-        font-size: 22px;
-        line-height: 1.3;
-    }
 
     #form-details button {
-        width: 100%; 
+        width: 100%;
         padding: 10px;
     }
 
-  
+    #contact-details {
+        flex-direction: column;
+    }
+
+    #contact-details .details {
+        width: 100%;
+    }
+
+
+    #contact-details .map {
+        width: 100%;
+        height: 400px;
+    }
+
+    .contact-header {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .contact-header h2 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #form-details {
+        padding: 10px;
+    }
+
+
     #contact-details {
         margin: 15px 0;
         padding: 20px;
@@ -237,14 +230,15 @@ button:hover {
 @media (max-width: 480px) {
     .contact-header {
         min-height: 200px;
+        padding: 10px;
     }
 
     #contact-details .map {
-        height: 250px; 
+        height: 250px;
     }
 
-    #form-details form input, 
+    #form-details form input,
     #form-details form textarea {
-        padding: 10px; 
+        padding: 10px;
     }
 }
