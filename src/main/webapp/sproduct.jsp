@@ -5,8 +5,10 @@
     request.setAttribute("activePage", "product");
     request.setAttribute("keepDefaultCss", true);
 %>
-
-<c:set var="customCss" scope="request">
+<c:set var="customCss">
+    <link rel="stylesheet" href="assets/css/product_detail.css">
+</c:set>
+<c:set var="customjs" scope="request">
     <script src="assets/js/scriptProduct.js"></script>
 </c:set>
 <%@ include file="_header.jsp" %>
