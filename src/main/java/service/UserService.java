@@ -38,4 +38,8 @@ public class UserService {
         return UserDAO.checkExistMail(password);
     }
 
+    public List<User> getAllUsers() {
+        return userDAO.getAllUser();
+    }
+
 }
