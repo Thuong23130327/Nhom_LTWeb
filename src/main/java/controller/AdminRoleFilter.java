@@ -21,18 +21,17 @@ public class AdminRoleFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
         HttpSession session = request.getSession();
 
         User user = (User) session.getAttribute("auth");
-        if (user != null && (user.getRole()== User.Role.Admin) ) {
+
+        if (user != null && user.getRole() == User.Role.Admin) {
             filterChain.doFilter(servletRequest, servletResponse);
+            return;
         } else {
             response.sendRedirect(request.getContextPath() + "/login.jsp");
+            return;
         }
-
-        filterChain.doFilter(servletRequest, servletResponse);
-
     }
 
     @Override
