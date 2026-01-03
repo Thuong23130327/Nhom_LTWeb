@@ -4,33 +4,23 @@ import java.time.LocalDate;
 public class Product {
 
     private int id;
+    private int brandId;
+    private int categoriesId;
     private String sku;
     private String name;
     private String description;
     private float avgRating;
     private int soldCount;
-    private int brandId;
-    private int categoriesId;
     private boolean isActive;
     private LocalDate createdAt;
+    private double oldPrice;
+    private double sellPrice;
     private String img;
-    private double price;
 
-    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId, int categoriesId, boolean isActive, LocalDate createdAt, String img, double price) {
-        this.id = id;
-        this.sku = sku;
-        this.name = name;
-        this.description = description;
-        this.avgRating = avgRating;
-        this.soldCount = soldCount;
-        this.brandId = brandId;
-        this.categoriesId = categoriesId;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.img = img;
-        this.price = price;
+    public Product() {
     }
 
+<<<<<<< HEAD
     public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId,
                    int categoriesId, boolean isActive, LocalDate createdAt) {
         super();
@@ -49,96 +39,152 @@ public class Product {
     public int getId() {
         return id;
     }
+=======
+	public Product(int id, int brandId, int categoriesId, String sku, String name, String description, float avgRating,
+			int soldCount, boolean isActive, LocalDate createdAt, double oldPrice, double sellPrice, String img) {
+		super();
+		this.id = id;
+		this.brandId = brandId;
+		this.categoriesId = categoriesId;
+		this.sku = sku;
+		this.name = name;
+		this.description = description;
+		this.avgRating = avgRating;
+		this.soldCount = soldCount;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.oldPrice = oldPrice;
+		this.sellPrice = sellPrice;
+		this.img = img;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getSku() {
-        return sku;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
+>>>>>>> 03320e7b2053f8f70ca6372930b262450d8b6418
 
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
+	public int getBrandId() {
+		return brandId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setBrandId(int brandId) {
+		this.brandId = brandId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public int getCategoriesId() {
+		return categoriesId;
+	}
 
+	public void setCategoriesId(int categoriesId) {
+		this.categoriesId = categoriesId;
+	}
+
+	public String getSku() {
+		return sku;
+	}
+
+<<<<<<< HEAD
     public String getDescription() {
         return description;
     }
+=======
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public float getAvgRating() {
-        return avgRating;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
+>>>>>>> 03320e7b2053f8f70ca6372930b262450d8b6418
 
-    public void setAvgRating(float avgRating) {
-        this.avgRating = avgRating;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public int getSoldCount() {
-        return soldCount;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setSoldCount(int soldCount) {
-        this.soldCount = soldCount;
-    }
+	public float getAvgRating() {
+		return avgRating;
+	}
 
-    public int getBrandId() {
-        return brandId;
-    }
+	public void setAvgRating(float avgRating) {
+		this.avgRating = avgRating;
+	}
 
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
-    }
+	public int getSoldCount() {
+		return soldCount;
+	}
 
-    public int getCategoriesId() {
-        return categoriesId;
-    }
+	public void setSoldCount(int soldCount) {
+		this.soldCount = soldCount;
+	}
 
-    public void setCategoriesId(int categoriesId) {
-        this.categoriesId = categoriesId;
-    }
+	public boolean isActive() {
+		return isActive;
+	}
 
-    public boolean isActive() {
-        return isActive;
-    }
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 
+	public LocalDate getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDate createdAt) {
+		this.createdAt = createdAt;
+	}
+
+<<<<<<< HEAD
     public void setActive(boolean isActive) {
         this.isActive = isActive;
     }
+=======
+	public double getOldPrice() {
+		return oldPrice;
+	}
+>>>>>>> 03320e7b2053f8f70ca6372930b262450d8b6418
 
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
+	public void setOldPrice(double oldPrice) {
+		this.oldPrice = oldPrice;
+	}
 
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
+	public double getSellPrice() {
+		return sellPrice;
+	}
 
-    public String getImg() {
-        return img;
-    }
+	public void setSellPrice(double sellPrice) {
+		this.sellPrice = sellPrice;
+	}
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+	public String getImg() {
+		return img;
+	}
 
-    public double getPrice() {
-        return price;
-    }
+	public void setImg(String img) {
+		this.img = img;
+	}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	@Override
+	public String toString() {
+		return "Product [ id=" + id + ", brandId=" + brandId + ", categoriesId=" + categoriesId + ", sku=" + sku
+				+ ", name=" + name + ", description=" + description + ", avgRating=" + avgRating + ", soldCount="
+				+ soldCount + ", isActive=" + isActive + ", createdAt=" + createdAt + ", oldPrice=" + oldPrice
+				+ ", sellPrice=" + sellPrice + ", img=" + img + " ]";
+	}
+
+	
+	
+    
+    
 }

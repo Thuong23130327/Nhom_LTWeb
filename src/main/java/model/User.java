@@ -3,6 +3,7 @@ package model;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+//KO SUA CUA TUI NHE
 public class User {
 
 	private int id;
@@ -100,6 +101,18 @@ public class User {
 		this.role = Role.Customer;
 	}
 
+
+    public User(int id, String email, String passwordHash, String fullName) {
+        super();
+        this.id = id;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.fullName = fullName;
+        this.isLocked = false;
+        this.avatarUrl = "";
+        this.role = Role.Customer;
+    }
+
 	public User(int id, String email, String passwordHash, String fullName, String phone, String avatarUrl, Role role,
 			boolean isLocked, Timestamp createdAt) {
 		super();
@@ -127,4 +140,19 @@ public class User {
 	public enum Role {
 		Customer, Admin
 	}
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", role=" + role +
+                ", isLocked=" + isLocked +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

@@ -6,7 +6,10 @@ import util.MD5;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+//KO SUA CUA TUI NHE
 public class UserService {
 
     private final UserDAO userDAO;
@@ -34,6 +37,5 @@ public class UserService {
     public boolean checkExistMail(String password) {
         return UserDAO.checkExistMail(password);
     }
-
 
 }

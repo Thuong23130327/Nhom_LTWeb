@@ -26,16 +26,16 @@ public class Cart implements Serializable {
 	}
 
 // Thêm hàng vào giỏ, nếu có sẵn sản phẩm sẽ cộng dồn
-	public void addItem(Product product, int quantity) {
-		if (quantity <= 0) {
-			quantity = 1;
-		}
-		if (!items.containsKey(product.getId())) {
-			items.put(product.getId(), new CartItem(product, quantity, product.getPrice()));
-		} else {
-			items.get(product.getId()).upQuantity(quantity);
-		}
-	}
+//	public void addItem(Product product, int quantity) {
+//		if (quantity <= 0) {
+//			quantity = 1;
+//		}
+//		if (!items.containsKey(product.getId())) {
+//			items.put(product.getId(), new CartItem(product, quantity, product.getPrice()));
+//		} else {
+//			items.get(product.getId()).upQuantity(quantity);
+//		}
+//	}
 //Cập nhật sp
 	public void updateItems(Product product, int quantity) {
 //		todo
