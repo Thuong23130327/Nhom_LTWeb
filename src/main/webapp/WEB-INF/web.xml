@@ -5,7 +5,7 @@
          version="6.0">
     <filter>
         <filter-name>AuthFilter</filter-name>
-        <filter-class>controller.AuthenticationFilter</filter-class>
+        <filter-class>controller.admin.AuthenticationFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AuthFilter</filter-name>
@@ -17,7 +17,7 @@
     </filter-mapping>
     <filter>
         <filter-name>RoleFilter</filter-name>
-        <filter-class>controller.AdminRoleFilter</filter-class>
+        <filter-class>controller.admin.AdminRoleFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>RoleFilter</filter-name>

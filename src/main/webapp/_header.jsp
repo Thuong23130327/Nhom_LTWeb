@@ -76,11 +76,11 @@
             <a class="a-nodecor ${activePage =='home'?'active':''}" href="index.jsp">
                 <div class="home">Trang chủ</div>
             </a>
-            <a class="a-nodecor ${activePage =='contact'?'active':''}" " href="contact.jsp">
+            <a class="a-nodecor ${activePage =='contact'?'active':''}" href="contact.jsp">
             <div class="contact">Liên hệ</div>
             </a>
             <div class="nav-item-dropdown">
-                <a class="a-nodecor ${activePage =='product'?'active':''}" " href="store.jsp">
+                <a class="a-nodecor ${activePage =='product'?'active':''}" href="store.jsp">
                 <div class="store">
                     Sản phẩm
                     <i class="bi bi-chevron-compact-down"></i>

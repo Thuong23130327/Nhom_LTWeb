@@ -15,7 +15,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/admin/users.jsp" class="nav-link"><i
+                <a href="${pageContext.request.contextPath}/admin/user-manager" class="nav-link"><i
                         class="fas fa-users"></i> Quản lý Người
                     dùng</a>
             </li>

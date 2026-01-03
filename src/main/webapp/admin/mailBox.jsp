@@ -11,7 +11,7 @@
 
 </c:set>
 <%@ include file="/_header.jsp" %>
-<!-- section -->            <%@ include file="/admin/_adminMenu.jsp" %>
+<!-- section -->
 
 <main class="mail-manager-main pt-5">
 

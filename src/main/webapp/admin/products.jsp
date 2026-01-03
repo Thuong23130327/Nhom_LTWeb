@@ -37,24 +37,25 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>SP001</td>
-                                    <td>Tai nghe Sony WH-CH520</td>
-                                    <td>15</td>
-                                    <td>900.000vnđ</td>
-                                    <td>
-                                        <a href="product_detail.jsp"><button class="btn btn-sm btn-warning">Sửa</button></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>SP002</td>
-                                    <td>Loa Bluetooth JBL Flip 6</td>
-                                    <td>8</td>
-                                    <td>2.500.000vnđ</td>
-                                    <td>
-                                        <a href="product_detail.jsp"><button class="btn btn-sm btn-warning">Sửa</button></a>
-                                    </td>
-                                </tr>
+                                <c:forEach items="${productList}" var="p">
+                                    <tr>
+                                        <td>${p.sku}</td>
+                                        <td>${p.name}</td>
+                                        <td>${p.stock}</td>
+                                        <td>${p.price}vnđ</td>
+                                        <td>
+                                            <a href="product_detail.jsp?id=${p.productId}">
+                                                <button class="btn btn-sm btn-warning">Sửa</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <%--Nếu danh sách trống--%>
+                                <c:if test="${empty productList}">
+                                    <tr>
+                                        <td colspan="5" class="text-center">Không có sản phẩm nào trong hệ thống.</td>
+                                    </tr>
+                                </c:if>
                             </tbody>
                         </table>
                         <a href="product_detail.jsp"><button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Thêm Sản phẩm Mới</button></a>

@@ -1,8 +1,8 @@
-package dao;
+package dao.adminDAO;
 
+import dao.DBConnect;
 import model.User;
 import model.User.Role;
-import util.MD5;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;

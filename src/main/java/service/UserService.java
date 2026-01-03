@@ -1,12 +1,11 @@
 package service;
 
-import dao.UserDAO;
+import dao.adminDAO.UserDAO;
 import model.User;
 import util.MD5;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 //KO SUA CUA TUI NHE
