@@ -27,7 +27,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/admin/products.jsp" class="nav-link"><i
+                <a href="${pageContext.request.contextPath}/admin/product-manager" class="nav-link"><i
                         class="fas fa-box"></i> Quản lý Sản
                     phẩm</a>
             </li>

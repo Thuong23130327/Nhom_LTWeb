@@ -5,7 +5,7 @@
     request.setAttribute("keepDefaultCss", true);
 %>
 <c:set var="customCss">
-    <link rel="stylesheet" href="/assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleAdmin.css?v=1.1">
 </c:set>
 <%@ include file="/_header.jsp" %>
 
@@ -25,40 +25,42 @@
                 <p class="text-muted">Thêm, sửa, xóa sản phẩm và quản lý tồn kho.</p>
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <table class="table table-striped table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Mã sản phẩm</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Tồn kho</th>
-                                    <th>Giá</th>
-                                    <th>Thao tác</th>
-                                </tr>
-                            </thead>
+                        <div class="table-scroll-wrapper">
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Mã sản phẩm</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Tồn kho</th>
+                                        <th>Giá</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                <c:forEach items="${productList}" var="p">
-                                    <tr>
-                                        <td>${p.sku}</td>
-                                        <td>${p.name}</td>
-                                        <td>${p.stock}</td>
-                                        <td>${p.price}vnđ</td>
-                                        <td>
-                                            <a href="product_detail.jsp?id=${p.productId}">
-                                                <button class="btn btn-sm btn-warning">Sửa</button>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <%--Nếu danh sách trống--%>
-                                <c:if test="${empty productList}">
-                                    <tr>
-                                        <td colspan="5" class="text-center">Không có sản phẩm nào trong hệ thống.</td>
-                                    </tr>
-                                </c:if>
-                            </tbody>
-                        </table>
-                        <a href="product_detail.jsp"><button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Thêm Sản phẩm Mới</button></a>
+                                <tbody>
+                                    <c:forEach items="${productList}" var="p">
+                                        <tr>
+                                            <td>${p.sku}</td>
+                                            <td>${p.name}</td>
+                                            <td>${p.stock}</td>
+                                            <td>${p.price}vnđ</td>
+                                            <td>
+                                                <a href="product_detail.jsp?id=${p.productId}">
+                                                    <button class="btn btn-sm btn-warning">Sửa</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    <%--Nếu danh sách trống--%>
+                                    <c:if test="${empty productList}">
+                                        <tr>
+                                            <td colspan="5" class="text-center">Không có sản phẩm nào trong hệ thống.</td>
+                                        </tr>
+                                    </c:if>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="product_detail.jsp"><button class="btn btn-primary mt-3"><i class="fas fa-plus"></i> Thêm Sản Phẩm Mới</button></a>
                     </div>
                 </div>
             </main>
