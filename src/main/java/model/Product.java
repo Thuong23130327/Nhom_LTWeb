@@ -12,120 +12,146 @@ public class Product {
     private float avgRating;
     private int soldCount;
     private boolean isActive;
-    private double price;
     private LocalDate createdAt;
+    private double oldPrice;
+    private double sellPrice;
     private String img;
 
     public Product() {
     }
 
-    public Product(int id, int brandId, int categoriesId, String sku, String name, String description, float avgRating, int soldCount, boolean isActive, double price, LocalDate createdAt) {
-        this.id = id;
-        this.brandId = brandId;
-        this.categoriesId = categoriesId;
-        this.sku = sku;
-        this.name = name;
-        this.description = description;
-        this.avgRating = avgRating;
-        this.soldCount = soldCount;
-        this.isActive = isActive;
-        this.price = price;
-        this.createdAt = createdAt;
-    }
+	public Product(int id, int brandId, int categoriesId, String sku, String name, String description, float avgRating,
+			int soldCount, boolean isActive, LocalDate createdAt, double oldPrice, double sellPrice, String img) {
+		super();
+		this.id = id;
+		this.brandId = brandId;
+		this.categoriesId = categoriesId;
+		this.sku = sku;
+		this.name = name;
+		this.description = description;
+		this.avgRating = avgRating;
+		this.soldCount = soldCount;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.oldPrice = oldPrice;
+		this.sellPrice = sellPrice;
+		this.img = img;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public int getBrandId() {
-        return brandId;
-    }
+	public int getBrandId() {
+		return brandId;
+	}
 
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
-    }
+	public void setBrandId(int brandId) {
+		this.brandId = brandId;
+	}
 
-    public int getCategoriesId() {
-        return categoriesId;
-    }
+	public int getCategoriesId() {
+		return categoriesId;
+	}
 
-    public void setCategoriesId(int categoriesId) {
-        this.categoriesId = categoriesId;
-    }
+	public void setCategoriesId(int categoriesId) {
+		this.categoriesId = categoriesId;
+	}
 
-    public String getSku() {
-        return sku;
-    }
+	public String getSku() {
+		return sku;
+	}
 
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public float getAvgRating() {
-        return avgRating;
-    }
+	public float getAvgRating() {
+		return avgRating;
+	}
 
-    public void setAvgRating(float avgRating) {
-        this.avgRating = avgRating;
-    }
+	public void setAvgRating(float avgRating) {
+		this.avgRating = avgRating;
+	}
 
-    public int getSoldCount() {
-        return soldCount;
-    }
+	public int getSoldCount() {
+		return soldCount;
+	}
 
-    public void setSoldCount(int soldCount) {
-        this.soldCount = soldCount;
-    }
+	public void setSoldCount(int soldCount) {
+		this.soldCount = soldCount;
+	}
 
-    public boolean isActive() {
-        return isActive;
-    }
+	public boolean isActive() {
+		return isActive;
+	}
 
-    public void setActive(boolean active) {
-        isActive = active;
-    }
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 
-    public double getPrice() {
-        return price;
-    }
+	public LocalDate getCreatedAt() {
+		return createdAt;
+	}
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+	public void setCreatedAt(LocalDate createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
+	public double getOldPrice() {
+		return oldPrice;
+	}
 
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
+	public void setOldPrice(double oldPrice) {
+		this.oldPrice = oldPrice;
+	}
 
-    public String getImg() {
-        return img;
-    }
+	public double getSellPrice() {
+		return sellPrice;
+	}
 
-    public void setImg(String img) {
-        this.img = img;
-    }
+	public void setSellPrice(double sellPrice) {
+		this.sellPrice = sellPrice;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [ id=" + id + ", brandId=" + brandId + ", categoriesId=" + categoriesId + ", sku=" + sku
+				+ ", name=" + name + ", description=" + description + ", avgRating=" + avgRating + ", soldCount="
+				+ soldCount + ", isActive=" + isActive + ", createdAt=" + createdAt + ", oldPrice=" + oldPrice
+				+ ", sellPrice=" + sellPrice + ", img=" + img + " ]";
+	}
+
+	
+	
+    
+    
 }
