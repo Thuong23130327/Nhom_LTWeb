@@ -20,6 +20,26 @@ public class Product {
     public Product() {
     }
 
+<<<<<<< HEAD
+    public Product(int id, String sku, String name, String description, float avgRating, int soldCount, int brandId,
+                   int categoriesId, boolean isActive, LocalDate createdAt) {
+        super();
+        this.id = id;
+        this.sku = sku;
+        this.name = name;
+        this.description = description;
+        this.avgRating = avgRating;
+        this.soldCount = soldCount;
+        this.brandId = brandId;
+        this.categoriesId = categoriesId;
+        this.isActive = isActive;
+        this.createdAt = createdAt;
+    }
+
+    public int getId() {
+        return id;
+    }
+=======
 	public Product(int id, int brandId, int categoriesId, String sku, String name, String description, float avgRating,
 			int soldCount, boolean isActive, LocalDate createdAt, double oldPrice, double sellPrice, String img) {
 		super();
@@ -45,6 +65,7 @@ public class Product {
 	public void setId(int id) {
 		this.id = id;
 	}
+>>>>>>> 03320e7b2053f8f70ca6372930b262450d8b6418
 
 	public int getBrandId() {
 		return brandId;
@@ -66,6 +87,11 @@ public class Product {
 		return sku;
 	}
 
+<<<<<<< HEAD
+    public String getDescription() {
+        return description;
+    }
+=======
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
@@ -77,6 +103,7 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
+>>>>>>> 03320e7b2053f8f70ca6372930b262450d8b6418
 
 	public String getDescription() {
 		return description;
@@ -118,9 +145,15 @@ public class Product {
 		this.createdAt = createdAt;
 	}
 
+<<<<<<< HEAD
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+=======
 	public double getOldPrice() {
 		return oldPrice;
 	}
+>>>>>>> 03320e7b2053f8f70ca6372930b262450d8b6418
 
 	public void setOldPrice(double oldPrice) {
 		this.oldPrice = oldPrice;
