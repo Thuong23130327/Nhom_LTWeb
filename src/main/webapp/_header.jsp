@@ -80,7 +80,7 @@
             <div class="contact">Liên hệ</div>
             </a>
             <div class="nav-item-dropdown">
-                <a class="a-nodecor ${activePage =='product'?'active':''}" href="store.jsp">
+                <a class="a-nodecor ${activePage =='product'?'active':''}" href="product">
                 <div class="store">
                     Sản phẩm
                     <i class="bi bi-chevron-compact-down"></i>
