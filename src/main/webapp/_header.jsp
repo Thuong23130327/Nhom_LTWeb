@@ -77,69 +77,70 @@
                 <div class="home">Trang chủ</div>
             </a>
             <a class="a-nodecor ${activePage =='contact'?'active':''}" href="contact.jsp">
-            <div class="contact">Liên hệ</div>
+                <div class="contact">Liên hệ</div>
             </a>
-            <div class="nav-item-dropdown">
-                <a class="a-nodecor ${activePage =='product'?'active':''}" href="product">
-                <div class="store">
-                    Sản phẩm
-                    <i class="bi bi-chevron-compact-down"></i>
-                </div>
+            <div class="nav-item-dropdown aura-dropdown-container">
+                <a class="a-nodecor ${activePage =='product'?'active':''}" href="${pageContext.request.contextPath}/product">
+                    <div class="store">
+                        Sản phẩm <i class="bi bi-chevron-compact-down"></i>
+                    </div>
                 </a>
-                <div class="menu-product">
+
+                <ul class="aura-menu-parent">
                     <c:forEach items="${parentList}" var="par">
-                        <a class="a-nodecor" href="product">
-                            <div>${par.name}</div>
-                        </a>
-
-                        <ul class="submenu">
-                            <c:forEach items="${childList}" var="child">
-                                <c:if test="${child.parentId == par.id}">
-                                    <li>
-                                        <a href="products.jsp?cateId=${child.id}">
-                                                ${child.name}
-                                        </a>
-                                    </li>
-                                </c:if>
-
-                            </c:forEach>
-                        </ul>
-                    </c:forEach>
-                </div>
-            </div>
-
-            <a class="a-nodecor ${activePage =='cart'?'active':''}" href="cart.jsp">
-                <div class="cart">
-                    <i class="bi bi-cart"></i> Giỏ hàng
-                    <span id="cart-badge" class="badge bg-danger rounded-pill"
-                          style="font-size: 0.7rem; vertical-align: top; ${sessionScope.cart == null ? 'display:none' : ''}">
-                        ${sessionScope.cart != null ? sessionScope.cart.totalQuantity : 0}
-                    </span>
-                </div>
-            </a>
-
-            <div class="nav-account">
-                <c:choose>
-                    <c:when test="${not empty sessionScope.loggedInUser}">
-                        <div class="account-avatar">
-                            <a href="profileM/profile.jsp" class="avatar-link">
-                                <img src="${sessionScope.loggedInUser.avatarUrl}" alt="Avatar">
+                        <li class="aura-menu-item has-child">
+                            <a href="product?cateId=${par.id}" class="parent-link">
+                                    ${par.name}
+                                <i class="bi bi-chevron-right ms-auto"></i>
                             </a>
-                            <div class="account-menu">
-                                <a class="account-menu-item" href="profileM/profile.jsp">Thông tin tài khoản</a>
-                                <a class="account-menu-item" href="logout" id="navLogout">Đăng xuất</a>
-                            </div>
-                        </div>
-                    </c:when>
-                    <c:otherwise>
-                        <a class="a-nodecor login-link" href="login.jsp">
-                            <div class="login">Đăng nhập</div>
-                        </a>
-                    </c:otherwise>
-                </c:choose>
+
+                            <ul class="aura-menu-child">
+                                <c:forEach items="${childList}" var="child">
+                                    <c:if test="${child.parentId == par.id}">
+                                        <li>
+                                            <a href="product?cateId=${child.id}">${child.name}</a>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                    </c:forEach>
+                </ul>
             </div>
-            <div id="hamburger-icon"><i class="bi bi-list"></i></div>
+
+
+        <a class="a-nodecor ${activePage =='cart'?'active':''}" href="cart.jsp">
+            <div class="cart">
+                <i class="bi bi-cart"></i> Giỏ hàng
+                <span id="cart-badge" class="badge bg-danger rounded-pill"
+                      style="font-size: 0.7rem; vertical-align: top; ${sessionScope.cart == null ? 'display:none' : ''}">
+                    ${sessionScope.cart != null ? sessionScope.cart.totalQuantity : 0}
+                </span>
+            </div>
+        </a>
+
+        <div class="nav-account">
+            <c:choose>
+                <c:when test="${not empty sessionScope.loggedInUser}">
+                    <div class="account-avatar">
+                        <a href="profileM/profile.jsp" class="avatar-link">
+                            <img src="${sessionScope.loggedInUser.avatarUrl}" alt="Avatar">
+                        </a>
+                        <div class="account-menu">
+                            <a class="account-menu-item" href="profileM/profile.jsp">Thông tin tài khoản</a>
+                            <a class="account-menu-item" href="logout" id="navLogout">Đăng xuất</a>
+                        </div>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <a class="a-nodecor login-link" href="login.jsp">
+                        <div class="login">Đăng nhập</div>
+                    </a>
+                </c:otherwise>
+            </c:choose>
         </div>
+        <div id="hamburger-icon"><i class="bi bi-list"></i></div>
+    </div>
     </div>
 </nav>
 

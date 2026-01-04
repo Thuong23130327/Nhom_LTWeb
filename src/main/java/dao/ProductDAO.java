@@ -12,48 +12,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProductDAO  {
+public class ProductDAO {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
 
     static Map<Integer, Product> data = new HashMap<>();
 
-
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
 
-        String sql = """
-                    WITH RankedProducts AS (
-                                     SELECT\s
-                                         p.id,
-                                         p.Brands_id,
-                                         p.Categories_id,
-                                         pv.variant_sku,
-                                         p.NAME,
-                                         p.description,
-                                         p.avg_rating,
-                                         p.sold_count,
-                                         p.is_active,
-                                         p.created_at,
-                                         pv.market_price,
-                                         pv.sell_price,
-                                         pv.main_image_url,
-                
-                                         ROW_NUMBER() OVER (
-                                             PARTITION BY p.id\s
-                                             ORDER BY\s
-                                                 pv.is_default DESC, 
-                                                 RAND()               
-                                         ) as rn
-                
-                                     FROM Products p
-                                     JOIN ProductVariants pv ON pv.Products_id = p.id
-                                     WHERE p.is_active = TRUE
-                                 )
-                                 SELECT * FROM RankedProducts\s
-                                 WHERE rn = 1; 
-                """;
+        String sql = "SELECT * FROM products";
 
         try {
             conn = DBConnect.getConnection();
@@ -61,22 +30,48 @@ public class ProductDAO  {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Product p = new Product(
-                        rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getInt(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getFloat(7),
-                        rs.getInt(8),
-                        rs.getBoolean(9),
-                        rs.getDate(10).toLocalDate(),
-                        rs.getDouble(11),
-                        rs.getDouble(12),
-                        rs.getString(13));
-
+                Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
+                        rs.getString("sku"), rs.getString("name"), rs.getString("description"),
+                        rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
+                        rs.getTimestamp("created_at"), rs.getDouble("display_sell_price"),
+                        rs.getDouble("display_market_price"), rs.getString("display_image_url"));
                 list.add(p);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+
+    public List<Product> getProductByCategoryId(String cateId) {
+        List<Product> list = new ArrayList<>();
+        String sql =
+                "SELECT * FROM products where Categories_id=?";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, cateId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getInt("Brands_id"),
+                        rs.getInt("Categories_id"),
+                        rs.getString("sku"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getFloat("avg_rating"),
+                        rs.getInt("sold_count"),
+                        rs.getBoolean("is_active"),
+                        rs.getTimestamp("created_at"),
+                        rs.getDouble("display_sell_price"),
+                        rs.getDouble("display_market_price"),
+                        rs.getString("display_image_url"));
+                list.add(p);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -287,5 +282,3 @@ public class ProductDAO  {
 //        System.out.println("Insert thành công!");
 //    }
 }
-
-

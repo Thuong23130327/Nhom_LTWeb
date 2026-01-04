@@ -1,14 +1,15 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Order {
     private int id;
     private Integer usersId;
     private Integer vouchersId;
-    private String orderCode;
-    private LocalDateTime orderDate;
+    private String orderCode;	private Timestamp orderDate;
+
     private String status;
     private PaymentStatus paymentStatus;
     private double totalProductsPrice;
@@ -20,7 +21,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int id, Integer usersId, Integer vouchersId, String orderCode, LocalDateTime orderDate, String status, PaymentStatus paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount, double finalAmount) {
+    public Order(int id, Integer usersId, Integer vouchersId, String orderCode, Timestamp orderDate, String status, PaymentStatus paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount, double finalAmount) {
         this.id = id;
         this.usersId = usersId;
         this.vouchersId = vouchersId;
@@ -66,11 +67,11 @@ public class Order {
         this.orderCode = orderCode;
     }
 
-    public LocalDateTime getOrderDate() {
+    public Timestamp getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(Timestamp orderDate) {
         this.orderDate = orderDate;
     }
 

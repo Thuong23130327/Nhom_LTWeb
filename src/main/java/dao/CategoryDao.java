@@ -34,24 +34,6 @@ public class CategoryDao {
         return list;
     }
 
-    public List<Category> getProductByCategories() throws SQLException, ClassNotFoundException {
-        List<Category> list = new ArrayList<>();
-        String sql = "SELECT * FROM Categories";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Category c = new Category(rs.getInt(1), rs.getString(2));
-                int idParent = rs.getInt(3) != 0 ? rs.getInt(3) : 0;
-                list.add(c);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         CategoryDao dao = new CategoryDao();

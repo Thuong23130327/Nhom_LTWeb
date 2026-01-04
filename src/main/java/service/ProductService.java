@@ -44,6 +44,10 @@ public class ProductService {
     public List<Product> getAllProduct() {
         return productDao.getAllProduct();
     }
+    public List<Product> getProductByCategoryId(String cateId) {
+        return productDao.getProductByCategoryId(cateId);
+    }
+
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ProductService ps = new ProductService();

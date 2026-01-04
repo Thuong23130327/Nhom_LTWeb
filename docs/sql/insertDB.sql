@@ -2,22 +2,26 @@ USE AuraSound_DB;
 SET SQL_SAFE_UPDATES = 0;
 UPDATE Temp_Products
 SET brandName = TRIM(brandName);
+
 UPDATE Temp_Products
 SET brandName = 'Samsung'
 WHERE
   brandName IN ('SS', 'SamSung');
+  
 UPDATE Temp_Products
 SET brandName = 'Realme'
 WHERE
   brandName IN ('RM', 'RealMe');
-UPDATE Temp_Products
-SET cat_child = 'Tai nghe chụp tai'
-WHERE
-  cat_child IN ('Chụp tai', 'Tai chụp', 'Chụp tai/ Major', 'Chụp tai/ Minor', 'Headphone');
+  
 UPDATE Temp_Products
 SET cat_child = 'Tai nghe nhét tai'
 WHERE
   cat_child IN ('Nhét tai', 'Airpods', 'Nhét tai/ Minor', 'Nhét tai/ Redmi Buds', 'In-ear');
+  
+UPDATE Temp_Products
+SET cat_child = 'Tai nghe chụp tai'
+WHERE
+  cat_child IN ('Chụp tai', 'Tai chụp', 'Chụp tai/ Major', 'Chụp tai/ Minor', 'Headphone');
 UPDATE Temp_Products
 SET cat_child = 'Tai nghe kẹp tai'
 WHERE
@@ -30,6 +34,7 @@ UPDATE Temp_Products
 SET cat_child = 'Loa Karaoke'
 WHERE
   cat_child IN ('Loa kéo', 'Karaoke');
+  
 INSERT INTO Categories (NAME, Categories_id) SELECT DISTINCT
   tp.cat_parent,
   NULL
