@@ -1,71 +1,76 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ include file="/tag/_taglibs.jsp" %>
 <%
     request.setAttribute("pageTitle", "Tên sp - AuraSound");
     request.setAttribute("activePage", "product");
     request.setAttribute("keepDefaultCss", true);
 %>
-<c:set var="customCss">
-    <link rel="stylesheet" href="assets/css/styleHeadphones.css">
+<c:set var="customCss" scope="request">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHeadphones.css">
 </c:set>
-<jsp:include page="/Header" />
+<%@ include file="_header.jsp" %>
 <main class="store-container content headphones-page-container">
+    <form action="product" method="get" id="filterForm">
+        <aside class="filter-sidebar" id="filter-sidebar">
+            <div class="filter-wrapper">
+                <button></button>
 
-    <aside class="filter-sidebar" id="filter-sidebar">
-
-        <div class="pt-3 pb-2">
-            <a href="store.jsp" class="btn btn-sm btn-primary" title="Quay lại">
-                <i class="fas fa-arrow-left"></i> Quay lại
-            </a>
-        </div>
-
-        <button class="filter-toggle-btn" id="filter-toggle">
-            <i class="bi bi-funnel-fill"></i> Bộ lọc
-        </button>
-
-        <div class="filter-wrapper">
-            <div class="filter-header">
-                <h3>Bộ lọc</h3>
-                <button class="filter-close-btn" id="filter-close">&times;</button>
+            </div>
+            <div class="pt-3 pb-2">
+                <a href="store.jsp" class="btn btn-sm btn-primary" title="Quay lại">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
             </div>
 
-            <div class="filter-group">
-                <h4>Hãng sản xuất</h4>
-                <div class="filter-options" data-filter-group="brand">
-                    <button class="filter-option" data-filter="sony">Sony</button>
-                    <button class="filter-option" data-filter="samsung">Samsung</button>
-                    <button class="filter-option" data-filter="apple">Apple</button>
-                    <button class="filter-option" data-filter="xiaomi">Xiaomi</button>
-                    <button class="filter-option" data-filter="jbl">JBL</button>
-                    <button class="filter-option" data-filter="marshall">Marshall</button>
-                    <button class="filter-option" data-filter="ava">AVA+</button>
+            <button class="filter-toggle-btn" id="filter-toggle">
+                <i class="bi bi-funnel-fill"></i> Bộ lọc
+            </button>
+
+            <div class="filter-wrapper">
+                <div class="filter-header">
+                    <h3>Bộ lọc</h3>
+                    <button class="filter-close-btn" id="filter-close">&times;</button>
                 </div>
-            </div>
 
-            <div class="filter-group">
-                <h4>Loại tai nghe</h4>
-                <div class="filter-options" data-filter-group="type">
-                    <c:forEach items="${categoryList}" var="cate">
-                        <button class="filter-option" data-filter="${cate.name}">
-                                ${cate.name}
-                        </button>
-                    </c:forEach>
+                <div class="filter-group">
+                    <h4>Hãng sản xuất</h4>
+                    <div class="filter-options" data-filter-group="brand">
+                        <button class="filter-option" data-filter="sony">Sony</button>
+                        <button class="filter-option" data-filter="samsung">Samsung</button>
+                        <button class="filter-option" data-filter="apple">Apple</button>
+                        <button class="filter-option" data-filter="xiaomi">Xiaomi</button>
+                        <button class="filter-option" data-filter="jbl">JBL</button>
+                        <button class="filter-option" data-filter="marshall">Marshall</button>
+                        <button class="filter-option" data-filter="ava">AVA+</button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="filter-group">
-                <h4>Tính năng</h4>
-                <div class="filter-options" data-filter-group="feature">
-                    <button class="filter-option" data-filter="bluetooth">Bluetooth</button>
-                    <button class="filter-option" data-filter="chong-on">Chống ồn</button>
-                    <button class="filter-option" data-filter="chong-nuoc">Chống nước (IPX4+)</button>
+                <div class="filter-group">
+                    <h4>Loại tai nghe</h4>
+                    <div class="filter-options" data-filter-group="type">
+                        <c:forEach items="${categoryList}" var="cate">
+                            <button class="filter-option" data-filter="${cate.name}">
+                                    ${cate.name}
+                            </button>
+                        </c:forEach>
+                    </div>
                 </div>
+
+                <div class="filter-group">
+                    <h4>Tính năng</h4>
+                    <div class="filter-options" data-filter-group="feature">
+                        <button class="filter-option" data-filter="bluetooth">Bluetooth</button>
+                        <button class="filter-option" data-filter="chong-on">Chống ồn</button>
+                        <button class="filter-option" data-filter="chong-nuoc">Chống nước (IPX4+)</button>
+                    </div>
+                </div>
+
+                <button class="filter-reset-btn" id="filter-reset">Xóa tất cả bộ lọc</button>
             </div>
+        </aside>
 
-            <button class="filter-reset-btn" id="filter-reset">Xóa tất cả bộ lọc</button>
-        </div>
-    </aside>
 
+    </form>
     <div class="product-grid-container">
         <h1>Tai Nghe</h1>
 
@@ -87,8 +92,8 @@
                         <h4>${p.name}</h4>
 
                         <div class="price-block">
-                            <span class="new-price">${p.sellPrice}</span>
-                            <span class="old-price">${p.oldPrice}</span>
+                            <span class="new-price"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/> đ</span>
+                            <span class="old-price"><fmt:formatNumber value="${p.oldPrice}" pattern="#,###"/> đ</span>
                         </div>
 
                         <div class="product-bottom-row">

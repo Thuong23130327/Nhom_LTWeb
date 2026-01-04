@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS AuraSound_DB;
+
 CREATE DATABASE AuraSound_DB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE AuraSound_DB;
 

@@ -18,21 +18,27 @@ import java.util.List;
 @WebServlet(name = "ProductServlet", value = "/product")
 public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            ProductService productService = new ProductService();
-            List<Product> productList = productService.getAllProduct();
 
-            CategoryService categoryService = new CategoryService();
-            List<Category> categoryList = categoryService.getAllCategories();
-            System.out.println( categoryList.size()+ "danh muc");
-            request.setAttribute("categoryList", categoryList);
+        ProductService productService = null;
+        try {
+            productService = new ProductService();
+            String cateId = request.getParameter("cateId");
+
+            List<Product> productList = null;
+            if (cateId != null) {
+                productList = productService.getProductByCategoryId(cateId);
+            } else {
+                productList = productService.getAllProduct();
+            }
             request.setAttribute("productList", productList);
-            request.getRequestDispatcher("/headphones.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
+        request.getRequestDispatcher("/headphones.jsp").forward(request, response);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

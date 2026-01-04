@@ -1,27 +1,28 @@
 package model;
-import java.time.LocalDate;
+
+import java.sql.Timestamp;
 
 public class Product {
 
-    private int id;
-    private int brandId;
-    private int categoriesId;
-    private String sku;
-    private String name;
-    private String description;
-    private float avgRating;
-    private int soldCount;
-    private boolean isActive;
-    private LocalDate createdAt;
-    private double oldPrice;
-    private double sellPrice;
-    private String img;
+	private int id;
+	private int brandId;
+	private int categoriesId;
+	private String sku;
+	private String name;
+	private String description;
+	private float avgRating;
+	private int soldCount;
+	private boolean isActive;
+	private Timestamp createdAt;
+	private double oldPrice;
+	private double sellPrice;
+	private String img;
 
-    public Product() {
-    }
+	public Product() {
+	}
 
 	public Product(int id, int brandId, int categoriesId, String sku, String name, String description, float avgRating,
-			int soldCount, boolean isActive, LocalDate createdAt, double oldPrice, double sellPrice, String img) {
+			int soldCount, boolean isActive, Timestamp createdAt, double oldPrice, double sellPrice, String img) {
 		super();
 		this.id = id;
 		this.brandId = brandId;
@@ -110,11 +111,11 @@ public class Product {
 		this.isActive = isActive;
 	}
 
-	public LocalDate getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDate createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -150,8 +151,4 @@ public class Product {
 				+ ", sellPrice=" + sellPrice + ", img=" + img + " ]";
 	}
 
-	
-	
-    
-    
 }
