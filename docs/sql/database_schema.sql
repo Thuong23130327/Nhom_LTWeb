@@ -1,11 +1,7 @@
-CREATE
-DATABASE AuraSound_DB DEFAULT CHARACTER
-SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE
-AuraSound_DB;
+DROP DATABASE IF EXISTS AuraSound_DB;
+CREATE DATABASE AuraSound_DB DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE AuraSound_DB;
 
--- LIÊN QUAN SẢN PHẨM
--- Thương hiệu
 CREATE TABLE Brands
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
@@ -13,7 +9,6 @@ CREATE TABLE Brands
     logo_url VARCHAR(255) NULL
 );
 
--- Loại
 CREATE TABLE Categories
 (
     id            INT AUTO_INCREMENT PRIMARY KEY,
@@ -22,24 +17,25 @@ CREATE TABLE Categories
     FOREIGN KEY (Categories_id) REFERENCES Categories (id)
 );
 
--- Sản phẩm
 CREATE TABLE Products
 (
-    id            INT AUTO_INCREMENT PRIMARY KEY,
-    Brands_id     INT                NOT NULL,
-    Categories_id INT                NOT NULL,
-    sku           VARCHAR(50) UNIQUE NOT NULL,
-    NAME          VARCHAR(255)       NOT NULL,
-    description   TEXT NULL,
-    avg_rating    DECIMAL(2, 1) DEFAULT 5.0,
-    sold_count    INT           DEFAULT 0,
-    is_active     BOOLEAN       DEFAULT TRUE,
-    created_at    DATETIME      DEFAULT CURRENT_TIMESTAMP,
+    id                   INT AUTO_INCREMENT PRIMARY KEY,
+    Brands_id            INT                NOT NULL,
+    Categories_id        INT                NOT NULL,
+    sku                  VARCHAR(50) UNIQUE NOT NULL,
+    NAME                 VARCHAR(255)       NOT NULL,
+    description          TEXT NULL,
+    avg_rating           DECIMAL(2, 1) DEFAULT 5.0,
+    sold_count           INT           DEFAULT 0,
+    is_active            BOOLEAN       DEFAULT TRUE,
+    created_at           DATETIME      DEFAULT CURRENT_TIMESTAMP,
+    display_sell_price   DECIMAL(10, 2) DEFAULT 0,
+    display_market_price DECIMAL(10, 2) DEFAULT 0,
+    display_image_url    VARCHAR(255) NULL,
     FOREIGN KEY (Brands_id) REFERENCES Brands (id),
     FOREIGN KEY (Categories_id) REFERENCES Categories (id)
 );
 
--- biến thể
 CREATE TABLE ProductVariants
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
@@ -51,9 +47,10 @@ CREATE TABLE ProductVariants
     sell_price     DECIMAL(10, 2)     NOT NULL,
     stock_quantity INT DEFAULT 0,
     sold_quantity  INT DEFAULT 0,
+    is_default     BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (Products_id) REFERENCES Products (id)
 );
--- Thông số
+
 CREATE TABLE ProductSpecs
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
@@ -63,7 +60,6 @@ CREATE TABLE ProductSpecs
     FOREIGN KEY (Products_id) REFERENCES Products (id)
 );
 
--- Ảnh sp
 CREATE TABLE ProductGalleries
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
@@ -73,7 +69,6 @@ CREATE TABLE ProductGalleries
     FOREIGN KEY (Products_id) REFERENCES Products (id)
 );
 
--- LIÊN QUAN USER + LIST
 CREATE TABLE Users
 (
     id            INT AUTO_INCREMENT PRIMARY KEY,
@@ -86,6 +81,7 @@ CREATE TABLE Users
     is_locked     BOOLEAN  DEFAULT FALSE,
     created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE UserAddresses
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
@@ -97,6 +93,7 @@ CREATE TABLE UserAddresses
     is_default     BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (Users_id) REFERENCES Users (id)
 );
+
 CREATE TABLE ContactMails
 (
     id            INT AUTO_INCREMENT PRIMARY KEY,
@@ -121,7 +118,6 @@ CREATE TABLE ContactReplies
     FOREIGN KEY (contact_id) REFERENCES ContactMails (id) ON DELETE CASCADE
 );
 
--- 3. Liên quan SALES & ORDER
 CREATE TABLE Vouchers
 (
     id              INT AUTO_INCREMENT PRIMARY KEY,
@@ -132,6 +128,7 @@ CREATE TABLE Vouchers
     end_date        DATETIME           NOT NULL,
     created_at      DATETIME       DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE Orders
 (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
@@ -148,6 +145,7 @@ CREATE TABLE Orders
     FOREIGN KEY (Users_id) REFERENCES Users (id),
     FOREIGN KEY (Vouchers_id) REFERENCES Vouchers (id)
 );
+
 CREATE TABLE OrderShippings
 (
     id             INT AUTO_INCREMENT PRIMARY KEY,
@@ -159,6 +157,7 @@ CREATE TABLE OrderShippings
     note           TEXT NULL,
     FOREIGN KEY (Orders_id) REFERENCES Orders (id)
 );
+
 CREATE TABLE OrderItems
 (
     id                 INT AUTO_INCREMENT PRIMARY KEY,
@@ -171,7 +170,6 @@ CREATE TABLE OrderItems
     UNIQUE KEY uk_order_variant (Orders_id, ProductVariants_id)
 );
 
--- 4. CỤM REVIEW
 CREATE TABLE Reviews
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
@@ -184,6 +182,7 @@ CREATE TABLE Reviews
     FOREIGN KEY (Products_id) REFERENCES Products (id),
     FOREIGN KEY (Users_id) REFERENCES Users (id)
 );
+
 CREATE TABLE ReviewGalleries
 (
     id         INT AUTO_INCREMENT PRIMARY KEY,
@@ -192,7 +191,6 @@ CREATE TABLE ReviewGalleries
     FOREIGN KEY (Reviews_id) REFERENCES Reviews (id)
 );
 
--- Banner QC - slider
 CREATE TABLE Banners
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
@@ -204,43 +202,3 @@ CREATE TABLE Banners
     is_active   BOOLEAN  DEFAULT TRUE,
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
--- Tạo các bảng tạm
-CREATE TABLE Temp_Products
-(
-    sku           VARCHAR(50),
-    proName       VARCHAR(255),
-    brandName     VARCHAR(255),
-    category      VARCHAR(255),
-    script        TEXT,
-    mapped_cat_id INT,
-    cat_parent    VARCHAR(100),
-    cat_child     VARCHAR(100)
-);
-CREATE TABLE Temp_Specs
-(
-    SKU       VARCHAR(50),
-    SpecName  VARCHAR(255),
-    SpecValue VARCHAR(255)
-);
-CREATE TABLE Temp_Gallery
-(
-    SKU   VARCHAR(50),
-    Image VARCHAR(255)
-);
-CREATE TABLE Temp_variants
-(
-    sku        NVARCHAR (50),
-    color      NVARCHAR (50),
-    basePrice  DECIMAL(10, 2),
-    sellPrice  DECIMAL(10, 2),
-    soLuongCon INT,
-    Image      NVARCHAR (255)
-);
-SELECT DISTINCT temp_products.brandName
-FROM temp_products
-WHERE brandName IS NOT NULL
-  AND brandName != '';
-  
-  ALTER TABLE ProductVariants
-ADD COLUMN is_default BOOLEAN DEFAULT FALSE;
