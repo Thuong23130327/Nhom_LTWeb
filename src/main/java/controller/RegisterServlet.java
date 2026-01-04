@@ -1,15 +1,11 @@
 package controller;
 
-import dao.UserDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.User;
 import service.UserService;
-import util.MD5;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

@@ -202,3 +202,43 @@ CREATE TABLE Banners
     is_active   BOOLEAN  DEFAULT TRUE,
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Tạo các bảng tạm
+CREATE TABLE Temp_Products
+(
+    sku           VARCHAR(50),
+    proName       VARCHAR(255),
+    brandName     VARCHAR(255),
+    category      VARCHAR(255),
+    script        TEXT,
+    mapped_cat_id INT,
+    cat_parent    VARCHAR(100),
+    cat_child     VARCHAR(100)
+);
+CREATE TABLE Temp_Specs
+(
+    SKU       VARCHAR(50),
+    SpecName  VARCHAR(255),
+    SpecValue VARCHAR(255)
+);
+CREATE TABLE Temp_Gallery
+(
+    SKU   VARCHAR(50),
+    Image VARCHAR(255)
+);
+CREATE TABLE Temp_variants
+(
+    sku        NVARCHAR (50),
+    color      NVARCHAR (50),
+    basePrice  DECIMAL(10, 2),
+    sellPrice  DECIMAL(10, 2),
+    soLuongCon INT,
+    Image      NVARCHAR (255)
+);
+SELECT DISTINCT temp_products.brandName
+FROM temp_products
+WHERE brandName IS NOT NULL
+  AND brandName != '';
+  
+  ALTER TABLE ProductVariants
+ADD COLUMN is_default BOOLEAN DEFAULT FALSE;

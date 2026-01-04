@@ -1,11 +1,27 @@
+<%@ page import="java.util.List" %>
+<%@ page import="model.User" %>
+<%@ page import="java.sql.Timestamp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%
+    int userId = request.getAttribute("id") == null ? 0 : (int) request.getAttribute("id");
+    String userEmail = request.getAttribute("email") == null ? "" : request.getAttribute("email") + "";
+    String fullName = request.getAttribute("fullName") == null ? "" : request.getAttribute("fullName") + "";
+    String passHash = request.getAttribute("password_hash") == null ? "" : request.getAttribute("password_hash") + "";
+    String userRole = request.getAttribute("role") == null ? "" : request.getAttribute("role") + "";
+    boolean lockedStatus = request.getAttribute("is_locked") != null && (boolean) request.getAttribute("is_locked");
+    Timestamp timeCreated = (Timestamp) request.getAttribute("created_at");
+
+    List<User> userList = (List<User>) request.getAttribute("userList");
+%>
+%>
 <%
     request.setAttribute("pageTitle", "QUẢN LÝ ĐƠN - AuraSound");
     request.setAttribute("keepDefaultCss", true);
 %>
 <c:set var="customCss">
-    <link rel="stylesheet" href="/assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleAdmin.css">
 </c:set>
 <%@ include file="/_header.jsp" %>
 
@@ -29,51 +45,53 @@
                         <table class="table table-striped table-sm">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>ID</th>
                                     <th>Tên</th>
                                     <th>Email</th>
                                     <th>Vai trò</th>
+                                    <th>Ngày tạo</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nguyễn Hoài Thương</td>
-                                    <td>23130327@st.hcmuaf.edu.vn</td>
-                                    <td>
-                                        <span class="badge bg-danger">Quản trị viên</span>
-                                    </td>
-                                    <td>
-                                        <a href="../profileM/profile.jsp"><button class="btn btn-sm btn-info">Xem</button></a>
-                                        <a href="../404.jsp"><button class="btn btn-sm btn-warning">Sửa</button></a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>Vũ Châu Hoài Phong</td>
-                                    <td>23130238@st.hcmuaf.edu.vn</td>
-                                    <td>
-                                        <span class="badge bg-primary">Khách hàng</span>
-                                    </td>
-                                    <td>
-                                        <a href="../profileM/profile.jsp"><button class="btn btn-sm btn-info">Xem</button></a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>Thòng Lý Tiểu Yến</td>
-                                    <td>23130397@st.hcmuaf.edu.vn</td>
-                                    <td>
-                                        <span class="badge bg-primary">Khách hàng</span>
-                                    </td>
-                                    <td>
-                                        <a href="../profileM/profile.jsp"><button class="btn btn-sm btn-info">Xem</button></a>
-                                    </td>
-                                </tr>
+                                <c:forEach items="${userList}" var="u">
+                                    <tr>
+                                        <td>${u.id}</td>
+                                        <td>${u.fullName}</td>
+                                        <td>${u.email}</td>
+                                        <td>
+                                                <%-- Kiểm tra vai trò dựa trên ENUM Role --%>
+                                            <c:choose>
+                                                <c:when test="${u.role == 'Admin'}">
+                                                    <span class="badge bg-danger">Quản trị viên</span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="badge bg-primary">Khách hàng</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <c:if test="${u.locked}">
+                                                <span class="text-danger"><i class="fas fa-lock"></i> Đã khóa</span>
+                                            </c:if>
+                                            <c:if test="${!u.locked}">
+                                                <span class="text-success"><i class="fas fa-check-circle"></i> Hoạt động</span>
+                                            </c:if>
+                                        </td>
+                                        <td>${u.createdAt}</td>
+                                        <td>
+                                            <a href="${pageContext.request.contextPath}/profileM/profile.jsp?id=${u.id}">
+                                                <button class="btn btn-sm btn-info">Xem</button>
+                                            </a>
+                                            <c:if test="${u.role != 'Admin'}">
+                                                <a href="${pageContext.request.contextPath}/404.jsp?id=${u.id}">
+                                                    <button class="btn btn-sm btn-warning">Sửa</button>
+                                                </a>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -81,6 +99,7 @@
             </main>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/script.js"></script>

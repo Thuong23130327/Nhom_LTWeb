@@ -1,8 +1,8 @@
-package dao;
+package dao.adminDAO;
 
+import dao.DBConnect;
 import model.User;
 import model.User.Role;
-import util.MD5;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -82,22 +82,25 @@ public class UserDAO {
 
     public List<User> getAllUser() {
         List<User> users = new ArrayList<User>();
-        String sql = "SELECT * FROM Users";
-        try {
-            Connection conn = DBConnect.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        String sql = "SELECT id, email, password_hash, full_name, role, is_locked, created_at FROM Users";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                int id = rs.getInt(1);
-                String dbEmail = rs.getString(2);
-                String dbPass = rs.getString(3);
-                String dbName = rs.getString(4);
-//                String dbPass = rs.getString(5);
-//                String dbPass = rs.getString(6);
-                users.add(new User(id, dbEmail, dbPass, dbName));
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("password_hash"),
+                        rs.getString("full_name"),
+                        null,
+                        null,
+                        User.Role.valueOf(rs.getString("role")),
+                        rs.getBoolean("is_locked"),
+                        rs.getTimestamp("created_at")
+                ));
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return users;
     }

@@ -36,10 +36,9 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-users me-2"></i>
-                    Quản lý khách hàng
-                </a>
+                <a href="${pageContext.request.contextPath}/admin/user-manager" class="nav-link"><i
+                        class="fas fa-users"></i> Quản lý Người
+                    dùng</a>
             </li>
 
             <li class="nav-item">
@@ -50,10 +49,9 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fa-solid fa-ticket me-2"></i>
-                    Mã giảm giá
-                </a>
+                <a href="${pageContext.request.contextPath}/admin/product-manager" class="nav-link"><i
+                        class="fas fa-box"></i> Quản lý Sản
+                    phẩm</a>
             </li>
 
             <li class="nav-item">

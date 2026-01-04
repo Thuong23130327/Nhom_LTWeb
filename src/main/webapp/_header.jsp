@@ -76,7 +76,7 @@
             <a class="a-nodecor ${activePage =='home'?'active':''}" href="index.jsp">
                 <div class="home">Trang chủ</div>
             </a>
-            <a class="a-nodecor ${activePage =='contact'?'active':''}" " href="contact.jsp">
+            <a class="a-nodecor ${activePage =='contact'?'active':''}" href="contact.jsp">
             <div class="contact">Liên hệ</div>
             </a>
             <div class="nav-item-dropdown">
