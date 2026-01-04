@@ -155,41 +155,71 @@ public class ProductDAO  {
 //        return list;
 //    }
 //
-//    public List<Product> getProductsByCategory(int idCategory) {
-//        List<Product> list = new ArrayList<>();
-//        // Thêm 'price' và 'img' vào câu query
-//        String sql = """
-//                SELECT id, sku, name, description, avg_rating, sold_count,
-//                       brand_id, categories_id, is_active, created_at, price, img
-//                FROM Products
-//                WHERE categories_id = ?""";
-//        try (Connection conn = DBConnect.getConnection(); // Đảm bảo lấy connection ở đây
-//             PreparedStatement ps = conn.prepareStatement(sql)) {
-//
-//            ps.setInt(1, idCategory);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                // Sử dụng constructor đầy đủ (bao gồm img và price)
-//                Product p = new Product(
-//                        rs.getInt("id"),
-//                        rs.getInt("brand_id"),
-//                        rs.getInt("categories_id"),
-//                        rs.getString("sku"),
-//                        rs.getString("name"),
-//                        rs.getString("description"),
-//                        rs.getFloat("avg_rating"),
-//                        rs.getInt("sold_count"),
-//                        rs.getBoolean("is_active"),
-//                        rs.getDouble("price"),
-//                        rs.getDate("created_at").toLocalDate()
-//                );
-//                list.add(p);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    }
+    public List<Product> getProductsByCateID(String cid) {
+        List<Product> list = new ArrayList<>();
+
+        String sql = """
+                    WITH RankedProducts AS (
+                                     SELECT\s
+                                         p.id,
+                                         p.Brands_id,
+                                         p.Categories_id,
+                                         pv.variant_sku,
+                                         p.NAME,
+                                         p.description,
+                                         p.avg_rating,
+                                         p.sold_count,
+                                         p.is_active,
+                                         p.created_at,
+                                         pv.market_price,
+                                         pv.sell_price,
+                                         pv.main_image_url,
+                
+                                         ROW_NUMBER() OVER (
+                                             PARTITION BY p.id\s
+                                             ORDER BY\s
+                                                 pv.is_default DESC, 
+                                                 RAND()               
+                                         ) as rn
+                
+                                     FROM Products p
+                                     JOIN ProductVariants pv ON pv.Products_id = p.id
+                                     WHERE p.is_active = TRUE
+                                 )
+                                 SELECT * FROM RankedProducts\s
+                                 WHERE rn = 1; 
+                """;
+
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product p = new Product(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getFloat(7),
+                        rs.getInt(8),
+                        rs.getBoolean(9),
+                        rs.getDate(10).toLocalDate(),
+                        rs.getDouble(11),
+                        rs.getDouble(12),
+                        rs.getString(13));
+
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
 //
 //    public List<Product> getListProduct() {
 //        return get().withHandle(h -> h.createQuery("select * from products").mapToBean(Product.class).list());
