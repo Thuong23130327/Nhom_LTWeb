@@ -81,7 +81,6 @@ main {
 }
 
 /* Stat Cards */
-
 .stat-card {
     border: none;
     border-radius: 15px;
@@ -115,7 +114,7 @@ main {
 }
 
 /* Bar Chart */
-.chart-container {
+/* .chart-container {
     height: 300px;
     display: flex;
     align-items: flex-end;
@@ -129,7 +128,21 @@ main {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
+} */
+
+.chart-container {
+    height: 300px;
+    padding: 20px 0;
 }
+
+.bar-chart {
+    height: calc(100% - 60px);
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    border-bottom: 2px solid #eee;
+}
+
 
 .bar {
     width: 10%;
@@ -150,6 +163,7 @@ main {
     color: #666;
 }
 
+
 /* Activity List */
 .list-group-item {
     font-size: 0.9rem;
@@ -159,6 +173,19 @@ main {
 .list-group-item:hover {
     background-color: #fcfcfc;
 }
+
+.notify-content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.notify-time {
+    font-size: 0.8rem;
+    color: #999;
+    white-space: nowrap;
+}
+
 
 /* Nút bấm đồng bộ */
 .btn-primary {
