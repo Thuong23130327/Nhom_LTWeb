@@ -26,15 +26,8 @@
         <%@ include file="/admin/_adminMenu.jsp" %>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-            <!-- Header -->
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap
-                        align-items-center pt-3 pb-2 mb-3 border-bottom">
-
-                <h1 class="h2">
-                    <i class="fas fa-home me-2"></i> Admin
-                </h1>
-
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2"><i class="fas fa-home me-2"></i> Admin </h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-mail-container me-3">
                         <button class="btn btn-primary btn-sm rounded-3">
@@ -42,7 +35,6 @@
                             <span class="badge rounded-pill bg-danger badge-counter">3</span>
                         </button>
                     </div>
-
                     <button type="button" class="btn btn-sm btn-primary rounded-3">
                         <i class="fas fa-sync-alt me-1"></i> Cập nhật Dữ liệu
                     </button>
@@ -61,7 +53,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-6 mb-3">
                     <div class="card stat-card">
                         <div class="card-body d-flex justify-content-between align-items-center">
@@ -73,7 +64,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-6 mb-3">
                     <div class="card stat-card">
                         <div class="card-body d-flex justify-content-between align-items-center">
@@ -85,7 +75,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3 col-md-6 mb-3">
                     <div class="card stat-card">
                         <div class="card-body d-flex justify-content-between align-items-center">
@@ -106,20 +95,62 @@
                             <h5 class="mb-0 fw-bold text-dark">Thống kê doanh thu</h5>
                         </div>
                         <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card stat-card bg-primary text-white">
+                                        <div class="card-body d-flex align-items-center">
+                                            <div>
+                                                <h5 class="card-title">Tổng doanh thu</h5>
+                                                <p class="h4 fw-bold">100,133,090 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card stat-card bg-success text-white">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="card-title">Năm 2025</h5>
+                                                <p class="h4 fw-bold">40,956,223 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card stat-card bg-info text-white">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="card-title">T12/2025</h5>
+                                                <p class="h4 fw-bold">2,336,284 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card stat-card bg-danger text-white">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="card-title">Hôm nay</h5>
+                                                <p class="h4 fw-bold">0 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="chart-container">
                                 <div class="bar-chart">
-                                    <div class="bar" style="height:50%" data-label="T6"></div>
-                                    <div class="bar" style="height:70%" data-label="T7"></div>
-                                    <div class="bar" style="height:60%" data-label="T8"></div>
-                                    <div class="bar" style="height:90%" data-label="T9"></div>
-                                    <div class="bar" style="height:80%" data-label="T10"></div>
-                                    <div class="bar" style="height:95%" data-label="T11"></div>
+                                    <div class="bar" style="height: 50%;" data-label="T6"></div>
+                                    <div class="bar" style="height: 70%;" data-label="T7"></div>
+                                    <div class="bar" style="height: 60%;" data-label="T8"></div>
+                                    <div class="bar" style="height: 90%;" data-label="T9"></div>
+                                    <div class="bar" style="height: 80%;" data-label="T10"></div>
+                                    <div class="bar" style="height: 95%;" data-label="T11"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-4 mb-4">
                     <div class="card shadow-sm h-100">
                         <div class="card-header bg-white py-3">
@@ -127,32 +158,169 @@
                         </div>
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item py-3 border-bottom">
-                                    <i class="fas fa-shopping-cart text-success me-2"></i>
-                                    <strong>Đơn hàng mới</strong> #1209 vừa được tạo.
+                                <li class="list-group-item py-3 border-0 border-bottom">
+                                    <i class="fas fa-shopping-cart text-success me-2"></i> <strong>Đơn hàng mới</strong> #1209 vừa được tạo.
                                 </li>
-                                <li class="list-group-item py-3 border-bottom">
-                                    <i class="fas fa-user-plus text-primary me-2"></i>
-                                    <strong>Nguyễn Hoài Thương</strong> đăng ký tài khoản.
+                                <li class="list-group-item py-3 border-0 border-bottom">
+                                    <i class="fas fa-user-plus text-primary me-2"></i> <strong>Nguyễn Hoài Thương</strong> đăng ký tài khoản.
                                 </li>
-                                <li class="list-group-item py-3 border-bottom">
-                                    <i class="fas fa-box text-warning me-2"></i>
-                                    <strong>Sản phẩm X</strong> sắp hết hàng (SL: 10).
+                                <li class="list-group-item py-3 border-0 border-bottom">
+                                    <i class="fas fa-box text-warning me-2"></i> <strong>Sản phẩm X</strong> sắp hết hàng (SL: 10).
                                 </li>
-                                <li class="list-group-item py-3 border-bottom">
-                                    <i class="fas fa-envelope text-info me-2"></i>
-                                    <strong>5</strong> tin nhắn hỗ trợ mới.
+                                <li class="list-group-item py-3 border-0 border-bottom">
+                                    <i class="fas fa-envelope text-info me-2"></i> <strong>5</strong> tin nhắn hỗ trợ mới.
                                 </li>
-                                <li class="list-group-item py-3">
-                                    <i class="fas fa-check-circle text-success me-2"></i>
-                                    <strong>Đơn hàng #1199</strong> đã giao thành công.
+                                <li class="list-group-item py-3 border-0">
+                                    <i class="fas fa-check-circle text-success me-2"></i> <strong>Đơn hàng #1199</strong> đã giao thành công.
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-8 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="mb-0 fw-bold text-dark">Thống kê doanh thu</h5>
+                        </div>
+                        <div class="card-body">
 
+                            <div class="row mb-4">
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card stat-card bg-primary text-white">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="card-title">Tổng doanh thu</h5>
+                                                <p class="h3 fw-bold">100,133,090 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card stat-card bg-success text-white">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="card-title">Năm 2025</h5>
+                                                <p class="h3 fw-bold">40,956,223 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card stat-card bg-info text-white">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="card-title">T12/2025</h5>
+                                                <p class="h3 fw-bold">2,336,284 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card stat-card bg-danger text-white">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="card-title">Hôm nay</h5>
+                                                <p class="h3 fw-bold">0 VNĐ</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="chart-container">
+                                <div class="card-header bg-white py-3">
+                                    <h2 class="mb-0 fw-bold text-dark">Doanh thu 7 ngày gần đây</h2>
+                                </div>
+                                <div class="bar-chart">
+                                    <div class="bar" style="height: 30%;" data-label="2/1"></div>
+                                    <div class="bar" style="height: 70%;" data-label="3/1"></div>
+                                    <div class="bar" style="height: 60%;" data-label="4/1"></div>
+                                    <div class="bar" style="height: 85%;" data-label="5/1"></div>
+                                    <div class="bar" style="height: 20%;" data-label="6/1"></div>
+                                    <div class="bar" style="height: 00%;" data-label="8/1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="mb-0 fw-bold text-dark">Hoạt động gần đây</h5>
+                        </div>
+
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item py-3 border-0 border-bottom d-flex justify-content-between align-items-center">
+                                    <div class="notify-content">
+                                        <i class="fas fa-shopping-cart text-primary me-2"></i>
+                                        <strong>Đơn hàng </strong> #AS091 vừa được tạo.
+                                    </div>
+                                    <div class="notify-time">5p trước</div>
+                                </li>
+
+                                <li class="list-group-item py-3 border-0 border-bottom d-flex justify-content-between align-items-center">
+                                    <div class="notify-content">
+                                        <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                        <strong>Đơn chờ xử lý</strong>  5 đơn hàng đang chờ.
+                                    </div>
+                                    <div class="notify-time">10p trước</div>
+                                </li>
+
+                                <li class="list-group-item py-3 border-0 border-bottom d-flex justify-content-between align-items-center">
+                                    <div class="notify-content">
+                                        <i class="fas fa-users text-primary me-2"></i>
+                                        <strong>Khách hàng </strong> N.H Thương đăng ký tài khoản mới.
+                                    </div>
+                                    <div class="notify-time">30p trước</div>
+                                </li>
+
+                                <li class="list-group-item py-3 border-0 border-bottom d-flex justify-content-between align-items-center">
+                                    <div class="notify-content">
+                                        <i class="fas fa-box text-warning me-2"></i>
+                                        <strong>Sản phẩm </strong> #SN-012 sắp hết hàng (SL: 10).
+                                    </div>
+                                    <div class="notify-time">1h trước</div>
+                                </li>
+
+                                <li class="list-group-item py-3 border-0 d-flex justify-content-between align-items-center">
+                                    <div class="notify-content">
+                                        <i class="fas fa-box text-primary me-2"></i>
+                                        <strong>Sản phẩm </strong> #HW123 vừa được thêm.
+                                    </div>
+                                    <div class="notify-time">2h trước</div>
+                                </li>
+
+                                <li class="list-group-item py-3 border-0 d-flex justify-content-between align-items-center">
+                                    <div class="notify-content">
+                                        <i class="fas fa-envelope text-info me-2"></i>
+                                        <strong>Tin nhắn</strong> 3 tin nhắn hỗ trợ mới.
+                                    </div>
+                                    <div class="notify-time">2h trước</div>
+                                </li>
+
+                                <li class="list-group-item py-3 border-0 d-flex justify-content-between align-items-center">
+                                    <div class="notify-content">
+                                        <i class="fas fa-shopping-cart text-danger me-2"></i>
+                                        <strong>Đơn hàng </strong> #AS045 đã bị hủy.
+                                    </div>
+                                    <div class="notify-time">2h trước</div>
+                                </li>
+
+                                <li class="list-group-item py-3 border-0 d-flex justify-content-between align-items-center">
+                                    <div class="notify-content">
+                                        <i class="fas fa-shopping-cart text-success me-2"></i>
+                                        <strong>Đơn hàng </strong> #AS098 đã giao thành công.
+                                    </div>
+                                    <div class="notify-time">3h trước</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </div>
