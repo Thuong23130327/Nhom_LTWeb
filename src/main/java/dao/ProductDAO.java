@@ -115,7 +115,33 @@ public class ProductDAO {
         }
     }
 
-
+        public Product getByIdForCart(String id) {
+            String sql = "SELECT id, sku, name, display_sell_price, display_image_url FROM Products WHERE id = ?";
+            try (Connection conn = DBConnect.getConnection();
+                 PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return new Product(
+                            rs.getInt("id"),
+                            null,
+                            null,
+                            rs.getString("sku"),
+                            rs.getString("name"),
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            rs.getDouble("display_sell_price"),
+                            rs.getString("display_image_url")
+                    );
+                }
+            } catch (Exception e) { e.printStackTrace(); }
+            return null;
+        }
+    }
 //
 //    public List<Product> getNewArrivals(int limit) {
 //        List<Product> list = new ArrayList<>();
@@ -284,4 +310,4 @@ public class ProductDAO {
 //        dao.insert(products);
 //        System.out.println("Insert thành công!");
 //    }
-}
+
