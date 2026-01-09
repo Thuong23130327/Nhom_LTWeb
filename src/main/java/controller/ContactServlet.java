@@ -16,17 +16,19 @@ import java.sql.SQLException;
 @WebServlet(name = "ContactServlet", value = "/contact")
 public class ContactServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/contact.jsp").forward(request, response);
-
+        request.setAttribute("activePage", "contact");
+        request.getRequestDispatcher("contact.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ContactService contactService = new ContactService();
+        request.setAttribute("activePage", "contact");
 
+        ContactService contactService = new ContactService();
         String email = request.getParameter("email");
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String message = request.getParameter("message");
+        String submit = request.getParameter("submit");
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("auth");

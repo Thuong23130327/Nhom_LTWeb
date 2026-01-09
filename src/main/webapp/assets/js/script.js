@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Các phần tử liên quan đến Popup
     const btnDatHang = document.getElementById('btn-dat-hang');
-    const cartBtn = document.getElementById('cart-btn'); // <--- ĐÃ THÊM MỚI
+    const cartBtn = document.getElementById('cart-btn');
     const successPopup = document.getElementById('success-popup');
 
     // Thêm: Lấy phần tử nội dung popup để chặn propagation
@@ -122,63 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- 5. LOGIC ĐĂNG NHẬP/ĐĂNG XUẤT ---
-
-    function updateAuthUI() {
-        const isLogged = localStorage.getItem('isLoggedIn') === 'true';
-        const loginLink = document.querySelector('.nav-right .login-link');
-        const accountAvatar = document.querySelector('.nav-right .account-avatar');
-        const mobileLoginBtn = document.querySelector('.mobile-menu .nav-login-btn');
-
-        if (isLogged) {
-            if (loginLink) loginLink.style.display = 'none';
-            if (accountAvatar) accountAvatar.style.display = 'flex';
-            if (mobileLoginBtn) mobileLoginBtn.textContent = 'Thông tin tài khoản';
-            if (mobileLoginBtn) mobileLoginBtn.href = 'profileM/profile.jsp';
-        } else {
-            if (loginLink) loginLink.style.display = 'inline-flex';
-            if (accountAvatar) accountAvatar.style.display = 'none';
-            if (mobileLoginBtn) mobileLoginBtn.textContent = 'Đăng nhập';
-            if (mobileLoginBtn) mobileLoginBtn.href = 'login.jsp';
-        }
-    }
-
-
-    function performLogoutNav() {
-        try { localStorage.removeItem('isLoggedIn'); localStorage.removeItem('authToken'); sessionStorage.removeItem('authToken'); } catch (e) { }
-        const onIndex = location.pathname.endsWith('index.jsp') || location.pathname === '/' || location.pathname === '';
-        if (onIndex) {
-            updateAuthUI();
-            return;
-        }
-        window.location.href = 'login.jsp';
-    }
-
-    document.addEventListener('click', function (e) {
-        const logoutEl = e.target.closest('#navLogout');
-        if (logoutEl) {
-            e.preventDefault();
-            performLogoutNav();
-        }
-    });
-
-    const loginLinkEl = document.querySelector('.nav-right .login-link');
-    if (loginLinkEl) {
-        loginLinkEl.addEventListener('click', function (e) {
-            if (e.shiftKey || e.ctrlKey || e.metaKey) {
-                e.preventDefault();
-                localStorage.setItem('isLoggedIn', 'true');
-                updateAuthUI();
-            }
-        });
-    }
-
-    window.addEventListener('storage', (ev) => {
-        if (ev.key === 'isLoggedIn') updateAuthUI();
-    });
-
-    updateAuthUI();
-
     // --- 6. LOGIC THANH SEARCH BAR ---
     const searchBar = document.querySelector('.searchBar');
     const searchIcon = document.querySelector('.searchBar i.bi-search');
@@ -189,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    
+
     // --- LOGIC SLIDESHOW ---
 
     const slidesTrack = document.querySelector('.slideshow-container .slides-track');
@@ -209,26 +152,42 @@ document.addEventListener("DOMContentLoaded", function () {
         current = idx;
     }
 
-    function next() { goTo(current + 1); }
-    function prev() { goTo(current - 1); }
+    function next() {
+        goTo(current + 1);
+    }
+
+    function prev() {
+        goTo(current - 1);
+    }
 
 
     const btns = document.querySelectorAll('.slideshow-container .slide-btn');
     btns.forEach(btn => {
         if (btn.classList.contains('next')) {
-            btn.addEventListener('click', () => { next(); resetTimer(); });
+            btn.addEventListener('click', () => {
+                next();
+                resetTimer();
+            });
         } else if (btn.classList.contains('prev')) {
-            btn.addEventListener('click', () => { prev(); resetTimer(); });
+            btn.addEventListener('click', () => {
+                prev();
+                resetTimer();
+            });
         }
     });
-    dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetTimer(); }));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => {
+        goTo(i);
+        resetTimer();
+    }));
 
     function startTimer() {
         autoSlide = setInterval(next, intervalMs);
     }
+
     function stopTimer() {
         clearInterval(autoSlide);
     }
+
     function resetTimer() {
         stopTimer();
         startTimer();
@@ -247,5 +206,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Hàm global backTop (Giữ nguyên bên ngoài DOMContentLoaded)
 function backTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top: 0, behavior: 'smooth'});
 }

@@ -6,27 +6,37 @@ public class ProductVariant {
 	private int productId;
 	private String variantSku;
 	private String colorName;
-	private String mainImageUlr;
+	private String mainImageUrl;
 	private double marketPrice;
 	private double sellPrice;
 	private int stockQuantity;
 	private int soldQuantity;
+	private boolean isDefault;
 
 	public ProductVariant() {
 	}
 
 	public ProductVariant(int id, int productId, String variantSku, String colorName, String mainImageUlr,
-			double marketPrice, double sellPrice, int stockQuantity, int soldQuantity) {
+			double marketPrice, double sellPrice, int stockQuantity, int soldQuantity, boolean isDefault) {
 		super();
 		this.id = id;
 		this.productId = productId;
 		this.variantSku = variantSku;
 		this.colorName = colorName;
-		this.mainImageUlr = mainImageUlr;
+		this.mainImageUrl = mainImageUlr;
 		this.marketPrice = marketPrice;
 		this.sellPrice = sellPrice;
 		this.stockQuantity = stockQuantity;
 		this.soldQuantity = soldQuantity;
+		this.isDefault = isDefault;
+	}
+
+	public boolean isDefault() {
+		return isDefault;
+	}
+
+	public void setDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 
 	public int getId() {
@@ -61,12 +71,13 @@ public class ProductVariant {
 		this.colorName = colorName;
 	}
 
-	public String getMainImageUlr() {
-		return mainImageUlr;
+
+	public String getMainImageUrl() {
+		return mainImageUrl;
 	}
 
-	public void setMainImageUlr(String mainImageUlr) {
-		this.mainImageUlr = mainImageUlr;
+	public void setMainImageUrl(String mainImageUrl) {
+		this.mainImageUrl = mainImageUrl;
 	}
 
 	public double getMarketPrice() {

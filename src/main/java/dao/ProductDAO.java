@@ -50,11 +50,13 @@ public class ProductDAO {
     public List<Product> getProductByCategoryId(String cateId) {
         List<Product> list = new ArrayList<>();
         String sql =
-                "SELECT * FROM products where Categories_id=?";
+                "SELECT * FROM products WHERE Categories_id = ? OR\n" +
+                        "Categories_id IN (SELECT id from categories WHERE Categories_id = ?);";
         try {
             conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, cateId);
+            ps.setString(2, cateId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product p = new Product(rs.getInt("id"),
@@ -81,38 +83,39 @@ public class ProductDAO {
         return list;
     }
 
-//    public Product getById(int id) {
-//        String sql = "SELECT * FROM Products WHERE id = ?";
-//// Lấy kết nối trực tiếp để tự động trả về Pool
-//        try (Connection conn = DBConnect.getConnection();
-//             PreparedStatement ps = conn.prepareStatement(sql)) {
-//            ps.setInt(1, id);
-//            try (ResultSet rs = ps.executeQuery()) {
-//                if (rs.next()) {
-// Giữ nguyên logic khởi tạo Product
+    //Lay sp tu prd id
+    public Product getById(String id) {
+        Product p = null;
+        String sql = "SELECT * FROM Products WHERE id = ?";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                p = new Product(rs.getInt("id"),
+                        rs.getInt("Brands_id"),
+                        rs.getInt("Categories_id"),
+                        rs.getString("sku"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getFloat("avg_rating"),
+                        rs.getInt("sold_count"),
+                        rs.getBoolean("is_active"),
+                        rs.getTimestamp("created_at"),
+                        rs.getDouble("display_sell_price"),
+                        rs.getDouble("display_market_price"),
+                        rs.getString("display_image_url"));
+            }
+            return p;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-//                            new Product(
-//                            rs.getInt("id"),
-//                            rs.getInt("brand_id"),
-//                            rs.getInt("categories_id"),
-//                            rs.getString("sku"),
-//                            rs.getString("name"),
-//                            rs.getString("description"),
-//                            rs.getFloat("avg_rating"),
-//                            rs.getInt("sold_count"),
-//                            rs.getBoolean("is_active"),
-//                            rs.getDouble("price"),
-//                            rs.getDate("created_at").toLocalDate()
-//                    );
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return null;
-//    }
+
 //
 //    public List<Product> getNewArrivals(int limit) {
 //        List<Product> list = new ArrayList<>();

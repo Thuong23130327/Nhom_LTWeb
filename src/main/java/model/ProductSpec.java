@@ -49,4 +49,10 @@ public class ProductSpec {
 		this.specValue = specValue;
 	}
 
+	@Override
+	public String toString() {
+		return "ProductSpec [id=" + id + ", productId=" + productId + ", specName=" + specName + ", specValue="
+				+ specValue + "]";
+	}
+
 }

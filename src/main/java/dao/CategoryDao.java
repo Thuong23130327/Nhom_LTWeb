@@ -26,6 +26,7 @@ public class CategoryDao {
             while (rs.next()) {
                 Category c = new Category(rs.getInt(1), rs.getString(2));
                 int idParent = rs.getInt(3) != 0 ? rs.getInt(3) : 0;
+                c.setParentID(idParent);
                 list.add(c);
             }
         } catch (Exception e) {

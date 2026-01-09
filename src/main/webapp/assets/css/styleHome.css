@@ -310,7 +310,6 @@ nav {
 }
 
 
-
 .searchBar:hover input,
 .searchBar.active input {
     width: 100%;
@@ -322,7 +321,6 @@ nav {
     font-size: 15px;
     color: var(--theme-color-primary);
 }
-
 
 
 .overlay {
@@ -1205,4 +1203,104 @@ footer .copyright a:hover {
 .feature-box:hover {
     transform: translateY(-5%);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+/* --- CSS CHO MENU DROPDOWN --- */
+.aura-dropdown-container {
+    position: relative; /* Làm gốc tọa độ cho menu con */
+}
+
+/* Ẩn menu cha mặc định */
+.aura-menu-parent {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    z-index: 999;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 4px;
+}
+
+/* Khi di chuột vào container "Sản phẩm" thì hiện menu cha */
+.aura-dropdown-container:hover .aura-menu-parent {
+    display: block;
+}
+
+.aura-menu-item {
+    position: relative;
+}
+
+.aura-menu-item a {
+    display: flex;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+}
+
+.aura-menu-item a:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+.aura-menu-parent, .aura-menu-child {
+    list-style: none ;
+    padding: 0 ;
+    margin: 0 ;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+    min-width: 200px;
+    z-index: 100;
+}
+
+.aura-menu-parent {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.aura-dropdown-container:hover .aura-menu-parent {
+    display: block;
+}
+
+.aura-menu-item {
+    position: relative;
+}
+
+.aura-menu-child {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    border-left: 1px solid #ddd;
+}
+
+.aura-menu-item:hover .aura-menu-child {
+    display: block;
+}
+
+.aura-menu-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.aura-menu-item a:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+/* Icon mũi tên */
+.aura-menu-item i {
+    font-size: 0.8rem;
+    margin-left: 10px;
 }

@@ -1,21 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ include file="/tag/_taglibs.jsp" %>
-<%
-    request.setAttribute("pageTitle", "Tên sp - AuraSound");
-    request.setAttribute("activePage", "product");
-    request.setAttribute("keepDefaultCss", true);
-%>
-<c:set var="customCss" scope="request">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tên sp - AuraSound</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProfile.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHeadphones.css">
-</c:set>
-<%@ include file="_header.jsp" %>
+
+</head>
+
+<body>
+<jsp:include page="/tag/_header.jsp"></jsp:include>
 <main class="store-container content headphones-page-container">
     <form action="product" method="get" id="filterForm">
         <aside class="filter-sidebar" id="filter-sidebar">
-            <div class="filter-wrapper">
-                <button></button>
-
-            </div>
             <div class="pt-3 pb-2">
                 <a href="store.jsp" class="btn btn-sm btn-primary" title="Quay lại">
                     <i class="fas fa-arrow-left"></i> Quay lại
@@ -35,13 +48,11 @@
                 <div class="filter-group">
                     <h4>Hãng sản xuất</h4>
                     <div class="filter-options" data-filter-group="brand">
-                        <button class="filter-option" data-filter="sony">Sony</button>
-                        <button class="filter-option" data-filter="samsung">Samsung</button>
-                        <button class="filter-option" data-filter="apple">Apple</button>
-                        <button class="filter-option" data-filter="xiaomi">Xiaomi</button>
-                        <button class="filter-option" data-filter="jbl">JBL</button>
-                        <button class="filter-option" data-filter="marshall">Marshall</button>
-                        <button class="filter-option" data-filter="ava">AVA+</button>
+                        <c:forEach items="${brandList}" var="brand">
+                            <button class="filter-option" data-filter="${brand.name}">
+                                    ${brand.name}
+                            </button>
+                        </c:forEach>
                     </div>
                 </div>
 
@@ -83,7 +94,7 @@
 
         <div class="product-grid" id="product-grid">
             <c:forEach items="${productList}" var="p">
-                <a href="sproduct.jsp" class="product-card">
+                <a href="detail?pid=${p.id}" class="product-card">
                     <div class="product-badge discount">Giảm 50%</div>
 
                     <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/300x300?text=No+Image'">
