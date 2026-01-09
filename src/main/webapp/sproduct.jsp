@@ -1,33 +1,47 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%
-    request.setAttribute("pageTitle", "Tên sp - AuraSound");
-    request.setAttribute("activePage", "product");
-    request.setAttribute("keepDefaultCss", true);
-%>
-<c:set var="customCss">
-    <link rel="stylesheet" href="assets/css/product_detail.css">
-</c:set>
-<c:set var="customjs" scope="request">
-    <script src="assets/js/scriptProduct.js"></script>
-</c:set>
-<%@ include file="_header.jsp" %>
+
+<%@ include file="/tag/_taglibs.jsp" %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm - AuraSound</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProduct.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleCheckout.css.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleCart.css">
+
+
+</head>
+
+<body>
+<jsp:include page="/tag/_header.jsp"></jsp:include>
 <main>
     <section class="container sproduct my-5 pt-5">
-<%--Thông tin sản phẩm--%>
         <div class="row">
             <div class="gallery-container col-lg-5 col-md-12 col-12">
-                <%-- Ảnh chính - Giữ nguyên class và id --%>
-                <img class="main-img img-fluid w-100 pb-1" src="${prod.mainImageUrl}" id="MainImg">
-
+                <img class="main-img img-fluid w-100 pb-1" src="${curVariant.mainImageUrl}" width="100%" id="MainImg">
                 <div class="thumb-container">
                     <button class="scroll-btn left" onclick="prevImage()">&#10094;</button>
 
                     <div class="small-img-group" id="thumbScroll">
-                        <c:forEach var="imgUrl" items="${images}" varStatus="status">
-                            <div class="small-img-col">
-                                <img src="${imgUrl}" class="small-img ${status.first ? 'active' : ''}" onclick="showImg(this, ${status.index})">
-                            </div>
+                        <c:forEach items="${images}" var="eachImg">
+                            <img src="${eachImg}" class="small-img">
                         </c:forEach>
                     </div>
 
@@ -36,60 +50,69 @@
             </div>
 
             <div class="info col-lg-6 col-md-12 col-12">
-                <h6 class="breadcrumb-text">Trang chủ / ${product.categoryName}</h6>
-                <h3 class="product-name-detail">${product.productName}</h3>
-
-                <div class="rating-stars-detail">
-                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
-                    <span>(124 Đánh giá)</span>
+                <h6>Home / ${product.name}</h6>
+                <h3>${product.name}</h3>
+                <div class="star">
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
+                    <i class='bx bxs-star'></i>
                 </div>
 
-                <h2 class="product-price-detail">${product.basePrice} VNĐ</h2>
+                <div class="price-block">
+                    <span class="new-price"><fmt:formatNumber value="${product.sellPrice}" pattern="#,###"/> đ</span>
+                    <span class="old-price"><fmt:formatNumber value="${product.oldPrice}" pattern="#,###"/> đ</span>
+                </div>
 
                 <div class="product-options">
-                    <h4 class="option-title">Màu sắc:</h4>
-                    <div class="color-options-grid">
-                        <c:forEach var="v" items="${variants}">
-                            <div class="color-item" onclick="selectColor(this)" data-variant-id="${v.variantId}" data-img="${v.mainImageUrl}">
-                                <img src="${v.mainImageUlr}" alt="${v.colorName}">
-                                <span>${v.colorName}</span>
-                                <div class="check-mark"><i class='bx bx-check'></i></div>
+                    <h4>Màu sắc: </h4>
+                    <div class="color-options">
+                        <c:forEach var="eachVar" items="${variants}">
+                            <div class="color-item" onclick="selectColor(this)"
+                                 data-img="${eachVar.mainImageUrl}">
+                                <img src="${eachVar.mainImageUrl}" alt="${eachVar.colorName}">
+                                <span>${eachVar.colorName}</span>
                             </div>
+
                         </c:forEach>
                     </div>
                 </div>
 
-                <div class="quantity-section mt-4">
-                    <h4 class="option-title mb-3">Số lượng:</h4>
-                    <div class="quantity-input-group d-flex align-items-center mb-4">
-                        <%-- Nút trừ/cộng giúp tăng UX trên mobile --%>
-                        <button class="qty-btn minus" onclick="changeQty(-1)">-</button>
-                        <input type="number" value="1" min="1" class="qty-input" id="productQty">
-                        <button class="qty-btn plus" onclick="changeQty(1)">+</button>
-                    </div>
+                <div class="product-quantity">
+                    <h4>Số lượng: ${curVariant.stockQuantity}</h4>
+                    <button class="quantity-btn" aria-label="Giảm">-</button>
+                    <input type="number" value="1">
+                    <button class="quantity-btn" aria-label="Tăng">+</button>
+
                 </div>
 
-                <div class="action-btns d-flex gap-3">
-                    <button class="btn-add-cart flex-grow-1" onclick="addToCart('${product.productId}')">
-                        <i class='bx bx-cart-add'></i> Thêm vào giỏ hàng
-                    </button>
-                    <button class="btn-buy-now flex-grow-1" onclick="buyNow('${product.productId}')">
-                        Mua Ngay
-                    </button>
+                <div class="btn">
+                    <button class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
+
+                    <a href="cart.html"><a href="checkout.html">
+                        <button class="buy-btn">Mua Ngay</button>
+                    </a></a>
                 </div>
+
+
             </div>
         </div>
+        </div>
+
     </section>
 
     <section class="container my-5 pt-5">
-            <div class="row g-4 equal-height-row"> <div class="col-lg-6 col-md-12">
-                <div class="info-card h-100">
-                    <h3 class="section-title">Thông số kỹ thuật</h3>
+        <div class="row equal-columns">
+            <div class="describe col-lg-6 col-md-12 col-12">
+                <div class="specs-container">
+                    <h3>Thông số kỹ thuật</h3>
+
                     <table class="specs-table">
-                        <c:forEach var="s" items="${specs}">
+                        <c:forEach items="${specs}" var="eachSpec">
                             <tr>
-                                <td class="spec-title">${s.specName}</td>
-                                <td class="spec-value">${s.specValue}</td>
+                                <td class="spec-title">${eachSpec.specName}</td>
+                                <td class="spec-value" style="white-space: pre-line;">${eachSpec.specValue}</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -98,167 +121,149 @@
             <div class="col-lg-5 col-md-12 col-12">
                 <div class=" describe-container">
                     <h3>Mô tả sản phẩm</h3>
-                    <span>Tai nghe Sony WH-CH520 sở hữu âm thanh kỹ thuật số DSEE giúp mang lại âm thanh chân thực
-                            cùng
-                            với đó là pin cho thời gian sử dụng tới 40 giờ. Bên cạnh đó, sản phẩm tai nghe Sony này sở
-                            hữu
-                            thiết
-                            kế khá gọn nhẹ cùng với thiết kế tích hợp micro vô cùng tiện lợi. Thưởng thức âm thanh chất
-                            lượng cao suốt cả ngày.
-                            Trải nghiệm lắng nghe dành riêng cho bạn. Cơ chế tăng cường âm thanh kỹ thuật số (DSEE)
-                            khôi phục các hòa âm và độ sống động bị mất trong quá trình nén nhạc thông thường, mang lại
-                            âm
-                            thanh trung thực hơn.</span>
+                    <span style="white-space: pre-line;">${product.description}</span>
                 </div>
             </div>
-
         </div>
     </section>
 
     <section class="boxReview">
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="boxReview-container">
-                    <div class="boxReview-head">
-                        <h3>Đánh giá & Nhận xét</h3>
+        <div class="boxReview-head">
+            <h3>Đánh giá</h3>
+        </div>
+        <div class="boxReview-review">
+            <div class="boxReview-overView">
+                <div class="score">
+                    <span class="average">5.0</span>/5
+                    <div class="star">
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
+                        <i class='bx bxs-star'></i>
                     </div>
+                    <p>23 lượt đánh giá</p>
+                </div>
 
-                    <div class="boxReview-review">
-                        <div class="boxReview-overView d-flex align-items-center justify-content-between">
-                            <div class="score-wrapper d-flex align-items-center">
-                                <div class="score-big">
-                                    <span class="average">5.0</span><span class="max-score">/5</span>
-                                </div>
-                                <div class="score-details ms-4">
-                                    <div class="star-group">
-                                        <i class='bx bxs-star'></i>
-                                        <i class='bx bxs-star'></i>
-                                        <i class='bx bxs-star'></i>
-                                        <i class='bx bxs-star'></i>
-                                        <i class='bx bxs-star'></i>
-                                    </div>
-                                    <p class="mb-0 text-muted">23 lượt đánh giá</p>
-                                </div>
-                            </div>
 
-                            <button class="btn-review">
-                                <i class='bx bx-edit'></i> Viết đánh giá
-                            </button>
+                <button class="btn-review">Viết đánh giá</button>
+                <div class="over-lay"></div>
+                <div class="wrapper">
+
+                    <h3>Đánh giá sản phẩm</h3>
+                    <form action="#">
+                        <div class="rating">
+                            <input type="number" name="rating" hidden>
+                            <i class='bx bx-star star'></i>
+                            <i class='bx bx-star star'></i>
+                            <i class='bx bx-star star'></i>
+                            <i class='bx bx-star star'></i>
+                            <i class='bx bx-star star'></i>
                         </div>
-
-                        <div class="review-modal-wrapper">
-                            <div class="over-lay"></div>
-                            <div class="wrapper">
-                                <h3>Đánh giá sản phẩm</h3>
-                                <form action="#" id="reviewForm">
-                                    <div class="rating">
-                                        <input type="number" name="rating" hidden>
-                                        <i class='bx bx-star star' style="--i: 0;"></i>
-                                        <i class='bx bx-star star' style="--i: 1;"></i>
-                                        <i class='bx bx-star star' style="--i: 2;"></i>
-                                        <i class='bx bx-star star' style="--i: 3;"></i>
-                                        <i class='bx bx-star star' style="--i: 4;"></i>
-                                    </div>
-                                    <textarea name="opinion" cols="30" rows="5" placeholder="Chia sẻ trải nghiệm của bạn về sản phẩm..."></textarea>
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn submit">Gửi đánh giá</button>
-                                        <button type="button" class="btn cancel">Hủy bỏ</button>
-                                    </div>
-                                </form>
-                            </div>
+                        <textarea name="opinion" cols="30" rows="5" placeholder="Đánh giá của bạn..."></textarea>
+                        <div class="btn-group">
+                            <button type="submit" class="btn submit">Gửi</button>
+                            <button class="btn cancel">Cancel</button>
                         </div>
+                    </form>
+                </div>
+
+
+            </div>
+
+            <div class="boxReview-rating">
+                <div class="rating-level">
+                    <div class="star-count">
+                        <div>5</div>
+                        <i class='bx bxs-star' style="color: goldenrod;"></i>
+                    </div>
+                    <progress class="progress" value="100" max="100"></progress>
+                    <span>23 đánh giá</span>
+                </div>
+                <div class="rating-level">
+                    <div class="star-count">
+                        <div>4</div>
+                        <i class='bx bxs-star' style="color: goldenrod;"></i>
+                    </div>
+                    <progress class="progress" value="0" max="100"></progress>
+                    <span>0 đánh giá</span>
+                </div>
+                <div class="rating-level">
+                    <div class="star-count">
+                        <div>3</div>
+                        <i class='bx bxs-star' style="color: goldenrod;"></i>
+                    </div>
+                    <progress class="progress" value="0" max="100"></progress>
+                    <span>0 đánh giá</span>
+                </div>
+                <div class="rating-level">
+                    <div class="star-count">
+                        <div>2</div>
+                        <i class='bx bxs-star' style="color: goldenrod;"></i>
+                    </div>
+                    <progress class="progress" value="0" max="100"></progress>
+                    <span>0 đánh giá</span>
+                </div>
+                <div class="rating-level">
+                    <div class="star-count">
+                        <div>1</div>
+                        <i class='bx bxs-star' style="color: goldenrod;"></i>
+                    </div>
+                    <progress class="progress" value="0" max="100"></progress>
+                    <span>0 đánh giá</span>
+                </div>
+            </div>
+
+            <div class="boxReview-experience">
+                <h4>Đánh giá theo trải nghiệm</h4>
+                <div class="experience-review-item">
+                    <div class="item-title">Thời lượng pin</div>
+                    <div class="result-item">
+                        <div class="star">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <div class="item-point">5/5</div>
+                        <div class="item-review-count">(19 đánh giá)</div>
+                    </div>
+                </div>
+                <div class="experience-review-item">
+                    <div class="item-title">Cảm giác đeo</div>
+                    <div class="result-item">
+                        <div class="star">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <div class="item-point">5/5</div>
+                        <div class="item-review-count">(19 đánh giá)</div>
+                    </div>
+                </div>
+                <div class="experience-review-item">
+                    <div class="item-title">Chất âm</div>
+                    <div class="result-item">
+                        <div class="star">
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                            <i class='bx bxs-star'></i>
+                        </div>
+                        <div class="item-point">5/5</div>
+                        <div class="item-review-count">(19 đánh giá)</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="boxReview-rating">
-            <div class="rating-level">
-                <div class="star-count">
-                    <div>5</div>
-                    <i class='bx bxs-star' style="color: goldenrod;"></i>
-                </div>
-                <progress class="progress" value="${percent5}" max="100"></progress>
-                <span>${count5} đánh giá</span>
-            </div>
-            <div class="rating-level">
-                <div class="star-count">
-                    <div>4</div>
-                    <i class='bx bxs-star' style="color: goldenrod;"></i>
-                </div>
-                <progress class="progress" value="${percent4}" max="100"></progress>
-                <span>${count4} đánh giá</span>
-            </div>
-            <div class="rating-level">
-                <div class="star-count">
-                    <div>3</div>
-                    <i class='bx bxs-star' style="color: goldenrod;"></i>
-                </div>
-                <progress class="progress" value="${percent3}" max="100"></progress>
-                <span>${count3} đánh giá</span>
-            </div>
-            <div class="rating-level">
-                <div class="star-count">
-                    <div>2</div>
-                    <i class='bx bxs-star' style="color: goldenrod;"></i>
-                </div>
-                <progress class="progress" value="${percent2}" max="100"></progress>
-                <span>${count2} đánh giá</span>
-            </div>
-            <div class="rating-level">
-                <div class="star-count">
-                    <div>1</div>
-                    <i class='bx bxs-star' style="color: goldenrod;"></i>
-                </div>
-                <progress class="progress" value="${percent1}" max="100"></progress>
-                <span>${count1} đánh giá</span>
-            </div>
-        </div>
 
-        <div class="boxReview-experience">
-            <h4>Đánh giá theo trải nghiệm</h4>
-
-            <div class="experience-review-item">
-                <div class="item-title">Thời lượng pin</div>
-                <div class="result-item">
-                    <div class="star">
-                        <%-- Logic hiển thị sao dựa trên số điểm batteryPoint (Ví dụ: 5) --%>
-                        <c:forEach begin="1" end="5" var="i">
-                            <i class='bx ${i <= batteryPoint ? "bxs-star" : "bx-star"}'></i>
-                        </c:forEach>
-                    </div>
-                    <div class="item-point">${batteryPoint}/5</div>
-                    <div class="item-review-count">(${batteryReviewCount} đánh giá)</div>
-                </div>
-            </div>
-
-            <div class="experience-review-item">
-                <div class="item-title">Cảm giác đeo</div>
-                <div class="result-item">
-                    <div class="star">
-                        <c:forEach begin="1" end="5" var="i">
-                            <i class='bx ${i <= comfortPoint ? "bxs-star" : "bx-star"}'></i>
-                        </c:forEach>
-                    </div>
-                    <div class="item-point">${comfortPoint}/5</div>
-                    <div class="item-review-count">(${comfortReviewCount} đánh giá)</div>
-                </div>
-            </div>
-
-            <div class="experience-review-item">
-                <div class="item-title">Chất âm</div>
-                <div class="result-item">
-                    <div class="star">
-                        <c:forEach begin="1" end="5" var="i">
-                            <i class='bx ${i <= soundPoint ? "bxs-star" : "bx-star"}'></i>
-                        </c:forEach>
-                    </div>
-                    <div class="item-point">${soundPoint}/5</div>
-                    <div class="item-review-count">(${soundReviewCount} đánh giá)</div>
-                </div>
-            </div>
-        </div>
     </section>
+
 
     <section id="featured" class="my-5 pb-5">
         <div class="container text-center">
@@ -268,7 +273,7 @@
         </div>
         <div class="row mx-auto container-fluid">
             <div class="product  col-lg-3 col-md-4 col-12">
-                <a href="sproduct.jsp" class="product-card loa page-1">
+                <a href="sproduct.html" class="product-card loa page-1">
                     <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/2162/356825/loa-bluetooth-jbl-partybox-720-1-638976840411732460-750x500.jpg"
                          alt="Loa Bluetooth JBL Partybox 720">
                     <div class="product-card-info">
@@ -290,14 +295,14 @@
                             </div>
                         </div>
                     </div>
-                </a> <a href="checkout.jsp">
+                </a> <a href="checkout.html">
                 <button class="buy-btn">Mua Ngay</button>
             </a>
 
             </div>
 
             <div class="product col-lg-3 col-md-4 col-12">
-                <a href="sproduct.jsp" class="product-card loa page-1">
+                <a href="sproduct.html" class="product-card loa page-1">
                     <!-- Tag giảm giá -->
                     <div class="product-badge discount">
                         Giảm 18%
@@ -326,7 +331,7 @@
                     </div>
 
                 </a>
-                <a href="checkout.jsp">
+                <a href="checkout.html">
                     <button class="buy-btn">Mua Ngay</button>
                 </a>
 
@@ -335,7 +340,7 @@
 
             <div class="product  col-lg-3 col-md-4 col-12">
 
-                <a href="sproduct.jsp" class="product-card tai-nghe page-1">
+                <a href="sproduct.html" class="product-card tai-nghe page-1">
 
                     <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/54/332455/tai-nghe-tws-jbl-wave-beam-2-den-3-638682176208572620-750x500.jpg"
                          alt="Tai nghe Bluetooth True Wireless JBL Wave Beam 2 ">
@@ -361,7 +366,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="checkout.jsp">
+                <a href="checkout.html">
                     <button class="buy-btn">Mua Ngay</button>
                 </a>
 
@@ -369,7 +374,7 @@
 
             <div class="product  col-lg-3 col-md-4 col-12">
 
-                <a href="sproduct.jsp" class="product-card tai-nghe page-1">
+                <a href="sproduct.html" class="product-card tai-nghe page-1">
 
                     <!-- Tag giảm giá -->
                     <div class="product-badge discount">
@@ -400,7 +405,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="checkout.jsp">
+                <a href="checkout.html">
                     <button class="buy-btn">Mua Ngay</button>
                 </a>
 
@@ -409,7 +414,7 @@
 
             <div class="product  col-lg-3 col-md-4 col-12">
 
-                <a href="sproduct.jsp" class="product-card loa page-1">
+                <a href="sproduct.html" class="product-card loa page-1">
 
                     <!-- Tag giảm giá -->
                     <div class="product-badge discount">
@@ -439,7 +444,7 @@
                             </div>
                         </div>
                     </div>
-                </a> <a href="checkout.jsp">
+                </a> <a href="checkout.html">
                 <button class="buy-btn">Mua Ngay</button>
             </a>
 
@@ -447,7 +452,7 @@
 
             <div class="product  col-lg-3 col-md-4 col-12">
 
-                <a href="sproduct.jsp" class="product-card loa page-1">
+                <a href="sproduct.html" class="product-card loa page-1">
 
                     <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/2162/356866/loa-bluetooth-alpha-works-aw-ikon20-den-cam-1-638947617992323340-750x500.jpg"
                          alt="                    Loa Bluetooth Alpha Works AW-IKON20">
@@ -470,7 +475,7 @@
                             </div>
                         </div>
                     </div>
-                </a> <a href="checkout.jsp">
+                </a> <a href="checkout.html">
                 <button class="buy-btn">Mua Ngay</button>
             </a>
 
@@ -478,7 +483,7 @@
 
             <div class="product  col-lg-3 col-md-4 col-12">
 
-                <a href="sproduct.jsp" class="product-card loa page-1">
+                <a href="sproduct.html" class="product-card loa page-1">
                     <div class="product-badge discount">
                         Giảm 15%
                     </div>
@@ -503,7 +508,7 @@
                             </div>
                         </div>
                     </div>
-                </a> <a href="checkout.jsp">
+                </a> <a href="checkout.html">
                 <button class="buy-btn">Mua Ngay</button>
             </a>
 
@@ -511,7 +516,7 @@
 
             <div class="product  col-lg-3 col-md-4 col-12">
 
-                <a href="sproduct.jsp" class="product-card loa page-1">
+                <a href="sproduct.html" class="product-card loa page-1">
                     <div class="product-badge discount">
                         Giảm 49%
                     </div>
@@ -537,25 +542,181 @@
                             </div>
                         </div>
                     </div>
-                </a> <a href="checkout.jsp">
+                </a> <a href="checkout.html">
                 <button class="buy-btn">Mua Ngay</button>
             </a>
             </div>
         </div>
     </section>
 </main>
-<%
-    request.setAttribute("keepDefaultJs", true);
-%>
 
-<c:set var="customJs" scope="request">
-    <script src="assets/js/scriptProduct.js"></script>
-</c:set>
+<footer class="footer-container">
+    <div class="row container mx-auto pt-5">
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+            <div class="logo-container">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <div class="logo-wave">
+                        <div class="sound-wave wave1"></div>
+                        <div class="sound-wave wave2"></div>
+                        <div class="sound-wave wave3"></div>
+                    </div>
+                    <span class="logo-text">AuraSound</span>
+                </a>
+            </div>
+            <p class="pt-3">Với Aura Sound, âm nhạc không chỉ để nghe – mà là để cảm nhận. Mỗi nhịp điệu, mỗi giai
+                điệu đều
+                được
+                tái hiện chân thực, giúp bạn thể hiện phong cách và cá tính qua từng thanh âm.</p>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+            <h5 class="pb-2">Featured</h5>
+            <ul class="text-uppercase list-unstyled">
+                <li><a href="#">Tai nghe thể thao</a></li>
+                <li><a href="#">Tai nghe cao cấp</a></li>
+                <li><a href="#">Loa cao cấp</a></li>
+                <li><a href="#">Tai nghe SONY</a></li>
+                <li><a href="#">Loa JBL</a></li>
+            </ul>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
+            <h5 class="pb-2">Liên Hệ</h5>
+            <div>
+                <h6 class="text-uppercase">Địa chỉ</h6>
+                <p>Nong Lam University, VQCR+GP6, khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh</p>
+            </div>
+            <div>
+                <h6 class="text-uppercase">Hotline</h6>
+                <p>1900 1919</p>
+            </div>
+            <div>
+                <h6 class="text-uppercase">Email</h6>
+                <p>Aurasound.work@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-one col-lg-3 col-md-6 col-12">
+            <h5 class="pb-2">Instagram</h5>
+            <div class="row">
+                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img1.jpg" alt="">
+                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img10.jpg" alt="">
+                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img2.jpg" alt="">
+                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img5.jpg" alt="">
+                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img6.jpg" alt="">
+            </div>
+        </div>
+    </div>
 
-<%@ include file="_footer.jsp" %>
+    <div class="copyright mt-5">
+        <div class="row container mx-auto">
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                <img src="assets/img/Payment/payment.png" alt="">
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
+                <p>© 2025 Công Ty Cổ Phần AuraSound </p>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
 
+    </div>
+</footer>
+<script src="assets/js/script.js"></script>
+<script src="assets/js/scriptProduct.js"></script>
 
 </body>
 
 
 </html>
+
+<%--CODE CŨ--%>
+
+
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
+<%--<%@ include file="/tag/_taglibs.jsp" %>--%>
+
+<%--&lt;%&ndash;%>
+<%--    request.setAttribute("pageTitle", "Tên sp - AuraSound");--%>
+<%--    request.setAttribute("activePage", "product");--%>
+<%--    request.setAttribute("keepDefaultCss", true);--%>
+<%--%>--%>
+
+<%--<c:set var="customjs" scope="request">--%>
+<%--    <script src="assets/js/scriptProduct.js"></script>--%>
+<%--</c:set>--%>
+<%--<head>--%>
+<%--    <meta charset="UTF-8">--%>
+<%--    <meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
+<%--    <title>${pageTitle}</title>--%>
+
+<%--    <link rel="preconnect" href="https://fonts.googleapis.com">--%>
+<%--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>--%>
+<%--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">--%>
+<%--    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">--%>
+<%--    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet"/>--%>
+<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">--%>
+<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">--%>
+<%--    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>--%>
+<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"--%>
+<%--          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">--%>
+
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">--%>
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">--%>
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProfile.css">--%>
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHeadphones.css">--%>
+<%--    <link rel="stylesheet" href="assets/css/product_detail.css">--%>
+
+<%--</head>--%>
+
+<%--<body>--%>
+<%--<jsp:include page="/tag/_header.jsp"></jsp:include>--%>
+
+<%--&lt;%&ndash;%>
+
+<%--%>--%>
+<%--<main>--%>
+<%--    <section class="container sproduct my-5 pt-5">--%>
+<%--                <h2 class="product-price-detail" id="displayPrice">--%>
+<%--                    <fmt:formatNumber value="${curVariant.price}" pattern="#,###"/> VNĐ--%>
+<%--                </h2>--%>
+<%--                <div class="product-options">--%>
+<%--                    <h4 class="option-title">Màu sắc:</h4>--%>
+<%--                    <div class="color-options-grid">--%>
+<%--                        <c:forEach var="v" items="${variants}">--%>
+<%--                            <div class="color-item" onclick="selectColor(this)" data-variant-id="${v.variantId}"--%>
+<%--                                 data-img="${v.mainImageUrl}">--%>
+<%--                                <img src="${v.mainImageUlr}" alt="${v.colorName}">--%>
+<%--                                <span>${v.colorName}</span>--%>
+<%--                                <div class="check-mark"><i class='bx bx-check'></i></div>--%>
+<%--                            </div>--%>
+<%--                        </c:forEach>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+
+<%--                <div class="quantity-section mt-4">--%>
+<%--                    <h4 class="option-title mb-3">Số lượng: ${curVariant.stockQuantity}</h4>--%>
+<%--                    <div class="quantity-input-group d-flex align-items-center mb-4">--%>
+<%--                        &lt;%&ndash; Nút trừ/cộng giúp tăng UX trên mobile &ndash;%&gt;--%>
+<%--                        <button class="qty-btn minus" onclick="changeQty(-1)">-</button>--%>
+<%--                        <input type="number" value="1" min="1" class="qty-input" id="productQty">--%>
+<%--                        <button class="qty-btn plus" onclick="changeQty(1)">+</button>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+
+<%--                <div class="action-btns d-flex gap-3">--%>
+<%--                    <button class="btn-add-cart flex-grow-1" onclick="addToCart('${product.productId}')">--%>
+<%--                        <i class='bx bx-cart-add'></i> Thêm vào giỏ hàng--%>
+<%--                    </button>--%>
+<%--                    <button class="btn-buy-now flex-grow-1" onclick="buyNow('${product.productId}')">--%>
+<%--                        Mua Ngay--%>
+<%--                    </button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </section>--%>
+
+
+
+
+

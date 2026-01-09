@@ -14,7 +14,8 @@ public class ProductService {
     public ProductService() throws SQLException, ClassNotFoundException {
         productDao = new ProductDAO();
     }
-//
+
+    //
 //    public List<Product> getNewArrivals(int limit) {
 //        return productDao.getNewArrivals(limit);
 //    }
@@ -40,18 +41,27 @@ public class ProductService {
 //        int total = productDao.countTotalHeadphones();
 //        return (int) Math.ceil((double) total / pageSize);
 //    }
-//Thuong done
+
+
+    //Thuong done
     public List<Product> getAllProduct() {
         return productDao.getAllProduct();
     }
+
     public List<Product> getProductByCategoryId(String cateId) {
         return productDao.getProductByCategoryId(cateId);
     }
+
+    public Product getById(String pid) {
+        Product p = productDao.getById(pid);
+        return p != null ? p : null;
+    }
+
+
 
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ProductService ps = new ProductService();
         System.out.println(ps.getAllProduct());
-
     }
 }

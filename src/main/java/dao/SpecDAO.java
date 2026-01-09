@@ -5,33 +5,37 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
 import model.ProductSpec;
 
 public class SpecDAO {
+    private Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
 
-	public List<ProductSpec> getSpecsByProductId(int productId) {
-		List<ProductSpec> list = new ArrayList<>();
-		String sql = "SELECT * FROM ProductSpecs WHERE Products_id = ?";
+//Lay thong so tu prdid
+    public List<ProductSpec> getSpecsByProductId(String productId) {
+        List<ProductSpec> list = new ArrayList<>();
+        String sql = "SELECT * FROM ProductSpecs WHERE Products_id = ?";
 
-		try (Connection conn = new DBConnect().getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, productId);
+            rs = ps.executeQuery();
 
-			ps.setInt(1, productId);
-
-			try (ResultSet rs = ps.executeQuery()) {
-				while (rs.next()) {
-
-					ProductSpec spec = new ProductSpec();
-					spec.setId(rs.getInt("id"));
-					spec.setProductId(rs.getInt("Products_id"));
-					spec.setSpecName(rs.getString("spec_name"));
-					spec.setSpecValue(rs.getString("spec_value"));
-
-					list.add(spec);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ProductSpec spec = new ProductSpec(rs.getInt("id"),
+                            rs.getInt("Products_id"),
+                            rs.getString("spec_name"),
+                            rs.getString("spec_value"));
+                    list.add(spec);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

@@ -235,10 +235,3 @@ CREATE TABLE Temp_variants
     soLuongCon INT,
     Image      NVARCHAR (255)
 );
-SELECT DISTINCT temp_products.brandName
-FROM temp_products
-WHERE brandName IS NOT NULL
-  AND brandName != '';
-  
-  ALTER TABLE ProductVariants
-ADD COLUMN is_default BOOLEAN DEFAULT FALSE;
