@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Product;
-import model.ProductDTO;
 import model.ProductSpec;
 import model.ProductVariant;
 import service.ProductDetailService;

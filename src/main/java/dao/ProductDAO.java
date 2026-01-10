@@ -69,8 +69,8 @@ public class ProductDAO {
                         rs.getInt("sold_count"),
                         rs.getBoolean("is_active"),
                         rs.getTimestamp("created_at"),
-                        rs.getDouble("display_sell_price"),
                         rs.getDouble("display_market_price"),
+                        rs.getDouble("display_sell_price"),
                         rs.getString("display_image_url"));
                 list.add(p);
 

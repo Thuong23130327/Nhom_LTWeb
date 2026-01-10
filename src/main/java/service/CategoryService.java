@@ -13,6 +13,15 @@ public class CategoryService {
         return categoryDao.getAllCategories();
     }
 
+    public Category getCategoryById(int cateId) throws SQLException, ClassNotFoundException {
+        List<Category> categoryList = categoryDao.getAllCategories();
+        for (Category category : categoryList) {
+            if (category.getId() == cateId) return category;
+        }
+        return null;
+
+    }
+
     public boolean isParent(Category c) {
         return c.getParentID() == 0;
     }
@@ -21,4 +30,5 @@ public class CategoryService {
         CategoryService categoryService = new CategoryService();
         System.out.println(categoryService.getAllCategories());
     }
+
 }
