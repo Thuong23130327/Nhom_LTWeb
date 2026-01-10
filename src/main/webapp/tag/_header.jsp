@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="head-right">
-            <div class="info-item"><a href="contact.jsp">Cửa hàng gần đây</a></div>
+            <div class="info-item"><a href="contact">Liên hệ chi tiết</a></div>
             <div class="info-item"><a href="profileM/order-history.jsp">Tra cứu đơn hàng</a></div>
             <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
         </div>
@@ -129,11 +129,11 @@
             <div class="mobile-menu-item"><a href="logout">Đăng xuất</a></div>
         </c:when>
         <c:otherwise>
-            <div class="mobile-menu-item"><a href="login.jsp" class="nav-login-btn">Đăng nhập</a></div>
+            <div class="mobile-menu-item"><a href="login" class="nav-login-btn">Đăng nhập</a></div>
         </c:otherwise>
     </c:choose>
     <div class="mobile-menu-item ${activePage =='cart'?'active':''}"><a href="cart.jsp">Giỏ hàng</a></div>
-    <div class="mobile-menu-item ${activePage =='contact'?'active':''}"><a href="contact.jsp">Liên hệ</a></div>
-    <div class="mobile-menu-item ${activePage =='product'?'active':''}"><a href="store.jsp">Sản phẩm</a></div>
+    <div class="mobile-menu-item ${activePage =='contact'?'active':''}"><a href="contact">Liên hệ</a></div>
+    <div class="mobile-menu-item ${activePage =='product'?'active':''}"><a href="product">Sản phẩm</a></div>
 </div>
 <div class="overlay" id="menu-overlay"></div>

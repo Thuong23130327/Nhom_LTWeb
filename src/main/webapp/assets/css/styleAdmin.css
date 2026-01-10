@@ -13,49 +13,54 @@ body {
     background-color: var(--main-bg);
 }
 
-/* Navbar */
-.navbar {
-    background: var(--gradient-purple) !important;
-    padding: 0.8rem 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1021;
-}
+/* Sidebar CỐ ĐỊNH CHO ADMIN */
 
-.navbar .navbar-brand {
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-}
-
-/* Sidebar */
-
-
-
-.sidebar {
-    min-height: 100vh;
-    background-color: var(--sidebar-bg);
-    padding-top: 20px;
-    border-right: 1px solid #eee;
-}
-
-.sidebar .logo-container{
+/*LOGO*/
+#sidebar .logo-container {
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    scale: 1.2;
+    justify-content: center;
+    gap: 8px;
 }
 
-.sidebar ul{
-    margin-top: 50px;
+#sidebar .logo-text {
+    font-size: 20px;
+}
+
+/*SIDEBAR*/
+html, body {
+    overflow-x: hidden; /* Chặn thanh cuộn ngang thừa thãi */
+    height: auto !important; /* Trả lại chiều cao tự nhiên cho trang web */
+    min-height: 100vh; /* Đảm bảo trang luôn cao ít nhất bằng màn hình */
+}
+
+/* Thiết lập Sidebar dính */
+.sidebar {
+    position: sticky !important; /* Kích hoạt dính */
+    top: 0; /* Dính ngay mép trên cùng */
+    height: 100vh; /* Chiều cao bằng màn hình */
+    overflow-y: auto; /* Cuộn riêng bên trong menu nếu dài */
+    z-index: 1000; /* Nổi lên trên cùng */padding-top: 0;
+    background-color: var(--main-bg); /* Màu nền (quan trọng để không bị nhìn xuyên thấu) */
+}
+
+.sidebar li:first-child {
+    margin-top: 10px;
 }
 
 .sidebar .nav-link {
     color: #444;
     font-weight: 500;
-    padding: 12px 20px;
-    margin: 5px 15px;
+    padding: 12px 10px;
     border-radius: 8px;
     transition: all 0.3s ease;
+}
+
+.sidebar a {
+    margin: 2px;
 }
 
 .sidebar .nav-link:hover {
@@ -65,7 +70,7 @@ body {
 
 .sidebar .nav-link.active {
     background: var(--primary-blue);
-    color: white !important;
+    color: white;
     box-shadow: 0 4px 10px rgba(74, 111, 255, 0.2);
 }
 

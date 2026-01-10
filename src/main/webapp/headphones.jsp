@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@ include file="/tag/_taglibs.jsp" %>
 <head>
     <meta charset="UTF-8">
@@ -138,8 +137,10 @@
 <%--</div>--%>
 
 
-<%@ include file="_footer.jsp" %>
+<jsp:include page="tag/_footer.jsp"></jsp:include>
 
+<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/scriptProfile.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/scriptStore.js"></script>
 </body>
-
 </html>

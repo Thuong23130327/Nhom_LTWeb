@@ -15,7 +15,7 @@
         <div class="row">
 
 
-            <%@ include file="/admin/_adminMenu.jsp" %>
+            <%@ include file="/tag/_adminMenu.jsp" %>
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
