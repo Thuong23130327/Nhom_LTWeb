@@ -2,15 +2,15 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar shadow-sm">
-    <div class="position-sticky top-0 pt-3">
-
         <a class="a-nodecor logo-container" href="index.jsp">
             <div class="logo-wave">
                 <div class="sound-wave wave1"></div>
                 <div class="sound-wave wave2"></div>
                 <div class="sound-wave wave3"></div>
+
             </div>
-            <span class="logo-text">AuraSound</span>
+
+            <span class="logo-text">AuraSound Admin</span>
         </a>
 
         <ul class="nav flex-column">
@@ -42,9 +42,9 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="${pageContext.request.contextPath}/admin/voucher.jsp" class="nav-link">
                     <i class="fa-solid fa-comment-dots me-2"></i>
-                    Đánh giá
+                    Quản lý Voucher
                 </a>
             </li>
 
@@ -62,7 +62,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link">
                     <i class="fa-solid fa-earth-asia me-2"></i>
                     Xem website
                 </a>
@@ -76,5 +76,4 @@
             </li>
         </ul>
 
-    </div>
 </nav>

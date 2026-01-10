@@ -8,7 +8,22 @@
 }
 
 /* Nút quay lại Mailbox */
+/* Chỉ đẩy sang phải khi ở trên màn hình máy tính (Desktop) */
+@media (min-width: 992px) {
+    .mail-manager-main {
+        /* Thay 260px bằng chiều rộng thực tế của menu bên trái */
+        margin-left: 260px;
+        width: calc(100% - 260px); /* Đảm bảo content không bị tràn ngang */
+    }
+}
 
+/* (Tùy chọn) Xử lý cho mobile: Thường mobile menu sẽ ẩn đi nên margin-left = 0 */
+@media (max-width: 991.98px) {
+    .mail-manager-main {
+        margin-left: 0;
+        width: 100%;
+    }
+}
 .back-btn-custom {
     display: inline-flex;
     align-items: center;

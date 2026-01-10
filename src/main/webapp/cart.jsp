@@ -108,16 +108,11 @@
     </div>
 </main>
 
-<%
-    request.setAttribute("keepDefaultJs", true);
-%>
+<jsp:include page="tag/_footer.jsp"></jsp:include>
 
-<c:set var="customJs" scope="request">
-    <script src="assets/js/scriptCart.js"></script>
-</c:set>
-
-<%@ include file="_footer.jsp" %>
-
-</>
-
+<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/scriptProfile.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/scriptStore.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/scriptCart.js"></script>
+</body>
 </html>

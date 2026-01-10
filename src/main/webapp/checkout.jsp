@@ -1,14 +1,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ include file="/tag/_taglibs.jsp" %>
 <%
     request.setAttribute("pageTitle", "Thanh toán - AuraSound");
     request.setAttribute("activePage", "cart");
-    request.setAttribute("keepDefaultCss", true);
 %>
-<c:set var="customCss">
-    <link rel="stylesheet" href="assets/css/styleCheckout.css">
-</c:set>
-<%@ include file="_header.jsp" %>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${pageTitle}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProfile.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleCheckout.css">
+
+</head>
+
+<body>
+<jsp:include page="/tag/_header.jsp"></jsp:include>
 
 <main class="content">
     <div class="checkout-container">
@@ -237,9 +257,9 @@
     </div>
 </div>
 
+<jsp:include page="tag/_footer.jsp"></jsp:include>
 
-<script src="assets/js/script.js"></script>
-<script src="assets/js/scriptProfile.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/scriptProfile.js"></script>
 </body>
-
 </html>
