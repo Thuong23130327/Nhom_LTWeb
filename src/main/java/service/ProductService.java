@@ -2,7 +2,6 @@ package service;
 
 import dao.ProductDAO;
 import model.Product;
-import model.ProductDTO;
 
 import java.sql.SQLException;
 import java.util.List;

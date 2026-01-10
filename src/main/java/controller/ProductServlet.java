@@ -18,15 +18,18 @@ import java.util.List;
 @WebServlet(name = "ProductServlet", value = "/product")
 public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        CategoryService categoryService = new CategoryService();
         ProductService productService = null;
         try {
             productService = new ProductService();
             String cateId = request.getParameter("cateId");
 
+
             List<Product> productList = null;
             if (cateId != null) {
                 productList = productService.getProductByCategoryId(cateId);
+                Category c = categoryService.getCategoryById(Integer.parseInt(cateId));
+                request.setAttribute("cateName", c.getName());
             } else {
                 productList = productService.getAllProduct();
             }

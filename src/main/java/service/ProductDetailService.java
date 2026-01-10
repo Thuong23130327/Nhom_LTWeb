@@ -7,8 +7,6 @@ import dao.GalleryDAO;
 import dao.ProductDAO;
 import dao.SpecDAO;
 import dao.VariantDAO;
-import model.Product;
-import model.ProductDTO;
 import model.ProductSpec;
 import model.ProductVariant;
 

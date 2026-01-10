@@ -83,7 +83,7 @@
 
     </form>
     <div class="product-grid-container">
-        <h1>Tai Nghe</h1>
+        <h1>${cateName != null ? cateName : 'Sản phẩm'}</h1>
 
         <div class="sort-options">
             <span>Sắp xếp theo:</span>
@@ -95,7 +95,9 @@
         <div class="product-grid" id="product-grid">
             <c:forEach items="${productList}" var="p">
                 <a href="detail?pid=${p.id}" class="product-card">
-                    <div class="product-badge discount">Giảm 50%</div>
+                    <c:if test="${p.discountPercent > 0}">
+                        <div class="product-badge discount">Giảm ${p.discountPercent} %</div>
+                    </c:if>
 
                     <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/300x300?text=No+Image'">
 
@@ -103,8 +105,12 @@
                         <h4>${p.name}</h4>
 
                         <div class="price-block">
-                            <span class="new-price"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/> đ</span>
-                            <span class="old-price"><fmt:formatNumber value="${p.oldPrice}" pattern="#,###"/> đ</span>
+                            <div class="new-price"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/> đ</div>
+
+                            <c:if test="${p.discountPercent > 0}">
+                                <div class="old-price"><fmt:formatNumber value="${p.oldPrice}" pattern="#,###"/> đ</div>
+                            </c:if>
+
                         </div>
 
                         <div class="product-bottom-row">

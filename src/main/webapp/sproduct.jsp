@@ -35,13 +35,19 @@
     <section class="container sproduct my-5 pt-5">
         <div class="row">
             <div class="gallery-container col-lg-5 col-md-12 col-12">
-                <img class="main-img img-fluid w-100 pb-1" src="${curVariant.mainImageUrl}" width="100%" id="MainImg">
+                <div class="main-img-container">
+                    <img class="main-img img-fluid w-100 pb-1" src="${curVariant.mainImageUrl}" width="100%"
+                         id="MainImg">
+                </div>
+
                 <div class="thumb-container">
                     <button class="scroll-btn left" onclick="prevImage()">&#10094;</button>
 
                     <div class="small-img-group" id="thumbScroll">
                         <c:forEach items="${images}" var="eachImg">
-                            <img src="${eachImg}" class="small-img">
+                            <img src="${eachImg}"
+                                 class="small-img ${eachImg == curVariant.mainImageUrl ? 'active' : ''}"
+                                 onclick="changeMainImg(this.src)">
                         </c:forEach>
                     </div>
 
@@ -53,47 +59,56 @@
                 <h6>Home / ${product.name}</h6>
                 <h3>${product.name}</h3>
                 <div class="star">
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
-                    <i class='bx bxs-star'></i>
+                    <span>${product.avgRating}</span>
                     <i class='bx bxs-star'></i>
                 </div>
 
                 <div class="price-block">
-                    <span class="new-price"><fmt:formatNumber value="${product.sellPrice}" pattern="#,###"/> đ</span>
-                    <span class="old-price"><fmt:formatNumber value="${product.oldPrice}" pattern="#,###"/> đ</span>
+                    <span class="new-price" id="new-price"><fmt:formatNumber value="${product.sellPrice}"
+                                                                             pattern="#,###"/> đ</span>
+                    <span class="old-price" id="old-price"><fmt:formatNumber value="${product.oldPrice}"
+                                                                             pattern="#,###"/> đ</span>
                 </div>
+                <form action="cart" method="post">
+                    <input type="hidden" name="variantId" id="selectedVariantId" value="${curVariant.id}">
+                    <div class="product-options">
+                        <h4>Màu sắc: </h4>
+                        <div class="color-options">
+                            <c:forEach var="eachVar" items="${variants}">
+                                <div class="color-item ${eachVar.id==curVariant.id?'active':''}"
 
-                <div class="product-options">
-                    <h4>Màu sắc: </h4>
-                    <div class="color-options">
-                        <c:forEach var="eachVar" items="${variants}">
-                            <div class="color-item" onclick="selectColor(this)"
-                                 data-img="${eachVar.mainImageUrl}">
-                                <img src="${eachVar.mainImageUrl}" alt="${eachVar.colorName}">
-                                <span>${eachVar.colorName}</span>
-                            </div>
+                                     onclick="selectVariant(this)"
+                                     data-id="${eachVar.id}"
+                                     data-sellPrice="${eachVar.sellPrice}"
+                                     data-marketPrice="${eachVar.marketPrice}"
+                                     data-stock="${eachVar.stockQuantity}"
+                                     data-img="${eachVar.mainImageUrl}">
+                                    <img src="${eachVar.mainImageUrl}" alt="${eachVar.colorName}">
+                                    <span>${eachVar.colorName}</span>
+                                </div>
 
-                        </c:forEach>
+                            </c:forEach>
+                        </div>
                     </div>
-                </div>
 
-                <div class="product-quantity">
-                    <h4>Số lượng: ${curVariant.stockQuantity}</h4>
-                    <button class="quantity-btn" aria-label="Giảm">-</button>
-                    <input type="number" value="1">
-                    <button class="quantity-btn" aria-label="Tăng">+</button>
+                    <div class="product-quantity">
+                        <h4 >Số lượng còn:
+                        <span id="stock">${curVariant.stockQuantity} </span>
+                        </h4>
+                        <button class="quantity-btn" aria-label="Giảm">-</button>
+                        <input type="number" value="1">
+                        <button class="quantity-btn" aria-label="Tăng">+</button>
 
-                </div>
+                    </div>
 
-                <div class="btn">
-                    <button class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
+                    <div class="btn">
+                        <button class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
 
-                    <a href="cart.html"><a href="checkout.html">
-                        <button class="buy-btn">Mua Ngay</button>
-                    </a></a>
-                </div>
+                        <a href="cart.html"><a href="checkout.html">
+                            <button class="buy-btn">Mua Ngay</button>
+                        </a></a>
+                    </div>
+                </form>
 
 
             </div>

@@ -150,5 +150,11 @@ public class Product {
 				+ soldCount + ", isActive=" + isActive + ", createdAt=" + createdAt + ", oldPrice=" + oldPrice
 				+ ", sellPrice=" + sellPrice + ", img=" + img + " ]";
 	}
-
+	public int getDiscountPercent() {
+	    if (this.oldPrice == 0) {
+	        return 0;
+	    }
+	    double result = ((this.oldPrice - this.sellPrice) / this.oldPrice) * 100;
+	    return (int) Math.round(result);
+	}
 }
