@@ -36,7 +36,9 @@ public class ManageProductDetailServlet extends HttpServlet {
             request.setAttribute("variants", variants);
             request.setAttribute("specs", specs);
             request.setAttribute("images", imgs);
+            String variantsJson = new com.google.gson.Gson().toJson(variants);
 
+            request.setAttribute("variantsJson", variantsJson);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

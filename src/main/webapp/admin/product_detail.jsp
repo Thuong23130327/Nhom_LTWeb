@@ -118,17 +118,47 @@
                     <!-- Trạng thái, Danh mục và Tồn kho -->
 
                     <div class="row g-3 mb-4">
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <label for="product-status" class="form-label">Các biến thể</label>
-                            <select id="product-status" class="form-select">
+                            <select onchange="updateVariantInfo(this.value)" id="product-status" class="form-select">
                                 <c:forEach items="${variants}" var="v">
-                                    <option value="${v.colorName}"  onclick="setVariant(this)" selected>${v.colorName}</option>
+                                    <option value="${v.colorName}" selected>${v.colorName}</option>
                                 </c:forEach>
                             </select>
                         </div>
+                        <div class="col-md-2">
+                            <label class="col-md-4 form-label">Tên màu<span
+                                    class="text-required">:</span></label>
+                            <input type="text" id="var-colorName" value="" class="form-control"
+                                   placeholder="Màu của biến thể">
+                        </div>
+                        <div class="col-md-3">
+                            <label  class="form-label">Mã SKU</label>
+                            <input type="text" id="var-sku" value="" class="form-control"
+                                   placeholder="Nhập mã SKU sản phẩm">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Giá Chưa Giảm</label>
+                            <input type="number" id="var-oldP" value="" class="form-control"
+                                   placeholder="Nhập mã SKU sản phẩm">
+                        </div>
 
+                        <div class="col-md-2">
+                            <label class="form-label">Giá Đã Giảm</label>
+                            <input type="number" id="var-newP" value="" class="form-control"
+                                   placeholder="Nhập mã SKU sản phẩm">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="product-stock" class="form-label">Số lượng kho</label>
+                            <input type="number" id="var-stock" value="" class="form-control"
+                                   placeholder="Số lượng">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="product-stock" class="form-label">Đã bán:</label>
+                            <span id="var-sold" class="form-control"></span>
+                        </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="product-category" class="form-label">Danh mục</label>
                             <select id="product-category" class="form-select">
                                 <option>Tai Nghe</option>
@@ -136,13 +166,13 @@
                                 <option>Phụ kiện Âm thanh</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label for="product-stock" class="form-label">Số lượng tồn kho</label>
-                            <input type="number" id="product-stock" value="85" class="form-control"
-                                   placeholder="Số lượng">
-                        </div>
+
+                        <button type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-3 mb-sm-0">
+                            <i class="ri-delete-bin-line me-1"></i> Xóa Biến Thể này
+                        </button>
                     </div>
                 </section>
+
                 <!-- Chi tiết kỹ thuật -->
 
                 <section class="mb-5 border-top pt-4">
@@ -152,49 +182,19 @@
                     </h2>
 
                     <div class="row g-3">
-
                         <!-- Công suất -->
+                        <c:forEach items="${specs}" var="s">
+                            <div class="col-md-3">
+                                <label for="product-power" class="form-label">${s.specName}</label>
+                                <textarea
+                                        class="form-control"
+                                        rows="3"
+                                        placeholder="Nhập nội dung chi tiết...">${s.specValue}</textarea>
+                            </div>
+                        </c:forEach>
 
-                        <div class="col-md-6">
-                            <label for="product-power" class="form-label">Công suất (W)</label>
-                            <input type="number" id="product-power" value="20" class="form-control" placeholder="20W">
-                        </div>
-
-                        <!-- Chuẩn chống nước -->
-
-                        <div class="col-md-6">
-                            <label for="product-waterproof" class="form-label">Chuẩn chống nước</label>
-                            <input type="text" id="product-waterproof" value="IPX7" class="form-control"
-                                   placeholder="IPX7, IPX4, ...">
-                        </div>
-
-                        <!-- Thời lượng Pin  -->
-
-                        <div class="col-md-6">
-                            <label for="product-battery" class="form-label">Thời lượng Pin (giờ)</label>
-                            <input type="number" id="product-battery" value="15" class="form-control" placeholder="15">
-                        </div>
-
-                        <!-- Phiên bản Bluetooth -->
-
-                        <div class="col-md-6">
-                            <label for="product-bluetooth" class="form-label">Bluetooth Version</label>
-                            <input type="text" id="product-bluetooth" value="5.0" class="form-control"
-                                   placeholder="5.0">
-                        </div>
-                    </div>
-
-                    <!-- Mô tả chi tiết -->
-
-                    <div class="mb-3 mt-4">
-                        <label for="product-full-desc" class="form-label">Mô tả chi tiết</label>
-                        <textarea id="product-full-desc" class="form-control" rows="5"
-                                  placeholder="Nhập mô tả chi tiết sản phẩm.">Chất liệu cao cấp, màng loa được tinh chỉnh để tối ưu hóa dải bass. Kết nối Bluetooth 5.0 ổn định trong phạm vi 10m. Pin dung lượng lớn, sạc nhanh trong 3 giờ. Kèm cáp sạc USB-C và dây AUX 3.5mm.</textarea>
                     </div>
                 </section>
-
-                <!-- Trạng thái và Quản lý Kho -->
-
 
                 <!-- Nút Hành động -->
                 <div class="d-flex flex-column flex-sm-row justify-content-end pt-4 border-top">
@@ -211,11 +211,16 @@
 
             </form>
         </main>
+        <script>
+            // In trực tiếp chuỗi JSON vào biến JS.
 
+            // Dùng escapeXml="false" để ngăn chặn việc biến các ký tự thành mã HTML (như " thành &quot;)
+            const productVariants = ${variantsJson};
+            console.log("Danh sách biến thể đã nhận:", productVariants);
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/script.js"></script>
         <script src="../assets/js/scriptAdmin.js"></script>
-        <script src="../assets/js/scriptProfile.js"></script>
         <script src="../assets/js/product_detail.js"></script>
 </body>
 
