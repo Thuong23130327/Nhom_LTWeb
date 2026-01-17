@@ -5,6 +5,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.Cart;
+import model.CartItem;
 import model.Product;
 
 import java.io.IOException;
@@ -41,6 +42,13 @@ public class CartServlet extends HttpServlet {
 
                     if (p != null) {
                         cart.addOrUpdateItem(p, qty);
+                    }
+                } else if ("check".equals(action)) {
+                    for (CartItem item : cart.getListItems()) {
+                        if (item.getProduct().getId() == Integer.parseInt(id)) {
+                            item.setChecked(!item.isChecked());
+                            break;
+                        }
                     }
                 }
             }

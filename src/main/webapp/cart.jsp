@@ -53,18 +53,20 @@
         %>
         <div class="cart-item" style="display: flex; align-items: center; gap: 15px;">
             <div class="item-checkbox">
-                <input type="checkbox" name="selectedItems" value="<%= p.getId() %>" checked
-                       style="width: 20px; height: 20px; cursor: pointer;">
+                <input type="checkbox" <%= item.isChecked() ? "checked" : "" %>
+                       onclick="location.href='cart?action=check&id=<%= p.getId() %>'">
             </div>
             <div class="item-main">
 <%--Lấy ảnh từ sku--%>
-                <img class="item-img" src="<%= p.getDescription() %>" alt="<%= p.getName() %>">
+                <img class="item-img" src="<%= p.getImg() %>" alt="<%= p.getName() %>">
 
                 <div class="item-details">
                     <h4><%= p.getName() %></h4>
+                    <div style="display: flex; align-items: center; gap: 10px;">
                     <div class="item-variant">
                         <span>Màu: Mặc định</span>
                         <i class="bi bi-chevron-compact-down"></i>
+                    </div>
                     </div>
                 </div>
                 <div class="item-price-col">

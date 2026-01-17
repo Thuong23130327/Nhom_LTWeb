@@ -73,13 +73,21 @@ public class Cart implements Serializable {
 //Lấy tổng số lượng sp
 	public int getTotalQuantity(){
 		AtomicInteger total = new AtomicInteger();
-		items.values().forEach((CartItem c) -> total.addAndGet(c.getQuantity()));
+		items.values().forEach((CartItem c) -> {
+			if (c.isChecked()) { // Chỉ cộng dồn nếu sản phẩm được tick
+				total.addAndGet(c.getQuantity());
+			}
+		});
 		return total.get();
 	}
 //Lấy tổng giá tiền
 	public double getTotalPrice(){
 		AtomicReference<Double> sum = new AtomicReference<>((double) 0);
-		items.values().forEach(c-> sum.updateAndGet(v -> v + (c.getPrice() * c.getQuantity())));
+		items.values().forEach(c-> {
+			if (c.isChecked()) { // Chỉ tính tiền nếu sản phẩm được tick
+				sum.updateAndGet(v -> v + (c.getPrice() * c.getQuantity()));
+			}
+		});
 		return sum.get();
 	}
 }
