@@ -9,15 +9,23 @@
                 <div class="sound-wave wave3"></div>
 
             </div>
-
             <span class="logo-text">AuraSound Admin</span>
         </a>
 
         <ul class="nav flex-column">
+
             <li class="nav-item">
                 <a href="#" class="nav-link active">
                     <i class="fas fa-home me-2"></i>
                     Tổng quan
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="${AuraSound}/admin/product-manager" class="nav-link">
+                    <i class="fas fa-box me-2"></i>
+                    Quản lý Sản phẩm
+
                 </a>
             </li>
 
@@ -29,9 +37,10 @@
             </li>
 
             <li class="nav-item">
-                <a href="${AuraSound}/admin/user-manager" class="nav-link"><i
-                        class="fas fa-users"></i> Quản lý Người
-                    dùng</a>
+                <a href="${AuraSound}/admin/user-manager" class="nav-link">
+                    <i class="fas fa-users me-2"></i>
+                    Quản lý Tài Khoản
+                </a>
             </li>
 
             <li class="nav-item">
@@ -42,15 +51,9 @@
             </li>
 
             <li class="nav-item">
-                <a href="${AuraSound}/admin/product-manager" class="nav-link"><i
-                        class="fas fa-box"></i> Quản lý Sản
-                    phẩm</a>
-            </li>
-
-            <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="fa-solid fa-list me-2"></i>
-                    Danh mục
+                    Quản lý Giao diện
                 </a>
             </li>
 
