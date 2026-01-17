@@ -161,4 +161,5 @@ public class Product {
 	    double result = ((this.oldPrice - this.sellPrice) / this.oldPrice) * 100;
 	    return (int) Math.round(result);
 	}
+
 }

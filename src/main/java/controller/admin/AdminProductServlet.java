@@ -1,13 +1,10 @@
 package controller.admin;
 
-import dao.adminDAO.AdminProductDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.Product;
-import model.admin.ProductAdminDTO;
 import service.AdminProductService;
-import service.ProductService;
 
 import java.io.IOException;
 import java.sql.SQLException;
