@@ -36,6 +36,9 @@ function selectColor(option) {
     }
 
 }
+function removeCartItem(){
+
+}
 
 // 3. Click ra ngoài khoảng trắng thì đóng menu
 document.addEventListener('click', function () {

@@ -166,14 +166,15 @@ function selectVariant(e) {
     const stock = e.getAttribute("data-stock");
     const sellPrice = e.getAttribute("data-sellPrice");
     const targetImg = e.getAttribute("data-img");
+
     changeMainImg(targetImg);
 
     const formatter = new Intl.NumberFormat('vi-VN');
     document.getElementById("new-price").innerText = formatter.format(sellPrice) + " đ";
     document.getElementById("old-price").innerText = formatter.format(marketPrice) + " đ";
+    document.getElementById("stock").innerText = stock;
 
     document.getElementById("selectedVariantId").value = id;
-    document.getElementById("stock").innerText = stock;
 
     const input = document.getElementById("quanProduct")
 
@@ -185,6 +186,7 @@ function selectVariant(e) {
     for (const eachVar of listVar) {
         eachVar.classList.remove("active");
     }
+
     e.classList.add("active");
 }
 

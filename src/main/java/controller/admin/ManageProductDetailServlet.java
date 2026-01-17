@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+
+//chi tiet quan ly sp Admin
 @WebServlet(name = "ManageProductDetailServlet", value = "/admin/product-detail-manager")
 public class ManageProductDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
