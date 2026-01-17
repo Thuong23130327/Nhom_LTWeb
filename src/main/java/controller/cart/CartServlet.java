@@ -41,6 +41,26 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String variantId = request.getParameter("variantId");
+        String quantityStr = request.getParameter("quantity");
 
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+            session.setAttribute("cart", cart);
+        }
+
+        try {
+            if (variantId != null) {
+                int qty = (quantityStr != null) ? Integer.parseInt(quantityStr) : 1;
+                Product p = new ProductDAO().getById(variantId);
+                if (p != null) {
+                    cart.addOrUpdateItem(p, qty);
+                }
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+
+        response.sendRedirect("cart.jsp");
     }
 }

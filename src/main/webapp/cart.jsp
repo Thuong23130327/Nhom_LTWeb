@@ -51,7 +51,11 @@
                 for (CartItem item : listItems) {
                     Product p = item.getProduct();
         %>
-        <div class="cart-item">
+        <div class="cart-item" style="display: flex; align-items: center; gap: 15px;">
+            <div class="item-checkbox">
+                <input type="checkbox" name="selectedItems" value="<%= p.getId() %>" checked
+                       style="width: 20px; height: 20px; cursor: pointer;">
+            </div>
             <div class="item-main">
 <%--Lấy ảnh từ sku--%>
                 <img class="item-img" src="<%= p.getDescription() %>" alt="<%= p.getName() %>">
