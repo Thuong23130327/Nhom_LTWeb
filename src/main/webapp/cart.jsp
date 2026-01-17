@@ -51,16 +51,22 @@
                 for (CartItem item : listItems) {
                     Product p = item.getProduct();
         %>
-        <div class="cart-item">
+        <div class="cart-item" style="display: flex; align-items: center; gap: 15px;">
+            <div class="item-checkbox">
+                <input type="checkbox" <%= item.isChecked() ? "checked" : "" %>
+                       onclick="location.href='cart?action=check&id=<%= p.getId() %>'">
+            </div>
             <div class="item-main">
 <%--Lấy ảnh từ sku--%>
-                <img class="item-img" src="<%= p.getDescription() %>" alt="<%= p.getName() %>">
+                <img class="item-img" src="<%= p.getImg() %>" alt="<%= p.getName() %>">
 
                 <div class="item-details">
                     <h4><%= p.getName() %></h4>
+                    <div style="display: flex; align-items: center; gap: 10px;">
                     <div class="item-variant">
                         <span>Màu: Mặc định</span>
                         <i class="bi bi-chevron-compact-down"></i>
+                    </div>
                     </div>
                 </div>
                 <div class="item-price-col">
@@ -70,16 +76,16 @@
             <div class="item-actions">
 <%-- Xóa sản phẩm --%>
                 <span class="item-delete"
-                      onclick="if(confirm('Xóa sản phẩm này?')) location.href='CartServlet?action=delete&id=<%= p.getId() %>'">
-                        Xoá
-                    </span>
+                      onclick="if(confirm('Xóa sản phẩm này?')) location.href='cart?action=delete&id=<%= p.getId() %>'">
+                    Xoá
+                </span>
 
                 <div class="quantity-control">
 <%-- Giảm số lượng(mặc định q = 1) --%>
-                    <button class="quantity-btn" onclick="location.href='CartServlet?action=add&id=<%= p.getId() %>&q=-1'">-</button>
+                    <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= p.getId() %>&q=-1'">-</button>
                     <input class="quantity-input" type="text" value="<%= item.getQuantity() %>" readonly>
 <%-- Tăng số lượng(mặc định q = 1) --%>
-                    <button class="quantity-btn" onclick="location.href='CartServlet?action=add&id=<%= p.getId() %>&q=1'">+</button>
+                    <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= p.getId() %>&q=1'">+</button>
                 </div>
             </div>
         </div>

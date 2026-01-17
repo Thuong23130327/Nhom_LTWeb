@@ -6,6 +6,7 @@ public class CartItem implements Serializable {
 	private Product product;
 	private int quantity;
 	private double price;
+	private boolean isChecked = true;
 
 	public CartItem() {
 	}
@@ -44,6 +45,14 @@ public class CartItem implements Serializable {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public boolean isChecked() {
+		return isChecked;
+	}
+
+	public void setChecked(boolean checked) {
+		isChecked = checked;
 	}
 
 	// Tính tổng tiền món hàng * số lượng
