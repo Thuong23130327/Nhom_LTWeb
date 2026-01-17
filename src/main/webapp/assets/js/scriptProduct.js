@@ -105,6 +105,7 @@
 //     overLay.classList.remove('active');
 // });
 
+// active ảnh nhỏ của minh họa sp
 function activeSmall(targetSrc) {
     const thumbnails = document.querySelectorAll(".small-img")
     for (const smallImg of thumbnails) {
@@ -120,6 +121,7 @@ function activeSmall(targetSrc) {
     }
 }
 
+// Đổi ảnh chính đang đc hiển thị
 function changeMainImg(targetSrc) {
     const mainImg = document.getElementById("MainImg")
     mainImg.classList.add("hiding");
@@ -128,6 +130,7 @@ function changeMainImg(targetSrc) {
     activeSmall(targetSrc);
 }
 
+//Hàm xử lý next ảnh hay prev ảnh
 function scrollImg(direction) {
     const thumbnails = Array.from(document.querySelectorAll(".small-img"))
 
@@ -157,12 +160,12 @@ function prevImage() {
 }
 
 function selectVariant(e) {
+
     const id = e.getAttribute("data-id");
     const marketPrice = e.getAttribute("data-marketPrice");
     const stock = e.getAttribute("data-stock");
     const sellPrice = e.getAttribute("data-sellPrice");
     const targetImg = e.getAttribute("data-img");
-
     changeMainImg(targetImg);
 
     const formatter = new Intl.NumberFormat('vi-VN');
@@ -171,9 +174,13 @@ function selectVariant(e) {
 
     document.getElementById("selectedVariantId").value = id;
     document.getElementById("stock").innerText = stock;
-    const qtyInput = document.querySelector(".product-quantity input");
-    qtyInput.value = 1;
-    qtyInput.setAttribute("max", stock);
+
+    const input = document.getElementById("quanProduct")
+
+    let stockElement = document.getElementById("stock");
+    input.value = 1;
+    stockElement.setAttribute("data-stock", stock);
+
     const listVar = document.querySelectorAll(".color-item")
     for (const eachVar of listVar) {
         eachVar.classList.remove("active");
@@ -181,6 +188,39 @@ function selectVariant(e) {
     e.classList.add("active");
 }
 
+function updateQuan(change) {
+    let input = document.getElementById("quanProduct");
+    let quanOld = parseInt(input.value);
+    let quanNew = quanOld + change;
+    checkValidAndSetQuan(input, quanNew);
+}
+
+function checkInput() {
+    let input = document.getElementById("quanProduct");
+    let quanNew = parseInt(input.value) || 1;
+    checkValidAndSetQuan(input, quanNew);
+}
+
+
+function checkValidAndSetQuan(input, quanNew) {
+    let stockElement = document.getElementById("stock");
+    let stock = parseInt(stockElement.getAttribute("data-stock"));
+    console.log("Giá trị nhập vào:", quanNew);
+    console.log("Tồn kho lấy từ HTML:", stockElement);
+    console.log("Tồn kho sau khi ép kiểu số:", stock);
+
+    if (isNaN(stock)) {
+        alert("Lỗi: Không lấy được số lượng tồn kho!");
+        return;
+    }
+    if (quanNew > stock) {
+        quanNew = stock;
+        alert("Bạn chỉ có thể mua tối đa " + stock + " sản phẩm!");
+    }
+
+    if (quanNew < 1) quanNew = 1;
+    input.value = quanNew;
+}
 
 
 

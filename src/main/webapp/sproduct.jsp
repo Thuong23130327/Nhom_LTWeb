@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProduct.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleCheckout.css.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleCart.css">
 
 
@@ -92,12 +91,12 @@
                     </div>
 
                     <div class="product-quantity">
-                        <h4 >Số lượng còn:
-                        <span id="stock">${curVariant.stockQuantity} </span>
+                        <h4>Số lượng còn:
+                            <span id="stock" data-stock="${curVariant.stockQuantity}">${curVariant.stockQuantity} </span>
                         </h4>
-                        <button class="quantity-btn" aria-label="Giảm">-</button>
-                        <input type="number" value="1">
-                        <button class="quantity-btn" aria-label="Tăng">+</button>
+                        <button type="button" class="quantity-btn" onclick="updateQuan(-1)">-</button>
+                        <input id="quanProduct" type="number" onchange="checkInput()" value="1">
+                        <button type="button" class="quantity-btn" onclick="updateQuan(+1)">+</button>
 
                     </div>
 
@@ -166,7 +165,7 @@
                 <div class="wrapper">
 
                     <h3>Đánh giá sản phẩm</h3>
-                    <form action="#">
+                    <form action="cart">
                         <div class="rating">
                             <input type="number" name="rating" hidden>
                             <i class='bx bx-star star'></i>
@@ -310,257 +309,12 @@
                             </div>
                         </div>
                     </div>
-                </a> <a href="checkout.html">
-                <button class="buy-btn">Mua Ngay</button>
-            </a>
-
-            </div>
-
-            <div class="product col-lg-3 col-md-4 col-12">
-                <a href="sproduct.html" class="product-card loa page-1">
-                    <!-- Tag giảm giá -->
-                    <div class="product-badge discount">
-                        Giảm 18%
-                    </div>
-                    <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/2162/344851/loa-bluetooth-alpha-works-aw-w39-cam-1-638951930619876890-750x500.jpg"
-                         alt="Loa Bluetooth Alpha Works AW-W39">
-
-                    <!-- Thông tin sản phẩm -->
-                    <div class="product-card-info">
-                        <h4>Loa Bluetooth Alpha Works AW-W39</h4>
-
-                        <div class="price-block">
-                            <span class="new-price">1.990.000đ</span>
-                        </div>
-
-                        <div class="product-bottom-row">
-                            <div class="rating">
-                                <i class="bi bi-star-fill"></i>
-                                <span>4.2</span>
-                            </div>
-                            <div class="favorite">
-                                <i class="bi bi-heart"></i> <i class="bi bi-heart-fill"></i>
-                                <span>Yêu thích</span>
-                            </div>
-                        </div>
-                    </div>
-
                 </a>
                 <a href="checkout.html">
                     <button class="buy-btn">Mua Ngay</button>
                 </a>
-
             </div>
 
-
-            <div class="product  col-lg-3 col-md-4 col-12">
-
-                <a href="sproduct.html" class="product-card tai-nghe page-1">
-
-                    <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/54/332455/tai-nghe-tws-jbl-wave-beam-2-den-3-638682176208572620-750x500.jpg"
-                         alt="Tai nghe Bluetooth True Wireless JBL Wave Beam 2 ">
-
-                    <!-- Thông tin sản phẩm -->
-                    <div class="product-card-info">
-                        <h4>Tai nghe Bluetooth True Wireless JBL Wave Beam 2 </h4>
-
-                        <div class="price-block">
-                            <span class="new-price">1.390.000đ</span>
-                        </div>
-
-                        <div class="product-bottom-row">
-                            <div class="rating">
-                                <i class="bi bi-star-fill"></i>
-                                <span>4.2</span>
-                            </div>
-                            <div class="favorite">
-                                <i class="bi bi-heart"></i> <i class="bi bi-heart-fill"></i>
-
-                                <span>Yêu thích</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="checkout.html">
-                    <button class="buy-btn">Mua Ngay</button>
-                </a>
-
-            </div>
-
-            <div class="product  col-lg-3 col-md-4 col-12">
-
-                <a href="sproduct.html" class="product-card tai-nghe page-1">
-
-                    <!-- Tag giảm giá -->
-                    <div class="product-badge discount">
-                        Giảm 39%
-                    </div>
-                    <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/54/333561/tai-nghe-tws-xiaomi-redmi-buds-6-den-3-638707208403801581-750x500.jpg"
-                         alt="Tai nghe Bluetooth True Wireless Xiaomi Redmi Buds 6 ">
-
-                    <!-- Thông tin sản phẩm -->
-                    <div class="product-card-info">
-                        <h4>Tai nghe Bluetooth True Wireless Xiaomi Redmi Buds 6 </h4>
-
-                        <div class="price-block">
-                            <span class="new-price">1.490.000đ</span>
-                            <span class="old-price">890.000đ</span>
-                        </div>
-
-                        <div class="product-bottom-row">
-                            <div class="rating">
-                                <i class="bi bi-star-fill"></i>
-                                <span>4.9</span>
-                            </div>
-                            <div class="favorite">
-                                <i class="bi bi-heart"></i> <i class="bi bi-heart-fill"></i>
-
-                                <span>Yêu thích</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="checkout.html">
-                    <button class="buy-btn">Mua Ngay</button>
-                </a>
-
-            </div>
-
-
-            <div class="product  col-lg-3 col-md-4 col-12">
-
-                <a href="sproduct.html" class="product-card loa page-1">
-
-                    <!-- Tag giảm giá -->
-                    <div class="product-badge discount">
-                        Giảm 49%
-                    </div>
-                    <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/2162/337351/loa-bluetooth-rezo-magsound-nau-1-638849101702450173-750x500.jpg"
-                         alt="Loa Bluetooth Rezo MagSound">
-
-                    <!-- Thông tin sản phẩm -->
-                    <div class="product-card-info">
-                        <h4>Loa Bluetooth Rezo MagSound</h4>
-
-                        <div class="price-block">
-                            <span class="new-price">390.000đ</span>
-                            <span class="old-price">590.000đ</span>
-
-                        </div>
-
-                        <div class="product-bottom-row">
-                            <div class="rating">
-                                <i class="bi bi-star-fill"></i>
-                                <span>4.2</span>
-                            </div>
-                            <div class="favorite">
-                                <i class="bi bi-heart"></i> <i class="bi bi-heart-fill"></i>
-                                <span>Yêu thích</span>
-                            </div>
-                        </div>
-                    </div>
-                </a> <a href="checkout.html">
-                <button class="buy-btn">Mua Ngay</button>
-            </a>
-
-            </div>
-
-            <div class="product  col-lg-3 col-md-4 col-12">
-
-                <a href="sproduct.html" class="product-card loa page-1">
-
-                    <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/2162/356866/loa-bluetooth-alpha-works-aw-ikon20-den-cam-1-638947617992323340-750x500.jpg"
-                         alt="                    Loa Bluetooth Alpha Works AW-IKON20">
-                    <!-- Thông tin sản phẩm -->
-                    <div class="product-card-info">
-                        <h4>Loa Bluetooth Alpha Works AW-IKON20</h4>
-
-                        <div class="price-block">
-                            <span class="new-price">3.890.000đ</span>
-                        </div>
-
-                        <div class="product-bottom-row">
-                            <div class="rating">
-                                <i class="bi bi-star-fill"></i>
-                                <span>4.2</span>
-                            </div>
-                            <div class="favorite">
-                                <i class="bi bi-heart"></i> <i class="bi bi-heart-fill"></i>
-                                <span>Yêu thích</span>
-                            </div>
-                        </div>
-                    </div>
-                </a> <a href="checkout.html">
-                <button class="buy-btn">Mua Ngay</button>
-            </a>
-
-            </div>
-
-            <div class="product  col-lg-3 col-md-4 col-12">
-
-                <a href="sproduct.html" class="product-card loa page-1">
-                    <div class="product-badge discount">
-                        Giảm 15%
-                    </div>
-
-                    <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tai-nghe-khong-day-havit-tw-931_3_.png"
-                         alt="Loa JBL Charge 5">
-                    <div class="product-card-info">
-                        <h4>Tai nghe Bluetooth True Wireless Xiaomi Redmi Buds 6 Play </h4>
-                        <div class="price-block">
-                            <span class="new-price">330.000đ</span>
-                            <span class="old-price">380.000đ</span>
-                        </div>
-
-                        <div class="product-bottom-row">
-                            <div class="rating">
-                                <i class="bi bi-star-fill"></i>
-                                <span>4.8</span>
-                            </div>
-                            <div class="favorite">
-                                <i class="bi bi-heart"></i> <i class="bi bi-heart-fill"></i>
-                                <span>Yêu thích</span>
-                            </div>
-                        </div>
-                    </div>
-                </a> <a href="checkout.html">
-                <button class="buy-btn">Mua Ngay</button>
-            </a>
-
-            </div>
-
-            <div class="product  col-lg-3 col-md-4 col-12">
-
-                <a href="sproduct.html" class="product-card loa page-1">
-                    <div class="product-badge discount">
-                        Giảm 49%
-                    </div>
-
-                    <img src="https://cdn.tgdd.vn/Products/Images/54/74185/tai-nghe-chup-tai-kanen-ip-2-750x500-2090.png"
-                         alt="Loa JBL Charge 5">
-                    <div class="product-card-info">
-                        <h4>Tai nghe Chụp Tai Kanen IP-2090 </h4>
-                        <div class="price-block">
-                            <span class="new-price">390.000đ</span>
-                            <span class="old-price">590.000đ</span>
-                        </div>
-
-                        <div class="product-bottom-row">
-                            <div class="rating">
-                                <i class="bi bi-star-fill"></i>
-                                <span>4.0</span>
-                            </div>
-                            <div class="favorite">
-                                <i class="bi bi-heart"></i> <i class="bi bi-heart-fill"></i>
-
-                                <span>Yêu thích</span>
-                            </div>
-                        </div>
-                    </div>
-                </a> <a href="checkout.html">
-                <button class="buy-btn">Mua Ngay</button>
-            </a>
-            </div>
         </div>
     </section>
 </main>

@@ -115,33 +115,71 @@ public class ProductDAO {
         }
     }
 
-        public Product getByIdForCart(String id) {
-            String sql = "SELECT id, sku, name, display_sell_price, display_image_url FROM Products WHERE id = ?";
-            try (Connection conn = DBConnect.getConnection();
-                 PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, id);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    return new Product(
-                            rs.getInt("id"),
-                            null,
-                            null,
-                            rs.getString("sku"),
-                            rs.getString("name"),
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            rs.getDouble("display_sell_price"),
-                            rs.getString("display_image_url")
-                    );
-                }
-            } catch (Exception e) { e.printStackTrace(); }
-            return null;
+    public Product getByIdForCart(String id) {
+        String sql = "SELECT id, sku, name, display_sell_price, display_image_url FROM Products WHERE id = ?";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Product(
+                        rs.getInt("id"),
+                        null,
+                        null,
+                        rs.getString("sku"),
+                        rs.getString("name"),
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        rs.getDouble("display_sell_price"),
+                        rs.getString("display_image_url")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
     }
+
+
+    public List<Product> searchProductByText(String textSearch) {
+        List<Product> list = new ArrayList<>();
+        String sql =" SELECT * FROM products WHERE `name` LIKE ? ";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + textSearch+"%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getInt("Brands_id"),
+                        rs.getInt("Categories_id"),
+                        rs.getString("sku"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getFloat("avg_rating"),
+                        rs.getInt("sold_count"),
+                        rs.getBoolean("is_active"),
+                        rs.getTimestamp("created_at"),
+                        rs.getDouble("display_market_price"),
+                        rs.getDouble("display_sell_price"),
+                        rs.getString("display_image_url"));
+                list.add(p);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+}
+
+
 //
 //    public List<Product> getNewArrivals(int limit) {
 //        List<Product> list = new ArrayList<>();
