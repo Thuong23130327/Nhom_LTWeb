@@ -35,10 +35,15 @@
             </a>
         </div>
         <div class="nav-right">
-            <div class="searchBar">
-                <input type="text" placeholder="Tìm kiếm">
-                <a href="#"><i class="bi bi-search"></i></a>
-            </div>
+            <form action="search" method="post">
+                <div class="searchBar">
+                    <input name="search" type="text" placeholder="Tìm kiếm" value="${search}">
+                    <button type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+
             <a class="a-nodecor ${activePage =='home'?'active':''}" href="index.jsp?activePage=home">
                 <div class="home">Trang chủ</div>
             </a>
@@ -118,10 +123,14 @@
         <i class="bi bi-x-lg" id="mobile-menu-close"></i>
     </div>
     <div class="mobile-menu-item">
-        <div class="searchBar">
-            <input type="text" placeholder="Tìm kiếm">
-            <a href="#"><i class="ri-search-line"></i></a>
-        </div>
+        <form action="search" method="post">
+            <div class="searchBar">
+                <input name="search" type="text" placeholder="Tìm kiếm" value="${search}">
+                <button type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </form>
     </div>
     <c:choose>
         <c:when test="${not empty sessionScope.loggedInUser}">

@@ -9,7 +9,7 @@ import model.Product;
 
 import java.io.IOException;
 
-@WebServlet(name = "CartServlet", value = "/CartServlet")
+@WebServlet(name = "CartServlet", value = "/cart")
 public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

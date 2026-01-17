@@ -14,7 +14,12 @@ public class ProductService {
         productDao = new ProductDAO();
     }
 
-    //
+    public List<Product> searchProductByText(String textSearch) {
+        return productDao.searchProductByText(textSearch);
+    }
+
+
+        //
 //    public List<Product> getNewArrivals(int limit) {
 //        return productDao.getNewArrivals(limit);
 //    }
@@ -61,6 +66,8 @@ public class ProductService {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ProductService ps = new ProductService();
+        System.out.println(ps.searchProductByText("2"));
         System.out.println(ps.getAllProduct());
+
     }
 }
