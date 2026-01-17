@@ -40,7 +40,7 @@
             <nav>
                 <div class="nav-container content">
                     <div class="nav-left">
-                        <form action="${AuraSound}/search" method="post">
+                        <form action="${AuraSound}/admin/product-manager" method="post">
                             <div class="searchBar">
                                 <input name="search" type="text" placeholder="Tìm kiếm" value="${search}">
                                 <button type="submit">
@@ -98,7 +98,7 @@
                                     <td class="new-price"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/> đ
                                     </td>
                                     <td>
-                                        <a href="product_detail.jsp?id=${p.id}">
+                                        <a href="${AuraSound}/admin/product-detail-manager?pid=${p.id}">
                                             <button class="btn btn-sm btn-warning">Chi tiết</button>
                                         </a>
                                     </td>

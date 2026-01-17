@@ -1,8 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ include file="/tag/_taglibs.jsp" %>
 
 <%
-    request.setAttribute("pageTitle", "QUẢN LÝ- AuraSound");
+    request.setAttribute("pageTitle", "QUẢN LÝ SẢN PHẨM - AuraSound");
 %>
 
 <!DOCTYPE html>
@@ -19,78 +19,130 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="${AuraSound}/assets/css/styleAdmin.css">
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
-    <link rel="stylesheet" href="/assets/css/product_detail.css">
-
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/product_detail.css">
 </head>
 
 <body>
+
+<button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
+    <i class="bi bi-caret-up-fill"></i>
+</button>
+
 <div class="container-fluid">
     <div class="row">
         <jsp:include page="/tag/_adminMenu.jsp"/>
 
-        <main class="container my-4 my-md-5">
-            <div class="mb-3">
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+            <nav>
+                <div class="nav-container content">
+                    <div class="nav-left">
+                        <form action="${AuraSound}/admin/product-manager" method="post">
+                            <div class="searchBar">
+                                <input name="search" type="text" placeholder="Tìm kiếm" value="${search}">
+                                <button type="submit">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </form>
+
+                        <a class="a-nodecor" href="#">
+                            <div class="contact">Sửa Sản Phẩm</div>
+                        </a>
+
+                        <a class="a-nodecor" href="#">
+                            <div class="contact">Sửa Biến Thể</div>
+                        </a>
+
+                        <a class="a-nodecor" href="#">
+                            <div class="contact">Sửa Thông Số</div>
+                        </a>
+
+                        <a class="a-nodecor" href="#">
+                            <div class="contact">Sửa Ảnh SP</div>
+                        </a>
+                    </div>
+
+                    <div id="hamburger-icon"><i class="bi bi-list"></i></div>
+                </div>
+
+            </nav>
+
+            <div class="mb-3 title">
                 <a href="products.jsp" class="btn btn-primary btn-gradient btn-sm rounded-3"
-                   aria-label="Quay lại danh sách Sản phẩm">
+                   title="Quay lại danh sách Sản phẩm">
                     <i class="ri-arrow-left-line me-1"></i> Quay lại
                 </a>
-            </div>
-
-            <!-- Tiêu đề chính của trang -->
-
-            <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
-                <h1 class="h5 header-title my-0">
-                    <i class="ri-edit-2-line me-2 main-header-icon"></i>
-                    CHỈNH SỬA SẢN PHẨM
-                </h1>
+                <span class="header-title"> CHỈNH SỬA SẢN PHẨM </span>
             </div>
 
             <form class="bg-white p-4 p-md-5 rounded-3 shadow-lg">
-
                 <!-- Thông tin cơ bản -->
-
                 <section class="mb-5">
                     <h2 class="h5 section-title">
                         <i class="ri-information-line"></i>
                         <span>1.</span> Thông tin chung
                     </h2>
 
-                    <!-- Tên Sản phẩm -->
-
+                    <!-- Sửa thông tin chung của sp -->
                     <div class="mb-3">
                         <label for="product-name" class="form-label">Tên Sản phẩm <span
                                 class="text-required">:</span></label>
-                        <input type="text" id="product-name" value="Tai nghe Sony WH-CH520 (20W)" class="form-control"
-                               placeholder="Nhập tên loa/tai nghe">
-                    </div>
+                        <input type="text" id="product-name" value="${p.name}" class="form-control"
+                               placeholder="Tên SP của bạn">
 
-                    <!-- Mã SKU(Định danh) & Giá -->
-
-                    <div class="row g-3">
                         <div class="col-md-6">
                             <label for="product-sku" class="form-label">Mã SKU</label>
-                            <input type="text" id="product-sku" value="SN-WHCH-20W" class="form-control"
+                            <input type="text" id="product-sku" value="${p.sku}" class="form-control"
                                    placeholder="Nhập mã SKU sản phẩm">
                         </div>
-                        <div class="col-md-6">
-                            <label for="product-price" class="form-label">Giá bán (VNĐ) <span
-                                    class="text-required">*</span></label>
-                            <input type="number" id="product-price" value="900000" class="form-control"
-                                   placeholder="900000">
+
+                        <div class="mb-3 mt-4">
+                            <label for="product-short-desc" class="form-label">Mô tả</label>
+                            <textarea id="product-short-desc" class="form-control" rows="3"
+                                      placeholder="Tóm tắt ngắn gọn về sản phẩm.">
+                                ${p.description}</textarea>
                         </div>
-                    </div>
 
-                    <!-- Mô tả ngắn -->
-
-                    <div class="mb-3 mt-4">
-                        <label for="product-short-desc" class="form-label">Mô tả ngắn</label>
-                        <textarea id="product-short-desc" class="form-control" rows="3"
-                                  placeholder="Tóm tắt ngắn gọn về sản phẩm.">Loa Bluetooth công suất 20W, chống nước IPX7, pin 15 giờ. Âm bass mạnh mẽ, kết nối ổn định.</textarea>
                     </div>
                 </section>
 
+                <section class="mb-5 border-top pt-4">
+                    <h2 class="h5 section-title">
+                        <i class="ri-folder-open-line"></i>
+                        <span>4.</span> Biến thể
+                    </h2>
+
+                    <!-- Trạng thái, Danh mục và Tồn kho -->
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <label for="product-status" class="form-label">Các biến thể</label>
+                            <select id="product-status" class="form-select">
+                                <c:forEach items="${variants}" var="v">
+                                    <option value="${v.colorName}"  onclick="setVariant(this)" selected>${v.colorName}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <label for="product-category" class="form-label">Danh mục</label>
+                            <select id="product-category" class="form-select">
+                                <option>Tai Nghe</option>
+                                <option selected>Loa Bluetooth</option>
+                                <option>Phụ kiện Âm thanh</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="product-stock" class="form-label">Số lượng tồn kho</label>
+                            <input type="number" id="product-stock" value="85" class="form-control"
+                                   placeholder="Số lượng">
+                        </div>
+                    </div>
+                </section>
                 <!-- Chi tiết kỹ thuật -->
 
                 <section class="mb-5 border-top pt-4">
@@ -143,38 +195,6 @@
 
                 <!-- Trạng thái và Quản lý Kho -->
 
-                <section class="mb-5 border-top pt-4">
-                    <h2 class="h5 section-title">
-                        <i class="ri-folder-open-line"></i>
-                        <span>3.</span> Trạng thái và Quản lý Kho
-                    </h2>
-
-                    <!-- Trạng thái, Danh mục và Tồn kho -->
-
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-4">
-                            <label for="product-status" class="form-label">Trạng thái</label>
-                            <select id="product-status" class="form-select">
-                                <option value="published" selected>Đang bán (Published)</option>
-                                <option value="draft">Bản nháp (Draft)</option>
-                                <option value="archived">Lưu trữ (Archived)</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="product-category" class="form-label">Danh mục</label>
-                            <select id="product-category" class="form-select">
-                                <option>Tai Nghe</option>
-                                <option selected>Loa Bluetooth</option>
-                                <option>Phụ kiện Âm thanh</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="product-stock" class="form-label">Số lượng tồn kho</label>
-                            <input type="number" id="product-stock" value="85" class="form-control"
-                                   placeholder="Số lượng">
-                        </div>
-                    </div>
-                </section>
 
                 <!-- Nút Hành động -->
                 <div class="d-flex flex-column flex-sm-row justify-content-end pt-4 border-top">
@@ -191,83 +211,6 @@
 
             </form>
         </main>
-
-        <!-- footer -->
-
-        <footer class="footer-container">
-            <div class="row container mx-auto pt-5">
-                <div class="footer-one col-lg-3 col-md-6 col-12">
-                    <a class=" a-nodecor" href="../index.jsp">
-                        <div class="logo-container">
-                            <div class="logo-wave">
-                                <div class="sound-wave wave1"></div>
-                                <div class="sound-wave wave2"></div>
-                                <div class="sound-wave wave3"></div>
-                            </div>
-                            <span class="logo-text">AuraSound</span>
-                        </div>
-                    </a>
-
-                    <p class="pt-3">Với Aura Sound, âm nhạc không chỉ để nghe – mà là để cảm nhận. Mỗi nhịp điệu, mỗi
-                        giai
-                        điệu đều
-                        được
-                        tái hiện chân thực, giúp bạn thể hiện phong cách và cá tính qua từng thanh âm.</p>
-                </div>
-                <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-                    <h5 class="pb-2">Featured</h5>
-                    <ul class="text-uppercase list-unstyled">
-                        <li><a href="#">Tai nghe thể thao</a></li>
-                        <li><a href="#">Tai nghe cao cấp</a></li>
-                        <li><a href="#">Loa cao cấp</a></li>
-                        <li><a href="#">Tai nghe SONY</a></li>
-                        <li><a href="#">Loa JBL</a></li>
-                    </ul>
-                </div>
-                <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-                    <h5 class="pb-2">Liên Hệ</h5>
-                    <div>
-                        <h6 class="text-uppercase">Địa chỉ</h6>
-                        <p>Nong Lam University, VQCR+GP6, khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh</p>
-                    </div>
-                    <div>
-                        <h6 class="text-uppercase">Phone</h6>
-                        <p>1900 1010</p>
-                    </div>
-                    <div>
-                        <h6 class="text-uppercase">Email</h6>
-                        <p>EXAMPLE@gmail.com</p>
-                    </div>
-                </div>
-                <div class="footer-one col-lg-3 col-md-6 col-12">
-                    <h5 class="pb-2">Instagram</h5>
-                    <div class="row">
-                        <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img1.jpg" alt="">
-                        <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img10.jpg" alt="">
-                        <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img2.jpg" alt="">
-                        <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img5.jpg" alt="">
-                        <img class="img-fluid w-25 h-100 m-2" src="../assets/img/Instagram/img6.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="copyright mt-5">
-                <div class="row container mx-auto">
-                    <div class="col-lg-3 col-md-6 col-12 mb-4">
-                        <img src="../assets/img/Payment/payment.png" alt="">
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
-                        <p>© 2025 Công Ty Cổ Phần AuraSound </p>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-
-            </div>
-        </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/script.js"></script>

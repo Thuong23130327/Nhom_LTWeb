@@ -20,10 +20,6 @@ public class AccountManagerServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User authUser = (User) session.getAttribute("auth");
 
-        if (authUser == null || authUser.getRole() != User.Role.Admin) {
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
-            return;
-        }
 
 // Lấy dữ liệu từ DAO
         UserDAO dao = new UserDAO();
