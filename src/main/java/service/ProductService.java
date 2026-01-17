@@ -70,4 +70,8 @@ public class ProductService {
         System.out.println(ps.getAllProduct());
 
     }
+
+    public boolean deleteProduct(String pid) {
+        return productDao.deleteProduct(pid);
+    }
 }

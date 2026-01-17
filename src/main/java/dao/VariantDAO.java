@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,4 +43,24 @@ public class VariantDAO {
     }
 
 
+    public boolean deleteVariant(String vid) {
+
+
+        String sql = "DELETE FROM productvariants WHERE id =? ;\n";
+
+
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, vid);
+            int afRow = ps.executeUpdate();
+            return afRow > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+
+    }
 }

@@ -52,11 +52,15 @@
                             <div class="contact">Sửa Sản Phẩm</div>
                         </a>
 
-                        <a class="a-nodecor" href="#">
+                        <a class="a-nodecor" href="#product-detail">
+                            <div class="contact">${p.name}</div>
+                        </a>
+
+                        <a class="a-nodecor" href="#var-detail">
                             <div class="contact">Sửa Biến Thể</div>
                         </a>
 
-                        <a class="a-nodecor" href="#">
+                        <a class="a-nodecor" href="#spec-detail">
                             <div class="contact">Sửa Thông Số</div>
                         </a>
 
@@ -70,7 +74,7 @@
 
             </nav>
 
-            <div class="mb-3 title">
+            <div class="mb-3 title" id="product-detail">
                 <a href="products.jsp" class="btn btn-primary btn-gradient btn-sm rounded-3"
                    title="Quay lại danh sách Sản phẩm">
                     <i class="ri-arrow-left-line me-1"></i> Quay lại
@@ -88,11 +92,12 @@
 
                     <!-- Sửa thông tin chung của sp -->
                     <div class="mb-3">
-                        <label for="product-name" class="form-label">Tên Sản phẩm <span
-                                class="text-required">:</span></label>
-                        <input type="text" id="product-name" value="${p.name}" class="form-control"
-                               placeholder="Tên SP của bạn">
-
+                        <div class="col-md-6">
+                            <label for="product-name" class="form-label">Tên Sản phẩm <span
+                                    class="text-required">:</span></label>
+                            <input type="text" id="product-name" value="${p.name}" class="form-control"
+                                   placeholder="Tên SP của bạn">
+                        </div>
                         <div class="col-md-6">
                             <label for="product-sku" class="form-label">Mã SKU</label>
                             <input type="text" id="product-sku" value="${p.sku}" class="form-control"
@@ -109,15 +114,14 @@
                     </div>
                 </section>
 
-                <section class="mb-5 border-top pt-4">
+                <section class="mb-5 border-top pt-4" id="var-detail">
                     <h2 class="h5 section-title">
                         <i class="ri-folder-open-line"></i>
                         <span>4.</span> Biến thể
                     </h2>
 
                     <!-- Trạng thái, Danh mục và Tồn kho -->
-
-                    <div class="row g-3 mb-4">
+                    <div class="row g-3 mb-2">
                         <div class="col-md-2">
                             <label for="product-status" class="form-label">Các biến thể</label>
                             <select onchange="updateVariantInfo(this.value)" id="product-status" class="form-select">
@@ -127,27 +131,28 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label class="col-md-4 form-label">Tên màu<span
+                            <label class=" form-label">Tên màu<span
                                     class="text-required">:</span></label>
                             <input type="text" id="var-colorName" value="" class="form-control"
                                    placeholder="Màu của biến thể">
                         </div>
-                        <div class="col-md-3">
-                            <label  class="form-label">Mã SKU</label>
+                        <div class="col-md-2">
+                            <label class="form-label">Mã SKU</label>
                             <input type="text" id="var-sku" value="" class="form-control"
                                    placeholder="Nhập mã SKU sản phẩm">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <label class="form-label">Giá Chưa Giảm</label>
                             <input type="number" id="var-oldP" value="" class="form-control"
                                    placeholder="Nhập mã SKU sản phẩm">
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <label class="form-label">Giá Đã Giảm</label>
                             <input type="number" id="var-newP" value="" class="form-control"
                                    placeholder="Nhập mã SKU sản phẩm">
                         </div>
+
                         <div class="col-md-2">
                             <label for="product-stock" class="form-label">Số lượng kho</label>
                             <input type="number" id="var-stock" value="" class="form-control"
@@ -155,7 +160,8 @@
                         </div>
                         <div class="col-md-2">
                             <label for="product-stock" class="form-label">Đã bán:</label>
-                            <span id="var-sold" class="form-control"></span>
+                            <input type="number" id="var-sold" value="" class="form-control bg-light"
+                                   placeholder="Số lượng" readonly>
                         </div>
 
                         <div class="col-md-3">
@@ -166,16 +172,21 @@
                                 <option>Phụ kiện Âm thanh</option>
                             </select>
                         </div>
-
-                        <button type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-3 mb-sm-0">
-                            <i class="ri-delete-bin-line me-1"></i> Xóa Biến Thể này
-                        </button>
+                        <input type="hidden" id="current-variant-id" value="">
+                        <div class="d-flex flex-sm-row justify-content-end pt-1">
+                            <button onclick="confirmDelete('v', document.getElementById('current-variant-id').value)" type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-0">
+                                Xóa Biến thể
+                            </button>
+                            <button type="submit" class="btn btn-primary btn-gradient">
+                                Lưu Thay Đổi
+                            </button>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Chi tiết kỹ thuật -->
 
-                <section class="mb-5 border-top pt-4">
+                <section class="mb-5 border-top pt-4" id="spec-detail">
                     <h2 class="h5 section-title">
                         <i class="ri-tools-line"></i>
                         <span>2.</span> Chi tiết kỹ thuật
@@ -198,7 +209,7 @@
 
                 <!-- Nút Hành động -->
                 <div class="d-flex flex-column flex-sm-row justify-content-end pt-4 border-top">
-                    <button type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-3 mb-sm-0">
+                    <button type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-3 mb-sm-0" onclick="confirmDelete('p','${p.id}')">
                         <i class="ri-delete-bin-line me-1"></i> Xóa Sản Phẩm
                     </button>
 
@@ -211,12 +222,9 @@
 
             </form>
         </main>
-        <script>
-            // In trực tiếp chuỗi JSON vào biến JS.
 
-            // Dùng escapeXml="false" để ngăn chặn việc biến các ký tự thành mã HTML (như " thành &quot;)
+        <script>
             const productVariants = ${variantsJson};
-            console.log("Danh sách biến thể đã nhận:", productVariants);
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="../assets/js/script.js"></script>
