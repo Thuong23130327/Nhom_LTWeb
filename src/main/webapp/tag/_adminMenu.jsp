@@ -17,14 +17,7 @@
             <li class="nav-item">
                 <a href="#" class="nav-link active">
                     <i class="fas fa-home me-2"></i>
-                    Admin
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-box me-2"></i>
-                    Quản lý sản phẩm
+                    Tổng quan
                 </a>
             </li>
 
@@ -36,20 +29,20 @@
             </li>
 
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/admin/user-manager" class="nav-link"><i
+                <a href="${AuraSound}/admin/user-manager" class="nav-link"><i
                         class="fas fa-users"></i> Quản lý Người
                     dùng</a>
             </li>
 
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/admin/voucher.jsp" class="nav-link">
+                <a href="${AuraSound}/admin/voucher.jsp" class="nav-link">
                     <i class="fa-solid fa-comment-dots me-2"></i>
                     Quản lý Voucher
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/admin/product-manager" class="nav-link"><i
+                <a href="${AuraSound}/admin/product-manager" class="nav-link"><i
                         class="fas fa-box"></i> Quản lý Sản
                     phẩm</a>
             </li>
@@ -62,14 +55,14 @@
             </li>
 
             <li class="nav-item">
-                <a href="${pageContext.request.contextPath}/index.jsp" class="nav-link">
+                <a href="${AuraSound}/index.jsp" class="nav-link">
                     <i class="fa-solid fa-earth-asia me-2"></i>
                     Xem website
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link text-danger">
+                <a href="${AuraSound}/logout" class="nav-link text-danger">
                     <i class="fa-solid fa-right-from-bracket me-2"></i>
                     Đăng xuất
                 </a>

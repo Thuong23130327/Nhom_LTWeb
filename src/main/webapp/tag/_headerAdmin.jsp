@@ -32,16 +32,16 @@
 
         <c:if test="${keepDefaultCss == true}">
             <link rel="stylesheet"
-                  href="${pageContext.request.contextPath}/assets/css/styleAdmin.css">
+                  href="${AuraSound}/assets/css/styleAdmin.css">
             <link rel="stylesheet"
-                  href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+                  href="${AuraSound}/assets/css/styleHome.css">
         </c:if>
     </c:when>
 
     <c:otherwise>
         <link rel="stylesheet"
-              href="${pageContext.request.contextPath}/assets/css/styleAdmin.css">
+              href="${AuraSound}/assets/css/styleAdmin.css">
         <link rel="stylesheet"
-              href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+              href="${AuraSound}/assets/css/styleHome.css">
     </c:otherwise>
 </c:choose>

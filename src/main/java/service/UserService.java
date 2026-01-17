@@ -27,10 +27,10 @@ public class UserService {
         return user;
     }
 
+
     public boolean register(String email, String passwordRaw, String fullname) throws NoSuchAlgorithmException {
         String passHash = MD5.getMd5(passwordRaw);
-        User newUser = new User(email, passHash, fullname);
-        return userDAO.register(newUser);
+        return userDAO.register(email, passHash, fullname);
     }
 
     public boolean checkExistMail(String password) {

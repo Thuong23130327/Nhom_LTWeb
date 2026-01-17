@@ -9,7 +9,6 @@ import model.User;
 
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/login.jsp", description = "filter cho login")
 public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -21,7 +20,7 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
-       User user = (User) session.getAttribute("auth");
+        User user = (User) session.getAttribute("auth");
         if (user != null) {
             response.sendRedirect(request.getContextPath() + "/index.jsp");
         } else {

@@ -19,8 +19,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleAdmin.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
     <link rel="stylesheet" href="/assets/css/styleStore.css">
     <link rel="stylesheet" href="/assets/css/styleAdmin.css">
     <link rel="stylesheet" href="/assets/css/order_detail.css">

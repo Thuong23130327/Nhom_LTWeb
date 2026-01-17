@@ -17,8 +17,7 @@ body {
 
 /*LOGO*/
 #sidebar .logo-container {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 10px auto;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,9 +31,7 @@ body {
 
 /*SIDEBAR*/
 html, body {
-    overflow-x: hidden; /* Chặn thanh cuộn ngang thừa thãi */
-    height: auto !important; /* Trả lại chiều cao tự nhiên cho trang web */
-    min-height: 100vh; /* Đảm bảo trang luôn cao ít nhất bằng màn hình */
+    min-height: 100vh;
 }
 
 /* Thiết lập Sidebar dính */
@@ -43,7 +40,8 @@ html, body {
     top: 0; /* Dính ngay mép trên cùng */
     height: 100vh; /* Chiều cao bằng màn hình */
     overflow-y: auto; /* Cuộn riêng bên trong menu nếu dài */
-    z-index: 1000; /* Nổi lên trên cùng */padding-top: 0;
+    z-index: 1000; /* Nổi lên trên cùng */
+    padding-top: 0;
     background-color: var(--main-bg); /* Màu nền (quan trọng để không bị nhìn xuyên thấu) */
 }
 
@@ -61,6 +59,7 @@ html, body {
 
 .sidebar a {
     margin: 2px;
+    font-size: 15px;
 }
 
 .sidebar .nav-link:hover {
@@ -202,4 +201,20 @@ main {
 .btn-primary:hover {
     opacity: 0.9;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-left {
+    max-width: 100%;
+    flex: 1;
+    flex-wrap: nowrap;
+}
+
+.nav-left a {
+    font-size: 14px;
+}
+
+@media (max-width: 991px) {
+    .sidebar {
+        display: none;
+    }
 }

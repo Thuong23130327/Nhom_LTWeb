@@ -11,6 +11,10 @@ import java.util.List;
 
 public class UserDAO {
 
+    private Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+
     public static boolean checkExistMail(String email) {
 
         String sql = "Select id from users where email =?";
@@ -27,11 +31,12 @@ public class UserDAO {
 
     public User checkLogin(String email, String passHash) throws NoSuchAlgorithmException, SQLException {
         User user = null;
-
-
         String sql = "SELECT * FROM Users WHERE email = ? AND password_hash = ?";
 
-        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+
             ps.setString(1, email);
             ps.setString(2, passHash);
 
@@ -59,21 +64,23 @@ public class UserDAO {
     }
 
 
-    public boolean register(User user) {
+    public boolean register(String email, String passHash, String fullname) {
 
         String sql = "INSERT INTO Users (email, password_hash, full_name) VALUES (?, ?, ?)";
 
-        // 2. Mở kết nối
-        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
 
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPasswordHash());
-            ps.setString(3, user.getFullName());
+            ps.setString(1, email);
+            ps.setString(2, passHash);
+            ps.setString(3, fullname);
 
             int rowsAffected = ps.executeUpdate();
-
-            return rowsAffected > 0;
-
+            if (rowsAffected > 0) {
+                User newUser = new User(email, passHash, fullname);
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,4 +122,5 @@ public class UserDAO {
         UserDAO userDAO = new UserDAO();
         System.out.println(userDAO.getAllUser());
     }
+
 }

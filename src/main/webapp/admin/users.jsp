@@ -31,8 +31,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleAdmin.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
 
 </head>
 
@@ -90,11 +90,11 @@
                                 </td>
                                 <td>${u.createdAt}</td>
                                 <td>
-                                    <a href="${pageContext.request.contextPath}/profileM/profile.jsp?id=${u.id}">
+                                    <a href="${AuraSound}/profileM/profile.jsp?id=${u.id}">
                                         <button class="btn btn-sm btn-info">Xem</button>
                                     </a>
                                     <c:if test="${u.role != 'Admin'}">
-                                        <a href="${pageContext.request.contextPath}/404.jsp?id=${u.id}">
+                                        <a href="${AuraSound}/404.jsp?id=${u.id}">
                                             <button class="btn btn-sm btn-warning">Sửa</button>
                                         </a>
                                     </c:if>

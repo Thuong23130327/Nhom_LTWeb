@@ -35,9 +35,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProfile.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleStore.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleProfile.css">
     <link rel="stylesheet" href="assets/css/styleCart.css">
 
 </head>
@@ -108,11 +108,11 @@
     </div>
 </main>
 
-<jsp:include page="tag/_footer.jsp"></jsp:include>
+<jsp:include page="/tag/_footer.jsp"></jsp:include>
 
-<script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/scriptProfile.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/scriptStore.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/scriptCart.js"></script>
+<script src="${AuraSound}/assets/js/script.js"></script>
+<script src="${AuraSound}/assets/js/scriptProfile.js"></script>
+<script src="${AuraSound}/assets/js/scriptStore.js"></script>
+<script src="${AuraSound}/assets/js/scriptCart.js"></script>
 </body>
 </html>

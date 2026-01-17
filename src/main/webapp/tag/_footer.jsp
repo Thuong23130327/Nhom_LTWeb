@@ -3,7 +3,7 @@
 <footer class="footer-container">
     <div class="row container mx-auto pt-5">
         <div class="footer-one col-lg-3 col-md-6 col-12">
-            <a class=" a-nodecor" href="index.jsp">
+            <a class=" a-nodecor" href="${AuraSound}/index.jsp">
                 <div class="logo-container">
                     <div class="logo-wave">
                         <div class="sound-wave wave1"></div>
@@ -20,7 +20,7 @@
         <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
             <h5 class="pb-2">Featured</h5>
             <ul class="text-uppercase list-unstyled">
-                <li><a href="#">Tai nghe thể thao</a></li>
+                <li><a href="${AuraSound}/">Tai nghe thể thao</a></li>
                 <li><a href="#">Tai nghe cao cấp</a></li>
                 <li><a href="#">Loa cao cấp</a></li>
                 <li><a href="#">Tai nghe SONY</a></li>
@@ -46,15 +46,8 @@
             <h5 class="pb-2">Instagram</h5>
             <div class="row">
                 <img class="img-fluid w-25 h-100 m-2"
-                     src="${pageContext.request.contextPath}/assets/img/Instagram/img1.jpg" alt="">
-                <img class="img-fluid w-25 h-100 m-2"
-                     src="${pageContext.request.contextPath}/assets/img/Instagram/img10.jpg" alt="">
-                <img class="img-fluid w-25 h-100 m-2"
-                     src="${pageContext.request.contextPath}/assets/img/Instagram/img2.jpg" alt="">
-                <img class="img-fluid w-25 h-100 m-2"
-                     src="${pageContext.request.contextPath}/assets/img/Instagram/img5.jpg" alt="">
-                <img class="img-fluid w-25 h-100 m-2"
-                     src="${pageContext.request.contextPath}/assets/img/Instagram/img6.jpg" alt="">
+                     src="${AuraSound}/assets/img/Instagram/img1.jpg" alt="">
+
             </div>
         </div>
     </div>
@@ -62,7 +55,7 @@
     <div class="copyright mt-5">
         <div class="row container mx-auto">
             <div class="col-lg-3 col-md-6 col-12 mb-4">
-                <img src="${pageContext.request.contextPath}/assets/img/Payment/payment.png" alt="">
+                <img src="${AuraSound}/assets/img/Payment/payment.png" alt="">
             </div>
             <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
                 <p>© 2025 Công Ty Cổ Phần AuraSound </p>
