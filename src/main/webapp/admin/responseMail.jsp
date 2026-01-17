@@ -19,9 +19,9 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleAdmin.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleResponseMail.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleResponseMail.css">
 
     <style>
         /* Ép layout về dạng Flexbox chuẩn để không bị vỡ */
@@ -158,8 +158,8 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/scriptResponseMail.js"></script>
-<script src="${pageContext.request.contextPath}/assets/js/scriptAdmin.js"></script>
+<script src="${AuraSound}/assets/js/scriptResponseMail.js"></script>
+<script src="${AuraSound}/assets/js/scriptAdmin.js"></script>
 
 </body>
 </html>

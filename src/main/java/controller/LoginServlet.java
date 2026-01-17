@@ -17,7 +17,6 @@ import java.sql.SQLException;
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/login.jsp").forward(request, response);
-
     }
 
 
@@ -26,26 +25,26 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String url = "/login.jsp";
-        String error = "";
+
         request.setAttribute("registerMessage", null);
         request.setAttribute("registerError", null);
-
 
         User user = null;
         try {
             user = userService.login(email, password);
             if (user != null) {
+                //Check bị khóa ko
                 if (user.isLocked()) {
-                    request.setAttribute(error, "Tài khoản của bạn đã bị khóa");
+                    request.setAttribute("error", "Tài khoản của bạn đã bị khóa");
                     request.setAttribute("loginEmail", email);
-                    request.getRequestDispatcher(url).forward(request, response);
+                    request.getRequestDispatcher("/login.jsp").forward(request, response);
                     return;
                 }
 
                 HttpSession session = request.getSession();
                 session.setAttribute("auth", user);
                 if (user.getRole() == User.Role.Admin) {
+                    session.setAttribute("author", user);
                     response.sendRedirect("admin/admin.jsp");
                 } else {
                     response.sendRedirect("index.jsp");
@@ -58,13 +57,11 @@ public class LoginServlet extends HttpServlet {
                 request.setAttribute("loginEmail", email);
                 request.setAttribute("error", "Mật khẩu không đúng");
             }
-            request.getRequestDispatcher(url).forward(request, response);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 }

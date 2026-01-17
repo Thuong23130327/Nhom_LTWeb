@@ -48,11 +48,11 @@
             <div class="footer-one col-lg-3 col-md-6 col-12">
                 <h5 class="pb-2">Instagram</h5>
                 <div class="row">
-                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img1.jpg" alt="">
-                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img10.jpg" alt="">
-                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img2.jpg" alt="">
-                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img5.jpg" alt="">
-                    <img class="img-fluid w-25 h-100 m-2" src="${pageContext.request.contextPath}/assets/img/Instagram/img6.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${AuraSound}/assets/img/Instagram/img1.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${AuraSound}/assets/img/Instagram/img10.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${AuraSound}/assets/img/Instagram/img2.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${AuraSound}/assets/img/Instagram/img5.jpg" alt="">
+                    <img class="img-fluid w-25 h-100 m-2" src="${AuraSound}/assets/img/Instagram/img6.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="copyright mt-5">
             <div class="row container mx-auto">
                 <div class="col-lg-3 col-md-6 col-12 mb-4">
-                    <img src="${pageContext.request.contextPath}/assets/img/Payment/payment.png" alt="">
+                    <img src="${AuraSound}/assets/img/Payment/payment.png" alt="">
                 </div>
                 <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
                     <p>© 2025 Công Ty Cổ Phần AuraSound </p>
@@ -84,15 +84,15 @@
     <c:when test="${not empty customJs}">
         ${customJs}
         <c:if test="${keepDefaultJs == true}">
-            <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/js/scriptProfile.js"></script>
-            <script src="${pageContext.request.contextPath}/assets/js/scriptStore.js"></script>
+            <script src="${AuraSound}/assets/js/script.js"></script>
+            <script src="${AuraSound}/assets/js/scriptProfile.js"></script>
+            <script src="${AuraSound}/assets/js/scriptStore.js"></script>
         </c:if>
     </c:when>
 
     <c:otherwise>
-        <script src="${pageContext.request.contextPath}/assets/js/script.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/scriptProfile.js"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/scriptStore.js"></script>
+        <script src="${AuraSound}/assets/js/script.js"></script>
+        <script src="${AuraSound}/assets/js/scriptProfile.js"></script>
+        <script src="${AuraSound}/assets/js/scriptStore.js"></script>
     </c:otherwise>
 </c:choose>

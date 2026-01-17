@@ -18,22 +18,19 @@ public class RegisterServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+        UserService userService = new UserService();
 
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String repassword = request.getParameter("repassword");
-        String url = "/login.jsp";
-        request.setAttribute("error", null);
-        UserService userService = new UserService();
+
 
         //Mail tồn tại chưa ?
         if (userService.checkExistMail(email)) {
-            request.setAttribute("registerError", "Email đã được sử dụng");
+            request.setAttribute("registerError", "Email đã được sử dụng, vui lòng Đăng Nhập");
             request.setAttribute("loginEmail", email);
-            request.setAttribute("fullname", fullname);
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }
 
@@ -42,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("registerError", "Password không trùng khớp");
             request.setAttribute("fullname", fullname);
             request.setAttribute("regEmail", email);
-            request.getRequestDispatcher(url).forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
             return;
         }
 
@@ -53,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         if (regisSuccess) {
-            request.getSession().setAttribute("registerMessage", "Đã đăng kí thành công");
+            request.setAttribute("registerMessage", "Đã đăng kí thành công");
             request.setAttribute("error", null);
             request.setAttribute("registerError", null);
             request.setAttribute("loginEmail", email);
@@ -62,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("regEmail", email);
             request.setAttribute("registerError", "Lỗi đăng kí, vui lòng thử lại");
         }
-        request.getRequestDispatcher(url).forward(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
 
     }
 }

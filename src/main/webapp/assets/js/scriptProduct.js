@@ -21,7 +21,7 @@
 //
 // function addToCart(productId) {
 //     let q = document.getElementById('quantity').value;
-//     let url = "${pageContext.request.contextPath}/CartServlet?id=" + productId + "&q=" + q;
+//     let url = "${AuraSound}/CartServlet?id=" + productId + "&q=" + q;
 //
 //     fetch(url)
 //         .then(response => response.text()) // Nhận số lượng từ Servlet gửi về

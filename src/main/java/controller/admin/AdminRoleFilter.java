@@ -8,7 +8,6 @@ import model.User;
 
 import java.io.IOException;
 
-//@WebFilter(urlPatterns = "/admin/*", description = "filter cho login")
 
 public class AdminRoleFilter implements Filter {
     @Override
@@ -22,9 +21,8 @@ public class AdminRoleFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
 
-        User user = (User) session.getAttribute("auth");
-
-        if (user != null && user.getRole() == User.Role.Admin) {
+        User user = (User) session.getAttribute("author");
+        if (user != null) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         } else {

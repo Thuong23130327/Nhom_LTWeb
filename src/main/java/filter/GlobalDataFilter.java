@@ -63,6 +63,7 @@ public class GlobalDataFilter implements Filter {
             }
 
         }
+        session.setAttribute("AuraSound", request.getContextPath());
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

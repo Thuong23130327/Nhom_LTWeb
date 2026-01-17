@@ -9,20 +9,6 @@
         <location>/404.jsp</location>
     </error-page>
 
-<!--    <filter>-->
-<!--        <filter-name>AuthFilter</filter-name>-->
-<!--        <filter-class>controller.admin.AuthenticationFilter</filter-class>-->
-<!--    </filter>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>AuthFilter</filter-name>-->
-<!--        <url-pattern>/admin/*</url-pattern>-->
-<!--    </filter-mapping>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>AuthFilter</filter-name>-->
-<!--        <url-pattern>/profileM/*</url-pattern>-->
-<!--    </filter-mapping>-->
-
-
     <filter>
         <filter-name>GlobalDataFilter</filter-name>
         <filter-class>filter.GlobalDataFilter</filter-class>
@@ -45,6 +31,10 @@
 <!--        <filter-name>LoginFilter</filter-name>-->
 <!--        <filter-class>controller.LoginFilter</filter-class>-->
 <!--    </filter>-->
+<!--    <filter-mapping>-->
+<!--        <filter-name>LoginFilter</filter-name>-->
+<!--        <url-pattern>/login</url-pattern>-->
+<!--    </filter-mapping>-->
 <!--    <filter-mapping>-->
 <!--        <filter-name>LoginFilter</filter-name>-->
 <!--        <url-pattern>/login.jsp</url-pattern>-->

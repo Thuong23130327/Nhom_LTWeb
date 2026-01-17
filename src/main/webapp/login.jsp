@@ -17,21 +17,12 @@
 
 <body>
 
-<%
-    String password = request.getAttribute("password") == null ? "" : request.getAttribute("password") + "";
-    String regEmail = request.getAttribute("regEmail") == null ? "" : request.getAttribute("regEmail") + "";
-    String loginEmail = request.getAttribute("loginEmail") == null ? "" : request.getAttribute("loginEmail") + "";
-    String error = request.getAttribute("error") == null ? "" : request.getAttribute("error") + "";
-    String regError = (String) request.getAttribute("registerError");
-    String regMsg = (String) request.getAttribute("registerMessage");
-    String fullname = request.getAttribute("fullname") == null ? "" : request.getAttribute("fullname") + "";
-%>
 <div class="container" id="container">
     <div class="form-container sign-up">
         <form action="register" method="post">
             <h1>Đăng ký</h1>
-            <input type="text" name="fullname" value="<%=fullname%>" placeholder=" Họ và tên" required/>
-            <input type="email" name="email" value="<%=regEmail%>" placeholder=" Email" required/>
+            <input type="text" name="fullname" value="${fullname}" placeholder=" Họ và tên" required/>
+            <input type="email" name="email" value="${regEmail}" placeholder=" Email" required/>
             <input type="password" name="password" placeholder="Password" required/>
             <input type="password" name="repassword" placeholder="Nhập lại password" required/>
             <span class="text-danger">${registerError}</span>
@@ -56,10 +47,9 @@
                     <i class="fa-brands fa-linkedin-in"></i>
                 </a>
             </div>
-            <input type="email" name="email" value="<%=loginEmail%>" placeholder="Nhập Email"/>
-            <input type="password" name="password" value="<%=password%>"
-                   placeholder="Password"/>
-            <p class="text-danger"><%= error %>
+            <input type="email" name="email" value="${loginEmail}" placeholder="Nhập Email"/>
+            <input type="password" name="password" placeholder="Password"/>
+            <p class="text-danger">${error}
             </p>
             <a href="#">Quên mật khẩu?</a>
             <span class="text-success">${registerMessage}</span>
@@ -73,14 +63,14 @@
             <div class="toggle-panel toggle-left">
                 <h1>Xin Chào!</h1>
                 <p>
-                    Đăng ký thông tin cá nhân của bạn để sử dụng trang web
+                    Đăng ký thông tin cá nhân của bạn để để nhận nhiều ưu đãi nhé! <br> Nhấn nút Đăng Nhập nếu bạn đã có tài khoản
                 </p>
                 <button class="hidden" id="login">Đăng Nhập</button>
             </div>
             <div class="toggle-panel toggle-right">
                 <h1>Chào Mừng Quay Lại!</h1>
                 <p>
-                    Nhập thông tin cá nhân của bạn để sử dụng trang web
+                    Nhập thông tin cá nhân của bạn để sử dụng trang web <br> Nếu chưa có tài khoản, Nhấn nút Đăng Kí để nhận nhiều ưu đãi nhé!
                 </p>
                 <button class="hidden" id="register">Đăng Ký</button>
 
@@ -90,7 +80,7 @@
 </div>
 <script src="assets/js/scriptLogin.js"></script>
 <%
-    if (regError != null) {
+    if ( request.getAttribute("registerError") != null) {
 %>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

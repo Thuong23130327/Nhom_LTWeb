@@ -20,10 +20,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProduct.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleCart.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleStore.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleProduct.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleCart.css">
 
 
 </head>
@@ -318,85 +318,12 @@
         </div>
     </section>
 </main>
+<jsp:include page="/tag/_footer.jsp"></jsp:include>
 
-<footer class="footer-container">
-    <div class="row container mx-auto pt-5">
-        <div class="footer-one col-lg-3 col-md-6 col-12">
-            <div class="logo-container">
-                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
-                    <div class="logo-wave">
-                        <div class="sound-wave wave1"></div>
-                        <div class="sound-wave wave2"></div>
-                        <div class="sound-wave wave3"></div>
-                    </div>
-                    <span class="logo-text">AuraSound</span>
-                </a>
-            </div>
-            <p class="pt-3">Với Aura Sound, âm nhạc không chỉ để nghe – mà là để cảm nhận. Mỗi nhịp điệu, mỗi giai
-                điệu đều
-                được
-                tái hiện chân thực, giúp bạn thể hiện phong cách và cá tính qua từng thanh âm.</p>
-        </div>
-        <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-            <h5 class="pb-2">Featured</h5>
-            <ul class="text-uppercase list-unstyled">
-                <li><a href="#">Tai nghe thể thao</a></li>
-                <li><a href="#">Tai nghe cao cấp</a></li>
-                <li><a href="#">Loa cao cấp</a></li>
-                <li><a href="#">Tai nghe SONY</a></li>
-                <li><a href="#">Loa JBL</a></li>
-            </ul>
-        </div>
-        <div class="footer-one col-lg-3 col-md-6 col-12 mb-3">
-            <h5 class="pb-2">Liên Hệ</h5>
-            <div>
-                <h6 class="text-uppercase">Địa chỉ</h6>
-                <p>Nong Lam University, VQCR+GP6, khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh</p>
-            </div>
-            <div>
-                <h6 class="text-uppercase">Hotline</h6>
-                <p>1900 1919</p>
-            </div>
-            <div>
-                <h6 class="text-uppercase">Email</h6>
-                <p>Aurasound.work@gmail.com</p>
-            </div>
-        </div>
-        <div class="footer-one col-lg-3 col-md-6 col-12">
-            <h5 class="pb-2">Instagram</h5>
-            <div class="row">
-                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img1.jpg" alt="">
-                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img10.jpg" alt="">
-                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img2.jpg" alt="">
-                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img5.jpg" alt="">
-                <img class="img-fluid w-25 h-100 m-2" src="assets/img/Instagram/img6.jpg" alt="">
-            </div>
-        </div>
-    </div>
-
-    <div class="copyright mt-5">
-        <div class="row container mx-auto">
-            <div class="col-lg-3 col-md-6 col-12 mb-4">
-                <img src="assets/img/Payment/payment.png" alt="">
-            </div>
-            <div class="col-lg-4 col-md-6 col-12 text-nowrap mb-2">
-                <p>© 2025 Công Ty Cổ Phần AuraSound </p>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-        </div>
-
-    </div>
-</footer>
-<script src="assets/js/script.js"></script>
-<script src="assets/js/scriptProduct.js"></script>
-
+<script src="${AuraSound}/assets/js/script.js"></script>
+<script src="${AuraSound}/assets/js/scriptProfile.js"></script>
+<script src="${AuraSound}/assets/js/scriptStore.js"></script>
 </body>
-
-
 </html>
 
 <%--CODE CŨ--%>
@@ -430,16 +357,15 @@
 <%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"--%>
 <%--          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">--%>
 
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleStore.css">--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProfile.css">--%>
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHeadphones.css">--%>
+<%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleStore.css">--%>
+<%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">--%>
+<%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleProfile.css">--%>
+<%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHeadphones.css">--%>
 <%--    <link rel="stylesheet" href="assets/css/product_detail.css">--%>
 
 <%--</head>--%>
 
 <%--<body>--%>
-<%--<jsp:include page="/tag/_header.jsp"></jsp:include>--%>
 
 <%--&lt;%&ndash;%>
 
