@@ -39,7 +39,11 @@ public class Product {
 		this.img = img;
 	}
 
-	public int getId() {
+    public Product(int id, Integer o, Object o1, String sku, String name, Object description, Object o2, Object o3, Object o4, Object createdAt, Object o5, double displaySellPrice, String displayImageUrl) {
+
+    }
+
+    public int getId() {
 		return id;
 	}
 

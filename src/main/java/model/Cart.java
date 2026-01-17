@@ -50,6 +50,22 @@ public class Cart implements Serializable {
 		items.clear();
 		return allItems;
     }
+//Lấy số lượng của 1 sản phẩm
+	public void addOrUpdateItem(Product product, int quantity) {
+		if (items.containsKey(product.getId())) {
+			CartItem item = items.get(product.getId());
+			item.upQuantity(quantity);
+			// Nếu số lượng về 0 hoặc nhỏ hơn (do nhấn nút giảm), xóa khỏi giỏ
+			if (item.getQuantity() <= 0) {
+				items.remove(product.getId());
+			}
+		} else {
+			if (quantity > 0) {
+				// Sử dụng sellPrice từ lớp Product bạn đã cung cấp
+				items.put(product.getId(), new CartItem(product, quantity, product.getSellPrice()));
+			}
+		}
+	}
 //Lấy ds sản phẩm
 	public List<CartItem> getListItems(){
 		return new ArrayList<>(items.values());
