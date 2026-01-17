@@ -74,16 +74,16 @@
             <div class="item-actions">
 <%-- Xóa sản phẩm --%>
                 <span class="item-delete"
-                      onclick="if(confirm('Xóa sản phẩm này?')) location.href='CartServlet?action=delete&id=<%= p.getId() %>'">
-                        Xoá
-                    </span>
+                      onclick="if(confirm('Xóa sản phẩm này?')) location.href='cart?action=delete&id=<%= p.getId() %>'">
+                    Xoá
+                </span>
 
                 <div class="quantity-control">
 <%-- Giảm số lượng(mặc định q = 1) --%>
-                    <button class="quantity-btn" onclick="location.href='CartServlet?action=add&id=<%= p.getId() %>&q=-1'">-</button>
+                    <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= p.getId() %>&q=-1'">-</button>
                     <input class="quantity-input" type="text" value="<%= item.getQuantity() %>" readonly>
 <%-- Tăng số lượng(mặc định q = 1) --%>
-                    <button class="quantity-btn" onclick="location.href='CartServlet?action=add&id=<%= p.getId() %>&q=1'">+</button>
+                    <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= p.getId() %>&q=1'">+</button>
                 </div>
             </div>
         </div>
