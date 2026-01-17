@@ -121,6 +121,19 @@
 //     }
 // });
 
+function confirmDelete(type,id) {
+    if (type == 'p'){
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không? Hành động này không thể hoàn tác!")) {
+            window.location.href = "product-detail-manager?action=delete&pid=" + id;
+        }
+    }
+    if (type == 'v'){
+        if (confirm("Bạn có chắc chắn muốn xóa biến thể này không? Hành động này không thể hoàn tác!")) {
+            window.location.href = "product-detail-manager?action=delete&vid=" + id;
+        }
+    }
+
+}
 function updateVariantInfo(selectedColor) {
     if (!selectedColor) return;
 
@@ -129,16 +142,14 @@ function updateVariantInfo(selectedColor) {
 
     if (variant) {
         // Cập nhật Tên màu
+        document.getElementById('current-variant-id').value = variant.id;
         document.getElementById('var-colorName').value = variant.colorName;
         document.getElementById('var-sku').value = variant.variantSku || "";
 
-        document.getElementById('var-oldP').value = variant.marketPrice || "";
-        document.getElementById('var-newP').value = variant.sellPrice || "";
-        document.getElementById('var-stock').value = variant.stockQuantity || "";
-        document.getElementById('var-sold').innerText = variant.soldQuantity || "";
+        document.getElementById('var-oldP').value = variant.marketPrice || "0";
+        document.getElementById('var-newP').value = variant.sellPrice || "0";
+        document.getElementById('var-stock').value = variant.stockQuantity || "0";
+        document.getElementById('var-sold').value = variant.soldQuantity || "0";
 
-        console.log("Đã tìm thấy và cập nhật biến thể:", variant);
-    } else {
-        console.error("Không tìm thấy dữ liệu cho màu:", selectedColor);
     }
 }

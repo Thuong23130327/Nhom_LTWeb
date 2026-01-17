@@ -21,11 +21,28 @@ import java.util.List;
 public class ManageProductDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
+        String vid = request.getParameter("vid");
+
+        String action = request.getParameter("action");
         AdminProductService adminProductService = null;
         try {
             adminProductService = new AdminProductService();
             ProductDetailService productDetailService = new ProductDetailService();
             ProductService productService = new ProductService();
+
+            if ("delete".equals(action)) {
+                if (pid != null)
+                    if (productService.deleteProduct(pid)) {
+                        response.sendRedirect(request.getContextPath() + "/admin/product-manager");
+                        return;
+                    }
+                if (vid != null)
+                    if (adminProductService.deleteVariant(vid)) {
+                        response.sendRedirect(request.getContextPath() + "/admin/product-manager");
+                        return;
+                    }
+
+            }
 
             Product product = productService.getById(pid);
             List<ProductSpec> specs = productDetailService.getAllSpecByProductId(pid);
@@ -39,6 +56,8 @@ public class ManageProductDetailServlet extends HttpServlet {
             String variantsJson = new com.google.gson.Gson().toJson(variants);
 
             request.setAttribute("variantsJson", variantsJson);
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

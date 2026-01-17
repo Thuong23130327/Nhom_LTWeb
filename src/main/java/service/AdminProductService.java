@@ -36,5 +36,8 @@ public class AdminProductService {
     }
 
 
+    public boolean deleteVariant(String vid) {
+    return variantDAO.deleteVariant(vid);
 
+    }
 }
