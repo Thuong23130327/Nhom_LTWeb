@@ -68,14 +68,12 @@
                     <span class="old-price" id="old-price"><fmt:formatNumber value="${product.oldPrice}"
                                                                              pattern="#,###"/> đ</span>
                 </div>
-                <form action="cart" method="post">
-                    <input type="hidden" name="variantId" id="selectedVariantId" value="${curVariant.id}">
+                <form action="cartt" method="post">
                     <div class="product-options">
                         <h4>Màu sắc: </h4>
                         <div class="color-options">
                             <c:forEach var="eachVar" items="${variants}">
                                 <div class="color-item ${eachVar.id==curVariant.id?'active':''}"
-
                                      onclick="selectVariant(this)"
                                      data-id="${eachVar.id}"
                                      data-sellPrice="${eachVar.sellPrice}"
@@ -95,13 +93,17 @@
                             <span id="stock" data-stock="${curVariant.stockQuantity}">${curVariant.stockQuantity} </span>
                         </h4>
                         <button type="button" class="quantity-btn" onclick="updateQuan(-1)">-</button>
-                        <input id="quanProduct" type="number" onchange="checkInput()" value="1">
+                        <input name="quantity" id="quanProduct" type="number" onchange="checkInput()" value="1">
                         <button type="button" class="quantity-btn" onclick="updateQuan(+1)">+</button>
+
+
+                        <input type="hidden" name="nameProduct" id="ipNameP" type="text" value="${product.name}">
+                        <input type="hidden" name="variantId" id="selectedVariantId" value="${curVariant.id}">
 
                     </div>
 
                     <div class="btn">
-                        <button class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
+                        <button type="submit" class="buy-btn popup" id="cart-btn">Thêm vào giỏ hàng</button>
 
                         <a href="cart.html"><a href="checkout.html">
                             <button class="buy-btn">Mua Ngay</button>
@@ -323,6 +325,7 @@
 <script src="${AuraSound}/assets/js/script.js"></script>
 <script src="${AuraSound}/assets/js/scriptProfile.js"></script>
 <script src="${AuraSound}/assets/js/scriptStore.js"></script>
+<script src="${AuraSound}/assets/js/scriptProduct.js"></script>
 </body>
 </html>
 

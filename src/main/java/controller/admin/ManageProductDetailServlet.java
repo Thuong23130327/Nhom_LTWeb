@@ -1,5 +1,6 @@
-package controller;
+package controller.admin;
 
+import dao.ProductDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Product;
 import model.ProductSpec;
 import model.ProductVariant;
+import service.AdminProductService;
 import service.ProductDetailService;
 import service.ProductService;
 
@@ -15,35 +17,47 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "ProductDetailServlet", value = "/detail")
-public class ProductDetailServlet extends HttpServlet {
+
+//chi tiet quan ly sp Admin
+@WebServlet(name = "ManageProductDetailServlet", value = "/admin/product-detail-manager")
+public class ManageProductDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
-        if (pid == null) {
-            response.sendRedirect("home"); // Hoặc trang lỗi
-            return;
-        }
+        String vid = request.getParameter("vid");
 
+        String action = request.getParameter("action");
+        AdminProductService adminProductService = null;
         try {
+            adminProductService = new AdminProductService();
             ProductDetailService productDetailService = new ProductDetailService();
             ProductService productService = new ProductService();
-            Product product = productService.getById(pid);
 
-            if (product == null) {
-                response.sendError(404, "Sản phẩm không tồn tại!");
-                return; // Dừng ngay, không chạy tiếp code bên dưới
+            if ("delete".equals(action)) {
+                if (pid != null)
+                    if (productService.deleteProduct(pid)) {
+                        response.sendRedirect(request.getContextPath() + "/admin/product-manager");
+                        return;
+                    }
+                if (vid != null)
+                    if (adminProductService.deleteVariant(vid)) {
+                        response.sendRedirect(request.getContextPath() + "/admin/product-manager");
+                        return;
+                    }
+
             }
 
+            Product product = productService.getById(pid);
             List<ProductSpec> specs = productDetailService.getAllSpecByProductId(pid);
             List<ProductVariant> variants = productDetailService.getAllVariantByProductId(pid);
             List<String> imgs = productDetailService.getImageByProductId(pid);
-            ProductVariant curVariant = productDetailService.getVariantByImg(variants, product.getImg());
 
-            request.setAttribute("product", product);
+            request.setAttribute("p", product);
             request.setAttribute("variants", variants);
             request.setAttribute("specs", specs);
             request.setAttribute("images", imgs);
-            request.setAttribute("curVariant", curVariant);
+            String variantsJson = new com.google.gson.Gson().toJson(variants);
+
+            request.setAttribute("variantsJson", variantsJson);
 
 
         } catch (SQLException e) {
@@ -51,12 +65,10 @@ public class ProductDetailServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        request.getRequestDispatcher("/sproduct.jsp").forward(request, response);
-
+        request.getRequestDispatcher("/admin/product_detail.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         doGet(request, response);
     }
 }

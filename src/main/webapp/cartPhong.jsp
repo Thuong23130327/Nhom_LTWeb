@@ -57,16 +57,16 @@
                        onclick="location.href='cart?action=check&id=<%= p.getId() %>'">
             </div>
             <div class="item-main">
-                <%--Lấy ảnh từ sku--%>
+<%--Lấy ảnh từ sku--%>
                 <img class="item-img" src="<%= p.getImg() %>" alt="<%= p.getName() %>">
 
                 <div class="item-details">
                     <h4><%= p.getName() %></h4>
                     <div style="display: flex; align-items: center; gap: 10px;">
-                        <div class="item-variant">
-                            <span>Màu: Mặc định</span>
-                            <i class="bi bi-chevron-compact-down"></i>
-                        </div>
+                    <div class="item-variant">
+                        <span>Màu: Mặc định</span>
+                        <i class="bi bi-chevron-compact-down"></i>
+                    </div>
                     </div>
                 </div>
                 <div class="item-price-col">
@@ -74,17 +74,17 @@
                 </div>
             </div>
             <div class="item-actions">
-                <%-- Xóa sản phẩm --%>
+<%-- Xóa sản phẩm --%>
                 <span class="item-delete"
                       onclick="if(confirm('Xóa sản phẩm này?')) location.href='cart?action=delete&id=<%= p.getId() %>'">
                     Xoá
                 </span>
 
                 <div class="quantity-control">
-                    <%-- Giảm số lượng(mặc định q = 1) --%>
+<%-- Giảm số lượng(mặc định q = 1) --%>
                     <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= p.getId() %>&q=-1'">-</button>
                     <input class="quantity-input" type="text" value="<%= item.getQuantity() %>" readonly>
-                    <%-- Tăng số lượng(mặc định q = 1) --%>
+<%-- Tăng số lượng(mặc định q = 1) --%>
                     <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= p.getId() %>&q=1'">+</button>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         %>
         <div style="text-align: center; padding: 50px;">
             <p>Giỏ hàng của bạn đang trống.</p>
-            <a href="product" style="color: blue;">Tiếp tục mua sắm</a>
+            <a href="ProductListServlet" style="color: blue;">Tiếp tục mua sắm</a>
         </div>
         <%
             }

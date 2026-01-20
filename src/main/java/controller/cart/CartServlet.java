@@ -59,8 +59,9 @@ public class CartServlet extends HttpServlet {
         // Quay lại cart để cập nhật giao diện
         response.sendRedirect("cart.jsp");
     }
-
-
+// TAO CÓ CHỈNH LẠI CÁI HIỂN THỊ CHO ĐÚG SP+SỐ LG, VOI GỌN HƠN AH
+// BAM VÔ SP NÀO DO RÒI THÊM VÔ GIỎ XEM THỬ
+// (CHƯA CHỈNH LẠI CẬP NHẬT SỐ LG, VỚI XỬ LÝ CHECKBOX THÔI)
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

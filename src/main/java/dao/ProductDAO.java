@@ -147,11 +147,18 @@ public class ProductDAO {
 
     public List<Product> searchProductByText(String textSearch) {
         List<Product> list = new ArrayList<>();
-        String sql = " SELECT * FROM products WHERE `name` LIKE ? ";
+        String sql = " SELECT p.* FROM products p JOIN brands b ON b.id = p.Brands_id JOIN categories c on c.id = p.Categories_id\n" +
+                "  WHERE p.`name` LIKE ? or p.sku LIKE ?" +
+                "or p.display_sell_price LIKE ? " +
+                "or p.display_market_price LIKE ? " +
+                "or b.`name` LIKE ? " +
+                "or c.`name`like ? ;\n";
         try {
             conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + textSearch + "%");
+            for (int i = 1; i < 7 ; i++) {
+                ps.setString(i, "%" + textSearch + "%");
+            };
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product p = new Product(rs.getInt("id"),
@@ -193,6 +200,34 @@ public class ProductDAO {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {}
         return map;
+    }
+
+    public boolean deleteProduct(String pid) {
+
+        String sql =" DELETE FROM productspecs WHERE Products_id = ? ;\n" +
+                "        DELETE FROM productvariants WHERE Products_id =? ;\n" +
+                "        DELETE FROM productgalleries WHERE Products_id = ?;";
+
+
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, pid);
+
+            conn.setAutoCommit(false);
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                int afRow = ps.executeUpdate();
+                if (afRow > 0) {
+                    conn.commit();
+                }
+                return  afRow > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 }
 
@@ -270,13 +305,6 @@ public class ProductDAO {
 //        return list;
 //    }
 //
-//    public List<Product> getListProduct() {
-//        return get().withHandle(h -> h.createQuery("select * from products").mapToBean(Product.class).list());
-//    }
-//
-//    public Product getProduct(int id) {
-//        return get().withHandle(h -> h.createQuery("select * from products where id = :id").bind("id", id).mapToBean(Product.class).stream().findFirst().orElse(null));
-//    }
 //
 //    public void insert(List<Product> products) {
 //        get().useHandle(h -> {

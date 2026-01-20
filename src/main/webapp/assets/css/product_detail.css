@@ -12,7 +12,9 @@
     margin-bottom: 2rem;
     overflow: hidden; 
 }
-
+.title{
+    margin-top: 10px;
+ }
 .card-header {
     background: var(--theme-gradient-icon) !important;
     color: var(--white);
@@ -27,9 +29,10 @@
 
 /* Màu chữ Tiêu đề lớn */
 
-.h5.header-title {
+.header-title {
     color: black !important; 
     font-weight: 600;
+    font-size: 25px;
 }
 
 /* Màu Icon Tiêu đề lớn */
@@ -42,9 +45,8 @@
     font-weight: 500;
     color: lightslategray; 
     margin-bottom: 0.3rem;
-    font-size: 0.95rem;
+    font-size: 13px;
 }
-
 /* Tiêu đề nhỏ trong Card */
 
 h1.card-title {
