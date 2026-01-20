@@ -95,7 +95,7 @@
         %>
         <div style="text-align: center; padding: 50px;">
             <p>Giỏ hàng của bạn đang trống.</p>
-            <a href="ProductListServlet" style="color: blue;">Tiếp tục mua sắm</a>
+            <a href="product" style="color: blue;">Tiếp tục mua sắm</a>
         </div>
         <%
             }
