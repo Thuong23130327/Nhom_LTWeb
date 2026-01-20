@@ -3,31 +3,75 @@ package model;
 import java.io.Serializable;
 
 public class CartItem implements Serializable {
-    private Product product;
+    private String name;
+    private ProductVariant productVariant;
     private int quantity;
     private double price;
+    private double oldPrice ;
+    private String img;
     private boolean isChecked = true;
 
     public CartItem() {
     }
-    public CartItem(Product product, int quantity, double price) {
-        this.product = product;
+
+
+    public String getImg() {
+        return img;
+    }
+
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+
+    public CartItem(String name, ProductVariant productVariant, int quantity, boolean isChecked) {
+        super();
+        this.name = name;
+        this.productVariant = productVariant;
         this.quantity = quantity;
-        this.price = price;
+        this.isChecked = isChecked;
     }
 
-    public CartItem(int variantId, String productName, int quantity, double price) {
+    public CartItem(String name, ProductVariant pv, int quantity) {
+        this.name = name;
+        this.productVariant = pv;
+        this.quantity = quantity;
+        this.price = productVariant.getSellPrice();
+        this.oldPrice= productVariant.getMarketPrice();
+        this.img = productVariant.getMainImageUrl();
     }
 
 
-
-    public Product getProduct() {
-        return product;
+    public String getName() {
+        return name;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+
+    public void setName(String name) {
+        this.name = name;
     }
+
+
+    public ProductVariant getProductVariant() {
+        return productVariant;
+    }
+
+
+    public void setProductVariant(ProductVariant productVariant) {
+        this.productVariant = productVariant;
+    }
+
+
+    public double getOldPrice() {
+        return oldPrice;
+    }
+
+
+    public void setOldPrice(double oldPrice) {
+        this.oldPrice = oldPrice;
+    }
+
 
     public int getQuantity() {
         return quantity;
