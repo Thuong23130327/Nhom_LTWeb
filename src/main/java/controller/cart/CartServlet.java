@@ -4,9 +4,9 @@ import dao.ProductDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.Cart;
-import model.CartItem;
-import model.Product;
+import model.*;
+import service.CartService;
+import service.ProductService;
 
 import java.io.IOException;
 
@@ -15,6 +15,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        // 'id' ở đây trong ngữ cảnh giỏ hàng (cart.jsp) sẽ là variantId
         String id = request.getParameter("id");
         String qStr = request.getParameter("q");
 
@@ -27,28 +28,40 @@ public class CartServlet extends HttpServlet {
 
         try {
             if (id != null) {
-                int productId = Integer.parseInt(id);
+                int variantId = Integer.parseInt(id);
 
-                // Xóa sản phẩm thẳng (Khi ấn nút Xoá)
+                // Xóa sản phẩm
                 if ("delete".equals(action)) {
-                    cart.deleteItem(productId);
+                    cart.deleteItem(variantId);
                 }
-                // Cộng/Trừ số lượng (Khi ấn + hoặc -)
+
+                // Cộng/Trừ số lượng (Khi ấn + hoặc - trong cart.jsp)
                 else if ("add".equals(action)) {
                     int qty = (qStr != null) ? Integer.parseInt(qStr) : 1;
 
-                    // Sử dụng hàm getById lấy sản phẩm
-                    Product p = new ProductDAO().getById(id);
+                    // Lấy item hiện tại trong giỏ để lấy thông tin Variant và Name
+                    CartItem existingItem = cart.getItems().get(variantId);
 
-                    if (p != null) {
-                        cart.addOrUpdateItem(p, qty);
-                    }
-                } else if ("check".equals(action)) {
-                    for (CartItem item : cart.getListItems()) {
-                        if (item.getProduct().getId() == Integer.parseInt(id)) {
-                            item.setChecked(!item.isChecked());
-                            break;
+                    if (existingItem != null) {
+                        // Cập nhật số lượng dựa trên phương thức ở Cart
+                        cart.addOrUpdateItem(existingItem.getName(), existingItem.getProductVariant(), qty);
+                    } else {
+                        ProductService productService = new ProductService();
+                        Product p = productService.getById(id);
+                        if (p != null) {
+                            CartService cartService = new CartService();
+                            ProductVariant defaultVariant = cartService.getProductVariant(id);
+                            if(defaultVariant != null) {
+                                cart.addOrUpdateItem(p.getName(), defaultVariant, qty);
+                            }
                         }
+                    }
+                }
+                // Xử lý Checkbox
+                else if ("check".equals(action)) {
+                    CartItem item = cart.getItems().get(variantId);
+                    if (item != null) {
+                        item.setChecked(!item.isChecked());
                     }
                 }
             }
@@ -56,32 +69,49 @@ public class CartServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // Quay lại cart để cập nhật giao diện
         response.sendRedirect("cart.jsp");
     }
-// TAO CÓ CHỈNH LẠI CÁI HIỂN THỊ CHO ĐÚG SP+SỐ LG, VOI GỌN HƠN AH
-// BAM VÔ SP NÀO DO RÒI THÊM VÔ GIỎ XEM THỬ
-// (CHƯA CHỈNH LẠI CẬP NHẬT SỐ LG, VỚI XỬ LÝ CHECKBOX THÔI)
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String variantId = request.getParameter("variantId");
-        String quantityStr = request.getParameter("quantity");
+        try {
+            String nameProduct = request.getParameter("nameProduct");
+            String variantIdStr = request.getParameter("variantId");
+            String quantityStr = request.getParameter("quantity");
 
-        HttpSession session = request.getSession();
-        Cart cart = (Cart) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute("cart", cart);
-        }
-
-        if (variantId != null) {
-            int qty = (quantityStr != null) ? Integer.parseInt(quantityStr) : 1;
-            Product p = new ProductDAO().getById(variantId);
-            if (p != null) {
-                cart.addOrUpdateItem(p, qty);
+            // Kiểm tra tham số đầu vào
+            if (variantIdStr == null || variantIdStr.isEmpty()) {
+                throw new Exception("Lỗi: Không nhận được variantId từ trang sản phẩm!");
             }
+
+            int qty = 1;
+            try {
+                qty = (quantityStr != null && !quantityStr.isEmpty()) ? Integer.parseInt(quantityStr) : 1;
+            } catch (NumberFormatException e) {
+                qty = 1;
+            }
+
+            // Lấy giỏ hàng từ Session
+            HttpSession session = request.getSession();
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (cart == null) {
+                cart = new Cart();
+            }
+
+            // Lấy Biến thể từ DB
+            CartService cartService = new CartService();
+            ProductVariant productVariant = cartService.getProductVariant(variantIdStr);
+
+            if (productVariant != null) {
+                cart.addOrUpdateItem(nameProduct, productVariant, qty);
+                session.setAttribute("cart", cart);
+                response.sendRedirect("cart.jsp");
+            } else {
+                throw new Exception("Lỗi: Biến thể ID " + variantIdStr + " không tồn tại trong DB!");
+            }
+
+        } catch (Exception e) {
+
         }
-        response.sendRedirect("cart.jsp");
     }
 }

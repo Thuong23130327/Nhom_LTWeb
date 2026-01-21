@@ -68,7 +68,7 @@
                     <span class="old-price" id="old-price"><fmt:formatNumber value="${product.oldPrice}"
                                                                              pattern="#,###"/> đ</span>
                 </div>
-                <form action="cartt" method="post">
+                <form action="cart" method="post">
                     <div class="product-options">
                         <h4>Màu sắc: </h4>
                         <div class="color-options">

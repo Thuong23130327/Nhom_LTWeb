@@ -33,8 +33,8 @@ public class ProductDAO {
                 Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
                         rs.getString("sku"), rs.getString("name"), rs.getString("description"),
                         rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"), rs.getDouble("display_sell_price"),
-                        rs.getDouble("display_market_price"), rs.getString("display_image_url"));
+                        rs.getTimestamp("created_at"), rs.getDouble("display_market_price"),
+                        rs.getDouble("display_sell_price"), rs.getString("display_image_url"));
                 list.add(p);
 
             }
@@ -103,8 +103,8 @@ public class ProductDAO {
                         rs.getInt("sold_count"),
                         rs.getBoolean("is_active"),
                         rs.getTimestamp("created_at"),
-                        rs.getDouble("display_sell_price"),
                         rs.getDouble("display_market_price"),
+                        rs.getDouble("display_sell_price"),
                         rs.getString("display_image_url"));
             }
             return p;
