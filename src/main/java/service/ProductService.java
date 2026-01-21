@@ -22,6 +22,14 @@ public class ProductService {
         return productDao.pageNeed(cateId, sizePerPage);
     }
 
+    public List<Product> filterProduct(String[] brandIds, String[] cateIds, int numPerPage, int page) {
+        System.out.println("DAO nhận Brand length: " + (brandIds != null ? brandIds.length : "NULL"));
+        System.out.println("DAO nhận Cate length: " + (cateIds != null ? cateIds.length : "NULL"));
+        return productDao.filterProduct(brandIds, cateIds, numPerPage, page);
+    }
+
+
+
     //GET TOP 3
     public List<Product> getPerPageProduct(int numPerPage, int page, String cId) {
         if (cId != null) {
@@ -48,8 +56,11 @@ public class ProductService {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ProductService ps = new ProductService();
-        System.out.println(ps.searchProductByText("2"));
-        System.out.println(ps.getAllProduct());
+        //System.out.println(ps.searchProductByText("2"));
+        String[] a = {"1","2"};
+        System.out.println(ps.filterProduct(a,null,12,1));
+
+
 
     }
 
