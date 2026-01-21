@@ -49,43 +49,49 @@
         <%
             if (!listItems.isEmpty()) {
                 for (CartItem item : listItems) {
-                    Product p = item.getProduct();
+                    int vId = item.getProductVariant().getId();
         %>
         <div class="cart-item" style="display: flex; align-items: center; gap: 15px;">
             <div class="item-checkbox">
                 <input type="checkbox" <%= item.isChecked() ? "checked" : "" %>
-                       onclick="location.href='cart?action=check&id=<%= p.getId() %>'">
+                       onclick="location.href='cart?action=check&id=<%= vId %>'">
             </div>
             <div class="item-main">
                 <%--Lấy ảnh từ sku--%>
-                <img class="item-img" src="<%= p.getImg() %>" alt="<%= p.getName() %>">
+                    <img class="item-img" src="<%= item.getImg() %>" alt="<%= item.getName() %>">
 
                 <div class="item-details">
-                    <h4><%= p.getName() %></h4>
+                    <h4><%= item.getName() %></h4>
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <div class="item-variant">
-                            <span>Màu: Mặc định</span>
+                            <span>Màu: Mặc định <%= item.getProductVariant().getColorName() %> </span>
                             <i class="bi bi-chevron-compact-down"></i>
                         </div>
                     </div>
                 </div>
                 <div class="item-price-col">
                     <span class="item-price"><%= String.format("%,.0f", item.getPrice()) %>₫</span>
+<%--                   <%--Giá cũ--%>
+                    <% if(item.getOldPrice() > item.getPrice()) { %>
+                    <div style="text-decoration: line-through; color: #999; font-size: 0.8rem;">
+                        <%= String.format("%,.0f", item.getOldPrice()) %>₫
+                    </div>
+                    <% } %>
                 </div>
             </div>
             <div class="item-actions">
                 <%-- Xóa sản phẩm --%>
                 <span class="item-delete"
-                      onclick="if(confirm('Xóa sản phẩm này?')) location.href='cart?action=delete&id=<%= p.getId() %>'">
+                          onclick="if(confirm('Xóa sản phẩm này?')) location.href='cart?action=delete&id=<%= vId %>'">
                     Xoá
                 </span>
 
                 <div class="quantity-control">
                     <%-- Giảm số lượng(mặc định q = 1) --%>
-                    <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= p.getId() %>&q=-1'">-</button>
+                    <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= vId %>&q=-1'">-</button>
                     <input class="quantity-input" type="text" value="<%= item.getQuantity() %>" readonly>
                     <%-- Tăng số lượng(mặc định q = 1) --%>
-                    <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= p.getId() %>&q=1'">+</button>
+                    <button class="quantity-btn" onclick="location.href='cart?action=add&id=<%= vId %>&q=1'">+</button>
                 </div>
             </div>
         </div>
@@ -95,7 +101,7 @@
         %>
         <div style="text-align: center; padding: 50px;">
             <p>Giỏ hàng của bạn đang trống.</p>
-            <a href="ProductListServlet" style="color: blue;">Tiếp tục mua sắm</a>
+            <a href="product" style="color: blue;">Tiếp tục mua sắm</a>
         </div>
         <%
             }

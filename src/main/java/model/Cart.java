@@ -51,18 +51,19 @@ public class Cart implements Serializable {
         return allItems;
     }
     //Lấy số lượng của 1 sản phẩm
-    public void addOrUpdateItem(Product product, int quantity) {
-        if (items.containsKey(product.getId())) {
-            CartItem item = items.get(product.getId());
+    public void addOrUpdateItem(String productName,ProductVariant productVariant, int quantity) {
+        if (productVariant == null) return; // Chống sập nếu biến thể bị null
+        if (items.containsKey(productVariant.getId())) {
+            CartItem item = items.get(productVariant.getId());
             item.upQuantity(quantity);
             // Nếu số lượng về 0 hoặc nhỏ hơn (do nhấn nút giảm), xóa khỏi giỏ
             if (item.getQuantity() <= 0) {
-                items.remove(product.getId());
+                items.remove(productVariant.getId());
             }
         } else {
             if (quantity > 0) {
                 // Sử dụng sellPrice từ lớp Product bạn đã cung cấp
-                items.put(product.getId(), new CartItem(product, quantity, product.getSellPrice()));
+                items.put(productVariant.getId(), new CartItem(productName, productVariant, quantity));
             }
         }
     }
