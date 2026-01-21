@@ -45,25 +45,26 @@
                 </div>
             </form>
 
-            <a class="a-nodecor ${activePage =='home'?'active':''}" href="${AuraSound}/index.jsp?activePage=home">
-                <div class="home">Trang chủ</div>
+            <a class="a-nodecor " href="${AuraSound}/index.jsp">
+                <div class="home ${activePage =='home'?'active':''}">Trang chủ</div>
             </a>
-            <a class="a-nodecor ${activePage =='contact'?'active':''}" href="${AuraSound}/contact">
-                <div class="contact">Liên hệ</div>
+            <a class="a-nodecor" href="${AuraSound}/contact">
+                <div class="contact  ${activePage =='contact'?'active':''}">Liên hệ</div>
             </a>
 
             <%--Menu dropdown--%>
             <div class="nav-item-dropdown aura-dropdown-container">
-                <a class="a-nodecor ${activePage =='product'?'active':''}"
+                <a class="a-nodecor"
                    href="${AuraSound}/product">
-                    <div class="store">
+                    <div class="store ${activePage =='product'?'active':''} ">
                         Sản phẩm <i class="bi bi-chevron-compact-down"></i>
                     </div>
                 </a>
 
                 <ul class="aura-menu-parent">
                     <c:forEach items="${parentList}" var="par">
-                        <li class="aura-menu-item has-child"><a href="${AuraSound}/product?cateId=${par.id}" class="parent-link">
+                        <li class="aura-menu-item has-child"><a href="${AuraSound}/product?cateId=${par.id}"
+                                                                class="parent-link">
                                 ${par.name}
                             <i class="bi bi-chevron-right ms-auto"></i> </a>
 
@@ -81,8 +82,8 @@
             </div>
 
 
-            <a class="a-nodecor ${activePage =='cart'?'active':''}" href="${AuraSound}/cart.jsp">
-                <div class="cart">
+            <a class="a-nodecor " href="${AuraSound}/cart.jsp">
+                <div class="cart ${activePage =='cart'?'active':''}">
                     <i class="bi bi-cart"></i> Giỏ hàng
                     <span id="cart-badge" class="badge bg-danger rounded-pill"
                           style="font-size: 0.7rem; vertical-align: top; ${sessionScope.cart == null ? 'display:none' : ''}">
@@ -99,8 +100,10 @@
                             <img src="${sessionScope.loggedInUser.avatarUrl}" alt="Avatar">
                         </a>
                         <div class="account-menu">
-                            <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Xin chào ${sessionScope.auth.fullName}</a>
-                            <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Thông tin tài khoản</a>
+                            <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Xin
+                                chào ${sessionScope.auth.fullName}</a>
+                            <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Thông tin tài
+                                khoản</a>
                             <a class="account-menu-item" href="${AuraSound}/logout" id="navLogout">Đăng xuất</a>
                         </div>
                     </div>
@@ -155,6 +158,7 @@
 
     <div class="mobile-menu-item ${activePage =='cart'?'active':''}"><a href="${AuraSound}/cart.jsp">Giỏ hàng</a></div>
     <div class="mobile-menu-item ${activePage =='contact'?'active':''}"><a href="${AuraSound}/contact">Liên hệ</a></div>
-    <div class="mobile-menu-item ${activePage =='product'?'active':''}"><a href="${AuraSound}/product">Sản phẩm</a></div>
+    <div class="mobile-menu-item ${activePage =='product'?'active':''}"><a href="${AuraSound}/product">Sản phẩm</a>
+    </div>
 </div>
 <div class="overlay" id="menu-overlay"></div>

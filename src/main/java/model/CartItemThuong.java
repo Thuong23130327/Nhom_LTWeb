@@ -24,15 +24,6 @@ public class CartItemThuong implements Serializable {
         this.img = img;
     }
 
-
-    public CartItemThuong(String name, ProductVariant productVariant, int quantity, boolean isChecked) {
-        super();
-        this.name = name;
-        this.productVariant = productVariant;
-        this.quantity = quantity;
-        this.isChecked = isChecked;
-    }
-
     public CartItemThuong(String name, ProductVariant pv, int quantity) {
         this.name = name;
         this.productVariant = pv;

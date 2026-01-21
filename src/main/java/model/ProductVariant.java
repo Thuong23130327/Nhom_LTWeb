@@ -70,6 +70,9 @@ public class ProductVariant {
 	public void setColorName(String colorName) {
 		this.colorName = colorName;
 	}
+	public double getDiscountPercent() {
+		return ((this.marketPrice - this.sellPrice)/this.marketPrice)*100;
+	}
 
 
 	public String getMainImageUrl() {

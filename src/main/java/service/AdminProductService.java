@@ -19,14 +19,13 @@ public class AdminProductService {
     private GalleryDAO galleryDAO = new GalleryDAO();
 
 
-
-
     public AdminProductService() throws SQLException, ClassNotFoundException {
     }
 
     public List<Product> searchProductByText(String textSearch) {
         return productDAO.searchProductByText(textSearch);
     }
+
     public List<Product> getAllProduct() {
         return productDAO.getAllProduct();
     }
@@ -35,9 +34,17 @@ public class AdminProductService {
         return productDAO.getTotalStock();
     }
 
+    public Map<Integer, Integer> getVarTotal() {
+        return productDAO.getVarTotal();
+    }
+
+    public List<Product> getProductByCategoryId(String cateId) {
+        return productDAO.getProductByCategoryId(cateId);
+    }
+
 
     public boolean deleteVariant(String vid) {
-    return variantDAO.deleteVariant(vid);
+        return variantDAO.deleteVariant(vid);
 
     }
 }

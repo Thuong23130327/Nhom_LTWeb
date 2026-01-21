@@ -48,6 +48,7 @@ html, body {
 .sidebar li:first-child {
     margin-top: 10px;
 }
+
 .sidebar .nav-link {
     color: #444;
     font-weight: 500;
@@ -194,9 +195,9 @@ main {
 
 /* Nút bấm đồng bộ */
 .btn-primary {
-    background: var(--gradient-purple);
+    background: var(--theme-gradient-button);
     border: none;
-    padding: 8px 15px;
+    padding: 4px 8px;
 }
 
 .btn-primary:hover {
@@ -205,13 +206,32 @@ main {
 }
 
 .nav-left {
+    margin: 0;
+    padding: 5px 0;
     max-width: 100%;
     flex: 1;
     flex-wrap: nowrap;
 }
 
 .nav-left a {
-    font-size: 18px;
+    font-size: 15px;
+}
+.nav-left a.active {
+    background: var(--theme-gradient-icon);
+    color: var(--white);
+    border-radius: 20px;
+}
+
+/*.nav-left a.active {*/
+/*    background: var(--theme-gradient-button);*/
+/*    border-radius: 15px;*/
+/*    color: var(--white);*/
+/*    box-sizing: border-box;*/
+/*    box-shadow: lightgrey 0 2px 5px;*/
+/*}*/
+
+th, tr {
+    font-size: 14px;
 }
 
 @media (max-width: 991px) {
@@ -219,3 +239,4 @@ main {
         display: none;
     }
 }
+

@@ -18,33 +18,17 @@ public class ProductService {
         return productDao.searchProductByText(textSearch);
     }
 
+    public int pageNeed(String cateId, int sizePerPage) {
+        return productDao.pageNeed(cateId, sizePerPage);
+    }
 
-        //
-//    public List<Product> getNewArrivals(int limit) {
-//        return productDao.getNewArrivals(limit);
-//    }
-//
-//    public List<Product> getProductsByCategory(int categoryId) {
-//        return productDao.getProductsByCategory(categoryId);
-//    }
-//
-//    public Product getProduct(int id) {
-//        return null;
-//    }
-//
-//    public List<ProductDTO> getListProductDTO() {
-//        return productDao.getProductDTOs();
-//    }
-//
-//    public List<ProductDTO> getHeadphonesPage(int page, int pageSize) {
-//        int offset = (page - 1) * pageSize;
-//        return productDao.getHeadphonesByPage(pageSize, offset);
-//    }
-//
-//    public int getTotalHeadphonesPages(int pageSize) {
-//        int total = productDao.countTotalHeadphones();
-//        return (int) Math.ceil((double) total / pageSize);
-//    }
+    //GET TOP 3
+    public List<Product> getPerPageProduct(int numPerPage, int page, String cId) {
+        if (cId != null) {
+            return productDao.getPerPageProductByCategoryId(numPerPage, page, cId);
+        }
+        return productDao.getPerPageAllProduct(numPerPage, page);
+    }
 
 
     //Thuong done
@@ -60,8 +44,6 @@ public class ProductService {
         Product p = productDao.getById(pid);
         return p != null ? p : null;
     }
-
-
 
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {

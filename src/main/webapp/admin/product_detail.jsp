@@ -21,6 +21,8 @@
 
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleAdmin.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHeadphones.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleStore.css">
     <link rel="stylesheet" href="${AuraSound}/assets/css/product_detail.css">
 </head>
 
@@ -91,26 +93,80 @@
                     </h2>
 
                     <!-- Sửa thông tin chung của sp -->
-                    <div class="mb-3">
-                        <div class="col-md-6">
+
+                    <div class="row mb-3">
+                        <div class="col-md-8">
                             <label for="product-name" class="form-label">Tên Sản phẩm <span
                                     class="text-required">:</span></label>
                             <input type="text" id="product-name" value="${p.name}" class="form-control"
                                    placeholder="Tên SP của bạn">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="product-sku" class="form-label">Mã SKU</label>
                             <input type="text" id="product-sku" value="${p.sku}" class="form-control"
                                    placeholder="Nhập mã SKU sản phẩm">
                         </div>
+                    </div>
 
-                        <div class="mb-3 mt-4">
-                            <label for="product-short-desc" class="form-label">Mô tả</label>
-                            <textarea id="product-short-desc" class="form-control" rows="3"
-                                      placeholder="Tóm tắt ngắn gọn về sản phẩm.">
-                                ${p.description}</textarea>
+                    <div class="row align-items-start">
+                        <div class="col-md-2 pickVar">
+                            <label class="form-label">
+                                Chọn biến thể làm đại diện</label>
+                            <c:forEach items="${variants}" var="v" varStatus="status">
+                                <div class="form-check mb-2">
+                                    <input type="radio"
+                                           name="variantSelect"
+                                           id="var-${status.index}"
+                                           value="${v.id}"
+                                           class="form-check-input"
+                                           onchange="showSample(this)"
+                                           data-img="${v.mainImageUrl}"
+                                           data-price="${v.sellPrice}"
+                                           data-oldprice="${v.marketPrice}"
+                                           data-discount="${v.discountPercent}">
+                                    <span>${v.colorName}</span>
+                                </div>
+                            </c:forEach>
                         </div>
+                        <div class="col-md-2 showVar">
+                            <a href="detail?pid=${p.id}" class="product-card">
+                                <div id="sampleBadge" class="product-badge discount"
+                                     style="${p.discountPercent > 0 ? '' : 'display:none'}">
+                                    Giảm <span id="sampleDiscountText">${p.discountPercent}</span> %
+                                </div>
 
+                                <img id="sampleImg" src="${p.img}" alt="${p.name}"
+                                     onerror="this.src='https://placehold.co/300x300?text=No+Image'">
+
+                                <div class="product-card-info">
+                                    <h4>${p.name}</h4>
+                                    <div class="price-block">
+                                        <div id="sampleNewPrice" class="new-price">
+                                            <fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/> đ
+                                        </div>
+
+                                        <div id="sampleOldPriceBlock"
+                                             style="${p.discountPercent > 0 ? '' : 'display:none'}">
+                                            <div id="sampleOldPrice" class="old-price">
+                                                <fmt:formatNumber value="${p.oldPrice}" pattern="#,###"/> đ
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-7">
+                            <label for="product-short-desc" class="form-label">Mô tả</label>
+                            <textarea id="product-short-desc"
+                                      class="form-control"
+                                      style="height: 200px; resize: vertical;"
+                                      placeholder="Tóm tắt ngắn gọn về sản phẩm.">${p.description}</textarea>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-sm-row justify-content-end pt-1">
+                        <button type="submit" class="btn btn-primary btn-gradient me-sm-3 mb-0">
+                            Lưu Thay Đổi
+                        </button>
                     </div>
                 </section>
 
@@ -138,7 +194,7 @@
                         </div>
                         <div class="col-md-2">
                             <label class="form-label">Mã SKU</label>
-                            <input type="text" id="var-sku" value="" class="form-control"
+                            <input readonly type="text" id="var-sku" value="" class="form-control"
                                    placeholder="Nhập mã SKU sản phẩm">
                         </div>
                         <div class="col-md-3">
@@ -174,7 +230,8 @@
                         </div>
                         <input type="hidden" id="current-variant-id" value="">
                         <div class="d-flex flex-sm-row justify-content-end pt-1">
-                            <button onclick="confirmDelete('v', document.getElementById('current-variant-id').value)" type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-0">
+                            <button onclick="confirmDelete('v', document.getElementById('current-variant-id').value)"
+                                    type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-0">
                                 Xóa Biến thể
                             </button>
                             <button type="submit" class="btn btn-primary btn-gradient">
@@ -209,7 +266,8 @@
 
                 <!-- Nút Hành động -->
                 <div class="d-flex flex-column flex-sm-row justify-content-end pt-4 border-top">
-                    <button type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-3 mb-sm-0" onclick="confirmDelete('p','${p.id}')">
+                    <button type="button" class="btn btn-outline-danger btn-accent me-sm-3 mb-3 mb-sm-0"
+                            onclick="confirmDelete('p','${p.id}')">
                         <i class="ri-delete-bin-line me-1"></i> Xóa Sản Phẩm
                     </button>
 

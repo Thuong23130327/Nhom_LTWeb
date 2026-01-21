@@ -17,10 +17,11 @@
     /* Dính lại bên dưới nav (giả sử nav cao ~70-80px) */
 }
 
+
 .filter-wrapper {
     background-color: #fff;
     border-radius: 8px;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #eee;
 }
 
@@ -35,10 +36,6 @@
     padding-bottom: 20px;
 }
 
-.filter-group:last-of-type {
-    border-bottom: none;
-    margin-bottom: 0;
-}
 
 .filter-group h4 {
     font-size: 16px;
@@ -53,7 +50,7 @@
 }
 
 .filter-option {
-    padding: 8px 12px;
+    padding: 4px 8px;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     border-radius: 20px;
@@ -66,7 +63,6 @@
     background-color: #eee;
 }
 
-/* Đây là style cho nút khi được CHỌN */
 .filter-option.active {
     background: var(--theme-gradient-button, linear-gradient(135deg, #b76bff, #4a6fff));
     color: var(--white, #ffffff);
@@ -98,6 +94,8 @@
 
 /* --- Cột 2: Lưới Sản Phẩm --- */
 .product-grid-container {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     /* Chiếm hết phần còn lại */
     min-width: 0;
@@ -231,17 +229,6 @@
     }
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-    width: 100%;
-}
 
 .page-btn {
     width: 40px;
