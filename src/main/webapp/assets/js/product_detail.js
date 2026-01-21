@@ -153,3 +153,38 @@ function updateVariantInfo(selectedColor) {
 
     }
 }
+
+function showSample(input) {
+    // 1. Lấy dữ liệu từ data attributes
+    const img = input.getAttribute('data-img');
+    const price = parseInt(input.getAttribute('data-price'));
+    const oldPrice = parseInt(input.getAttribute('data-oldprice'));
+    const discount = parseInt(input.getAttribute('data-discount'));
+
+    // 2. Cập nhật Hình ảnh
+    if (img) {
+        document.getElementById('sampleImg').src = img;
+    }
+
+    // 3. Định dạng tiền tệ (ví dụ: 100,000)
+    const formatter = new Intl.NumberFormat('vi-VN');
+
+    // 4. Cập nhật Giá mới
+    document.getElementById('sampleNewPrice').innerText = formatter.format(price) + " đ";
+
+    // 5. Xử lý hiển thị Giảm giá và Giá cũ
+    const badge = document.getElementById('sampleBadge');
+    const oldPriceBlock = document.getElementById('sampleOldPriceBlock');
+    const oldPriceText = document.getElementById('sampleOldPrice');
+    const discountText = document.getElementById('sampleDiscountText');
+
+    if (discount > 0) {
+        badge.style.display = 'block';
+        oldPriceBlock.style.display = 'block';
+        discountText.innerText = discount;
+        oldPriceText.innerText = formatter.format(oldPrice) + " đ";
+    } else {
+        badge.style.display = 'none';
+        oldPriceBlock.style.display = 'none';
+    }
+}

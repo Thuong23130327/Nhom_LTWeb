@@ -147,6 +147,7 @@ nav {
     box-sizing: border-box;
 }
 
+
 /* Đã */
 .nav-right {
     display: flex;
@@ -160,12 +161,9 @@ nav {
 .nav-right a.active {
     font-weight: bold;
     scale: calc(1.1);
+    box-shadow: 1px 20px 3px lightgrey;
 }
 
-.mobile-menu-item.active a {
-    font-weight: bold;
-    scale: calc(1.1);
-}
 
 /* Đã */
 .a-nodecor {
@@ -322,12 +320,22 @@ form .searchBar input {
 }
 
 
+.home.active,
+.cart.active,
+.contact.active,
+.store.active {
+    color: var(--white);
+    box-sizing: border-box;
+    box-shadow: lightgrey 0 2px 5px;
+    background: var(--theme-gradient-button);
+}
+
+
 .searchBar:hover,
-.searchBar.active  {
+.searchBar.active {
     scale: calc(1.05);
     transition: all 0.3s ease;
 }
-
 
 
 .overlay {
@@ -369,6 +377,15 @@ form .searchBar input {
 
 }
 
+.mobile-menu-item.active {
+    background-color: rgba(211, 211, 211, 0.8);
+    border-radius: 0;
+}
+
+.mobile-menu-item.active a {
+    font-weight: bold;
+    scale: calc(1.1);
+}
 
 .mobile-menu-item a:hover {
     transform: scale(1.1);
@@ -378,6 +395,7 @@ form .searchBar input {
 }
 
 .mobile-menu-item a {
+    border-bottom: black;
     text-decoration: none;
     color: #333;
     font-size: 18px;
@@ -429,38 +447,6 @@ form .searchBar input {
     transform: translateY(-5px);
     scale: calc(1.1);
     box-shadow: 0 2px 10px lightskyblue;
-}
-
-
-/* phần hotline */
-
-#quick-contact {
-    position: fixed;
-    right: 30px;
-    bottom: 95px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 97;
-}
-
-.contact-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 40%;
-    color: var(--white);
-    font-size: 1.5rem;
-
-    background-color: rgba(0, 123, 255, 0.6);
-    box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(3px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    text-decoration: none;
-
 }
 
 
@@ -1211,6 +1197,7 @@ footer .copyright a:hover {
     transform: translateY(-5%);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
+
 /* --- CSS CHO MENU DROPDOWN --- */
 .aura-dropdown-container {
     position: relative; /* Làm gốc tọa độ cho menu con */
@@ -1224,7 +1211,7 @@ footer .copyright a:hover {
     left: 0;
     background-color: #fff;
     min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     z-index: 999;
     list-style: none;
     padding: 10px 0;
@@ -1254,11 +1241,11 @@ footer .copyright a:hover {
 }
 
 .aura-menu-parent, .aura-menu-child {
-    list-style: none ;
-    padding: 0 ;
-    margin: 0 ;
+    list-style: none;
+    padding: 0;
+    margin: 0;
     background-color: #fff;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
     border: 1px solid #eee;
     min-width: 200px;
     z-index: 100;

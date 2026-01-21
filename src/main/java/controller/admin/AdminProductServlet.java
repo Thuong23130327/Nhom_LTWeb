@@ -22,9 +22,10 @@ public class AdminProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String search = request.getParameter("search");
-        if (search != null) {
+        String categoryId = request.getParameter("categoryId");
+        if (search != null)
             search = search.trim(); // Xóa khoảng trắng đầu cuối
-        }
+
         AdminProductService adminProductService = null;
         try {
             adminProductService = new AdminProductService();
@@ -35,16 +36,21 @@ public class AdminProductServlet extends HttpServlet {
         }
         List<Product> productList = new ArrayList<>();
         Map<Integer, Integer> stockMap = adminProductService.getTotalStock();
+        Map<Integer, Integer> varCountMap = adminProductService.getVarTotal();
         if (search != null && !search.isEmpty()) {
             productList = adminProductService.searchProductByText(search);
-            request.setAttribute("search", search);
+
+        } else if (categoryId != null && !categoryId.isEmpty()) {
+            productList = adminProductService.getProductByCategoryId(categoryId);
         } else {
             productList = adminProductService.getAllProduct();
 
         }
-
+        request.setAttribute("search", search);
+        request.setAttribute("activeId", categoryId);
         request.setAttribute("productList", productList);
         request.setAttribute("totalStockMap", stockMap);
+        request.setAttribute("varCountMap", varCountMap);
         request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 }

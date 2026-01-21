@@ -49,11 +49,10 @@
                             </div>
                         </form>
                         <c:forEach items="${categoryList}" var="cate">
-                            <a class="a-nodecor ${activePage == cate.name ? 'active':''}" href="${AuraSound}/contact">
+                            <a class="a-nodecor ${activeId == cate.id ? 'active':''}" href="${AuraSound}/admin/product-manager?categoryId=${cate.id}">
                                 <div class="contact">${cate.name}</div>
                             </a>
                         </c:forEach>
-
                     </div>
 
                     <div id="hamburger-icon"><i class="bi bi-list"></i></div>
@@ -74,8 +73,10 @@
                         <table class="table table-striped table-sm">
                             <thead>
                             <tr>
-                                <th>Mã sản phẩm</th>
+                                <th>Stt</th>
+                                <th>Mã SKU</th>
                                 <th>Tên sản phẩm</th>
+                                <th>Tổng biến thể</th>
                                 <th>Tồn kho</th>
                                 <th>Giá gốc</th>
                                 <th>Giá bán</th>
@@ -84,10 +85,12 @@
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${productList}" var="p">
+                            <c:forEach items="${productList}" var="p" varStatus="i">
                                 <tr>
+                                    <td>${i.count}</td>
                                     <td>${p.sku}</td>
                                     <td>${p.name}</td>
+                                    <td>${varCountMap[p.id]}</td>
                                     <td>${totalStockMap[p.id]}</td>
 
                                         <%--                                    <c:if test="${p.discountPercent > 0}">--%>

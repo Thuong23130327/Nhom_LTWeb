@@ -19,6 +19,33 @@ public class ProductDAO {
 
     static Map<Integer, Product> data = new HashMap<>();
 
+    public List<Product> getPageProduct() {
+        List<Product> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM products";
+
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
+                        rs.getString("sku"), rs.getString("name"), rs.getString("description"),
+                        rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
+                        rs.getTimestamp("created_at"), rs.getDouble("display_sell_price"),
+                        rs.getDouble("display_market_price"), rs.getString("display_image_url"));
+                list.add(p);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
 
@@ -156,9 +183,10 @@ public class ProductDAO {
         try {
             conn = DBConnect.getConnection();
             ps = conn.prepareStatement(sql);
-            for (int i = 1; i < 7 ; i++) {
+            for (int i = 1; i < 7; i++) {
                 ps.setString(i, "%" + textSearch + "%");
-            };
+            }
+            ;
             rs = ps.executeQuery();
             while (rs.next()) {
                 Product p = new Product(rs.getInt("id"),
@@ -198,13 +226,14 @@ public class ProductDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {}
+        } catch (ClassNotFoundException e) {
+        }
         return map;
     }
 
     public boolean deleteProduct(String pid) {
 
-        String sql =" DELETE FROM productspecs WHERE Products_id = ? ;\n" +
+        String sql = " DELETE FROM productspecs WHERE Products_id = ? ;\n" +
                 "        DELETE FROM productvariants WHERE Products_id =? ;\n" +
                 "        DELETE FROM productgalleries WHERE Products_id = ?;";
 
@@ -220,7 +249,7 @@ public class ProductDAO {
                 if (afRow > 0) {
                     conn.commit();
                 }
-                return  afRow > 0;
+                return afRow > 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -229,46 +258,102 @@ public class ProductDAO {
         }
         return false;
     }
+
+    public Map<Integer, Integer> getVarTotal() {
+        Map<Integer, Integer> map = new HashMap<>();
+        String sql = "SELECT Products_id, count(id) FROM productvariants GROUP BY Products_id; ";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                map.put(rs.getInt(1), rs.getInt(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+        }
+        return map;
+    }
+
+    public List<Product> getPerPageProductByCategoryId(int numPerPage, int page, String cateId) {
+        List<Product> list = new ArrayList<>();
+        String sql =
+                "SELECT * FROM products WHERE Categories_id = ? OR\n" +
+                        "Categories_id IN (SELECT id from categories WHERE Categories_id = ?) LIMIT ? OFFSET ?";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, cateId);
+            ps.setString(2, cateId);
+            ps.setInt(3, numPerPage);
+            ps.setInt(4, (page - 1) * numPerPage);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getInt("Brands_id"),
+                        rs.getInt("Categories_id"),
+                        rs.getString("sku"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getFloat("avg_rating"),
+                        rs.getInt("sold_count"),
+                        rs.getBoolean("is_active"),
+                        rs.getTimestamp("created_at"),
+                        rs.getDouble("display_market_price"),
+                        rs.getDouble("display_sell_price"),
+                        rs.getString("display_image_url"));
+                list.add(p);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    public List<Product> getPerPageAllProduct(int numPerPage, int page) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT * FROM Products ORDER BY id LIMIT ? OFFSET ?";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, numPerPage);
+            ps.setInt(2, (page - 1) * numPerPage);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
+                        rs.getString("sku"), rs.getString("name"), rs.getString("description"),
+                        rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
+                        rs.getTimestamp("created_at"), rs.getDouble("display_sell_price"),
+                        rs.getDouble("display_market_price"), rs.getString("display_image_url"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("so lg sp trang: " + list.size());
+        return list;
+    }
+
+
+    public int pageNeed(String cateId, int sizePerPage) {
+        if (cateId == null || cateId.equals("0")) {
+            System.out.println("Tong so trang: " + (int) getAllProduct().size() / sizePerPage + "all: " + getAllProduct().size());
+            return (int) getAllProduct().size() / sizePerPage + 1;
+        } else {
+            System.out.println("Tong so trang: " + (int) getProductByCategoryId(cateId).size() / sizePerPage + "all: " + getProductByCategoryId(cateId).size());
+            return (int) getProductByCategoryId(cateId).size() / sizePerPage + 1;
+        }
+    }
 }
 
 
-//
-//    public List<Product> getNewArrivals(int limit) {
-//        List<Product> list = new ArrayList<>();
-//
-//        String sql = """
-//                    SELECT id, sku, name, description, avg_rating, sold_count,
-//                           brand_id, categories_id, is_active, created_at, img, price
-//                    FROM Products
-//                    ORDER BY created_at DESC
-//                    LIMIT ?
-//                """;
-//
-//        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-//            ps.setInt(1, limit);
-//            ResultSet rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                list.add(new Product(
-//                        rs.getInt("id"),
-//                        rs.getInt("brand_id"),
-//                        rs.getInt("categories_id"),
-//                        rs.getString("sku"),
-//                        rs.getString("name"),
-//                        rs.getString("description"),
-//                        rs.getFloat("avg_rating"),
-//                        rs.getInt("sold_count"),
-//                        rs.getBoolean("is_active"),
-//                        rs.getDouble("price"),
-//                        rs.getDate("created_at").toLocalDate()
-//                ));
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    }
-//
 //    public List<Product> getProductsByCategory(int idCategory) {
 //        List<Product> list = new ArrayList<>();
 //        // Thêm 'price' và 'img' vào câu query

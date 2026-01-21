@@ -83,7 +83,6 @@
                                     <img src="${eachVar.mainImageUrl}" alt="${eachVar.colorName}">
                                     <span>${eachVar.colorName}</span>
                                 </div>
-
                             </c:forEach>
                         </div>
                     </div>

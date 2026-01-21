@@ -1,5 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/tag/_taglibs.jsp" %>
+
+<%
+    request.setAttribute("activePage", "product");
+%>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -78,13 +83,11 @@
                 <button class="filter-reset-btn" id="filter-reset">Xóa tất cả bộ lọc</button>
             </div>
         </aside>
-
-
     </form>
-    <div class="product-grid-container">
+    <div id="namePage" class="product-grid-container">
         <h1>${cateName != null ? cateName : 'Sản phẩm'}</h1>
 
-        <div class="sort-options">
+        <div class="sort-options"id="sort-options">
             <span>Sắp xếp theo:</span>
             <button class="sort-btn active" data-sort="default">Nổi bật</button>
             <button class="sort-btn" data-sort="price-asc">Giá tăng dần</button>
@@ -125,20 +128,27 @@
                     </div>
                 </a>
             </c:forEach>
+
+
+        </div>
+
+        <div class="pagination" id="pagination-buttons">
+            <c:forEach begin="1" end="${numPage}" var="i">
+                <button class="page-btn ${pageCurrent == i ? 'active' :''}" onclick="loadPage(this)"
+                        data-page="${i}">${i}</button>
+            </c:forEach>
         </div>
     </div>
 
+    <input type="hidden" id="numPage" value="${numPage}">
+    <input type="hidden" id="cur-keyword" value="${search}">
+
+
 </main>
-
-<%--<div class="pagination" id="pagination-buttons">--%>
-<%--    <button class="page-btn" data-page="1">1</button>--%>
-<%--    <button class="page-btn" data-page="2">2</button>--%>
-<%--    <button class="page-btn" data-page="3">3</button>--%>
-<%--</div>--%>
-
 
 <jsp:include page="/tag/_footer.jsp"></jsp:include>
 
+<script>const path = "${pageContext.request.contextPath}" </script>
 <script src="${AuraSound}/assets/js/script.js"></script>
 <script src="${AuraSound}/assets/js/scriptProfile.js"></script>
 <script src="${AuraSound}/assets/js/scriptStore.js"></script>

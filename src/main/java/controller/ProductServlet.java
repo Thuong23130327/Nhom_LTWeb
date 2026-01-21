@@ -15,24 +15,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+// sản phẩm all, theo phan loai cate
 @WebServlet(name = "ProductServlet", value = "/product")
 public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int numPerPage = 12;
         CategoryService categoryService = new CategoryService();
         ProductService productService = null;
         try {
             productService = new ProductService();
             String cateId = request.getParameter("cateId");
-
-
+            int numPage = productService.pageNeed(cateId, numPerPage);
             List<Product> productList = null;
-            if (cateId != null) {
-                productList = productService.getProductByCategoryId(cateId);
+            if (cateId != null && !cateId.equals("0")) {
                 Category c = categoryService.getCategoryById(Integer.parseInt(cateId));
                 request.setAttribute("cateName", c.getName());
-            } else {
-                productList = productService.getAllProduct();
             }
+
+            productList = productService.getPerPageProduct(numPerPage, 1, cateId);
+            request.setAttribute("numPage", numPage);
+            request.setAttribute("pageCurrent", 1);
             request.setAttribute("productList", productList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
