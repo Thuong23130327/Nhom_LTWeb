@@ -1,36 +1,22 @@
 let total = parseInt(document.getElementById("numPage").value) || 1;
+let selectedBrands = [];
+let selectedCates = [];
+let selectedSort;
 
 document.addEventListener("DOMContentLoaded", function () {
     renderPagination(1, total);
+    activeFilter();
 });
 
-function loadMore() {
-    let amount = document.getElementsByClassName("product-card").length;
+function activeFilter() {
+    var options = document.querySelectorAll('div[data-filter-group="category"] .filter-option');
 
-    $.ajax({
-        type: "GET",
-        url: "${pageContext.request.contextPath}/load",
-        data: {
-            exist: amount
-
-        },
-        dataType: "html",
-
-        success: function (data) {
-            console.log("Dữ liệu nhận được từ Server:");
-            console.log(data);
-            var row = document.getElementById("product-grid");
-
-            if (row) {
-                row.innerHTML += data; // Nối thêm sản phẩm mới vào
-            } else {
-                console.log("Không tìm thấy thẻ div chứa sản phẩm!");
-            }
-        },
-        error: function (xhr, status, error) {
-            // In chi tiết lỗi ra để dễ debug
-            console.log("Lỗi: " + error);
-            console.log("Trạng thái: " + status);
+    options.forEach(function (element) {
+        // Lấy giá trị data-filter
+        var value = element.getAttribute('data-filter');
+        if (cateId == value) {
+            selectedCates.push(cateId);
+            element.classList.add("active");
         }
     });
 }
@@ -70,6 +56,7 @@ function renderPagination(current, total) {
     return;
 }
 
+
 function loadPage(e) {
     let page = parseInt(e.getAttribute("data-page"));
     console.log("page: " + page);
@@ -77,26 +64,34 @@ function loadPage(e) {
         type: "GET",
         url: path + "/loadAjax",
         data: {
+            selectedBrands: selectedBrands,
+            selectedCates: selectedCates, selectedSort: selectedSort,
             pageCurrent: page
         },
-        dataType: "html",
+        traditional:
+            true,
+        dataType:
+            "html",
 
-        success: function (data) {
-            console.log("Dữ liệu nhận được từ Server:");
-            console.log(data);
-            var row = document.getElementById("product-grid");
+        success:
 
-            if (row) {
-                row.innerHTML = data;
-            } else {
-                console.log("Không tìm thấy thẻ div chứa sản phẩm!");
+            function (data) {
+                var row = document.getElementById("product-grid");
+
+                if (row)
+                    row.innerHTML = data;
+                else
+                    console.log("Không tìm thấy thẻ div chứa sản phẩm!");
+
             }
-        },
+
+        ,
         error: function (xhr, status, error) {
             console.log("Lỗi: " + error);
             console.log("Trạng thái: " + status);
         }
-    });
+    })
+    ;
     let listButonPage = document.getElementsByClassName("page-btn");
     let tittleEle = document.getElementById("namePage");
 
@@ -106,10 +101,57 @@ function loadPage(e) {
         listButonPageElement.classList.remove("active");
     }
     renderPagination(page, total);
+    setTitle();
 }
 
-let selectedBrands = [];
-let selectedCates = [];
+function clearFilter(e) {
+    selectedBrands = [];
+    selectedCates = [];
+    loadData(e);
+    let listSort = document.getElementsByClassName("filter-option");
+    for (let EachElement of listSort) {
+        EachElement.classList.remove("active");
+    }
+    setTitle();
+}
+
+
+function loadData(e) {
+    $.ajax({
+        type: "GET",
+        url: path + "/loadAjax",
+        traditional: true,
+        data: {
+            pageCurrent: 1,
+            selectedBrands: selectedBrands,
+            selectedCates: selectedCates, selectedSort: selectedSort
+        },
+        dataType: "html",
+
+        success: function (data) {
+            var row = document.getElementById("product-grid");
+
+            if (row)
+                row.innerHTML = data;
+            else
+                console.log("Không tìm thấy thẻ div chứa sản phẩm!");
+
+
+        },
+        error: function (xhr, status, error) {
+            console.log("Lỗi: " + error);
+            console.log("Trạng thái: " + status);
+        }
+    });
+    setTitle();
+}
+
+function setTitle() {
+    if ((selectedCates == null && selectedBrands == null) || (selectedBrands.length == 0 && selectedCates == 0)) {
+        document.getElementById("namePage").innerText = "Sản phẩm";
+    } else
+        document.getElementById("namePage").innerText = "Kết quả lọc";
+}
 
 function sort(e) {
     e.classList.toggle("active");
@@ -118,7 +160,6 @@ function sort(e) {
     let index = -1;
 
     let datafilter = e.getAttribute("data-filter");
-    console.log(datafilter);
     if (e.classList.contains("active")) {
         if (sortFiter == "brand") selectedBrands.push(datafilter);
         if (sortFiter == "category") selectedCates.push(datafilter);
@@ -132,33 +173,24 @@ function sort(e) {
             selectedCates.splice(index, 1);
         }
     }
-    $.ajax({
-        type: "GET",
-        url: path + "/loadAjax",
-        traditional: true,
-        data: {
-            pageCurrent:1,
-            selectedBrands: selectedBrands,
-            selectedCates: selectedCates
-        },
-        dataType: "html",
+    renderPagination(1, total);
+    loadData(e);
+    setTitle();
+}
 
-        success: function (data) {
-            console.log("Dữ liệu nhận được từ Server:");
-            console.log(data);
-            var row = document.getElementById("product-grid");
+function sortOption(e) {
+    selectedSort = e.getAttribute("data-sort");
+    loadData(e);
+    activeSort();
+}
 
-            if (row) {
-                row.innerHTML = data;
-            } else {
-                console.log("Không tìm thấy thẻ div chứa sản phẩm!");
-            }
+function activeSort() {
+    var options = document.querySelectorAll(".sort-btn");
 
-        },
-        error: function (xhr, status, error) {
-            console.log("Lỗi: " + error);
-            console.log("Trạng thái: " + status);
-        }
+    options.forEach(function (element) {
+        var value = element.getAttribute('data-sort');
+        if (selectedSort === value)
+            element.classList.add("active");
+        else element.classList.remove("active");
     });
-
 }

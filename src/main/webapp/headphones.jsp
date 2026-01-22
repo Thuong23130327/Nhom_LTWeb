@@ -53,7 +53,7 @@
                     <h4>Hãng sản xuất</h4>
                     <div class="filter-options" data-filter-group="brand">
                         <c:forEach items="${brandList}" var="brand">
-                            <button onclick="sort(this)"  type="button" class="filter-option" data-filter="${brand.id}">
+                            <button onclick="sort(this)" type="button" class="filter-option" data-filter="${brand.id}">
                                     ${brand.name}
                             </button>
                         </c:forEach>
@@ -70,28 +70,20 @@
                         </c:forEach>
                     </div>
                 </div>
-
-                <div class="filter-group">
-                    <h4>Tính năng</h4>
-                    <div class="filter-options" data-filter-group="feature">
-                        <button class="filter-option" data-filter="bluetooth">Bluetooth</button>
-                        <button class="filter-option" data-filter="chong-on">Chống ồn</button>
-                        <button class="filter-option" data-filter="chong-nuoc">Chống nước (IPX4+)</button>
-                    </div>
-                </div>
-
-                <button class="filter-reset-btn" id="filter-reset">Xóa tất cả bộ lọc</button>
+                <button type="button" onclick="clearFilter(this)" class="filter-reset-btn" id="filter-reset">Xóa tất cả
+                    bộ lọc
+                </button>
             </div>
         </aside>
     </form>
-    <div id="namePage" class="product-grid-container">
-        <h1>${cateName != null ? cateName : 'Sản phẩm'}</h1>
+    <div  class="product-grid-container">
+        <h1 id="namePage">${cateName != null ? cateName : 'Sản phẩm'}</h1>
 
-        <div class="sort-options"id="sort-options">
+        <div class="sort-options" id="sort-options">
             <span>Sắp xếp theo:</span>
-            <button class="sort-btn active" data-sort="default">Nổi bật</button>
-            <button class="sort-btn" data-sort="price-asc">Giá tăng dần</button>
-            <button class="sort-btn" data-sort="price-desc">Giá giảm dần</button>
+            <button class="sort-btn active" onclick="sortOption(this)" data-sort="default">Nổi bật</button>
+            <button class="sort-btn" onclick="sortOption(this)" data-sort="price-asc">Giá tăng dần</button>
+            <button class="sort-btn" onclick="sortOption(this)" data-sort="price-desc">Giá giảm dần</button>
         </div>
 
         <div class="product-grid" id="product-grid">
@@ -140,7 +132,7 @@
         </div>
     </div>
 
-    <input type="hidden" id="numPage" value="${numPage}">
+    <input type="hidden" id="numPage" name="totalPageNeed" value="${numPage}">
     <input type="hidden" id="cur-keyword" value="${search}">
 
 
@@ -148,7 +140,9 @@
 
 <jsp:include page="/tag/_footer.jsp"></jsp:include>
 
-<script>const path = "${pageContext.request.contextPath}" </script>
+<script>const path = "${pageContext.request.contextPath}";
+let cateId = "${cateId}";
+</script>
 <script src="${AuraSound}/assets/js/script.js"></script>
 <%--<script src="${AuraSound}/assets/js/scriptProfile.js"></script>--%>
 <script src="${AuraSound}/assets/js/scriptStore.js"></script>
