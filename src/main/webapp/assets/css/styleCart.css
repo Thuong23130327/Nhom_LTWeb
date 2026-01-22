@@ -66,7 +66,7 @@ body {
     background-color: var(--white);
     border-radius: 8px;
     margin-top: 15px;
-    overflow: hidden;
+    overflow: visible !important;
 }
 
 .cart-item {
@@ -101,6 +101,7 @@ body {
 
 .item-details {
     flex-grow: 1;
+    overflow: visible !important;
 }
 
 .item-details h4 {
@@ -111,8 +112,11 @@ body {
 }
 
 .item-variant {
+    position: relative;
     display: inline-flex;
     align-items: center;
+    justify-content: space-between;
+    min-width: 110px;
     font-size: 0.9rem;
     padding: 3px 8px;
     border: 1px solid #ddd;
@@ -433,15 +437,23 @@ body {
 .variant-dropdown {
     display: none;
     position: absolute;
-    top: 110%;
+    top: 100%;
     left: 0;
+    margin-top: 4px;
+    min-width: 100%;
+    max-width: 250px;
+    width: max-content;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    min-width: 150px;
-    z-index: 100;
-    padding: 5px 0;
+    z-index: 9999;
+    display: none;
+}
+
+.variant-dropdown.active {
+    display: block;
+    animation: fadeIn 0.2s ease-in-out;
 }
 
 .variant-dropdown.show {
@@ -450,16 +462,15 @@ body {
 }
 
 .variant-option {
-    padding: 8px 15px;
-    font-size: 0.9rem;
-    color: #333;
+    padding: 8px 12px;
+    white-space: nowrap;
     cursor: pointer;
-    transition: background 0.2s;
+    text-align: left;
 }
 
 .variant-option:hover {
-    background-color: #f1f8fe;
-    color: var(--theme-color-primary, #4a6fff);
+    background-color: #f0f0f0;
+    color: #007bff;
 }
 
 @keyframes fadeIn {
@@ -472,4 +483,50 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+/*Container nút chọn màu*/
+.item-variant {
+    position: relative;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    user-select: none; /* Chống bôi đen text khi click */
+}
+
+.item-variant:hover {
+    background-color: #f9f9f9;
+}
+
+/* Hiện menu */
+.variant-dropdown.show {
+    display: block !important;
+}
+
+/* Các tùy chọn bên trong */
+.variant-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: background 0.2s;
+}
+
+.variant-option:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.cart-item {
+    overflow: visible !important;
+    position: relative;
+    z-index: 1;
+}
+
+.cart-item:hover {
+    z-index: 1000;
 }

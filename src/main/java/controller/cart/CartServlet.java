@@ -15,7 +15,6 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        // 'id' ở đây trong ngữ cảnh giỏ hàng (cart.jsp) sẽ là variantId
         String id = request.getParameter("id");
         String qStr = request.getParameter("q");
         String newVariantId = request.getParameter("newVariantId"); // Chọn biến thể
@@ -28,6 +27,23 @@ public class CartServlet extends HttpServlet {
         }
 
         try {
+            // Khởi tạo Service
+            CartService cartService = new CartService();
+
+            // Xử lý AJAX Update Variant
+            if ("updateVariant".equals(action) && id != null && newVariantId != null) {
+                int oldVid = Integer.parseInt(id);
+
+                // Gọi method xử lý logic nằm trong Service
+                boolean isUpdated = cartService.updateVariant(cart, oldVid, newVariantId);
+
+                if (isUpdated) {
+                    response.setContentType("text/plain");
+                    response.getWriter().write("success");
+                    return; // Ngắt luồng, không redirect
+                }
+            }
+
             if (id != null) {
                 int variantId = Integer.parseInt(id);
 
@@ -47,11 +63,9 @@ public class CartServlet extends HttpServlet {
                         // Cập nhật số lượng dựa trên phương thức ở Cart
                         cart.addOrUpdateItem(existingItem.getName(), existingItem.getProductVariant(), qty);
                     } else {
-                        ProductService productService = new ProductService();
-                        Product p = productService.getById(id);
+                        Product p = cartService.getProductById(id);
                         if (p != null) {
-                            CartService cartService = new CartService();
-                            ProductVariant defaultVariant = cartService.getProductVariant(id);
+                            ProductVariant defaultVariant = CartService.getProductVariant(id);
                             if(defaultVariant != null) {
                                 cart.addOrUpdateItem(p.getName(), defaultVariant, qty);
                             }
@@ -97,11 +111,11 @@ public class CartServlet extends HttpServlet {
             Cart cart = (Cart) session.getAttribute("cart");
             if (cart == null) {
                 cart = new Cart();
+                session.setAttribute("cart", cart);
             }
 
             // Lấy Biến thể từ DB
-            CartService cartService = new CartService();
-            ProductVariant productVariant = cartService.getProductVariant(variantIdStr);
+            ProductVariant productVariant = CartService.getProductVariant(variantIdStr);
 
             if (productVariant != null) {
                 cart.addOrUpdateItem(nameProduct, productVariant, qty);

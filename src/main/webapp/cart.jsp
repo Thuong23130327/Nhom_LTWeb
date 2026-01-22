@@ -6,6 +6,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Product" %>
+<%@ page import="model.ProductVariant" %>
 
 
 <%
@@ -64,8 +65,37 @@
                     <h4><%= item.getName() %></h4>
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <div class="item-variant">
-                            <span>Màu: Mặc định <%= item.getProductVariant().getColorName() %> </span>
+                            <span>Màu: <%= item.getProductVariant().getColorName() %> </span>
                             <i class="bi bi-chevron-compact-down"></i>
+                            <div class="variant-dropdown">
+                                <%
+                                    try {
+                                        // Khởi tạo Service
+                                        service.CartService cartServiceJsp = new service.CartService();
+
+                                        // Lấy productId
+                                        int pId = item.getProductVariant().getProductId();
+
+                                        // Gọi hàm lấy danh sách biến thể của sản phẩm đang chọn mà có trong cart
+                                        java.util.List<model.ProductVariant> options = cartServiceJsp.getVariantsByProductId(pId);
+
+                                        if(options != null) {
+                                            for (model.ProductVariant v : options) {
+                                                if (v.getId() != vId) { // Không hiện lại biến thể đang chọn
+                                %>
+                                <div class="variant-option"
+                                     onclick="selectColor(this, '<%= vId %>', '<%= v.getId() %>')">
+                                    Màu: <%= v.getColorName() %>
+                                </div>
+                                <%
+                                                }
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                %>
+                            </div>
                         </div>
                     </div>
                 </div>

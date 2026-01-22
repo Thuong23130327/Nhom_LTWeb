@@ -1,48 +1,61 @@
-// 1. Bắt sự kiện click vào nút chọn màu (.item-variant)
-const variants = document.querySelectorAll('.item-variant');
+document.addEventListener("DOMContentLoaded", function () {
+    // Bắt sự kiện click vào nút chọn màu
+    const variants = document.querySelectorAll('.item-variant');
 
-variants.forEach(btn => {
-    btn.addEventListener('click', function (e) {
-        // Ngăn chặn sự kiện nổi bọt để không kích hoạt sự kiện click của document
-        e.stopPropagation();
+    variants.forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            // Ngăn chặn sự kiện nổi bọt
+            e.stopPropagation();
 
-        // Tìm menu dropdown bên trong nút vừa click
-        const dropdown = this.querySelector('.variant-dropdown');
+            // Tìm menu bên trong nút vừa click
+            const dropdown = this.querySelector('.variant-dropdown');
 
-        // Đóng tất cả các dropdown khác đang mở (tránh mở nhiều cái cùng lúc)
-        document.querySelectorAll('.variant-dropdown').forEach(d => {
-            if (d !== dropdown) d.classList.remove('show');
+            // Đóng tất cả cái khác đang mở
+            document.querySelectorAll('.variant-dropdown').forEach(d => {
+                if (d !== dropdown) d.classList.remove('show');
+            });
+
+            // (Ẩn/Hiện) cái hiện tại
+            if (dropdown) {
+                dropdown.classList.toggle('show');
+            }
         });
+    });
 
-        // Toggle (Ẩn/Hiện) cái hiện tại
-        if (dropdown) {
-            dropdown.classList.toggle('show');
-        }
+    // Click ra ngoài khoảng trắng thì đóng menu
+    document.addEventListener('click', function () {
+        document.querySelectorAll('.variant-dropdown').forEach(d => {
+            d.classList.remove('show');
+        });
     });
 });
 
-// 2. Hàm xử lý khi chọn 1 màu cụ thể
-function selectColor(option) {
-    // Lấy text của màu vừa chọn (VD: Màu: Đen)
-    const colorText = option.innerText;
+// XỬ LÝ AJAX
+function selectColor(element, oldVid, newVid) {
+    // Ngăn sự kiện click này lan ra ngoài
+    if (window.event) window.event.stopPropagation();
 
-    // Tìm thẻ cha lớn nhất (.item-variant)
-    const parentVariant = option.closest('.item-variant');
+    console.log(`Đang đổi biến thể: ${oldVid} -> ${newVid}`);
 
-    // Tìm thẻ span hiển thị text hiện tại và thay đổi nội dung
-    const displayText = parentVariant.querySelector('span'); // hoặc .selected-color nếu bạn đã thêm class
-    if (displayText) {
-        displayText.innerText = colorText;
-    }
-
+    // Gọi về Servlet để xử lý logic
+    fetch(`cart?action=updateVariant&id=${oldVid}&newVariantId=${newVid}`)
+        .then(response => response.text())
+        .then(data => {
+            // Kiểm tra phản hồi từ Servlet
+            if (data.trim() === "success") {
+                // Thành công? -> Reload trang để cập nhật lại Giá tiền, Hình ảnh, Tên màu
+                window.location.reload();
+            } else {
+                alert("Lỗi: Không thể cập nhật biến thể. Vui lòng thử lại!");
+                console.error("Server response:", data);
+            }
+        })
+        .catch(error => {
+            console.error('Lỗi kết nối:', error);
+            alert("Mất kết nối đến máy chủ.");
+        });
 }
-function removeCartItem(){
 
-}
-
-// 3. Click ra ngoài khoảng trắng thì đóng menu
-document.addEventListener('click', function () {
-    document.querySelectorAll('.variant-dropdown').forEach(d => {
-        d.classList.remove('show');
-    });
-});
+// function removeCartItem() {
+//
+// }
