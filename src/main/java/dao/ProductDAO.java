@@ -7,10 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProductDAO {
     private Connection conn = null;
@@ -33,8 +30,8 @@ public class ProductDAO {
                 Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
                         rs.getString("sku"), rs.getString("name"), rs.getString("description"),
                         rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"), rs.getDouble("display_sell_price"),
-                        rs.getDouble("display_market_price"), rs.getString("display_image_url"));
+                        rs.getTimestamp("created_at"),
+                        rs.getDouble("display_market_price"), rs.getDouble("display_sell_price"), rs.getString("display_image_url"));
                 list.add(p);
 
             }
@@ -276,14 +273,24 @@ public class ProductDAO {
         return map;
     }
 
-    public List<Product> getPerPageProductByCategoryId(int numPerPage, int page, String cateId) {
+    public List<Product> getPerPageProductByCategoryId(int numPerPage, int page, String cateId, String selectedSort) {
         List<Product> list = new ArrayList<>();
-        String sql =
+        StringBuffer sql = new StringBuffer(
                 "SELECT * FROM products WHERE Categories_id = ? OR\n" +
-                        "Categories_id IN (SELECT id from categories WHERE Categories_id = ?) LIMIT ? OFFSET ?";
+                        "Categories_id IN (SELECT id from categories WHERE Categories_id = ?) ");
+
+        if (selectedSort.equals("default")) {
+            sql.append(" ORDER BY id ");
+        } else if (selectedSort.equals("price-asc")) {
+            sql.append(" ORDER BY  display_sell_price asc ");
+        }else if (selectedSort.equals("price-desc")) {
+            sql.append(" ORDER BY  display_sell_price desc ");
+        }
+        sql.append(" LIMIT ? OFFSET ?");
+
         try {
             conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(String.valueOf(sql));
             ps.setString(1, cateId);
             ps.setString(2, cateId);
             ps.setInt(3, numPerPage);
@@ -314,12 +321,20 @@ public class ProductDAO {
         return list;
     }
 
-    public List<Product> getPerPageAllProduct(int numPerPage, int page) {
+    public List<Product> getPerPageAllProduct(int numPerPage, int page, String selectedSort) {
         List<Product> list = new ArrayList<>();
-        String sql = "SELECT * FROM Products ORDER BY id LIMIT ? OFFSET ?";
+        StringBuilder sql = new StringBuilder("SELECT * FROM Products") ;
+        if (selectedSort.equals("default")) {
+            sql.append(" ORDER BY id ");
+        } else if (selectedSort.equals("price-asc")) {
+            sql.append(" ORDER BY  display_sell_price asc ");
+        }else if (selectedSort.equals("price-desc")) {
+            sql.append(" ORDER BY  display_sell_price desc ");
+        }
+        sql.append(" LIMIT ? OFFSET ?");
         try {
             conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(String.valueOf(sql));
             ps.setInt(1, numPerPage);
             ps.setInt(2, (page - 1) * numPerPage);
             rs = ps.executeQuery();
@@ -327,8 +342,8 @@ public class ProductDAO {
                 Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
                         rs.getString("sku"), rs.getString("name"), rs.getString("description"),
                         rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"), rs.getDouble("display_sell_price"),
-                        rs.getDouble("display_market_price"), rs.getString("display_image_url"));
+                        rs.getTimestamp("created_at"),
+                        rs.getDouble("display_market_price"), rs.getDouble("display_sell_price"), rs.getString("display_image_url"));
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -351,7 +366,33 @@ public class ProductDAO {
         }
     }
 
-    public List<Product> filterProduct(String[] brandIds, String[] cateIds, int numPerPage, int page) {
+    private List<String> getListCategoryIdsIncludingChildren(String[] cateIds) {
+        Set<String> allCategoryIds = new HashSet<>();
+        if (cateIds == null || cateIds.length == 0)
+            return new ArrayList<>();
+        Collections.addAll(allCategoryIds, cateIds);
+        StringBuilder sql = new StringBuilder("SELECT id FROM Categories WHERE Categories_id IN (");
+        for (int i = 0; i < cateIds.length; i++) {
+            sql.append(cateIds[i]);
+            if (i < cateIds.length - 1) sql.append(",");
+        }
+        sql.append(")");
+
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(String.valueOf(sql));
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                allCategoryIds.add(String.valueOf(rs.getInt("id")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>(allCategoryIds);
+    }
+
+    public List<Product> filterProduct(String[] brandIds, String[] cateIds, int numPerPage, int page, String selectedSort) {
+
 
         List<Product> list = new ArrayList<>();
         StringBuffer sql = new StringBuffer("SELECT * FROM Products where 1=1 ");
@@ -365,14 +406,25 @@ public class ProductDAO {
         }
 
         if (cateIds.length > 0) {
-            sql.append(" and Categories_id in (");
-            for (int i = 0; i < cateIds.length; i++) {
-                sql.append(cateIds[i]);
-                if (i < cateIds.length - 1) sql.append(",");
+            List<String> allCateIds = getListCategoryIdsIncludingChildren(cateIds);
+            if (!allCateIds.isEmpty()) {
+                sql.append(" and Categories_id in (");
+                for (int i = 0; i < allCateIds.size(); i++) {
+                    sql.append(allCateIds.get(i));
+                    if (i < allCateIds.size() - 1) sql.append(",");
+                }
+                sql.append(") ");
             }
-            sql.append(") ");
         }
-        sql.append(" ORDER BY id LIMIT ? OFFSET ?");
+
+        if (selectedSort.equals("default")) {
+            sql.append(" ORDER BY id ");
+        } else if (selectedSort.equals("price-asc")) {
+            sql.append(" ORDER BY  display_sell_price asc ");
+        }else if (selectedSort.equals("price-desc")) {
+            sql.append(" ORDER BY  display_sell_price desc ");
+        }
+        sql.append(" LIMIT ? OFFSET ?");
         try {
             conn = DBConnect.getConnection();
             ps = conn.prepareStatement(String.valueOf(sql));
@@ -383,8 +435,8 @@ public class ProductDAO {
                 Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
                         rs.getString("sku"), rs.getString("name"), rs.getString("description"),
                         rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"), rs.getDouble("display_sell_price"),
-                        rs.getDouble("display_market_price"), rs.getString("display_image_url"));
+                        rs.getTimestamp("created_at"), rs.getDouble("display_market_price"), rs.getDouble("display_sell_price"),
+                        rs.getString("display_image_url"));
                 list.add(p);
             }
         } catch (SQLException e) {
@@ -392,7 +444,6 @@ public class ProductDAO {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("so lg sp trang: " + list.size());
         return list;
     }
 }

@@ -31,16 +31,19 @@ public class LoadPageAjaxServlet extends HttpServlet {
         String[] selectedCates = request.getParameterValues("selectedCates");
         List<Product> productList = null;
         String cateId = request.getParameter("cateId");
+        String selectedSort = request.getParameter("selectedSort") != null ? request.getParameter("selectedSort") : "default";
+
         System.out.println("Servlet nhận Brands: " + (selectedBrands == null ? "NULL" : Arrays.toString(selectedBrands)));
         System.out.println("Servlet nhận Brands: " + (selectedCates == null ? "NULL" : Arrays.toString(selectedCates)));
 
         if (selectedBrands == null) selectedBrands = new String[0];
         if (selectedCates == null) selectedCates = new String[0];
 
+        //Ngdung da chon loc thi goi loc
         if (selectedBrands.length > 0 || selectedCates.length > 0)
-            productList = productService.filterProduct(selectedBrands, selectedCates, 12, 1);
-        else productList = productService.getPerPageProduct(12, pageCurrent, cateId);
-
+            productList = productService.filterProduct(selectedBrands, selectedCates, 12, pageCurrent,selectedSort);
+        else //Chua chon loc o filter, auto chon theo cai header
+            productList = productService.getPerPageProduct(12, pageCurrent, cateId,selectedSort);
 
         PrintWriter out = response.getWriter();
         if (productList == null || productList.isEmpty()) {

@@ -12,7 +12,6 @@ import service.ProductService;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 // sản phẩm all, theo phan loai cate, brand ban dau
@@ -22,6 +21,8 @@ public class ProductServlet extends HttpServlet {
         int numPerPage = 12;
         CategoryService categoryService = new CategoryService();
         ProductService productService = null;
+        String selectedSort = request.getParameter("selectedSort") != null ? request.getParameter("selectedSort") : "default";
+
         try {
             productService = new ProductService();
             String cateId = request.getParameter("cateId");
@@ -32,9 +33,10 @@ public class ProductServlet extends HttpServlet {
                 request.setAttribute("cateName", c.getName());
             }
 
-            productList = productService.getPerPageProduct(numPerPage, 1, cateId);
+            productList = productService.getPerPageProduct(numPerPage, 1, cateId, selectedSort);
             request.setAttribute("numPage", numPage);
             request.setAttribute("pageCurrent", 1);
+            request.setAttribute("cateId", cateId);
             request.setAttribute("productList", productList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
