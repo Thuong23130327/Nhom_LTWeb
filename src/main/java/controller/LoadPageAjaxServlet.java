@@ -10,33 +10,43 @@ import service.ProductService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 
-@WebServlet(name = "LoadMoreServlet", value = "/load")
-public class LoadMoreServlet extends HttpServlet {
+@WebServlet(name = "LoadPageAjaxServlet", value = "/loadAjax")
+public class LoadPageAjaxServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String cateId = request.getParameter("cateId");
         ProductService productService = null;
         try {
             productService = new ProductService();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         int pageCurrent = Integer.parseInt(request.getParameter("pageCurrent"));
-        List<Product> productList = productService.getPerPageProduct(12, pageCurrent,cateId);
-        request.setAttribute("pageCurrent", pageCurrent);
+        String[] selectedBrands = request.getParameterValues("selectedBrands");
+        String[] selectedCates = request.getParameterValues("selectedCates");
+        List<Product> productList = null;
+        String cateId = request.getParameter("cateId");
+        System.out.println("Servlet nhận Brands: " + (selectedBrands == null ? "NULL" : Arrays.toString(selectedBrands)));
+        System.out.println("Servlet nhận Brands: " + (selectedCates == null ? "NULL" : Arrays.toString(selectedCates)));
+
+        if (selectedBrands == null) selectedBrands = new String[0];
+        if (selectedCates == null) selectedCates = new String[0];
+
+        if (selectedBrands.length > 0 || selectedCates.length > 0)
+            productList = productService.filterProduct(selectedBrands, selectedCates, 12, 1);
+        else productList = productService.getPerPageProduct(12, pageCurrent, cateId);
+
+
         PrintWriter out = response.getWriter();
         if (productList == null || productList.isEmpty()) {
             out.println("");
             return;
         }
-
         NumberFormat vnFormatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         for (Product p : productList) {
             String formattedSellPrice = vnFormatter.format(p.getSellPrice());
@@ -74,6 +84,7 @@ public class LoadMoreServlet extends HttpServlet {
                     "                </a>");
         }
     }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

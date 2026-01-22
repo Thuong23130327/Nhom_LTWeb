@@ -53,7 +53,7 @@
                     <h4>Hãng sản xuất</h4>
                     <div class="filter-options" data-filter-group="brand">
                         <c:forEach items="${brandList}" var="brand">
-                            <button class="filter-option" data-filter="${brand.name}">
+                            <button onclick="sort(this)"  type="button" class="filter-option" data-filter="${brand.id}">
                                     ${brand.name}
                             </button>
                         </c:forEach>
@@ -62,9 +62,9 @@
 
                 <div class="filter-group">
                     <h4>Loại tai nghe</h4>
-                    <div class="filter-options" data-filter-group="type">
+                    <div class="filter-options" data-filter-group="category">
                         <c:forEach items="${categoryList}" var="cate">
-                            <button class="filter-option" data-filter="${cate.name}">
+                            <button onclick="sort(this)" type="button" class="filter-option" data-filter="${cate.id}">
                                     ${cate.name}
                             </button>
                         </c:forEach>
@@ -150,7 +150,7 @@
 
 <script>const path = "${pageContext.request.contextPath}" </script>
 <script src="${AuraSound}/assets/js/script.js"></script>
-<script src="${AuraSound}/assets/js/scriptProfile.js"></script>
+<%--<script src="${AuraSound}/assets/js/scriptProfile.js"></script>--%>
 <script src="${AuraSound}/assets/js/scriptStore.js"></script>
 </body>
 </html>
