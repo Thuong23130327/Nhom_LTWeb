@@ -337,7 +337,6 @@ public class ProductDAO {
             throw new RuntimeException(e);
         }
 
-        System.out.println("so lg sp trang: " + list.size());
         return list;
     }
 
@@ -350,6 +349,51 @@ public class ProductDAO {
             System.out.println("Tong so trang: " + (int) getProductByCategoryId(cateId).size() / sizePerPage + "all: " + getProductByCategoryId(cateId).size());
             return (int) getProductByCategoryId(cateId).size() / sizePerPage + 1;
         }
+    }
+
+    public List<Product> filterProduct(String[] brandIds, String[] cateIds, int numPerPage, int page) {
+
+        List<Product> list = new ArrayList<>();
+        StringBuffer sql = new StringBuffer("SELECT * FROM Products where 1=1 ");
+        if (brandIds.length > 0) {
+            sql.append(" and Brands_id in (");
+            for (int i = 0; i < brandIds.length; i++) {
+                sql.append(brandIds[i]);
+                if (i < brandIds.length - 1) sql.append(",");
+            }
+            sql.append(") ");
+        }
+
+        if (cateIds.length > 0) {
+            sql.append(" and Categories_id in (");
+            for (int i = 0; i < cateIds.length; i++) {
+                sql.append(cateIds[i]);
+                if (i < cateIds.length - 1) sql.append(",");
+            }
+            sql.append(") ");
+        }
+        sql.append(" ORDER BY id LIMIT ? OFFSET ?");
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(String.valueOf(sql));
+            ps.setInt(1, numPerPage);
+            ps.setInt(2, (page - 1) * numPerPage);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
+                        rs.getString("sku"), rs.getString("name"), rs.getString("description"),
+                        rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
+                        rs.getTimestamp("created_at"), rs.getDouble("display_sell_price"),
+                        rs.getDouble("display_market_price"), rs.getString("display_image_url"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("so lg sp trang: " + list.size());
+        return list;
     }
 }
 

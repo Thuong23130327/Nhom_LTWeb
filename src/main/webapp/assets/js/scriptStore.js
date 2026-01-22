@@ -1,6 +1,5 @@
 let total = parseInt(document.getElementById("numPage").value) || 1;
 
-
 document.addEventListener("DOMContentLoaded", function () {
     renderPagination(1, total);
 });
@@ -71,13 +70,12 @@ function renderPagination(current, total) {
     return;
 }
 
-
 function loadPage(e) {
     let page = parseInt(e.getAttribute("data-page"));
     console.log("page: " + page);
     $.ajax({
         type: "GET",
-        url: path + "/load",
+        url: path + "/loadAjax",
         data: {
             pageCurrent: page
         },
@@ -108,4 +106,59 @@ function loadPage(e) {
         listButonPageElement.classList.remove("active");
     }
     renderPagination(page, total);
+}
+
+let selectedBrands = [];
+let selectedCates = [];
+
+function sort(e) {
+    e.classList.toggle("active");
+    let parDiv = e.closest(".filter-options");
+    let sortFiter = parDiv.getAttribute("data-filter-group");
+    let index = -1;
+
+    let datafilter = e.getAttribute("data-filter");
+    console.log(datafilter);
+    if (e.classList.contains("active")) {
+        if (sortFiter == "brand") selectedBrands.push(datafilter);
+        if (sortFiter == "category") selectedCates.push(datafilter);
+    } else {
+        if (sortFiter == "brand") {
+            index = selectedBrands.indexOf(datafilter);
+            selectedBrands.splice(index, 1);
+        }
+        if (sortFiter == "category") {
+            index = selectedCates.indexOf(datafilter);
+            selectedCates.splice(index, 1);
+        }
+    }
+    $.ajax({
+        type: "GET",
+        url: path + "/loadAjax",
+        traditional: true,
+        data: {
+            pageCurrent:1,
+            selectedBrands: selectedBrands,
+            selectedCates: selectedCates
+        },
+        dataType: "html",
+
+        success: function (data) {
+            console.log("Dữ liệu nhận được từ Server:");
+            console.log(data);
+            var row = document.getElementById("product-grid");
+
+            if (row) {
+                row.innerHTML = data;
+            } else {
+                console.log("Không tìm thấy thẻ div chứa sản phẩm!");
+            }
+
+        },
+        error: function (xhr, status, error) {
+            console.log("Lỗi: " + error);
+            console.log("Trạng thái: " + status);
+        }
+    });
+
 }
