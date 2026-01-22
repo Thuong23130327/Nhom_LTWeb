@@ -18,6 +18,7 @@ public class CartServlet extends HttpServlet {
         // 'id' ở đây trong ngữ cảnh giỏ hàng (cart.jsp) sẽ là variantId
         String id = request.getParameter("id");
         String qStr = request.getParameter("q");
+        String newVariantId = request.getParameter("newVariantId"); // Chọn biến thể
 
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
