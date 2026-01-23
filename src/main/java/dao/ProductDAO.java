@@ -16,33 +16,6 @@ public class ProductDAO {
 
     static Map<Integer, Product> data = new HashMap<>();
 
-    public List<Product> getPageProduct() {
-        List<Product> list = new ArrayList<>();
-
-        String sql = "SELECT * FROM products";
-
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
-                        rs.getString("sku"), rs.getString("name"), rs.getString("description"),
-                        rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"),
-                        rs.getDouble("display_market_price"), rs.getDouble("display_sell_price"), rs.getString("display_image_url"));
-                list.add(p);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
-    }
-
     public List<Product> getAllProduct() {
         List<Product> list = new ArrayList<>();
 
@@ -183,24 +156,10 @@ public class ProductDAO {
             for (int i = 1; i < 7; i++) {
                 ps.setString(i, "%" + textSearch + "%");
             }
-            ;
+
             rs = ps.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getInt("id"),
-                        rs.getInt("Brands_id"),
-                        rs.getInt("Categories_id"),
-                        rs.getString("sku"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getFloat("avg_rating"),
-                        rs.getInt("sold_count"),
-                        rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"),
-                        rs.getDouble("display_market_price"),
-                        rs.getDouble("display_sell_price"),
-                        rs.getString("display_image_url"));
-                list.add(p);
-
+                list.add(mapRStoProduct(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -283,7 +242,7 @@ public class ProductDAO {
             sql.append(" ORDER BY id ");
         } else if (selectedSort.equals("price-asc")) {
             sql.append(" ORDER BY  display_sell_price asc ");
-        }else if (selectedSort.equals("price-desc")) {
+        } else if (selectedSort.equals("price-desc")) {
             sql.append(" ORDER BY  display_sell_price desc ");
         }
         sql.append(" LIMIT ? OFFSET ?");
@@ -321,14 +280,22 @@ public class ProductDAO {
         return list;
     }
 
+    private Product mapRStoProduct(ResultSet rs) throws SQLException {
+        return new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
+                rs.getString("sku"), rs.getString("name"), rs.getString("description"),
+                rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
+                rs.getTimestamp("created_at"),
+                rs.getDouble("display_market_price"), rs.getDouble("display_sell_price"), rs.getString("display_image_url"));
+    }
+
     public List<Product> getPerPageAllProduct(int numPerPage, int page, String selectedSort) {
         List<Product> list = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT * FROM Products") ;
+        StringBuilder sql = new StringBuilder("SELECT * FROM Products");
         if (selectedSort.equals("default")) {
             sql.append(" ORDER BY id ");
         } else if (selectedSort.equals("price-asc")) {
             sql.append(" ORDER BY  display_sell_price asc ");
-        }else if (selectedSort.equals("price-desc")) {
+        } else if (selectedSort.equals("price-desc")) {
             sql.append(" ORDER BY  display_sell_price desc ");
         }
         sql.append(" LIMIT ? OFFSET ?");
@@ -392,23 +359,23 @@ public class ProductDAO {
     }
 
     public List<Product> filterProduct(String[] brandIds, String[] cateIds, int numPerPage, int page, String selectedSort) {
-
-
         List<Product> list = new ArrayList<>();
-        StringBuffer sql = new StringBuffer("SELECT * FROM Products where 1=1 ");
-        if (brandIds.length > 0) {
-            sql.append(" and Brands_id in (");
+        StringBuilder sql = new StringBuilder("SELECT p.* FROM Products p ");
+        sql.append("LEFT JOIN Brands b ON p.Brands_id = b.id ");
+        sql.append("LEFT JOIN Categories c ON p.Categories_id = c.id ");
+        sql.append("WHERE 1=1 ");
+        if (brandIds != null && brandIds.length > 0) {
+            sql.append(" AND p.Brands_id IN (");
             for (int i = 0; i < brandIds.length; i++) {
                 sql.append(brandIds[i]);
                 if (i < brandIds.length - 1) sql.append(",");
             }
             sql.append(") ");
         }
-
-        if (cateIds.length > 0) {
+        if (cateIds != null && cateIds.length > 0) {
             List<String> allCateIds = getListCategoryIdsIncludingChildren(cateIds);
             if (!allCateIds.isEmpty()) {
-                sql.append(" and Categories_id in (");
+                sql.append(" AND p.Categories_id IN (");
                 for (int i = 0; i < allCateIds.size(); i++) {
                     sql.append(allCateIds.get(i));
                     if (i < allCateIds.size() - 1) sql.append(",");
@@ -416,28 +383,101 @@ public class ProductDAO {
                 sql.append(") ");
             }
         }
-
-        if (selectedSort.equals("default")) {
-            sql.append(" ORDER BY id ");
+        if (selectedSort == null){
+            sql.append(" ORDER BY p.id DESC ");
         } else if (selectedSort.equals("price-asc")) {
-            sql.append(" ORDER BY  display_sell_price asc ");
-        }else if (selectedSort.equals("price-desc")) {
-            sql.append(" ORDER BY  display_sell_price desc ");
+            sql.append(" ORDER BY p.display_sell_price ASC ");
+        } else if (selectedSort.equals("price-desc")) {
+            sql.append(" ORDER BY p.display_sell_price DESC ");
+        }
+        if (page * numPerPage != 0)
+            sql.append(" LIMIT ? OFFSET ?");
+
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql.toString());
+
+            if (page * numPerPage != 0) {
+                ps.setInt(1, numPerPage);
+                ps.setInt(2, (page - 1) * numPerPage);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(mapRStoProduct(rs));
+            }
+        } catch (SQLException |
+                 ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Product> filterProductBackup(String[] brandIds, String[] cateIds, int numPerPage, int page, String selectedSort) {
+        List<Product> list = new ArrayList<>();
+        StringBuffer sql = new StringBuffer("SELECT * FROM Products p");
+        sql.append("LEFT JOIN Brands b ON p.Brands_id = b.id ");
+        sql.append("LEFT JOIN Categories c ON p.Categories_id = c.id ");
+        sql.append("WHERE 1=1 ");
+        if (brandIds != null && brandIds.length > 0) {
+            sql.append(" AND p.Brands_id IN (");
+            for (int i = 0; i < brandIds.length; i++) {
+                sql.append(brandIds[i]);
+                if (i < brandIds.length - 1) sql.append(",");
+            }
+            sql.append(") ");
+        }
+
+        if (cateIds != null && cateIds.length > 0) {
+            List<String> allCateIds = getListCategoryIdsIncludingChildren(cateIds);
+            if (!allCateIds.isEmpty()) {
+                sql.append(" and p.Categories_id in (");
+                for (int i = 0; i < allCateIds.size(); i++) {
+                    sql.append(allCateIds.get(i));
+                    if (i < allCateIds.size() - 1) sql.append(",");
+                }
+                sql.append(") ");
+            }
+        }
+//        boolean hasSearch = (search != null && !search.trim().isEmpty());
+//        if (hasSearch) {
+//            sql.append(" AND (");
+//            sql.append("p.name LIKE ? OR p.sku LIKE ? ");
+//            sql.append("OR p.display_sell_price LIKE ? ");
+//            sql.append("OR p.display_market_price LIKE ? ");
+//            sql.append("OR b.name LIKE ? ");
+//            sql.append("OR c.name LIKE ? ");
+//            sql.append(") ");
+//        }
+
+        if (selectedSort.equals("price-asc")) {
+            sql.append(" ORDER BY  p.display_sell_price asc ");
+        } else if (selectedSort.equals("price-desc")) {
+            sql.append(" ORDER BY  p.display_sell_price desc ");
+        } else {
+            sql.append(" ORDER BY  p.id");
         }
         sql.append(" LIMIT ? OFFSET ?");
         try {
             conn = DBConnect.getConnection();
             ps = conn.prepareStatement(String.valueOf(sql));
+
+//            if(hasSearch){
+//                search = "%"+search+"%";
+//                for (int i = 0; i < 7; i++) {
+//                    ps.setString(i, search);
+//                }
+//                ps.setInt(7, numPerPage);
+//                ps.setInt(8, (page - 1) * numPerPage);
+//            } else {
+//                ps.setInt(1, numPerPage);
+//                ps.setInt(2, (page - 1) * numPerPage);
+//            }
+
             ps.setInt(1, numPerPage);
             ps.setInt(2, (page - 1) * numPerPage);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
-                        rs.getString("sku"), rs.getString("name"), rs.getString("description"),
-                        rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"), rs.getDouble("display_market_price"), rs.getDouble("display_sell_price"),
-                        rs.getString("display_image_url"));
-                list.add(p);
+                list.add(mapRStoProduct(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -447,130 +487,4 @@ public class ProductDAO {
         return list;
     }
 }
-
-
-//    public List<Product> getProductsByCategory(int idCategory) {
-//        List<Product> list = new ArrayList<>();
-//        // Thêm 'price' và 'img' vào câu query
-//        String sql = """
-//                SELECT id, sku, name, description, avg_rating, sold_count,
-//                       brand_id, categories_id, is_active, created_at, price, img
-//                FROM Products
-//                WHERE categories_id = ?""";
-//        try (Connection conn = DBConnect.getConnection(); // Đảm bảo lấy connection ở đây
-//             PreparedStatement ps = conn.prepareStatement(sql)) {
-//
-//            ps.setInt(1, idCategory);
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                // Sử dụng constructor đầy đủ (bao gồm img và price)
-//                Product p = new Product(
-//                        rs.getInt("id"),
-//                        rs.getInt("brand_id"),
-//                        rs.getInt("categories_id"),
-//                        rs.getString("sku"),
-//                        rs.getString("name"),
-//                        rs.getString("description"),
-//                        rs.getFloat("avg_rating"),
-//                        rs.getInt("sold_count"),
-//                        rs.getBoolean("is_active"),
-//                        rs.getDouble("price"),
-//                        rs.getDate("created_at").toLocalDate()
-//                );
-//                list.add(p);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    }
-//
-//
-//    public void insert(List<Product> products) {
-//        get().useHandle(h -> {
-//            String sql = "INSERT INTO products (id, Brands_id, Categories_id, sku, NAME, description, avg_rating, sold_count, is_active, created_at) " +
-//                    "VALUES (:id, :Brands_id, :Categories_id, :sku, :NAME, :description, :avg_rating, :sold_count, :is_active, :created_at)";
-//
-//            PreparedBatch batch = h.prepareBatch(sql);
-//
-//            for (Product p : products) {
-//                batch.bind("id", p.getId())
-//                        .bind("Brands_id", p.getBrandId())
-//                        .bind("Categories_id", p.getCategoriesId())
-//                        .bind("sku", p.getSku())
-//                        .bind("NAME", p.getName())
-//                        .bind("description", p.getDescription())
-//                        .bind("avg_rating", p.getAvgRating())
-//                        .bind("sold_count", p.getSoldCount())
-//                        .bind("is_active", p.isActive() ? 1 : 0)
-//                        .bind("created_at", p.getCreatedAt())
-//                        .add();
-//            }
-//            batch.execute();
-//        });
-//    }
-//
-//    public List<ProductDTO> getProductDTOs() {
-//        return get().withHandle(handle -> {
-//            String sql = "SELECT p.id, " +
-//                    "p.NAME AS name, " + // Đổi NAME (DB) thành name (Java)
-//                    "pv.main_image_url AS mainImageUrl, " + // Đổi gạch dưới thành CamelCase
-//                    "pv.market_price AS marketPrice, " +
-//                    "pv.sell_price AS sellPrice, " +
-//                    "p.sold_count AS soldCount, " +
-//                    "p.avg_rating AS avgRating " +
-//                    "FROM products p " +
-//                    "LEFT JOIN productvariants pv ON p.id = pv.Products_id " +
-//                    "GROUP BY p.id";
-//
-//            return handle.createQuery(sql)
-//                    .mapToBean(ProductDTO.class)
-//                    .list();
-//        });
-//    }
-//
-//    public List<ProductDTO> getHeadphonesByPage(int limit, int offset) {
-//        return get().withHandle(handle -> {
-//            String sql = "SELECT p.id, " +
-//                    "p.NAME AS name, " +
-//                    "pv.main_image_url AS mainImageUrl, " +
-//                    "pv.market_price AS marketPrice, " +
-//                    "pv.sell_price AS sellPrice, " +
-//                    "p.sold_count AS soldCount, " +
-//                    "p.avg_rating AS avgRating " +
-//                    "FROM products p " +
-//                    "LEFT JOIN productvariants pv ON p.id = pv.Products_id " +
-//                    "WHERE p.NAME LIKE 'Tai nghe%' " +
-//                    "GROUP BY p.id " +
-//                    "LIMIT :limit OFFSET :offset";
-//
-//            return handle.createQuery(sql)
-//                    .bind("limit", limit)
-//                    .bind("offset", offset)
-//                    .mapToBean(ProductDTO.class)
-//                    .list();
-//        });
-//    }
-//
-//    public int countTotalHeadphones() {
-//        return get().withHandle(handle ->
-//                handle.createQuery("SELECT COUNT(DISTINCT id) FROM products WHERE NAME LIKE 'Tai nghe%'")
-//                        .mapTo(Integer.class).one()
-//        );
-//    }
-//
-//    public static void main(String[] args) {
-//        ProductDAO dao = new ProductDAO();
-//        List<Product> products = new ArrayList<>();
-//        Product p = new Product();
-//        p.setId(170);
-//        p.setName("Sp_001");
-//        p.setBrandId(1);
-//        p.setCategoriesId(1);
-//        p.setSku("SN-SN-99");
-//        p.setCreatedAt(java.time.LocalDate.now());
-//        products.add(p);
-//        dao.insert(products);
-//        System.out.println("Insert thành công!");
-//    }
 

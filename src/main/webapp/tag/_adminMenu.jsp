@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
+<script>
+    const path = "${pageContext.request.contextPath}";
+</script>
 <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar shadow-sm">
         <a class="a-nodecor logo-container" href="index.jsp">
             <div class="logo-wave">
@@ -15,50 +17,55 @@
         <ul class="nav flex-column">
 
             <li class="nav-item">
-                <a href="#" class="nav-link active">
+                <a href="#" class="nav-link ${activePage == "admin"? "active" : ""}">
                     <i class="fas fa-home me-2"></i>
                     Tổng quan
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="${AuraSound}/admin/product-manager" class="nav-link">
+                <a href="${AuraSound}/admin/mail" class="nav-link ${activePage == "contact"? "active" : ""}">
+                    <i class="fas fa-envelope me-2"></i>
+                    Liên hệ
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="${AuraSound}/admin/product-manager" class="nav-link ${activePage == "product"? "active" : ""}">
                     <i class="fas fa-box me-2"></i>
                     Quản lý Sản phẩm
-
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link ${activePage == "order"? "active" : ""}">
                     <i class="fas fa-shopping-cart me-2"></i>
-                    Quản lý đơn hàng
+                    Quản lý Đơn hàng
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="${AuraSound}/admin/user-manager" class="nav-link">
+                <a href="${AuraSound}/admin/user-manager" class="nav-link ${activePage == "acc"? "active" : ""}">
                     <i class="fas fa-users me-2"></i>
                     Quản lý Tài Khoản
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="${AuraSound}/admin/voucher.jsp" class="nav-link">
+                <a href="${AuraSound}/admin/voucher.jsp" class="nav-link ${activePage == "vou"? "active" : ""}">
                     <i class="fa-solid fa-comment-dots me-2"></i>
                     Quản lý Voucher
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link ${activePage == "custom"? "active" : ""}">
                     <i class="fa-solid fa-list me-2"></i>
                     Quản lý Giao diện
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="${AuraSound}/index.jsp" class="nav-link">
+                <a href="${AuraSound}/index.jsp" class="nav-link ">
                     <i class="fa-solid fa-earth-asia me-2"></i>
                     Xem website
                 </a>

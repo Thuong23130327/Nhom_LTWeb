@@ -3,8 +3,8 @@
 
 <%
     request.setAttribute("pageTitle", "QUẢN LÝ SẢN PHẨM - AuraSound");
+    request.setAttribute("activePage", "product");
 %>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -21,11 +21,9 @@
 
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleAdmin.css">
-    <%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleResponseMail.css">--%>
 </head>
 
 <body>
-
 
 <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
     <i class="bi bi-caret-up-fill"></i>
@@ -49,8 +47,8 @@
                             </div>
                         </form>
                         <c:forEach items="${categoryList}" var="cate">
-                            <a class="a-nodecor ${activeId == cate.id ? 'active':''}" href="${AuraSound}/admin/product-manager?categoryId=${cate.id}">
-                                <div class="contact">${cate.name}</div>
+                            <a class="a-nodecor " href="${AuraSound}/admin/product-manager?categoryId=${cate.id}">
+                                <div class="contact ${activeId == cate.id ? 'active':''}">${cate.name}</div>
                             </a>
                         </c:forEach>
                     </div>
@@ -60,13 +58,14 @@
 
             </nav>
 
-
             <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"><i class="fas fa-box"></i> Quản lý Sản phẩm</h1>
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-2 border-bottom">
+                <h2 class="h2 section-title text-primary">
+                    Quản lý Tài Khoản
+                </h2>
             </div>
 
-            <p class="text-muted">Thêm, sửa, xóa sản phẩm và quản lý tồn kho.</p>
+            <p class="text-muted">Sửa, xóa sản phẩm và quản lý xuất nhập hàng.</p>
             <div class="card shadow-sm">
                 <div class="card-body">
                     <div class="table-scroll-wrapper">

@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/tag/_taglibs.jsp" %>
-
+<script>
+    const path = "${pageContext.request.contextPath}";
+</script>
 <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
     <i class="bi bi-caret-up-fill"></i>
 </button>
@@ -36,94 +38,109 @@
             </a>
         </div>
         <div class="nav-right">
-            <form action="${AuraSound}/search" method="post">
-                <div class="searchBar">
-                    <input name="search" type="text" placeholder="Tìm kiếm" value="${search}">
-                    <button type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
+            <div class="nav-right">
+                <form class="formSearch" action="${AuraSound}/search" method="get" style="position: relative;">
+                    <div class="searchBar">
+                        <input id="search-input"
+                               oninput="searchAjax(this)"
+                               autocomplete="off"
+                               name="search"
+                               type="text"
+                               placeholder="Tìm kiếm"
+                               value="${not empty search ? search : param.search}">
+
+                        <button type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+
+                    </div>
+                    <div id="result-search" class="result-search">
+                        <span>Ket qua tim kiem</span>
+
+                    </div>
+                </form>
+
+
+                <a class="a-nodecor " href="${AuraSound}/index.jsp">
+                    <div class="home ${activePage =='home'?'active':''}">Trang chủ</div>
+                </a>
+                <a class="a-nodecor" href="${AuraSound}/contact">
+                    <div class="contact  ${activePage =='contact'?'active':''}">Liên hệ</div>
+                </a>
+
+                <%--Menu dropdown--%>
+                <div class="nav-item-dropdown aura-dropdown-container">
+                    <a class="a-nodecor"
+                       href="${AuraSound}/product">
+                        <div class="store ${activePage =='product'?'active':''} ">
+                            Sản phẩm <i class="bi bi-chevron-compact-down"></i>
+                        </div>
+                    </a>
+
+                    <ul class="aura-menu-parent">
+                        <c:forEach items="${parentList}" var="par">
+                            <li class="aura-menu-item has-child"><a href="${AuraSound}/product?cateId=${par.id}"
+                                                                    class="parent-link">
+                                    ${par.name}
+                                <i class="bi bi-chevron-right ms-auto"></i> </a>
+
+                                <ul class="aura-menu-child"><c:forEach items="${childList}" var="child">
+                                    <c:if test="${child.parentID == par.id}">
+                                        <li>
+                                            <a href="${AuraSound}/product?cateId=${child.id}">${child.name}</a>
+                                        </li>
+                                    </c:if>
+                                </c:forEach>
+                                </ul>
+                            </li>
+                        </c:forEach>
+                    </ul>
                 </div>
-            </form>
 
-            <a class="a-nodecor " href="${AuraSound}/index.jsp">
-                <div class="home ${activePage =='home'?'active':''}">Trang chủ</div>
-            </a>
-            <a class="a-nodecor" href="${AuraSound}/contact">
-                <div class="contact  ${activePage =='contact'?'active':''}">Liên hệ</div>
-            </a>
 
-            <%--Menu dropdown--%>
-            <div class="nav-item-dropdown aura-dropdown-container">
-                <a class="a-nodecor"
-                   href="${AuraSound}/product">
-                    <div class="store ${activePage =='product'?'active':''} ">
-                        Sản phẩm <i class="bi bi-chevron-compact-down"></i>
+                <a class="a-nodecor " href="${AuraSound}/cart.jsp">
+                    <div class="cart ${activePage =='cart'?'active':''}">
+                        <i class="bi bi-cart"></i> Giỏ hàng
+                        <span id="cart-badge" class="badge bg-danger rounded-pill"
+                              style="font-size: 0.7rem; vertical-align: top; ${sessionScope.cart == null ? 'display:none' : ''}">
+                            ${sessionScope.cart != null ? sessionScope.cart.totalQuantity : 0}
+                        </span>
                     </div>
                 </a>
 
-                <ul class="aura-menu-parent">
-                    <c:forEach items="${parentList}" var="par">
-                        <li class="aura-menu-item has-child"><a href="${AuraSound}/product?cateId=${par.id}"
-                                                                class="parent-link">
-                                ${par.name}
-                            <i class="bi bi-chevron-right ms-auto"></i> </a>
+                <div class="nav-account">
 
-                            <ul class="aura-menu-child"><c:forEach items="${childList}" var="child">
-                                <c:if test="${child.parentID == par.id}">
-                                    <li>
-                                        <a href="${AuraSound}/product?cateId=${child.id}">${child.name}</a>
-                                    </li>
-                                </c:if>
-                            </c:forEach>
-                            </ul>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </div>
-
-
-            <a class="a-nodecor " href="${AuraSound}/cart.jsp">
-                <div class="cart ${activePage =='cart'?'active':''}">
-                    <i class="bi bi-cart"></i> Giỏ hàng
-                    <span id="cart-badge" class="badge bg-danger rounded-pill"
-                          style="font-size: 0.7rem; vertical-align: top; ${sessionScope.cart == null ? 'display:none' : ''}">
-                        ${sessionScope.cart != null ? sessionScope.cart.totalQuantity : 0}
-                    </span>
-                </div>
-            </a>
-
-            <div class="nav-account">
-
-                <c:if test="${sessionScope.auth != null}">
-                    <div class="account-avatar">
-                        <a href="${AuraSound}/profileM/profile.jsp" class="avatar-link">
-                            <img src="${sessionScope.loggedInUser.avatarUrl}" alt="Avatar">
-                        </a>
-                        <div class="account-menu">
-                            <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Xin
-                                chào ${sessionScope.auth.fullName}</a>
-                            <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Thông tin tài
-                                khoản</a>
-                            <a class="account-menu-item" href="${AuraSound}/logout" id="navLogout">Đăng xuất</a>
+                    <c:if test="${sessionScope.auth != null}">
+                        <div class="account-avatar">
+                            <a href="${AuraSound}/profileM/profile.jsp" class="avatar-link">
+                                <img src="${sessionScope.loggedInUser.avatarUrl}" alt="Avatar">
+                            </a>
+                            <div class="account-menu">
+                                <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Xin
+                                    chào ${sessionScope.auth.fullName}</a>
+                                <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Thông tin tài
+                                    khoản</a>
+                                <a class="account-menu-item" href="${AuraSound}/logout" id="navLogout">Đăng xuất</a>
+                            </div>
                         </div>
-                    </div>
-                </c:if>
+                    </c:if>
 
-                <c:if test="${sessionScope.auth == null}">
-                    <a class="a-nodecor login-link" href="${AuraSound}/login">
-                        <div class="login">Đăng nhập</div>
-                    </a>
-                </c:if>
+                    <c:if test="${sessionScope.auth == null}">
+                        <a class="a-nodecor login-link" href="${AuraSound}/login">
+                            <div class="login">Đăng nhập</div>
+                        </a>
+                    </c:if>
 
-                <c:if test="${sessionScope.author != null}">
-                    <a class="a-nodecor login-link" href="${AuraSound}/admin/admin.jsp">
-                        <div class="login">Admin - Quản Lý</div>
-                    </a>
-                </c:if>
+                    <c:if test="${sessionScope.author != null}">
+                        <a class="a-nodecor login-link" href="${AuraSound}/admin/admin.jsp">
+                            <div class="login">Admin - Quản Lý</div>
+                        </a>
+                    </c:if>
 
+                </div>
+
+                <div id="hamburger-icon"><i class="bi bi-list"></i></div>
             </div>
-
-            <div id="hamburger-icon"><i class="bi bi-list"></i></div>
         </div>
     </div>
 </nav>

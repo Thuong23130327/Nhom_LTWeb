@@ -9,7 +9,7 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: var(--main-bg);
 }
 
@@ -81,6 +81,7 @@ main {
 }
 
 .h2 {
+    font-family: Arial, sans-serif;
     font-weight: 700;
     color: #333;
     padding-bottom: 10px;
@@ -119,22 +120,23 @@ main {
     border: 2px solid white;
 }
 
-/* Bar Chart */
-/* .chart-container {
-    height: 300px;
-    display: flex;
-    align-items: flex-end;
-    padding: 20px 0;
-    border-bottom: 2px solid #eee;
+.info-label {
+    font-weight: 600;
+    color: #555;
+    min-width: 120px;
+    display: inline-block;
 }
 
-.bar-chart {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-} */
+.info-value {
+    color: #000;
+}
+
+.section-title {
+    border-left: 4px solid #0d6efd;
+    padding-left: 15px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
 
 .chart-container {
     height: 300px;
@@ -216,6 +218,7 @@ main {
 .nav-left a {
     font-size: 15px;
 }
+
 .nav-left a.active {
     background: var(--theme-gradient-icon);
     color: var(--white);
@@ -239,4 +242,47 @@ th, tr {
         display: none;
     }
 }
+
+td button {
+    min-width: 70px;
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    padding: 4px 8px;
+    background-color: rgba(0, 123, 255, 0.6);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-new, .btn-replied {
+    border-radius: 5px;
+    border: none;
+    text-decoration: none;
+    padding: 4px 8px;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-new {
+    background-color: rgba(255, 106, 106, 0.8);
+}
+
+
+.btn-replied:hover {
+    background-color: rgba(0, 123, 255, 0.9);
+    color: white;
+    scale: calc(1.1);
+}
+.btn-new:hover {
+    background-color: rgb(255, 106, 106);
+    color: white;
+    scale: calc(1.1);
+}
+
+td button:hover {
+    background-color: rgba(0, 123, 255, 0.9);
+    color: white;
+    scale: calc(1.1);
+}
+
 

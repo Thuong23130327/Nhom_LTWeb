@@ -203,8 +203,43 @@ document.addEventListener("DOMContentLoaded", function () {
         startTimer();
     }
 });
-
-// Hàm global backTop (Giữ nguyên bên ngoài DOMContentLoaded)
 function backTop() {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
+//Luu thgian ngung go search
+var searchTimeout = null;
+
+function searchAjax(inputElement) {
+    let keyword = inputElement.value.trim();
+    let dropdown = document.getElementById("result-search");
+
+    if (searchTimeout) clearTimeout(searchTimeout);
+    console.log("Đang gửi AJAX tới: " + path + "/searchAjax?search=" + keyword);
+    searchTimeout = setTimeout(function() {
+        $.ajax({
+            url: path + "/searchAjax", // Đường dẫn Servlet của bạn
+            type: "GET",
+            data: {
+                search: keyword
+            },
+            success: function(data) {
+                    dropdown.innerHTML = data; // Nhét HTML vào hộp
+                    dropdown.style.display = "block"; // Hiện hộp lên
+
+            },
+            error: function() {
+                console.log("Lỗi tìm kiếm");
+            }
+        });
+    }, 300); // Đợi 300ms sau khi ngừng gõ mới tìm
+}
+
+// Ẩn hộp gợi ý khi click ra ngoài
+document.addEventListener('click', function(e) {
+    let dropdown = document.getElementById("result-search");
+    let searchInput = document.getElementById("search-input");
+
+    if (dropdown && !dropdown.contains(e.target) && e.target !== searchInput) {
+        dropdown.style.display = 'none';
+    }
+});
