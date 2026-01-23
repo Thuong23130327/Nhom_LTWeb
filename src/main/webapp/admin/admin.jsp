@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleAdmin.css">
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
+    <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 </head>
 
@@ -51,7 +52,7 @@
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <h5 class="card-title">Tổng sản phẩm</h5>
-                            <p class="h3 fw-bold">165</p>
+                            <p class="h3 fw-bold">${stats.totalProducts}</p>
                         </div>
                         <i class="fas fa-box fa-3x opacity-50"></i>
                     </div>
@@ -62,7 +63,7 @@
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <h5 class="card-title">Tổng đơn hàng</h5>
-                            <p class="h3 fw-bold">2,240</p>
+                            <p class="h3 fw-bold">${stats.totalOrders}</p>
                         </div>
                         <i class="fas fa-shopping-cart fa-3x opacity-50"></i>
                     </div>
@@ -73,7 +74,7 @@
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <h5 class="card-title">Đơn chờ xử lý</h5>
-                            <p class="h3 fw-bold">5</p>
+                            <p class="h3 fw-bold">${stats.ordersPending}</p>
                         </div>
                         <i class="fas fa-exclamation-triangle fa-3x opacity-50"></i>
                     </div>
@@ -84,7 +85,7 @@
                     <div class="card-body d-flex justify-content-between align-items-center">
                         <div>
                             <h5 class="card-title">Khách hàng</h5>
-                            <p class="h3 fw-bold">123</p>
+                            <p class="h3 fw-bold">${stats.totalCustomer}</p>
                         </div>
                         <i class="fas fa-users fa-3x opacity-50"></i>
                     </div>
@@ -99,13 +100,14 @@
                         <h5 class="mb-0 fw-bold text-dark">Thống kê doanh thu</h5>
                     </div>
                     <div class="card-body">
+
                         <div class="row mb-4">
                             <div class="col-lg-3 col-md-6 mb-3">
                                 <div class="card stat-card bg-primary text-white">
-                                    <div class="card-body d-flex align-items-center">
+                                    <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
                                             <h5 class="card-title">Tổng doanh thu</h5>
-                                            <p class="h4 fw-bold">100,133,090 VNĐ</p>
+                                            <p class="h3 fw-bold"><fmt:formatNumber value="${stats.totalRevenue}" type="number" maxFractionDigits="0" /> VNĐ</p>
                                         </div>
                                     </div>
                                 </div>
@@ -114,8 +116,8 @@
                                 <div class="card stat-card bg-success text-white">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h5 class="card-title">Năm 2025</h5>
-                                            <p class="h4 fw-bold">40,956,223 VNĐ</p>
+                                            <h5 class="card-title">Năm ${currentYear}</h5>
+                                            <p class="h3 fw-bold"><fmt:formatNumber value="${stats.yearRevenue}" type="number" maxFractionDigits="0" /> VNĐ</p>
                                         </div>
                                     </div>
                                 </div>
@@ -124,8 +126,8 @@
                                 <div class="card stat-card bg-info text-white">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h5 class="card-title">T12/2025</h5>
-                                            <p class="h4 fw-bold">2,336,284 VNĐ</p>
+                                            <h5 class="card-title">T${currentMonth}/${currentYear}</h5>
+                                            <p class="h3 fw-bold"><fmt:formatNumber value="${stats.monthRevenue}" type="number" maxFractionDigits="0" /> VNĐ</p>
                                         </div>
                                     </div>
                                 </div>
@@ -135,102 +137,7 @@
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
                                             <h5 class="card-title">Hôm nay</h5>
-                                            <p class="h4 fw-bold">0 VNĐ</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="chart-container">
-                            <div class="bar-chart">
-                                <div class="bar" style="height: 50%;" data-label="T6"></div>
-                                <div class="bar" style="height: 70%;" data-label="T7"></div>
-                                <div class="bar" style="height: 60%;" data-label="T8"></div>
-                                <div class="bar" style="height: 90%;" data-label="T9"></div>
-                                <div class="bar" style="height: 80%;" data-label="T10"></div>
-                                <div class="bar" style="height: 95%;" data-label="T11"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="mb-0 fw-bold text-dark">Hoạt động gần đây</h5>
-                    </div>
-                    <div class="card-body p-0">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item py-3 border-0 border-bottom">
-                                <i class="fas fa-shopping-cart text-success me-2"></i> <strong>Đơn hàng mới</strong>
-                                #1209 vừa được tạo.
-                            </li>
-                            <li class="list-group-item py-3 border-0 border-bottom">
-                                <i class="fas fa-user-plus text-primary me-2"></i> <strong>Nguyễn Hoài Thương</strong>
-                                đăng ký tài khoản.
-                            </li>
-                            <li class="list-group-item py-3 border-0 border-bottom">
-                                <i class="fas fa-box text-warning me-2"></i> <strong>Sản phẩm X</strong> sắp hết hàng
-                                (SL: 10).
-                            </li>
-                            <li class="list-group-item py-3 border-0 border-bottom">
-                                <i class="fas fa-envelope text-info me-2"></i> <strong>5</strong> tin nhắn hỗ trợ mới.
-                            </li>
-                            <li class="list-group-item py-3 border-0">
-                                <i class="fas fa-check-circle text-success me-2"></i> <strong>Đơn hàng #1199</strong> đã
-                                giao thành công.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 mb-4">
-                <div class="card shadow-sm h-100">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="mb-0 fw-bold text-dark">Thống kê doanh thu</h5>
-                    </div>
-                    <div class="card-body">
-
-                        <div class="row mb-4">
-                            <div class="col-lg-3 col-md-6 mb-3">
-                                <div class="card stat-card bg-primary text-white">
-                                    <div class="card-body d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h5 class="card-title">Tổng doanh thu</h5>
-                                            <p class="h3 fw-bold">100,133,090 VNĐ</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 mb-3">
-                                <div class="card stat-card bg-success text-white">
-                                    <div class="card-body d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h5 class="card-title">Năm 2025</h5>
-                                            <p class="h3 fw-bold">40,956,223 VNĐ</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 mb-3">
-                                <div class="card stat-card bg-info text-white">
-                                    <div class="card-body d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h5 class="card-title">T12/2025</h5>
-                                            <p class="h3 fw-bold">2,336,284 VNĐ</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 mb-3">
-                                <div class="card stat-card bg-danger text-white">
-                                    <div class="card-body d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h5 class="card-title">Hôm nay</h5>
-                                            <p class="h3 fw-bold">0 VNĐ</p>
+                                            <p class="h3 fw-bold"><fmt:formatNumber value="${stats.dayRevenue}" type="number" maxFractionDigits="0" /> VNĐ</p>
                                         </div>
                                     </div>
                                 </div>
