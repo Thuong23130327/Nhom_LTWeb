@@ -3,8 +3,10 @@ package controller.admin;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import model.Category;
 import model.Product;
 import service.AdminProductService;
+import service.CategoryService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -44,13 +46,23 @@ public class AdminProductServlet extends HttpServlet {
             productList = adminProductService.getProductByCategoryId(categoryId);
         } else {
             productList = adminProductService.getAllProduct();
-
+        }
+        CategoryService categoryService =null;
+        List<Category> categoryList = new ArrayList<>();
+        try {
+            categoryService= new CategoryService();
+            categoryList = categoryService.getAllCategories();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         request.setAttribute("search", search);
         request.setAttribute("activeId", categoryId);
         request.setAttribute("productList", productList);
         request.setAttribute("totalStockMap", stockMap);
         request.setAttribute("varCountMap", varCountMap);
+        request.setAttribute("listOption", categoryList);
         request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 }

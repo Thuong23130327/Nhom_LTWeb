@@ -3,6 +3,7 @@
 
 <%
     request.setAttribute("pageTitle", "QUẢN LÝ SẢN PHẨM - AuraSound");
+    request.setAttribute("activePage", "order");
 %>
 
 <!DOCTYPE html>

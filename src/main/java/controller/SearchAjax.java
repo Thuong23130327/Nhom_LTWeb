@@ -11,62 +11,43 @@ import service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 @WebServlet(name = "SearchAjax", value = "/searchAjax")
 public class SearchAjax extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
+        NumberFormat vnFormatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         String search = request.getParameter("search");
         try {
             ProductService productService = new ProductService();
-            List<Product> list = productService.searchProductByText(search);
-
-            PrintWriter out = response.getWriter();
-            for (Product p : list) {
-                out.print("<a productCount href=\"detail?pid=" + p.getId() + "\" class=\"product-card\">\n" +
-                        "                    <c:if test=\"" + p.getDiscountPercent() +
-                        "> 0" +
-                        "                        <div class=\"product-badge discount\">Giảm " +
-                        p.getDiscountPercent() +
-                        "%</div>\n" +
-                        "                    </c:if>\n" +
-                        "\n" +
-                        "                    <img src=\"" +
-                        p.getImg() +
-                        "\" alt=\"" +
-                        p.getName() +
-                        "\" onerror=\"this.src='https://placehold.co/300x300?text=No+Image'\">\n" +
-                        "\n" +
-                        "                    <div class=\"product-card-info\">\n" +
-                        "                        <h4>" + p.getName() + "</h4>\n" +
-                        "\n" +
-                        "                        <div class=\"price-block\">\n" +
-                        "                            <div class=\"new-price\"><fmt:formatNumber value=\"" + p.getSellPrice() + "\" pattern=\"#,###\"/> đ</div>\n" +
-                        "\n" +
-                        "                            <c:if test=\"${p.discountPercent > 0}\">\n" +
-                        "                                <div class=\"old-price\"><fmt:formatNumber value=\"" + p.getOldPrice() + "\" pattern=\"#,###\"/> đ</div>\n" +
-                        "                            </c:if>\n" +
-                        "\n" +
-                        "                        </div>\n" +
-                        "\n" +
-                        "                        <div class=\"product-bottom-row\">\n" +
-                        "                            <div class=\"rating\">\n" +
-                        "                                <i class=\"bi bi-star-fill\"></i>\n" +
-                        "                                <span>" + p.getAvgRating() + "</span>\n" +
-                        "                            </div>\n" +
-                        "                            <div class=\"favorite\">\n" +
-                        "                                <i class=\"bi bi-heart\"></i>\n" +
-                        "                                <span>Yêu thích</span>\n" +
-                        "                            </div>\n" +
-                        "                        </div>\n" +
-                        "                    </div>\n" +
-                        "                </a>");
+            List<Product> productList = productService.searchProductByText(search);
+        PrintWriter out = response.getWriter();
+            if (productList == null || productList.isEmpty()) {
+                out.println("<a href='product' class='search-item'>");
+                out.println("   <div class='info'>");
+                out.println("       <div class='name'> Không tìm thấy sản phẩm nào </div>");
+                out.println("   </div>");
+                out.println("</a>");
+                return;
+            }
+            // Trong Servlet, vòng lặp tạo HTML trả về
+            for (Product p : productList) {
+                out.println("<a href='detail?pid=" + p.getId() + "' class='search-item'>");
+                out.println("   <img src='" + p.getImg() + "' alt='" + p.getName() + "'>");
+                out.println("   <div class='info'>");
+                out.println("       <div class='name'>" + p.getName() + "</div>");
+                out.println("       <div class='price'>" + vnFormatter.format(p.getSellPrice()) + " đ</div>");
+                out.println("   </div>");
+                out.println("</a>");
             }
 
-            request.setAttribute("productList", list);
+            request.setAttribute("productList", productList);
             request.setAttribute("search", search);
-//            Chung voi trang headphones (hien thi sp)
-            request.getRequestDispatcher("/headphones.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

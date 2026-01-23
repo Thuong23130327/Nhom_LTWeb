@@ -3,6 +3,7 @@ package service;
 import dao.ProductDAO;
 import model.Product;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ProductService {
     }
 
     public List<Product> filterProduct(String[] brandIds, String[] cateIds, int numPerPage, int page, String selectedSort) {
-        if (selectedSort== null) selectedSort = "default";
+        if (selectedSort == null) selectedSort = "default";
         return productDao.filterProduct(brandIds, cateIds, numPerPage, page, selectedSort);
     }
 
@@ -62,5 +63,9 @@ public class ProductService {
 
     public boolean deleteProduct(String pid) {
         return productDao.deleteProduct(pid);
+    }
+
+    public int totalProduct(String[] selectedBrands, String[] selectedCates) {
+        return productDao.filterProduct(selectedBrands, selectedCates, 0, 0, null).size();
     }
 }
