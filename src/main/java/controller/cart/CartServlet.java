@@ -7,8 +7,10 @@ import jakarta.servlet.annotation.*;
 import model.*;
 import service.CartService;
 import service.ProductService;
+import service.ProductVariantService;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "CartServlet", value = "/cart")
 public class CartServlet extends HttpServlet {
@@ -26,30 +28,65 @@ public class CartServlet extends HttpServlet {
             session.setAttribute("cart", cart);
         }
 
+        response.setCharacterEncoding("UTF-8");
+
         try {
             // Khởi tạo Service
             CartService cartService = new CartService();
+            ProductVariantService variantService = new ProductVariantService();
 
             // Xử lý AJAX Update Variant
-            if ("updateVariant".equals(action) && id != null && newVariantId != null) {
-                int oldVid = Integer.parseInt(id);
+            if ("updateVariant".equals(action) && id != null) {
+                String newVariantIdStr = request.getParameter("newVariantId");
 
-                // Gọi method xử lý logic nằm trong Service
-                boolean isUpdated = cartService.updateVariant(cart, oldVid, newVariantId);
+                if (newVariantIdStr != null) {
+                    int oldVid = Integer.parseInt(id);
+                    int newVid = Integer.parseInt(newVariantIdStr); // Tùy logic CartService của bạn nhận String hay int
 
-                if (isUpdated) {
-                    response.setContentType("text/plain");
-                    response.getWriter().write("success");
-                    return; // Ngắt luồng, không redirect
+                    // Gọi Service cập nhật giỏ hàng
+                    boolean isUpdated = cartService.updateVariant(cart, oldVid, newVariantIdStr);
+
+                    if (isUpdated) {
+                        // Cập nhật lại session
+                        session.setAttribute("cart", cart);
+
+                        // Lấy dữ liệu biến thể từ db -> Client
+                        ProductVariant newVar = variantService.getProductVariant(newVariantIdStr);
+
+                        // Phản hồi JSON
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        PrintWriter out = response.getWriter();
+
+                        if (newVar != null) {
+                            StringBuilder json = new StringBuilder();
+                            json.append("{");
+                            json.append("\"status\": \"success\",");
+                            json.append("\"newId\": ").append(newVar.getId()).append(",");
+                            json.append("\"img\": \"").append(newVar.getMainImageUrl()).append("\",");
+                            json.append("\"price\": ").append(newVar.getSellPrice()).append(",");
+                            json.append("\"name\": \"").append(newVar.getColorName()).append("\",");
+                            json.append("\"totalOrder\": ").append(cart.getTotalPrice());
+                            json.append("}");
+
+                            out.print(json.toString());
+                        } else {
+                            out.print("{\"status\": \"error\", \"message\": \"Không tìm thấy biến thể\"}");
+                        }
+                        out.flush();
+                        return;
+                    }
                 }
             }
 
             if (id != null) {
                 int variantId = Integer.parseInt(id);
+                boolean isSuccess = false;
 
                 // Xóa sản phẩm
                 if ("delete".equals(action)) {
                     cart.deleteItem(variantId);
+                    isSuccess = true;
                 }
 
                 // Cộng/Trừ số lượng (Khi ấn + hoặc - trong cart.jsp)
@@ -62,6 +99,7 @@ public class CartServlet extends HttpServlet {
                     if (existingItem != null) {
                         // Cập nhật số lượng dựa trên phương thức ở Cart
                         cart.addOrUpdateItem(existingItem.getName(), existingItem.getProductVariant(), qty);
+                        isSuccess = true;
                     } else {
                         Product p = cartService.getProductById(id);
                         if (p != null) {
@@ -77,13 +115,50 @@ public class CartServlet extends HttpServlet {
                     CartItem item = cart.getItems().get(variantId);
                     if (item != null) {
                         item.setChecked(!item.isChecked());
+                        isSuccess = true;
                     }
                 }
+
+                session.setAttribute("cart", cart);
+
+                // Phản hồi JSON
+                if ("ajax".equals(newVariantId)) {
+                    response.setContentType("application/json");
+                    PrintWriter out = response.getWriter();
+
+                    // Lấy thông tin item hiện tại
+                    CartItem currentItem = cart.getItems().get(variantId);
+                    int currentItemQty = (currentItem != null) ? currentItem.getQuantity() : 0;
+
+                    // Tính tổng tiền
+                    double totalPrice = cart.getTotalPrice();
+                    int totalQty = cart.getTotalQuantity();
+
+                    StringBuilder json = new StringBuilder();
+                    json.append("{");
+                    json.append("\"status\": \"success\",");
+                    json.append("\"action\": \"").append(action).append("\",");
+                    json.append("\"itemId\": ").append(variantId).append(",");
+                    json.append("\"itemQty\": ").append(currentItemQty).append(",");
+                    json.append("\"cartTotal\": ").append(totalPrice).append(",");
+                    json.append("\"cartQty\": ").append(totalQty);
+                    json.append("}");
+
+                    out.print(json.toString());
+                    out.flush();
+                    return;
+                }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
+            // Trả về lỗi
+            if ("ajax".equals(newVariantId)) {
+                response.setStatus(500);
+                response.getWriter().write("{\"status\": \"error\"}");
+                return;
+            }
         }
-
         response.sendRedirect("cart.jsp");
     }
 
