@@ -7,6 +7,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Product" %>
 <%@ page import="model.ProductVariant" %>
+<%@ page import="service.ProductVariantService" %>
 
 
 <%
@@ -17,6 +18,8 @@
 
     request.setAttribute("pageTitle", "Giỏ hàng - AuraSound");
     request.setAttribute("activePage", "cart");
+
+    ProductVariantService variantService = new ProductVariantService();
 %>
 
 <head>
@@ -70,18 +73,17 @@
                             <div class="variant-dropdown">
                                 <%
                                     try {
-                                        // Khởi tạo Service
-                                        service.CartService cartServiceJsp = new service.CartService();
+
 
                                         // Lấy productId
                                         int pId = item.getProductVariant().getProductId();
 
                                         // Gọi hàm lấy danh sách biến thể của sản phẩm đang chọn mà có trong cart
-                                        java.util.List<model.ProductVariant> options = cartServiceJsp.getVariantsByProductId(pId);
+                                        List<ProductVariant> options = variantService.getVariantsByProductId(String.valueOf(pId));
 
                                         if(options != null) {
-                                            for (model.ProductVariant v : options) {
-                                                if (v.getId() != vId) { // Không hiện lại biến thể đang chọn
+                                            for (ProductVariant v : options) {
+                                                if (v.getId() != vId) {
                                 %>
                                 <div class="variant-option"
                                      onclick="selectColor(this, '<%= vId %>', '<%= v.getId() %>')">
