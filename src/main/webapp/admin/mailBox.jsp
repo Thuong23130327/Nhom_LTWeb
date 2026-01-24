@@ -16,7 +16,7 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
@@ -29,24 +29,6 @@
         <jsp:include page="/tag/_adminMenu.jsp"/>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-            <nav>
-                <div class="nav-container content">
-                    <div class="nav-left" style="cursor: pointer">
-                        <a class="a-nodecor">
-                            <div class="contact" onclick="sortContact(this)" data-sort="new">Mới nhất</div>
-                        </a>
-                        <a class="a-nodecor">
-                            <div class="contact" onclick="sortContact(this)" data-sort="old">Cũ nhất</div>
-                        </a> <a class="a-nodecor">
-                        <div class="contact" onclick="sortContact(this)" data-sort="non">Chưa phản hồi</div>
-                    </a> <a class="a-nodecor">
-                        <div class="contact" onclick="sortContact(this)" data-sort="rep">Đã phản hồi</div>
-                    </a>
-                    </div>
-                    <div id="hamburger-icon"><i class="bi bi-list"></i></div>
-                </div>
-            </nav>
             <div class="mail-content-center-wrapper mx-auto">
 
                 <div
@@ -59,7 +41,7 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <div class="table-scroll-wrapper">
-                            <table class="table table-striped table-sm">
+                            <table id="contactTable" class="table table-striped table-sm">
                                 <thead>
                                 <tr>
                                     <th>Stt</th>
@@ -116,6 +98,44 @@
             </div>
         </main>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+
+        <script src="${AuraSound}/assets/js/scriptAdmin.js"></script>
+        <script>
+            $(document).ready(function () {
+                var table = $('#contactTable').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "language": {
+                        "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json"
+                    }
+                });
+
+                $('#contactTable thead tr').clone(true).appendTo('#contactTable thead');
+                $('#contactTable thead tr:eq(1) th').each(function (i) {
+                    var title = $(this).text();
+                    if (title !== 'Thao tác' && title !== 'Stt') { // Không thêm lọc cho cột thao tác/stt
+                        $(this).html('<input type="text" class="form-control form-control-sm" placeholder="Lọc ' + title + '" />');
+
+                        $('input', this).on('keyup change', function () {
+                            if (table.column(i).search() !== this.value) {
+                                table.column(i).search(this.value).draw();
+                            }
+                        });
+                    } else {
+                        $(this).html('');
+                    }
+                });
+            });
+        </script>
 
 </body>
 
@@ -132,7 +152,4 @@
         }
     }
 %>
-<script src="${AuraSound}/assets/js/scriptAdmin.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
 </html>

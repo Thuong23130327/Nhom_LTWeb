@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 
 public class Order {
 	private int id;
@@ -14,9 +15,29 @@ public class Order {
 	private double shippingFee;
 	private double discountAmount;
 	private double finalAmount;
+	private String adminNote;
+	private String recipientName;
 
-//Constructor
+	// Constructor
 	public Order() {
+	}
+
+	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, String status,
+			String paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
+			double finalAmount, String adminNote) {
+		super();
+		this.id = id;
+		this.usersId = usersId;
+		this.vouchersId = vouchersId;
+		this.orderCode = orderCode;
+		this.orderDate = orderDate;
+		this.status = status;
+		this.paymentStatus = paymentStatus;
+		this.totalProductsPrice = totalProductsPrice;
+		this.shippingFee = shippingFee;
+		this.discountAmount = discountAmount;
+		this.finalAmount = finalAmount;
+		this.adminNote = adminNote;
 	}
 
 	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, String status,
@@ -69,7 +90,15 @@ public class Order {
 	}
 
 	public Timestamp getOrderDate() {
+
 		return orderDate;
+	}
+
+	public String getFmOrderDate() {
+		if (this.orderDate == null)
+			return "";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy ");
+		return this.orderDate.toLocalDateTime().format(formatter);
 	}
 
 	public void setOrderDate(Timestamp orderDate) {
@@ -122,6 +151,32 @@ public class Order {
 
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
+	}
+
+	public String getAdminNote() {
+		if (adminNote == null || adminNote.trim() == "")
+			return "Không có note";
+		return adminNote;
+	}
+
+	public void setAdminNote(String adminNote) {
+		this.adminNote = adminNote;
+	}
+
+	public void setUsersId(int usersId) {
+		this.usersId = usersId;
+	}
+
+	public void setVouchersId(int vouchersId) {
+		this.vouchersId = vouchersId;
+	}
+
+	public String getRecipientName() {
+		return recipientName;
+	}
+
+	public void setRecipientName(String recipientName) {
+		this.recipientName = recipientName;
 	}
 
 }

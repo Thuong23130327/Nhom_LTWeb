@@ -48,10 +48,8 @@
                             </a>
                         </c:forEach>
                     </div>
-
                     <div id="hamburger-icon"><i class="bi bi-list"></i></div>
                 </div>
-
             </nav>
 
             <div
@@ -85,15 +83,15 @@
                                     <td>${i.count}</td>
                                     <td>${p.sku}</td>
                                     <td>${p.name}</td>
-                                    <td>${varCountMap[p.id]}</td>
-                                    <td>${totalStockMap[p.id]}</td>
+                                    <td>${varCountMap[p.id] > 0 ? varCountMap[p.id]:0}</td>
+                                    <td>${totalStockMap[p.id] > 0 ? totalStockMap[p.id]:0}</td>
 
-                                        <%--                                    <c:if test="${p.discountPercent > 0}">--%>
-                                    <td data-order="${p.oldPrice}" class="old-price"><fmt:formatNumber value="${p.oldPrice}" pattern="#,###"/>
+                                    <td data-order="${p.oldPrice}" class="old-price"><fmt:formatNumber
+                                            value="${p.oldPrice > p.sellPrice ? p.oldPrice : 0}" pattern="#,###"/>
                                         đ
                                     </td>
-                                        <%--                                    </c:if>--%>
-                                    <td data-order="${p.sellPrice}" class="new-price"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/> đ
+                                    <td data-order="${p.sellPrice}" class="new-price"><fmt:formatNumber
+                                            value="${p.sellPrice}" pattern="#,###"/> đ
                                     </td>
                                     <td>
                                         <a href="${AuraSound}/admin/product-detail-manager?pid=${p.id}">
@@ -102,7 +100,6 @@
                                     </td>
                                 </tr>
                             </c:forEach>
-                            <%--Nếu danh sách trống--%>
                             <c:if test="${empty productList}">
                                 <tr>
                                     <td colspan="5" class="text-center">Không có sản phẩm nào trong hệ thống.</td>
@@ -120,11 +117,11 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/script.js"></script>
 <script src="../assets/js/scriptAdmin.js"></script>
 <script src="../assets/js/scriptProfile.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>

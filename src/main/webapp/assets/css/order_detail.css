@@ -13,7 +13,7 @@
 }
 
 .card-header {
-    background: var(--theme-gradient-icon);
+    background-color: #77baff;
     color: var(--white);
     font-weight: bold;
     padding: 4px 8px;
@@ -30,6 +30,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     color: white !important;
     transition: all 0.2s ease;
+    padding: 8px 10px;
 }
 
 
@@ -67,10 +68,9 @@
 
 /* Tổng cộng */
 .text-gradient-total {
-    font-weight: 700;
-    background: var(--theme-gradient-text);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    background: var(--theme-gradient-button);
+    background-clip: text;
 }
 
 /* Trạng thái (kích thước) */

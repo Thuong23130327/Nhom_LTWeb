@@ -385,7 +385,7 @@ public class ProductDAO {
                 sql.append(") ");
             }
         }
-        if (selectedSort == null){
+        if (selectedSort == null) {
             sql.append(" ORDER BY p.id DESC ");
         } else if (selectedSort.equals("price-asc")) {
             sql.append(" ORDER BY p.display_sell_price ASC ");
@@ -412,6 +412,25 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public String getProductName(String pid) {
+        String sql = "SELECT name FROM Products WHERE id = ?";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, pid);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("name");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return "Không tìm thấy tên Sản phẩm";
+
     }
 
     public List<Product> filterProductBackup(String[] brandIds, String[] cateIds, int numPerPage, int page, String selectedSort) {

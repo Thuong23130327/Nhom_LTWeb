@@ -59,8 +59,8 @@
                             <tr>
                                 <td>${i.count}</td>
                                 <td>${o.orderCode}</td>
-                                <td>${o.usersId}</td>
-                                <td>${o.orderDate}</td>
+                                <td>${o.recipientName}</td>
+                                <td data-sort="${o.orderDate}">${o.fmOrderDate}</td>
                                 <td>
                                     <c:if test="${o.status == 'Pending'}">
                                         <span class="badge bg-warning-subtle text-warning-emphasis">Chờ duyệt</span>
@@ -87,8 +87,8 @@
 
 
                                 </td>
-                                <td data-order="${o.totalProductsPrice}" class="new-price"><fmt:formatNumber
-                                        value="${o.totalProductsPrice}" pattern="#,###"/> đ
+                                <td data-order="${o.finalAmount}" class="new-price"><fmt:formatNumber
+                                        value="${o.finalAmount}" pattern="#,###"/> đ
                                 </td>
                                 <td>
                                     <a href="${AuraSound}/admin/manage-order-detail?id=${o.id}">

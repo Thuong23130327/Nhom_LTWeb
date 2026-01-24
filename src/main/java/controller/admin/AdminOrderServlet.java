@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Category;
 import model.Order;
+import model.OrderShipping;
 import model.Product;
 import service.AdOrderService;
 import service.AdminProductService;
@@ -28,9 +29,8 @@ public class AdminOrderServlet extends HttpServlet {
         List<Order> list = new ArrayList<>();
         AdOrderService adOrderService = new AdOrderService();
         list = adOrderService.geAllOrders();
-        if (list.isEmpty()) {
-            System.out.println("ko co order nao");
-        }
+
+
         request.setAttribute("list", list);
         request.getRequestDispatcher("orders.jsp").forward(request, response);
     }

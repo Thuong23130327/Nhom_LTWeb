@@ -194,7 +194,9 @@ main {
     white-space: nowrap;
 }
 
-
+textarea:read-only{
+    background-color: #f3f3f3;
+}
 /* Nút bấm đồng bộ */
 .btn-primary {
     margin-top: 5px;
