@@ -363,7 +363,9 @@ public class ProductDAO {
         StringBuilder sql = new StringBuilder("SELECT p.* FROM Products p ");
         sql.append("LEFT JOIN Brands b ON p.Brands_id = b.id ");
         sql.append("LEFT JOIN Categories c ON p.Categories_id = c.id ");
-        sql.append("WHERE 1=1 ");
+        sql.append("WHERE p.display_sell_price <> 0  ");
+        sql.append("AND p.display_image_url IS NOT NULL  ");
+        sql.append("AND TRIM(p.display_image_url) <> ''  ");
         if (brandIds != null && brandIds.length > 0) {
             sql.append(" AND p.Brands_id IN (");
             for (int i = 0; i < brandIds.length; i++) {
@@ -383,7 +385,7 @@ public class ProductDAO {
                 sql.append(") ");
             }
         }
-        if (selectedSort == null){
+        if (selectedSort == null) {
             sql.append(" ORDER BY p.id DESC ");
         } else if (selectedSort.equals("price-asc")) {
             sql.append(" ORDER BY p.display_sell_price ASC ");
@@ -410,6 +412,25 @@ public class ProductDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public String getProductName(String pid) {
+        String sql = "SELECT name FROM Products WHERE id = ?";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, pid);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("name");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return "Không tìm thấy tên Sản phẩm";
+
     }
 
     public List<Product> filterProductBackup(String[] brandIds, String[] cateIds, int numPerPage, int page, String selectedSort) {

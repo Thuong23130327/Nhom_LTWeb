@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 
 public class Product {
 
@@ -39,11 +40,12 @@ public class Product {
 		this.img = img;
 	}
 
-    public Product(int id, Integer o, Object o1, String sku, String name, Object description, Object o2, Object o3, Object o4, Object createdAt, Object o5, double displaySellPrice, String displayImageUrl) {
+	public Product(int id, Integer o, Object o1, String sku, String name, Object description, Object o2, Object o3,
+			Object o4, Object createdAt, Object o5, double displaySellPrice, String displayImageUrl) {
 
-    }
+	}
 
-    public int getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -119,6 +121,13 @@ public class Product {
 		return createdAt;
 	}
 
+	public String getFmCreatedAt() {
+		if (this.createdAt == null)
+			return "";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy ");
+		return this.createdAt.toLocalDateTime().format(formatter);
+	}
+
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
@@ -154,12 +163,13 @@ public class Product {
 				+ soldCount + ", isActive=" + isActive + ", createdAt=" + createdAt + ", oldPrice=" + oldPrice
 				+ ", sellPrice=" + sellPrice + ", img=" + img + " ]";
 	}
+
 	public int getDiscountPercent() {
-	    if (this.oldPrice == 0) {
-	        return 0;
-	    }
-	    double result = ((this.oldPrice - this.sellPrice) / this.oldPrice) * 100;
-	    return (int) Math.round(result);
+		if (this.oldPrice == 0) {
+			return 0;
+		}
+		double result = ((this.oldPrice - this.sellPrice) / this.oldPrice) * 100;
+		return (int) Math.round(result);
 	}
 
 }
