@@ -149,13 +149,8 @@
                             <div class="card-header bg-white py-3">
                                 <h2 class="mb-0 fw-bold text-dark">Doanh thu 7 ngày gần đây</h2>
                             </div>
-                            <div class="bar-chart">
-                                <div class="bar" style="height: 30%;" data-label="2/1"></div>
-                                <div class="bar" style="height: 70%;" data-label="3/1"></div>
-                                <div class="bar" style="height: 60%;" data-label="4/1"></div>
-                                <div class="bar" style="height: 85%;" data-label="5/1"></div>
-                                <div class="bar" style="height: 20%;" data-label="6/1"></div>
-                                <div class="bar" style="height: 00%;" data-label="8/1"></div>
+                            <div class="bar-chart" style="height: 320px;">
+                                <canvas id="revenueBarChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -241,6 +236,7 @@
 </div>
 </div>
 
+<%@ include file="/tag/_chartRevenueScript.jsp" %>
 <%@ include file="/tag/_footerAdmin.jsp" %>
 </body>
 </html>
