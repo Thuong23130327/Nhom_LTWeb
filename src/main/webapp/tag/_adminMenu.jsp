@@ -37,7 +37,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link ${activePage == "order"? "active" : ""}">
+                <a href="${AuraSound}/admin/manage-order" class="nav-link ${activePage == "order"? "active" : ""}">
                     <i class="fas fa-shopping-cart me-2"></i>
                     Quản lý Đơn hàng
                 </a>

@@ -1,125 +1,127 @@
 package model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 public class Order {
-    private int id;
-    private Integer usersId;
-    private Integer vouchersId;
-    private String orderCode;	private Timestamp orderDate;
-
-    private String status;
-    private PaymentStatus paymentStatus;
-    private double totalProductsPrice;
-    private double shippingFee;
-    private double discountAmount;
-    private double finalAmount;
+	private int id;
+	private int usersId;
+	private int vouchersId;
+	private String orderCode;
+	private Timestamp orderDate;
+	private String status;
+	private String paymentStatus;
+	private double totalProductsPrice;
+	private double shippingFee;
+	private double discountAmount;
+	private double finalAmount;
 
 //Constructor
-    public Order() {
-    }
+	public Order() {
+	}
 
-    public Order(int id, Integer usersId, Integer vouchersId, String orderCode, Timestamp orderDate, String status, PaymentStatus paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount, double finalAmount) {
-        this.id = id;
-        this.usersId = usersId;
-        this.vouchersId = vouchersId;
-        this.orderCode = orderCode;
-        this.orderDate = orderDate;
-        this.status = status;
-        this.paymentStatus = paymentStatus;
-        this.totalProductsPrice = totalProductsPrice;
-        this.shippingFee = shippingFee;
-        this.discountAmount = discountAmount;
-        this.finalAmount = finalAmount;
-    }
+	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, String status,
+			String paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
+			double finalAmount) {
+		this.id = id;
+		this.usersId = usersId;
+		this.vouchersId = vouchersId;
+		this.orderCode = orderCode;
+		this.orderDate = orderDate;
+		this.status = status;
+		this.paymentStatus = paymentStatus;
+		this.totalProductsPrice = totalProductsPrice;
+		this.shippingFee = shippingFee;
+		this.discountAmount = discountAmount;
+		this.finalAmount = finalAmount;
+	}
+
 //Getters & Setters
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public Integer getUsersId() {
-        return usersId;
-    }
+	public Integer getUsersId() {
+		return usersId;
+	}
 
-    public void setUsersId(Integer usersId) {
-        this.usersId = usersId;
-    }
+	public void setUsersId(Integer usersId) {
+		this.usersId = usersId;
+	}
 
-    public Integer getVouchersId() {
-        return vouchersId;
-    }
+	public Integer getVouchersId() {
+		return vouchersId;
+	}
 
-    public void setVouchersId(Integer vouchersId) {
-        this.vouchersId = vouchersId;
-    }
+	public void setVouchersId(Integer vouchersId) {
+		this.vouchersId = vouchersId;
+	}
 
-    public String getOrderCode() {
-        return orderCode;
-    }
+	public String getOrderCode() {
+		return orderCode;
+	}
 
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode;
-    }
+	public void setOrderCode(String orderCode) {
+		this.orderCode = orderCode;
+	}
 
-    public Timestamp getOrderDate() {
-        return orderDate;
-    }
+	public Timestamp getOrderDate() {
+		return orderDate;
+	}
 
-    public void setOrderDate(Timestamp orderDate) {
-        this.orderDate = orderDate;
-    }
+	public void setOrderDate(Timestamp orderDate) {
+		this.orderDate = orderDate;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
-    }
+	public double getTotalProductsPrice() {
+		return totalProductsPrice;
+	}
 
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
+	public void setTotalProductsPrice(double totalProductsPrice) {
+		this.totalProductsPrice = totalProductsPrice;
+	}
 
-    public double getTotalProductsPrice() {
-        return totalProductsPrice;
-    }
+	public double getShippingFee() {
+		return shippingFee;
+	}
 
-    public void setTotalProductsPrice(double totalProductsPrice) {
-        this.totalProductsPrice = totalProductsPrice;
-    }
+	public void setShippingFee(double shippingFee) {
+		this.shippingFee = shippingFee;
+	}
 
-    public double getShippingFee() {
-        return shippingFee;
-    }
+	public double getDiscountAmount() {
+		return discountAmount;
+	}
 
-    public void setShippingFee(double shippingFee) {
-        this.shippingFee = shippingFee;
-    }
+	public void setDiscountAmount(double discountAmount) {
+		this.discountAmount = discountAmount;
+	}
 
-    public double getDiscountAmount() {
-        return discountAmount;
-    }
+	public double getFinalAmount() {
+		return finalAmount;
+	}
 
-    public void setDiscountAmount(double discountAmount) {
-        this.discountAmount = discountAmount;
-    }
+	public void setFinalAmount(double finalAmount) {
+		this.finalAmount = finalAmount;
+	}
 
-    public double getFinalAmount() {
-        return finalAmount;
-    }
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
 
-    public void setFinalAmount(double finalAmount) {
-        this.finalAmount = finalAmount;
-    }
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+
 }

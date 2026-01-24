@@ -113,7 +113,7 @@
                     <c:if test="${sessionScope.auth != null}">
                         <div class="account-avatar">
                             <a href="${AuraSound}/profileM/profile.jsp" class="avatar-link">
-                                <img src="${sessionScope.loggedInUser.avatarUrl}" alt="Avatar">
+                                <img src="${sessionScope.auth.avatarUrl}" alt="Avatar">
                             </a>
                             <div class="account-menu">
                                 <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Xin

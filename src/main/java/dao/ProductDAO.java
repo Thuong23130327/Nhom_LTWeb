@@ -363,7 +363,9 @@ public class ProductDAO {
         StringBuilder sql = new StringBuilder("SELECT p.* FROM Products p ");
         sql.append("LEFT JOIN Brands b ON p.Brands_id = b.id ");
         sql.append("LEFT JOIN Categories c ON p.Categories_id = c.id ");
-        sql.append("WHERE 1=1 ");
+        sql.append("WHERE p.display_sell_price <> 0  ");
+        sql.append("AND p.display_image_url IS NOT NULL  ");
+        sql.append("AND TRIM(p.display_image_url) <> ''  ");
         if (brandIds != null && brandIds.length > 0) {
             sql.append(" AND p.Brands_id IN (");
             for (int i = 0; i < brandIds.length; i++) {

@@ -15,6 +15,24 @@ public class UserDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
+    private User mapUser(ResultSet rs) throws SQLException {
+        if (rs != null) {
+            int id = rs.getInt("id");
+            String dbEmail = rs.getString("email");
+            String dbPass = rs.getString("password_hash");
+            String dbName = rs.getString("full_name");
+            String dbPhone = rs.getString("phone");
+            String dbAvt = rs.getString("avatar_url");
+
+            String role = rs.getString("role");
+            boolean locked = rs.getBoolean("is_locked");
+            Timestamp created = rs.getTimestamp("created_at");
+            return new User(id, dbEmail, dbPass, dbName, dbPhone, dbAvt, Role.valueOf(role), locked, created);
+        } else {
+            return null;
+        }
+    }
+
     public static boolean checkExistMail(String email) {
 
         String sql = "Select id from users where email =?";
@@ -113,8 +131,23 @@ public class UserDAO {
     }
 
     public User getUserByEmail(String email) {
+        return null;
+    }
 
 
+    public User getUserById(String id) {
+        String sql = "SELECT * FROM Users WHERE id = ?";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) return mapUser(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
@@ -122,5 +155,4 @@ public class UserDAO {
         UserDAO userDAO = new UserDAO();
         System.out.println(userDAO.getAllUser());
     }
-
 }

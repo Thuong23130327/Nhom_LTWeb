@@ -1,28 +1,15 @@
 
+
+
 .product-detail-page {
     padding-top: 20px;
     padding-bottom: 20px;
-}
-
-.card {
-    border-radius: 1rem;
-    border: none;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09);
-    margin-bottom: 2rem;
-    overflow: hidden;
 }
 
 .title {
     margin-top: 10px;
 }
 
-.card-header {
-    background: var(--theme-gradient-icon) !important;
-    color: var(--white);
-    font-weight: 600;
-    padding: 1.25rem 1.5rem;
-    border-bottom: none;
-}
 
 .d-flex.align-items-center.mb-4.pb-3.border-bottom {
     border-bottom: 1px solid #dee2e6 !important;
@@ -184,8 +171,8 @@ textarea.form-control {
 
 
 .btn-primary.btn-gradient {
-    background: var(--theme-gradient-button) ;
-    border: none ;
+    background: var(--theme-gradient-button);
+    border: none;
     color: var(--white);
     font-weight: 600;
     border-radius: 15px;
@@ -701,7 +688,7 @@ textarea.form-control {
     max-width: 70px;
     margin: 0;
     pointer-events: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .showVar #sampleImg {
