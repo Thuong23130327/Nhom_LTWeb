@@ -33,10 +33,15 @@ public class CartService {
     public boolean updateVariant(Cart cart, int oldVid, String newVidStr) {
         if (cart == null) return false;
 
+        if (!cart.getItems().containsKey(oldVid)) {
+            return false;
+        }
+
         CartItem oldItem = cart.getItems().get(oldVid);
         ProductVariant newVariant = getProductVariant(newVidStr);
 
         if (oldItem != null && newVariant != null) {
+            int quantity = oldItem.getQuantity();
             // Xóa biến thể cũ khỏi Map items
             cart.getItems().remove(oldVid);
             // Thêm biến thể mới vào cart (Dùng hàm addOrUpdateItem trongg Cart)

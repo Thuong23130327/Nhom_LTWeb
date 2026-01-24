@@ -1,7 +1,7 @@
 let total = parseInt(document.getElementById("numPage").value) || 1;
 let selectedBrands = [];
 let selectedCates = [];
-let selectedSort;
+let selectedSort =  "default";
 
 document.addEventListener("DOMContentLoaded", function () {
     renderPagination(1, total);
@@ -40,7 +40,7 @@ function renderPagination(current, total) {
     }
     if (current == total) {
         html += `<button title="Về Trang đầu" class="page-btn " onclick="loadPage(this)" data-page="1"><<</button>`;
-        html += `<button class="page-btn " onclick="loadPage(this)" data-page="${current - 2}">${current - 1}</button>`;
+        html += `<button class="page-btn " onclick="loadPage(this)" data-page="${current - 2}">${current - 2}</button>`;
         html += `<button class="page-btn " onclick="loadPage(this)" data-page="${current - 1}">${current - 1}</button>`;
         html += `<button class="page-btn active" onclick="loadPage(this)" data-page="${current}">${current}</button>`;
         divPageButton.innerHTML = html;
@@ -56,8 +56,9 @@ function renderPagination(current, total) {
     return;
 }
 
-
 function loadPage(e) {
+
+    console.log("Đang gửi AJAX tới: " + path + "/loadAjax" );
     let page = parseInt(e.getAttribute("data-page"));
     console.log("page: " + page);
     $.ajax({
@@ -65,8 +66,10 @@ function loadPage(e) {
         url: path + "/loadAjax",
         data: {
             selectedBrands: selectedBrands,
-            selectedCates: selectedCates, selectedSort: selectedSort,
-            pageCurrent: page
+            selectedCates: selectedCates,
+            selectedSort: selectedSort != null ? selectedSort : "default",
+            pageCurrent: page,
+            cateId: typeof cateId !== 'undefined' ? cateId : null
         },
         traditional:
             true,
@@ -74,12 +77,11 @@ function loadPage(e) {
             "html",
 
         success:
-
             function (data) {
+            var html = data.split("||||")[1];
                 var row = document.getElementById("product-grid");
-
                 if (row)
-                    row.innerHTML = data;
+                    row.innerHTML = html;
                 else
                     console.log("Không tìm thấy thẻ div chứa sản phẩm!");
 
@@ -114,9 +116,9 @@ function clearFilter(e) {
     }
     setTitle();
 }
+var allPage = 0;
 
-
-function loadData(e) {
+function loadData() {
     $.ajax({
         type: "GET",
         url: path + "/loadAjax",
@@ -124,19 +126,22 @@ function loadData(e) {
         data: {
             pageCurrent: 1,
             selectedBrands: selectedBrands,
-            selectedCates: selectedCates, selectedSort: selectedSort
+            selectedCates: selectedCates,
+            selectedSort: selectedSort == null ? "default" : selectedSort,
+            cateId: typeof cateId !== 'undefined' ? cateId : null
         },
         dataType: "html",
 
         success: function (data) {
+            allPage = parseInt(data.split("||||")[0]);
+            var html = data.split("||||")[1];
+            console.log(total);
             var row = document.getElementById("product-grid");
 
             if (row)
-                row.innerHTML = data;
+                row.innerHTML = html;
             else
                 console.log("Không tìm thấy thẻ div chứa sản phẩm!");
-
-
         },
         error: function (xhr, status, error) {
             console.log("Lỗi: " + error);

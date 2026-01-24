@@ -14,7 +14,8 @@
     Timestamp timeCreated = (Timestamp) request.getAttribute("created_at");
 
     List<User> userList = (List<User>) request.getAttribute("userList");
-    request.setAttribute("pageTitle", "QUẢN LÝ- AuraSound");
+    request.setAttribute("pageTitle", "Quản lý Tài Khoản- AuraSound");
+    request.setAttribute("activePage", "acc");
 %>
 
 <!DOCTYPE html>
@@ -43,12 +44,14 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"><i class="fas fa-users"></i> Quản lý Người dùng</h1>
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-2 border-bottom">
+                <h2 class="h2 section-title text-primary">
+                    Quản lý Tài Khoản
+                </h2>
             </div>
 
-            <p class="text-muted">Đây là khu vực quản lý tài khoản người dùng, chỉnh sửa, khóa hoặc xem chi tiết hoạt
-                động.</p>
+            <p class="text-muted">Quản lý tài khoản, chỉnh sửa quyền, khóa hoặc xem chi tiết hoạt
+                động tài khoản</p>
             <div class="card shadow-sm">
                 <div class="card-body">
                     <table class="table table-striped table-sm">

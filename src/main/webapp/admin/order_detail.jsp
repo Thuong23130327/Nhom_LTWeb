@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <%
-    request.setAttribute("pageTitle", "QUẢN LÝ- AuraSound");
+    request.setAttribute("pageTitle", "Quản lý Đơn hàng - AuraSound");
+    request.setAttribute("activePage", "order");
 %>
 
 <!DOCTYPE html>

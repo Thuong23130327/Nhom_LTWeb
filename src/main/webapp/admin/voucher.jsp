@@ -3,6 +3,7 @@
 
 <%
     request.setAttribute("pageTitle", "QUẢN LÝ VOUCHER - AuraSound");
+    request.setAttribute("activePage", "vou");
 %>
 
 <!DOCTYPE html>
@@ -31,10 +32,13 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"><i class="fas fa-users"></i> Quản lý Voucher</h1>
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-2 border-bottom">
+                <h2 class="h2 section-title text-primary">
+                    Quản lý Voucher
+                </h2>
             </div>
-   <div class="card shadow-sm">
+
+            <div class="card shadow-sm">
                 <div class="card-body">
                     <table class="table table-striped table-sm">
                         <thead>
@@ -56,12 +60,14 @@
                                 <span class="badge bg-danger">Đang phát hành</span>
                             </td>
                             <td>
-                                <a href="../profileM/profile.jsp"><button class="btn btn-sm btn-info">Xem</button></a>
-                                <a href="../404.jsp"><button class="btn btn-sm btn-warning">Sửa</button></a>
+                                <a href="../profileM/profile.jsp">
+                                    <button class="btn btn-sm btn-info">Xem</button>
+                                </a>
+                                <a href="../404.jsp">
+                                    <button class="btn btn-sm btn-warning">Sửa</button>
+                                </a>
                             </td>
                         </tr>
-
-
                         </tbody>
                     </table>
                 </div>

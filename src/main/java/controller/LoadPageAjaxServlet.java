@@ -20,40 +20,44 @@ import java.util.Locale;
 public class LoadPageAjaxServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ProductService productService = null;
+        List<Product> productList = null;
         try {
             productService = new ProductService();
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-        int pageCurrent = Integer.parseInt(request.getParameter("pageCurrent"));
+        //Lay para
         String[] selectedBrands = request.getParameterValues("selectedBrands");
         String[] selectedCates = request.getParameterValues("selectedCates");
-        List<Product> productList = null;
-        String cateId = request.getParameter("cateId");
+        int pageCurrent = Integer.parseInt(request.getParameter("pageCurrent"));
         String selectedSort = request.getParameter("selectedSort") != null ? request.getParameter("selectedSort") : "default";
-
-        System.out.println("Servlet nhận Brands: " + (selectedBrands == null ? "NULL" : Arrays.toString(selectedBrands)));
-        System.out.println("Servlet nhận Brands: " + (selectedCates == null ? "NULL" : Arrays.toString(selectedCates)));
+        String cateId = request.getParameter("cateId");
 
         if (selectedBrands == null) selectedBrands = new String[0];
         if (selectedCates == null) selectedCates = new String[0];
-
-        //Ngdung da chon loc thi goi loc
-        if (selectedBrands.length > 0 || selectedCates.length > 0)
-            productList = productService.filterProduct(selectedBrands, selectedCates, 12, pageCurrent,selectedSort);
-        else //Chua chon loc o filter, auto chon theo cai header
-            productList = productService.getPerPageProduct(12, pageCurrent, cateId,selectedSort);
+        productList = productService.filterProduct(selectedBrands, selectedCates, 12, pageCurrent, selectedSort);
 
         PrintWriter out = response.getWriter();
+        int totalPage = (int) Math.ceil((double) productService.totalProduct(selectedBrands, selectedCates) / 12);
+        System.out.println(Arrays.toString(selectedBrands));
+        System.out.println(Arrays.toString(selectedCates));
+        System.out.println("tong trang: " + totalPage);
+        out.println(totalPage + "||||");
+
+
         if (productList == null || productList.isEmpty()) {
-            out.println("");
+            out.println("<div class=\"alert alert-warning text-center\" role=\"alert\">\n" +
+                    "        <i class=\"bi bi-search\"></i> \n" +
+                    "        Không tìm thấy sản phẩm nào phù hợp với bộ lọc\"<strong></strong>\"\n" +
+                    "    </div>");
             return;
         }
         NumberFormat vnFormatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         for (Product p : productList) {
             String formattedSellPrice = vnFormatter.format(p.getSellPrice());
             String formattedOldPrice = vnFormatter.format(p.getOldPrice());
+            String imageSrc = (p.getImg() != null && !p.getImg().isEmpty()) ? p.getImg() : "https://placehold.co/300x300?text=No+Image";
             out.println("<a href=\"detail?pid=" + p.getId() + "\" class=\"product-card\">\n");
             if (p.getDiscountPercent() > 0) {
                 out.println("   <div class=\"product-badge discount\">Giảm " + p.getDiscountPercent() + " %</div>\n");
@@ -61,7 +65,7 @@ public class LoadPageAjaxServlet extends HttpServlet {
 
 
             out.println("\n" +
-                    "                    <img src=\"" + p.getImg() + "\" alt=\"" + p.getName() + "\" onerror=\"this.src='https://placehold.co/300x300?text=No+Image'\">\n" +
+                    "                    <img src=\"" + imageSrc + "\" alt=\"" + p.getName() + "\" onerror=\"this.src='https://placehold.co/300x300?text=No+Image'\">\n" +
                     "\n" +
                     "                    <div class=\"product-card-info\">\n" +
                     "                        <h4>" + p.getName() + "</h4>\n" +

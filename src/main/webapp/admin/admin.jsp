@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<%
-    request.setAttribute("pageTitle", "QUẢN LÝ- AuraSound");
-%>
 
+<%
+    request.setAttribute("pageTitle", "Quản lý Tổng quát - AuraSound");
+    request.setAttribute("activePage", "admin");
+%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
