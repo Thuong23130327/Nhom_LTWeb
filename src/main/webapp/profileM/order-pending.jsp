@@ -176,7 +176,7 @@
     </main>
 
     <!-- footer -->
-    <%@ include file="../_footer.jsp" %>
+    <jsp:include page="/tag/_footer.jsp"></jsp:include>
 </body>
 
 </html>

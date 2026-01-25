@@ -112,13 +112,13 @@
 
                     <c:if test="${sessionScope.auth != null}">
                         <div class="account-avatar">
-                            <a href="${AuraSound}/profileM/profile.jsp" class="avatar-link">
-                                <img src="${sessionScope.auth.avatarUrl}" alt="Avatar">
+                            <a href="${AuraSound}/profile" class="avatar-link">
+                                <img src="${sessionScope.loggedInUser.avatarUrl}" alt="Avatar">
                             </a>
                             <div class="account-menu">
-                                <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Xin
+                                <a class="account-menu-item" href="${AuraSound}/profile">Xin
                                     chào ${sessionScope.auth.fullName}</a>
-                                <a class="account-menu-item" href="${AuraSound}/profileM/profile.jsp">Thông tin tài
+                                <a class="account-menu-item" href="${AuraSound}/profile">Thông tin tài
                                     khoản</a>
                                 <a class="account-menu-item" href="${AuraSound}/logout" id="navLogout">Đăng xuất</a>
                             </div>
