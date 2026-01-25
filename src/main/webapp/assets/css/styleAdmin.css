@@ -194,9 +194,12 @@ main {
     white-space: nowrap;
 }
 
-
+textarea:read-only{
+    background-color: #f3f3f3;
+}
 /* Nút bấm đồng bộ */
 .btn-primary {
+    margin-top: 5px;
     background: var(--theme-gradient-button);
     border: none;
     padding: 4px 8px;

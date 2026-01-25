@@ -23,10 +23,7 @@ public class AdminProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String search = request.getParameter("search");
         String categoryId = request.getParameter("categoryId");
-        if (search != null)
-            search = search.trim(); // Xóa khoảng trắng đầu cuối
 
         AdminProductService adminProductService = null;
         try {
@@ -39,10 +36,8 @@ public class AdminProductServlet extends HttpServlet {
         List<Product> productList = new ArrayList<>();
         Map<Integer, Integer> stockMap = adminProductService.getTotalStock();
         Map<Integer, Integer> varCountMap = adminProductService.getVarTotal();
-        if (search != null && !search.isEmpty()) {
-            productList = adminProductService.searchProductByText(search);
 
-        } else if (categoryId != null && !categoryId.isEmpty()) {
+        if (categoryId != null && !categoryId.isEmpty()) {
             productList = adminProductService.getProductByCategoryId(categoryId);
         } else {
             productList = adminProductService.getAllProduct();
@@ -57,7 +52,6 @@ public class AdminProductServlet extends HttpServlet {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        request.setAttribute("search", search);
         request.setAttribute("activeId", categoryId);
         request.setAttribute("productList", productList);
         request.setAttribute("totalStockMap", stockMap);

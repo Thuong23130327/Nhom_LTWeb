@@ -351,7 +351,6 @@ input[type="radio"]:checked+label {}
     border: none;
     font-size: 18px;
     color: #aaa;
-    /* Màu xám nhẹ */
     cursor: pointer;
     padding: 8px;
     border-radius: 50%;
@@ -366,7 +365,6 @@ input[type="radio"]:checked+label {}
     width: 60px;
     height: 60px;
     background-color: #2ecc71;
-    /* Màu xanh lá cây - Success */
     color: var(--white);
     border-radius: 50%;
     display: flex;
@@ -374,7 +372,6 @@ input[type="radio"]:checked+label {}
     align-items: center;
     font-size: 32px;
     margin: 0 auto 20px;
-    /* Hiệu ứng viền phát sáng nhẹ */
     box-shadow: 0 0 0 8px rgba(46, 204, 113, 0.1);
 }
 .popup-content h3 {
@@ -389,4 +386,36 @@ input[type="radio"]:checked+label {}
     color: #666;
     font-size: 14px;
     line-height: 1.6;
+}
+
+
+.error-msg {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+    font-weight: 500;
+}
+
+.success-msg {
+    color: #28a745;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+    font-weight: 500;
+}
+
+#discount-row {
+    display: none;
+    color: #28a745;
+}
+
+.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+
+#success-popup {
+    display: none;
 }
