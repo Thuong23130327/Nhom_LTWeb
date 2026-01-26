@@ -63,7 +63,8 @@ public class ProfileServlet extends HttpServlet {
             if ("success".equals(result)) {
                 user.setFullName(fullName);
                 user.setPhone(phone);
-                session.setAttribute("user", user);
+                session.setAttribute("auth", user);
+                System.out.println("FULLNAME NHAN DUOC: " + request.getParameter("fullName"));
 
                 request.setAttribute("message", "Cập nhật thông tin thành công!");
             } else {

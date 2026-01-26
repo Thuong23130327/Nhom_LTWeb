@@ -21,7 +21,7 @@ public class OrderDao {
                 rs.getString("order_code"),
                 rs.getTimestamp("order_date"),
                 rs.getString("status"),
-                rs.getString("payment_status"),
+                PaymentStatus.valueOf(rs.getString("payment_status")),
                 rs.getInt("total_products_price"),
                 rs.getDouble("shipping_fee"),
                 rs.getDouble("discount_amount"),

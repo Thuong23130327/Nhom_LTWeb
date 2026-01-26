@@ -10,7 +10,7 @@ public class Order {
 	private String orderCode;
 	private Timestamp orderDate;
 	private String status;
-	private String paymentStatus;
+	private PaymentStatus paymentStatus;
 	private double totalProductsPrice;
 	private double shippingFee;
 	private double discountAmount;
@@ -23,7 +23,7 @@ public class Order {
 	}
 
 	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, String status,
-			String paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
+			PaymentStatus paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
 			double finalAmount, String adminNote) {
 		super();
 		this.id = id;
@@ -41,8 +41,8 @@ public class Order {
 	}
 
 	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, String status,
-			String paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
-			double finalAmount) {
+                 PaymentStatus paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
+                 double finalAmount) {
 		this.id = id;
 		this.usersId = usersId;
 		this.vouchersId = vouchersId;
@@ -145,11 +145,11 @@ public class Order {
 		this.finalAmount = finalAmount;
 	}
 
-	public String getPaymentStatus() {
+	public PaymentStatus getPaymentStatus() {
 		return paymentStatus;
 	}
 
-	public void setPaymentStatus(String paymentStatus) {
+	public void setPaymentStatus(PaymentStatus paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
 

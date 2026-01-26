@@ -190,3 +190,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const btnSave = document.getElementById('btnSave');
+    const editForm = document.getElementById('editForm');
+
+    if (btnSave && editForm) {
+        btnSave.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log("Nút Lưu đã được nhấn, đang submit form...");
+            editForm.submit();
+        });
+    } else {
+        console.error("Không tìm thấy nút btnSave hoặc form editForm trong trang này!");
+    }
+});
+
