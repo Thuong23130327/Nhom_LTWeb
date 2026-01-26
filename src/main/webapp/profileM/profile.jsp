@@ -46,15 +46,15 @@
                     <ul class="nav-list">
                         <li><a class="nav-link active" href="profile.jsp"><i class="fa-solid fa-user icon"></i> Thông
                                 tin tài khoản</a></li>
-                        <li><a class="nav-link" href="favorites.jsp"><i class="fa-solid fa-heart icon"></i> Sản phẩm
+                        <li><a class="nav-link" href="profileM/favorites.jsp"><i class="fa-solid fa-heart icon"></i> Sản phẩm
                                 yêu thích</a></li>
-                        <li><a class="nav-link" href="order-shipping.jsp"><i class="fa-solid fa-truck icon"></i> Đang
+                        <li><a class="nav-link" href="${pageContext.request.contextPath}/order-shipping"><i class="fa-solid fa-truck icon"></i> Đang
                                 vận chuyển</a></li>
-                        <li><a class="nav-link" href="order-pending.jsp"><i class="fa-solid fa-clock icon"></i> Đang
+                        <li><a class="nav-link" href="profileM/order-pending.jsp"><i class="fa-solid fa-clock icon"></i> Đang
                                 chờ duyệt</a></li>
-                        <li><a class="nav-link" href="order-cancelled.jsp"><i class="fa-solid fa-ban icon"></i> Đã
+                        <li><a class="nav-link" href="profileM/order-cancelled.jsp"><i class="fa-solid fa-ban icon"></i> Đã
                                 hủy</a></li>
-                        <li><a class="nav-link" href="order-history.jsp"><i class="fa-solid fa-history icon"></i> Lịch
+                        <li><a class="nav-link" href="profileM/order-history.jsp"><i class="fa-solid fa-history icon"></i> Lịch
                                 sử mua hàng</a></li>
                     </ul>
                 </div>

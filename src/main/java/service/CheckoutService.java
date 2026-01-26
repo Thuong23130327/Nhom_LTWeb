@@ -29,7 +29,7 @@ public class CheckoutService {
         if (user != null) order.setUsersId(user.getId());
 
         // Trạng thái mặc định
-        order.setStatus(OrderStatus.PENDING.name());
+        order.setStatus(OrderStatus.valueOf(OrderStatus.PENDING.name()));
         order.setPaymentStatus(PaymentStatus.UNPAID);
 
         // Tính toán tiền

@@ -20,8 +20,8 @@ public class OrderDao {
                 rs.getInt("Vouchers_id"),
                 rs.getString("order_code"),
                 rs.getTimestamp("order_date"),
-                rs.getString("status"),
-                PaymentStatus.valueOf(rs.getString("payment_status")),
+                OrderStatus.valueOf(rs.getString("status").toUpperCase()),
+                PaymentStatus.valueOf(rs.getString("payment_status").toUpperCase()),
                 rs.getInt("total_products_price"),
                 rs.getDouble("shipping_fee"),
                 rs.getDouble("discount_amount"),
@@ -69,6 +69,51 @@ public class OrderDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Order> getOrdersByStatus(int userId, String status) {
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT o.*, os.recipient_name " +
+                "FROM orders o " +
+                "LEFT JOIN ordershippings os ON o.id = os.Orders_id " +
+                "WHERE o.Users_id = ? AND o.status = ? " +
+                "ORDER BY o.order_date DESC;";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.setString(2, status);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Order order = mapOrder(rs);
+                order.setRecipientName(rs.getString("recipient_name"));
+                list.add(order);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    //đơn chờ xử lý
+    public List<Order> getPendingOrders(int userId) {
+        return getOrdersByStatus(userId, "Pending");
+    }
+
+    //đơn đang giao
+    public List<Order> getShippingOrders(int userId) {
+        return getOrdersByStatus(userId, "Shipping");
+    }
+
+    //đơn hoàn thành
+    public List<Order> getCompletedOrders(int userId) {
+        return getOrdersByStatus(userId, "Completed");
+    }
+
+    //đơn đã hủy
+    public List<Order> getCanceledOrders(int userId) {
+        return getOrdersByStatus(userId, "Canceled");
     }
 
     private OrderItems mapOrderItem(ResultSet rs) throws SQLException {
