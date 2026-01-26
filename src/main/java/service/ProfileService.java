@@ -1,12 +1,16 @@
 package service;
 
+import dao.OrderDao;
 import dao.profileMDAO.ProfileDAO;
+import model.Order;
 import model.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class ProfileService {
     private ProfileDAO pDAO = new ProfileDAO();
+    private OrderDao oDAO = new OrderDao();
 
     public User getUserById(int userId) throws SQLException {
         return pDAO.getUserById(userId);
@@ -28,7 +32,21 @@ public class ProfileService {
         return isSuccess ? "success" : "Cập nhật thất bại tại hệ thống.";
     }
 
+    public List<Order> getPendingOrders(int userId){
+        return oDAO.getPendingOrders(userId);
+    }
 
+    public List<Order> getShippingOrders(int userId) {
+        return oDAO.getOrdersByStatus(userId, "SHIPPING");
+    }
+
+    public List<Order> getCompletedOrders(int userId) {
+        return oDAO.getOrdersByStatus(userId, "Completed");
+    }
+
+    public List<Order> getCanceledOrders(int userId) {
+        return oDAO.getOrdersByStatus(userId, "Canceled");
+    }
 
 }
 

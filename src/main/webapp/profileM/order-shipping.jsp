@@ -1,12 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %><!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/tag/_taglibs.jsp" %>
+
+<%
+    request.setAttribute("activePage", "product");
+%>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Đơn hàng đang vận chuyển - AuraSound</title>
-    <link rel="stylesheet" href="../assets/css/styleHome.css">
-    <link rel="stylesheet" href="../assets/css/styleProfile.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleHome.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styleProfile.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -20,132 +24,14 @@
 </head>
 
 <body>
-    <!-- header -->
-
-    <button onclick="backTop()" id="back-top-btn" title="Lên đầu trang">
-        <i class="bi bi-caret-up-fill"></i>
-    </button>
-    <header>
-        <div class="header-container content">
-            <div class="head-left">
-                <div class="head-scroll">
-                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
-                    <div class="text-item">Chuyên các loại Loa, Tai nghe chính hãng</div>
-                    <div class="text-item">AuraSound - Âm thanh định hình phong cách</div>
-                    <div class="text-item">Bảo hành 1 đổi 1 trong 1 tháng</div>
-                </div>
-            </div>
-            <div class="head-right">
-                <div class="info-item"><a href="../contact.jsp">Cửa hàng gần đây</a></div>
-                <div class="info-item"><a href="order-history.jsp">Tra cứu đơn hàng</a></div>
-                <div class="info-item"><a href="tel:19001919">1900 1919</a></div>
-            </div>
-        </div>
-    </header>
-    <nav>
-        <div class="nav-container content">
-            <div class="nav-left">
-                <a class="a-nodecor logo-container" href="../index.jsp">
-                    <div class="logo-wave">
-                        <div class="sound-wave wave1"></div>
-                        <div class="sound-wave wave2"></div>
-                        <div class="sound-wave wave3"></div>
-                    </div>
-                    <span class="logo-text">AuraSound</span>
-                </a>
-            </div>
-            <div class="nav-right">
-                <div class="searchBar">
-                    <input type="text" placeholder="Tìm kiếm">
-                    <a href="#"><i class="bi bi-search"></i></a>
-                </div>
-                <a class="a-nodecor" href="../index.jsp">
-                    <div class="home">
-                        Trang chủ</div>
-                </a>
-                <a class="a-nodecor" href="../contact.jsp">
-                    <div class="contact">
-                        Liên hệ</div>
-                </a>
-                <div class="nav-item-dropdown">
-                    <a class="a-nodecor active" href="../store.jsp">
-                        <div class="store">
-                            Sản phẩm
-                            <i class="bi bi-chevron-compact-down"></i>
-                        </div>
-                    </a>
-
-                    <div class="menu-product">
-                        <a class="a-nodecor" href="../speakers.jsp">
-                            <div>Loa</div>
-                        </a>
-                        <a class="a-nodecor" href="../headphones.jsp">
-                            <div>Tai nghe</div>
-                        </a>
-                    </div>
-                </div>
-
-                <a class="a-nodecor" href="../cart.jsp">
-                    <div class="cart"> <i class="bi bi-cart"></i>
-                        Giỏ hàng</div>
-                </a>
-                <div id="hamburger-icon">
-                    <i class="bi bi-list"></i>
-                </div>
-            </div>
-
-        </div>
-    </nav>
-
-    <div class="mobile-menu" id="mobile-menu-container">
-        <div class="mobile-menu-header">
-            <div class="logo-container">
-                <a href="../index.jsp" class="a-nodecor">
-                    <div class="logo-wave">
-                        <div class="sound-wave wave1"></div>
-                        <div class="sound-wave wave2"></div>
-                        <div class="sound-wave wave3"></div>
-                    </div>
-                    <span class="logo-text">AuraSound</span>
-                </a>
-            </div>
-            <i class="bi bi-x-lg" id="mobile-menu-close"></i>
-        </div>
-
-        <div class="mobile-menu-item">
-            <div class="searchBar">
-                <input type="text" placeholder="Tìm kiếm">
-                <a href="#"><i class="ri-search-line"></i></a>
-            </div>
-        </div>
-
-        <div class="mobile-menu-item">
-            <a href="../index.jsp">Trang chủ</a>
-        </div>
-        <div class="mobile-menu-item">
-            <a href="../cart.jsp">Giỏ hàng</a>
-        </div>
-        <div class="mobile-menu-item">
-            <a href="../contact.jsp">Liên hệ</a>
-        </div>
-        <div class="mobile-menu-item">
-            <a href="../store.jsp">Sản phẩm</a>
-        </div>
-
-        <div class="mobile-menu-footer">
-            <a href="../login.jsp" id="logoutBtn" class="logout-btn">Đăng xuất</a>
-        </div>
-    </div>
-    <div class="overlay" id="menu-overlay"></div>
-
-    <!-- section -->
-
+    <jsp:include page="/tag/_header.jsp"></jsp:include>
     <main class="profile-page-main">
         <div class="profile-container">
             <div class="profile-sidebar">
-                <div class="user-info"><img class="img-profile" src="../assets/img/avatar/HoaiThuong.png" alt="Avatar">
-                    <h5 class="user-name">Chào, Nguyễn Hoài Thương</h5>
-                    <p class="user-email">23130327@st.hcmuaf.edu.vn</p>
+                <div class="user-info">
+                    <img class="img-profile" src="${not empty userDetail.avatarUrl ? userDetail.avatarUrl : '../assets/img/avatar/default.png'}" alt="Avatar">
+                    <h5 class="user-name">Chào, ${userDetail.fullName}</h5>
+                    <p class="user-email">${userDetail.email}</p>
                 </div>
                 <div class="side-menu mobile-hidden" id="sideMenuContent">
                     <ul class="nav-list">
@@ -153,7 +39,7 @@
                                 tin tài khoản</a></li>
                         <li><a class="nav-link" href="favorites.jsp"><i class="fa-solid fa-heart icon"></i> Sản phẩm
                                 yêu thích</a></li>
-                        <li><a class="nav-link active" href="order-shipping.jsp"><i class="fa-solid fa-truck icon"></i>
+                        <li><a class="nav-link active" href="${pageContext.request.contextPath}/order-shipping"><i class="fa-solid fa-truck icon"></i>
                                 Đang vận chuyển</a></li>
                         <li><a class="nav-link" href="order-pending.jsp"><i class="fa-solid fa-clock icon"></i> Đang
                                 chờ duyệt</a></li>
@@ -166,18 +52,25 @@
             </div>
             <section class="profile-content">
                 <h3 class="title">Đơn hàng đang vận chuyển</h3>
-
-
-                <a class="a-nodecor" href="../order-detail.jsp">
-                    <div class="list-item">
-                        <div class="item-order shipping">#AS1002 - Loa SoundPro. Ngày giao dự kiến: 15/12</div>
-                    </div>
-                </a>
-                <a class="a-nodecor" href="../order-detail-success.jsp">
-                    <div class="list-item">
-                        <div class="item-order shipping">#AS1003 - Tai nghe AVA+. Ngày giao dự kiến: 25/12</div>
-                    </div>
-                </a>
+                <c:choose>
+                    <c:when test="${not empty shippingOrders}">
+                        <c:forEach var="order" items="${shippingOrders}">
+                            <a class="a-nodecor" href="${pageContext.request.contextPath}/order-detail?id=${order.id}">
+                                <div class="list-item">
+                                    <div class="item-order shipping">
+                                        #${order.orderCode} - Người nhận: ${order.recipientName}
+                                        | Tổng tiền: <fmt:formatNumber value="${order.finalAmount}" type="currency" currencySymbol="VNĐ"/>
+                                        <br>
+                                        <small>Ngày đặt: <fmt:formatDate value="${order.orderDate}" pattern="dd/MM/yyyy HH:mm"/></small>
+                                    </div>
+                                </div>
+                            </a>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                            <div class="alert alert-info">Bạn hiện không có đơn hàng nào đang vận chuyển.</div>
+                    </c:otherwise>
+                </c:choose>
 
             </section>
         </div>

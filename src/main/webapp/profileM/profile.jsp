@@ -46,15 +46,15 @@
                     <ul class="nav-list">
                         <li><a class="nav-link active" href="profile.jsp"><i class="fa-solid fa-user icon"></i> Thông
                                 tin tài khoản</a></li>
-                        <li><a class="nav-link" href="favorites.jsp"><i class="fa-solid fa-heart icon"></i> Sản phẩm
+                        <li><a class="nav-link" href="profileM/favorites.jsp"><i class="fa-solid fa-heart icon"></i> Sản phẩm
                                 yêu thích</a></li>
-                        <li><a class="nav-link" href="order-shipping.jsp"><i class="fa-solid fa-truck icon"></i> Đang
+                        <li><a class="nav-link" href="${pageContext.request.contextPath}/order-shipping"><i class="fa-solid fa-truck icon"></i> Đang
                                 vận chuyển</a></li>
-                        <li><a class="nav-link" href="order-pending.jsp"><i class="fa-solid fa-clock icon"></i> Đang
+                        <li><a class="nav-link" href="profileM/order-pending.jsp"><i class="fa-solid fa-clock icon"></i> Đang
                                 chờ duyệt</a></li>
-                        <li><a class="nav-link" href="order-cancelled.jsp"><i class="fa-solid fa-ban icon"></i> Đã
+                        <li><a class="nav-link" href="profileM/order-cancelled.jsp"><i class="fa-solid fa-ban icon"></i> Đã
                                 hủy</a></li>
-                        <li><a class="nav-link" href="order-history.jsp"><i class="fa-solid fa-history icon"></i> Lịch
+                        <li><a class="nav-link" href="profileM/order-history.jsp"><i class="fa-solid fa-history icon"></i> Lịch
                                 sử mua hàng</a></li>
                     </ul>
                 </div>
@@ -79,7 +79,7 @@
                         </div>
                         <button type="button" id="btnOpenEdit" class="btn-primary">Cập nhật thông tin</button>
 
-
+                    <form id="editForm" action="${pageContext.request.contextPath}/profile" method="post">
                         <div id="modal-edit-profile" class="modal-container">
                             <div class="modal-header">
                                 <h3>Chỉnh sửa hồ sơ</h3>
@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="modal-body">
-                                <form id="editForm" action="${pageContext.request.contextPath}/profile" method="post">
+
                                     <div class="avatar-upload-group">
                                         <div class="avatar-preview-box">
                                             <img id="avatarPreview" src="${not empty userDetail.avatarUrl ? userDetail.avatarUrl : '../assets/img/avatar/default.png'}"
@@ -115,7 +115,7 @@
                                         <label>Số điện thoại</label>
                                         <input type="text" id="editPhone" name="phone" value="${userDetail.phone}">
                                     </div>
-                                </form>
+
                             </div>
 
                             <div class="modal-footer">
@@ -123,7 +123,7 @@
                                 <button id="btnSave" class="btn-primary">Lưu thay đổi</button>
                             </div>
                         </div>
-
+                    </form>
                 </div>
             </div>
         </div>

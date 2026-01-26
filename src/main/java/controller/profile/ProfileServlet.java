@@ -1,4 +1,4 @@
-package controller;
+package controller.profile;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,8 +28,6 @@ public class ProfileServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/login.jsp");
             return;
         }
-
-        System.out.println("SESSION USER ID = " + user.getId());
 
         try {
             User userDetail = profileService.getUserById(user.getId());
@@ -63,7 +61,8 @@ public class ProfileServlet extends HttpServlet {
             if ("success".equals(result)) {
                 user.setFullName(fullName);
                 user.setPhone(phone);
-                session.setAttribute("user", user);
+                session.setAttribute("auth", user);
+                System.out.println("FULLNAME NHAN DUOC: " + request.getParameter("fullName"));
 
                 request.setAttribute("message", "Cập nhật thông tin thành công!");
             } else {

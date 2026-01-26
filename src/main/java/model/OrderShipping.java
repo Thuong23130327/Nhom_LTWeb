@@ -16,17 +16,6 @@ public class OrderShipping {
 
 
 
-	public OrderShipping(int id, int orderId, String recipientName, String phone, String address, String city,
-			String note) {
-		super();
-		this.id = id;
-		this.orderId = orderId;
-		this.recipientName = recipientName;
-		this.phone = phone;
-		this.address = address;
-		this.city = city;
-		this.note = note;
-	}
 
 	public int getId() {
 		return id;
