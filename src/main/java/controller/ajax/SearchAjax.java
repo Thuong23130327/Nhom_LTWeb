@@ -26,7 +26,7 @@ public class SearchAjax extends HttpServlet {
         try {
             ProductService productService = new ProductService();
             List<Product> productList = productService.searchProductByText(search);
-        PrintWriter out = response.getWriter();
+            PrintWriter out = response.getWriter();
             if (productList == null || productList.isEmpty()) {
                 out.println("<a href='product' class='search-item'>");
                 out.println("   <div class='info'>");
@@ -37,6 +37,10 @@ public class SearchAjax extends HttpServlet {
             }
             // Trong Servlet, vòng lặp tạo HTML trả về
             for (Product p : productList) {
+
+                productService.updateSearchCount(String.valueOf(p.getId()));
+
+
                 out.println("<a href='detail?pid=" + p.getId() + "' class='search-item'>");
                 out.println("   <img src='" + p.getImg() + "' alt='" + p.getName() + "'>");
                 out.println("   <div class='info'>");

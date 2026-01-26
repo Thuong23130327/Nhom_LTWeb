@@ -35,13 +35,12 @@ public class GalleryDAO {
         return images;
     }
 
-    public boolean addImage(int productId, String imageUrl, int sortOrder) {
-        String sql = "INSERT INTO productgalleries (Products_id, image_url, sort_order) VALUES (?, ?, ?)";
+    public boolean addImage(String productId, String imageUrl) {
+        String sql = "INSERT INTO productgalleries (Products_id, image_url, sort_order) VALUES (?, ?, 0)";
         try (Connection conn = DBConnect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, productId);
+            ps.setString(1, productId);
             ps.setString(2, imageUrl);
-            ps.setInt(3, sortOrder);
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,11 +48,12 @@ public class GalleryDAO {
         }
     }
 
-    public boolean deleteImage(int id) {
-        String sql = "DELETE FROM productgalleries WHERE id = ?";
+    public boolean delImage(String pid, String imgId) {
+        String sql = "DELETE FROM productgalleries WHERE id = ? and products_id = ?";
         try (Connection conn = DBConnect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
+            ps.setString(1, imgId);
+            ps.setString(2, pid);
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,16 +81,5 @@ public class GalleryDAO {
         }
     }
 
-    public int getMaxSortOrder(int productId) {
-        String sql = "SELECT MAX(sort_order) FROM productgalerries WHERE Products_id = ?";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, productId);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) return rs.getInt(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
+
 }

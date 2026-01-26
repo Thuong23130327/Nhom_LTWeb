@@ -13,26 +13,6 @@ window.onload = function () {
     }
 }
 
-// Xử lý xóa ảnh
-function deleteImg(imgId, pid) {
-    if (confirm("Bạn có chắc chắn muốn xóa ảnh này không?")) {
-        window.location.href = `product-update?action=deleteImage&imgId=${imgId}&pid=${pid}`;
-    }
-}
-
-function confirmDelete(type, id) {
-    if (type == 'p') {
-        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này không? Hành động này không thể hoàn tác!")) {
-            window.location.href = "product-detail-manager?action=delete&pid=" + id;
-        }
-    }
-    if (type == 'v') {
-        if (confirm("Bạn có chắc chắn muốn xóa biến thể này không? Hành động này không thể hoàn tác!")) {
-            window.location.href = "product-detail-manager?action=delete&vid=" + id;
-        }
-    }
-
-}
 
 function updateVariantInfo(select) {
     // 1. Lấy đúng cái Option đang được chọn

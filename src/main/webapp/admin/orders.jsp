@@ -33,9 +33,12 @@
         <jsp:include page="/tag/_adminMenu.jsp"/>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2"><i class="fas fa-shopping-cart"></i> Quản lý Đơn hàng</h1>
+            <div   class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-4 pb-2 border-bottom">
+                <h2 class="h2 section-title text-primary">
+                    Quản lý Đơn hàng
+                </h2>
             </div>
+
 
             <p class="text-muted">Quản lý các trạng thái đơn hàng: Chờ duyệt, Đang giao, Đã hoàn thành, Đã hủy.</p>
             <div class="card shadow-sm">

@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Image;
 import model.Product;
 import model.ProductSpec;
 import model.ProductVariant;
@@ -28,21 +29,21 @@ public class ProductDetailServlet extends HttpServlet {
             ProductDetailService productDetailService = new ProductDetailService();
             ProductService productService = new ProductService();
             Product product = productService.getById(pid);
-
+            productService.updateViewCount(pid);
             if (product == null) {
                 response.sendError(404, "Sản phẩm không tồn tại!");
-                return; // Dừng ngay, không chạy tiếp code bên dưới
+                return;
             }
 
             List<ProductSpec> specs = productDetailService.getAllSpecByProductId(pid);
             List<ProductVariant> variants = productDetailService.getAllVariantByProductId(pid);
-            //List<String> imgs = productDetailService.getImageByProductId(pid);
+            List<Image> imgs = productDetailService.getImageByProductId(pid);
             ProductVariant curVariant = productDetailService.getVariantByImg(variants, product.getImg());
 
             request.setAttribute("product", product);
             request.setAttribute("variants", variants);
             request.setAttribute("specs", specs);
-            //request.setAttribute("images", imgs);
+            request.setAttribute("images", imgs);
             request.setAttribute("curVariant", curVariant);
 
 

@@ -61,7 +61,7 @@
         </li>
 
         <li class="nav-item">
-            <a href="#" class="nav-link ${activePage == "custom"? "active" : ""}">
+            <a href=""${AuraSound}/admin/my-web" class="nav-link ${activePage == "custom"? "active" : ""}">
                 <i class="fa-solid fa-list me-2"></i>
                 Quản lý Giao diện
             </a>
