@@ -1,6 +1,7 @@
 package dao;
 
 import model.Product;
+import model.ProductVariant;
 //import model.ProductDTO;
 
 import java.sql.Connection;
@@ -42,7 +43,6 @@ public class ProductDAO {
         }
         return list;
     }
-
 
     public List<Product> getProductByCategoryId(String cateId) {
         List<Product> list = new ArrayList<>();
@@ -111,36 +111,6 @@ public class ProductDAO {
             throw new RuntimeException(e);
         }
     }
-
-    public Product getByIdForCart(String id) {
-        String sql = "SELECT id, sku, name, display_sell_price, display_image_url FROM Products WHERE id = ?";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, id);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Product(
-                        rs.getInt("id"),
-                        null,
-                        null,
-                        rs.getString("sku"),
-                        rs.getString("name"),
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        rs.getDouble("display_sell_price"),
-                        rs.getString("display_image_url")
-                );
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
     public List<Product> searchProductByText(String textSearch) {
         List<Product> list = new ArrayList<>();
@@ -433,79 +403,187 @@ public class ProductDAO {
 
     }
 
-    public List<Product> filterProductBackup(String[] brandIds, String[] cateIds, int numPerPage, int page, String selectedSort) {
-        List<Product> list = new ArrayList<>();
-        StringBuffer sql = new StringBuffer("SELECT * FROM Products p");
-        sql.append("LEFT JOIN Brands b ON p.Brands_id = b.id ");
-        sql.append("LEFT JOIN Categories c ON p.Categories_id = c.id ");
-        sql.append("WHERE 1=1 ");
-        if (brandIds != null && brandIds.length > 0) {
-            sql.append(" AND p.Brands_id IN (");
-            for (int i = 0; i < brandIds.length; i++) {
-                sql.append(brandIds[i]);
-                if (i < brandIds.length - 1) sql.append(",");
-            }
-            sql.append(") ");
-        }
-
-        if (cateIds != null && cateIds.length > 0) {
-            List<String> allCateIds = getListCategoryIdsIncludingChildren(cateIds);
-            if (!allCateIds.isEmpty()) {
-                sql.append(" and p.Categories_id in (");
-                for (int i = 0; i < allCateIds.size(); i++) {
-                    sql.append(allCateIds.get(i));
-                    if (i < allCateIds.size() - 1) sql.append(",");
-                }
-                sql.append(") ");
-            }
-        }
-//        boolean hasSearch = (search != null && !search.trim().isEmpty());
-//        if (hasSearch) {
-//            sql.append(" AND (");
-//            sql.append("p.name LIKE ? OR p.sku LIKE ? ");
-//            sql.append("OR p.display_sell_price LIKE ? ");
-//            sql.append("OR p.display_market_price LIKE ? ");
-//            sql.append("OR b.name LIKE ? ");
-//            sql.append("OR c.name LIKE ? ");
-//            sql.append(") ");
-//        }
-
-        if (selectedSort.equals("price-asc")) {
-            sql.append(" ORDER BY  p.display_sell_price asc ");
-        } else if (selectedSort.equals("price-desc")) {
-            sql.append(" ORDER BY  p.display_sell_price desc ");
-        } else {
-            sql.append(" ORDER BY  p.id");
-        }
-        sql.append(" LIMIT ? OFFSET ?");
+    // Cập nhật thông tin chung và xử lý Biến thể mặc định
+    public boolean updateProductGeneral(Product p, int defaultVariantId) throws SQLException {
+        Connection conn = null;
         try {
             conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(String.valueOf(sql));
+            conn.setAutoCommit(false); // Dùng Transaction để đảm bảo tính toàn vẹn
 
-//            if(hasSearch){
-//                search = "%"+search+"%";
-//                for (int i = 0; i < 7; i++) {
-//                    ps.setString(i, search);
-//                }
-//                ps.setInt(7, numPerPage);
-//                ps.setInt(8, (page - 1) * numPerPage);
-//            } else {
-//                ps.setInt(1, numPerPage);
-//                ps.setInt(2, (page - 1) * numPerPage);
-//            }
+            // 1. Cập nhật bảng products
+            String sqlProd = "UPDATE products SET name=?, sku=?, description=?, is_active=? WHERE id=?";
+            PreparedStatement psProd = conn.prepareStatement(sqlProd);
+            psProd.setString(1, p.getName());
+            psProd.setString(2, p.getSku());
+            psProd.setString(3, p.getDescription());
+            psProd.setInt(4, p.isActive() ? 1 : 0);
+            psProd.setInt(5, p.getId());
+            psProd.executeUpdate();
 
-            ps.setInt(1, numPerPage);
-            ps.setInt(2, (page - 1) * numPerPage);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(mapRStoProduct(rs));
-            }
-        } catch (SQLException e) {
+            // 2. Reset tất cả biến thể của SP này về is_default = 0
+            String sqlReset = "UPDATE product_variants SET is_default = 0 WHERE product_id = ?";
+            PreparedStatement psReset = conn.prepareStatement(sqlReset);
+            psReset.setInt(1, p.getId());
+            psReset.executeUpdate();
+
+            // 3. Set biến thể được chọn làm mặc định (is_default = 1)
+            String sqlSetDef = "UPDATE product_variants SET is_default = 1 WHERE id = ?";
+            PreparedStatement psSetDef = conn.prepareStatement(sqlSetDef);
+            psSetDef.setInt(1, defaultVariantId);
+            psSetDef.executeUpdate();
+
+            // 4. Đồng bộ giá và ảnh từ biến thể mặc định sang bảng products
+            String sqlSync = "UPDATE p SET p.oldPrice = v.market_price, p.sellPrice = v.sell_price, p.img = v.main_image_url " +
+                    "FROM products p JOIN product_variants v ON p.id = v.product_id WHERE v.id = ?";
+            PreparedStatement psSync = conn.prepareStatement(sqlSync);
+            psSync.setInt(1, defaultVariantId);
+            psSync.executeUpdate();
+
+            conn.commit();
+            return true;
+        } catch (Exception e) {
+            if (conn != null) conn.rollback();
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            return false;
+        } finally {
+            if (conn != null) conn.close();
         }
-        return list;
     }
+
+    // Thêm biến thể mới với SKU tự động
+    public boolean insertVariant(ProductVariant v, String productSku) {
+        String variantSku = productSku + "_" + v.getColorName().replaceAll("\\s+", ""); // Tự động tạo SKU
+        String sql = "INSERT INTO product_variants (product_id, color_name, sku, market_price, sell_price, stock_quantity, main_image_url, is_default) VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, v.getProductId());
+            ps.setString(2, v.getColorName());
+            ps.setString(3, variantSku);
+            ps.setDouble(4, v.getMarketPrice());
+            ps.setDouble(5, v.getSellPrice());
+            ps.setInt(6, v.getStockQuantity());
+            ps.setString(7, v.getMainImageUrl());
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }// 1. Thêm ảnh mới vào Gallery
+
+    public boolean insertProductImage(int pid, String imgPath) {
+        String sql = "INSERT INTO product_images (product_id, image_url) VALUES (?, ?)";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, pid);
+            ps.setString(2, imgPath);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    // 2. Lấy đường dẫn ảnh để xóa file vật lý
+    public String getImagePathById(int imgId) {
+        String sql = "SELECT image_url FROM product_images WHERE id = ?";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, imgId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return rs.getString("image_url");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // 3. Xóa record ảnh trong Database
+    public boolean deleteImageRecord(int imgId) {
+        String sql = "DELETE FROM product_images WHERE id = ?";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, imgId);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    public boolean updateProduct(String pid, String brandid, String cateid, String name, String sku, String discript, String varSelected, String isActive) throws SQLException {
+        try {
+            conn = DBConnect.getConnection();
+            conn.setAutoCommit(false);
+            String sqlProduct = "UPDATE products SET brands_id = ?, categories_id =?, name=?, sku=?, description=?, is_active=? WHERE id=?";
+            ps = conn.prepareStatement(sqlProduct);
+            ps.setString(1, brandid);
+            ps.setString(2, cateid);
+            ps.setString(3, name);
+            ps.setString(4, sku);
+            ps.setString(5, discript);
+            ps.setString(6, isActive);
+            ps.setString(7, pid);
+            ps.executeUpdate();
+
+            String sqlResetDefault = " UPDATE productvariants SET is_default =0  WHERE products_id = ? ";
+            java.sql.PreparedStatement ps3 = conn.prepareStatement(sqlResetDefault);
+            ps3.setString(1, pid);
+            ps3.executeUpdate();
+
+            String sqlVarDefault = " UPDATE productvariants SET is_default =1  WHERE id=? ";
+            java.sql.PreparedStatement ps2 = conn.prepareStatement(sqlVarDefault);
+            ps2.setString(1, varSelected);
+            ps2.executeUpdate();
+
+            String sqlUpDisplayProd = "UPDATE products p " +
+                    "JOIN productvariants v ON p.id = v.products_id " +
+                    "SET p.display_image_url = v.main_image_url, " +
+                    "    p.display_sell_price = v.sell_price, " +
+                    "    p.display_market_price = v.market_price " +
+                    "WHERE v.id = ? and p.id = ?";
+            java.sql.PreparedStatement ps4 = conn.prepareStatement(sqlUpDisplayProd);
+            ps4.setString(2, pid);
+            ps4.setString(1, varSelected);
+            ps4.executeUpdate();
+
+            conn.commit();
+            return true;
+
+        } catch (Exception e) {
+            conn.rollback();
+            return false;
+        } finally {
+            conn.setAutoCommit(true);
+            conn.close();
+
+        }
+
+    }
+
+    public boolean updateSpecs(String[] inputSpecIds, String[] inputSpecValue) throws SQLException {
+        try {
+            conn = DBConnect.getConnection();
+            conn.setAutoCommit(false);
+            String sqlProduct = "UPDATE productspecs SET spec_value= ? WHERE id=?";
+            ps = conn.prepareStatement(sqlProduct);
+
+            for (int i = 0; i < inputSpecIds.length; i++) {
+                ps.setString(1, inputSpecValue[i]);
+                ps.setString(2, inputSpecIds[i]);
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            conn.commit();
+            return true;
+
+        } catch (Exception e) {
+            conn.rollback();
+            return false;
+        } finally {
+            conn.setAutoCommit(true);
+            conn.close();
+        }
+    }
+
 }
 

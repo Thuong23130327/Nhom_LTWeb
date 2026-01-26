@@ -52,7 +52,7 @@ public class CheckoutDAO {
 
             psOrder.setString(3, order.getOrderCode());
             psOrder.setString(4, order.getStatus());
-            psOrder.setString(5, order.getPaymentStatus().name());
+            psOrder.setString(5, order.getPaymentStatus());
             psOrder.setDouble(6, order.getTotalProductsPrice());
             psOrder.setDouble(7, order.getShippingFee());
             psOrder.setDouble(8, order.getDiscountAmount());

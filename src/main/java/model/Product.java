@@ -112,6 +112,9 @@ public class Product {
 	public boolean isActive() {
 		return isActive;
 	}
+	public boolean getIsActive() {
+		return isActive;
+	}
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;

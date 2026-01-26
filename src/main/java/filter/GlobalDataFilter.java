@@ -42,7 +42,9 @@ public class GlobalDataFilter implements Filter {
             List<Category> categoryList = new  ArrayList<>();
             List<Category> parentList = new  ArrayList<>();
             List<Category> childList = new  ArrayList<>();
+            BrandService brandService = new BrandService();
             try {
+                brandList = brandService.getAllBrands();
                 categoryList = categoryService.getAllCategories();
                 for (Category category : categoryList) {
                     if (categoryService.isParent(category)) {
@@ -52,7 +54,7 @@ public class GlobalDataFilter implements Filter {
                     }
                 }
 
-
+                session.setAttribute("brandList", brandList);
                 session.setAttribute("categoryList", categoryList);
                 session.setAttribute("parentList", parentList);
                 session.setAttribute("childList", childList);

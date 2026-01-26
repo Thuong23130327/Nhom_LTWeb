@@ -16,8 +16,13 @@ public class CartService {
     public CartService() throws SQLException, ClassNotFoundException {
 
     }
+    public List<ProductVariant> getAllVariantByProductId(String productId) throws SQLException, ClassNotFoundException {
+        List<ProductVariant> variants = variantDAO.getVariantsByProductId(productId);
+        return variants != null ? variants : null;
+    }
 
-    public static ProductVariant getProductVariant(String variantId) {
+
+    public static ProductVariant getProductVariant(String variantId) throws SQLException {
         return variantDAO.getProductVariant(variantId);
     }
 
@@ -30,7 +35,7 @@ public class CartService {
     }
 
     // Cập nhật biến thể
-    public boolean updateVariant(Cart cart, int oldVid, String newVidStr) {
+    public boolean updateVariant(Cart cart, int oldVid, String newVidStr) throws SQLException {
         if (cart == null) return false;
 
         if (!cart.getItems().containsKey(oldVid)) {
