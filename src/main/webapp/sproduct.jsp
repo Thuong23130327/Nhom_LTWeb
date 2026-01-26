@@ -95,7 +95,7 @@
                         <input name="quantity" id="quanProduct" type="number" onchange="checkInput()" value="1">
                         <button type="button" class="quantity-btn" onclick="updateQuan(+1)">+</button>
 
-
+                        <input type="hidden" name="variants" id="ipListVar" value="${variants}">
                         <input type="hidden" name="nameProduct" id="ipNameP" type="text" value="${product.name}">
                         <input type="hidden" name="variantId" id="selectedVariantId" value="${curVariant.id}">
 

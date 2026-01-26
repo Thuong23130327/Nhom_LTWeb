@@ -166,3 +166,25 @@ document.addEventListener("DOMContentLoaded", function () {
         if(popup) popup.style.display = 'none';
     }
 });
+
+function updateItem() {
+    $.ajax({
+        url: path + "/admin/update-order-status",
+        type: "POST",
+        data: {
+            id: orderId,
+            status: newStatus
+        },
+        success: function (response) {
+            if (response.trim() == "true") {
+                alert("Cập nhật trạng thái thành công !");
+                location.reload();
+            } else {
+                alert("Có lỗi xảy ra khi Update trạng thái, vui lòng thử lại !");
+            }
+        },
+        error: function () {
+            alert("Có lỗi xảy ra khi Update trạng thái, vui lòng thử lại !");
+        }
+    });
+}

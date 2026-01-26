@@ -1,18 +1,57 @@
 package model;
 
-public class Banner {
-	private int id;
-	private String imageUrl; // Đường dẫn tới tệp ảnh (ví dụ: /assets/slider/bose-qc45.jpg)
-	private String targetUrl; // Liên kết đích khi click (ví dụ: /san-pham/bose-qc45)
-	private int sortOrder; // Thứ tự hiển thị trên slider
-	private boolean isActive;
+import java.sql.Timestamp;
 
-	public Banner(String imageUrl, String targetUrl, int sortOrder, boolean isActive) {
+public class Banner {
+    private int id;
+    private String imageUrl;   // Lưu tên file ảnh
+    private String targetUrl;  // Link khi click vào banner
+    private String title;
+    private String description;
+    private int sortOrder;
+    private boolean isActive;
+    private Timestamp createdAt;
+
+    public Banner() {
+
+    }
+
+
+    public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Banner(int id, String imageUrl, String targetUrl, String title, String description, int sortOrder,
+			boolean isActive, Timestamp createdAt) {
 		super();
+		this.id = id;
 		this.imageUrl = imageUrl;
 		this.targetUrl = targetUrl;
+		this.title = title;
+		this.description = description;
 		this.sortOrder = sortOrder;
 		this.isActive = isActive;
+		this.createdAt = createdAt;
 	}
 
 	public int getId() {

@@ -30,7 +30,7 @@ public class CheckoutService {
 
         // Trạng thái mặc định
         order.setStatus(OrderStatus.PENDING.name());
-        order.setPaymentStatus(PaymentStatus.UNPAID);
+        order.setPaymentStatus("Unpaid");
 
         // Tính toán tiền
         double totalProductPrice = cart.getTotalPrice();

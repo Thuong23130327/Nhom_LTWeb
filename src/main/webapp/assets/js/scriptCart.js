@@ -193,6 +193,3 @@ function selectColor(element, oldVid, newVid) {
         });
 }
 
-// function removeCartItem() {
-//
-// }

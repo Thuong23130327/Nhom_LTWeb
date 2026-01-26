@@ -13,7 +13,7 @@ public class SpecDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-//Lay thong so tu prdid
+    //Lay thong so tu prdid
     public List<ProductSpec> getSpecsByProductId(String productId) {
         List<ProductSpec> list = new ArrayList<>();
         String sql = "SELECT * FROM ProductSpecs WHERE Products_id = ?";
@@ -38,4 +38,6 @@ public class SpecDAO {
         }
         return list;
     }
+
+
 }

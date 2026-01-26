@@ -3,6 +3,7 @@ package service;
 import dao.VariantDAO;
 import model.ProductVariant;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProductVariantService {
@@ -14,7 +15,7 @@ public class ProductVariantService {
     }
 
     // Lấy chi tiết 1 biến thể
-    public ProductVariant getProductVariant(String variantId) {
+    public ProductVariant getProductVariant(String variantId) throws SQLException {
         return variantDAO.getProductVariant(variantId);
     }
 }
