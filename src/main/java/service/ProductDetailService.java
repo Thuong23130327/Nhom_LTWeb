@@ -7,6 +7,7 @@ import dao.GalleryDAO;
 import dao.ProductDAO;
 import dao.SpecDAO;
 import dao.VariantDAO;
+import model.Image;
 import model.ProductSpec;
 import model.ProductVariant;
 
@@ -19,6 +20,12 @@ public class ProductDetailService {
     public ProductDetailService() throws SQLException, ClassNotFoundException {
     }
 
+    public ProductVariant getVarByimg(String img, List<ProductVariant> productVariantList) throws SQLException, ClassNotFoundException {
+        for (ProductVariant productVariant : productVariantList) {
+            if (productVariant.getMainImageUrl() == img) return productVariant;
+        }
+        return null;
+    }
 
     public ProductVariant getVariantByImg(List<ProductVariant> list, String img) throws SQLException, ClassNotFoundException {
         if (list == null || list.isEmpty()) {
@@ -44,9 +51,9 @@ public class ProductDetailService {
         return specs != null ? specs : null;
     }
 
-    public List<String> getImageByProductId(String productId) throws SQLException, ClassNotFoundException {
-        List<String> images = galleryDAO.getImagesByProductId(productId);
-        return images != null ? images : null;
+    public List<Image> getImageByProductId(String productId) throws SQLException, ClassNotFoundException {
+        if (productId == null || productId.isEmpty()) return null;
+        return galleryDAO.getImagesByProductId(productId);
     }
 
 

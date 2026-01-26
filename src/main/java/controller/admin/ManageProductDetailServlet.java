@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Image;
 import model.Product;
 import model.ProductSpec;
 import model.ProductVariant;
@@ -23,7 +24,6 @@ import java.util.List;
 public class ManageProductDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
-        String vid = request.getParameter("vid");
 
         String action = request.getParameter("action");
         AdminProductService adminProductService = null;
@@ -32,32 +32,18 @@ public class ManageProductDetailServlet extends HttpServlet {
             ProductDetailService productDetailService = new ProductDetailService();
             ProductService productService = new ProductService();
 
-            if ("delete".equals(action)) {
-                if (pid != null)
-                    if (productService.deleteProduct(pid)) {
-                        response.sendRedirect(request.getContextPath() + "/admin/product-manager");
-                        return;
-                    }
-                if (vid != null)
-                    if (adminProductService.deleteVariant(vid)) {
-                        response.sendRedirect(request.getContextPath() + "/admin/product-manager");
-                        return;
-                    }
-
-            }
 
             Product product = productService.getById(pid);
             List<ProductSpec> specs = productDetailService.getAllSpecByProductId(pid);
             List<ProductVariant> variants = productDetailService.getAllVariantByProductId(pid);
-            List<String> imgs = productDetailService.getImageByProductId(pid);
+            List<Image> imgs = productDetailService.getImageByProductId(pid);
+            ProductVariant pv = productDetailService.getVarByimg(product.getImg(), variants);
 
+            request.setAttribute("pv", pv);
             request.setAttribute("p", product);
             request.setAttribute("variants", variants);
             request.setAttribute("specs", specs);
             request.setAttribute("images", imgs);
-            String variantsJson = new com.google.gson.Gson().toJson(variants);
-
-            request.setAttribute("variantsJson", variantsJson);
 
 
         } catch (SQLException e) {

@@ -36,13 +36,13 @@ public class ProductDetailServlet extends HttpServlet {
 
             List<ProductSpec> specs = productDetailService.getAllSpecByProductId(pid);
             List<ProductVariant> variants = productDetailService.getAllVariantByProductId(pid);
-            List<String> imgs = productDetailService.getImageByProductId(pid);
+            //List<String> imgs = productDetailService.getImageByProductId(pid);
             ProductVariant curVariant = productDetailService.getVariantByImg(variants, product.getImg());
 
             request.setAttribute("product", product);
             request.setAttribute("variants", variants);
             request.setAttribute("specs", specs);
-            request.setAttribute("images", imgs);
+            //request.setAttribute("images", imgs);
             request.setAttribute("curVariant", curVariant);
 
 

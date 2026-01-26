@@ -26,22 +26,22 @@
 <jsp:include page="/tag/_header.jsp"></jsp:include>
 <div class="slideshow-container">
     <div class="slides-track">
-        <div class="slide"><a href="speakers.jsp" class="a-nodecor"><img src="assets/img/banner/banner_1.png"
-                                                                         alt="Banner 1"></a></div>
-        <div class="slide"><a href="store.jsp" class="a-nodecor"><img src="assets/img/banner/banner_2.jpg"
-                                                                      alt="Banner 2"></a></div>
-        <div class="slide"><a href="headphones.jsp" class="a-nodecor"><img src="assets/img/banner/banner_3.png"
-                                                                           alt="Banner 3"></a></div>
-        <div class="slide"><a href="speakers.jsp" class="a-nodecor"><img src="assets/img/banner/banner_4.png"
-                                                                         alt="Banner 4"></a></div>
+        <c:forEach items="${bannerList}" var="b">
+            <div class="slide">
+                <a href="${AuraSound}${b.targetUrl}" class="a-nodecor">
+                    <img src="${AuraSound}/display-banner?name=${b.imageUrl}" alt="${b.title}">
+                </a>
+            </div>
+        </c:forEach>
     </div>
+
     <button class="slide-btn prev">&#10094;</button>
     <button class="slide-btn next">&#10095;</button>
+
     <div class="slide-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+        <c:forEach items="${bannerList}" varStatus="i">
+            <span class="dot ${i.first ? 'active' : ''}"></span>
+        </c:forEach>
     </div>
 </div>
 

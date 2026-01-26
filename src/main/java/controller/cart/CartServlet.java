@@ -11,6 +11,7 @@ import service.ProductVariantService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name = "CartServlet", value = "/cart")
 public class CartServlet extends HttpServlet {
@@ -104,7 +105,7 @@ public class CartServlet extends HttpServlet {
                         Product p = cartService.getProductById(id);
                         if (p != null) {
                             ProductVariant defaultVariant = CartService.getProductVariant(id);
-                            if(defaultVariant != null) {
+                            if (defaultVariant != null) {
                                 cart.addOrUpdateItem(p.getName(), defaultVariant, qty);
                             }
                         }
@@ -173,17 +174,17 @@ public class CartServlet extends HttpServlet {
             if (variantIdStr == null || variantIdStr.isEmpty()) {
                 throw new Exception("Lỗi: Không nhận được variantId từ trang sản phẩm!");
             }
-
-            int qty = 1;
+            int qty;
             try {
                 qty = (quantityStr != null && !quantityStr.isEmpty()) ? Integer.parseInt(quantityStr) : 1;
             } catch (NumberFormatException e) {
                 qty = 1;
             }
 
-            // Lấy giỏ hàng từ Session
+            // Lấy giỏ từ Session
             HttpSession session = request.getSession();
             Cart cart = (Cart) session.getAttribute("cart");
+
             if (cart == null) {
                 cart = new Cart();
                 session.setAttribute("cart", cart);
@@ -195,13 +196,11 @@ public class CartServlet extends HttpServlet {
             if (productVariant != null) {
                 cart.addOrUpdateItem(nameProduct, productVariant, qty);
                 session.setAttribute("cart", cart);
-                response.sendRedirect("cart.jsp");
+                request.getRequestDispatcher("cart.jsp").forward(request, response);
             } else {
                 throw new Exception("Lỗi: Biến thể ID " + variantIdStr + " không tồn tại trong DB!");
             }
-
         } catch (Exception e) {
-
         }
     }
 }

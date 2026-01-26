@@ -14,6 +14,27 @@ public class VariantDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
+    public boolean updateVariant(int vid, String sku, double oldP, double newP, int stock, String img) {
+        // Nếu không up ảnh mới (img == null), giữ nguyên ảnh cũ trong SQL
+        String sql = "UPDATE product_variants SET sku=?, market_price=?, sell_price=?, stock_quantity=?"
+                + (img != null ? ", main_image_url=?" : "") + " WHERE id=?";
+        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, sku);
+            ps.setDouble(2, oldP);
+            ps.setDouble(3, newP);
+            ps.setInt(4, stock);
+            if (img != null) {
+                ps.setString(5, img);
+                ps.setInt(6, vid);
+            } else {
+                ps.setInt(5, vid);
+            }
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public List<ProductVariant> getVariantsByProductId(String productId) {
         List<ProductVariant> list = new ArrayList<>();
@@ -89,5 +110,66 @@ public class VariantDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public boolean updateVariant(String vid, String inputClName, String inputStock, String inputOldP, String inputNewP, String finalImgUrl) throws SQLException {
+        try {
+            conn = DBConnect.getConnection();
+            conn.setAutoCommit(false);
+
+            String sql = "UPDATE ProductVariants SET color_name= ?,stock_quantity=?, market_price=?, sell_price=?,main_image_url=? WHERE id=?";
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, inputClName);
+            ps.setString(2, inputStock);
+            ps.setString(3, inputOldP);
+            ps.setString(4, inputNewP);
+            ps.setString(5, finalImgUrl);
+            ps.setString(6, vid);
+
+            ps.executeUpdate();
+            conn.commit();
+            return true;
+
+        } catch (Exception e) {
+            conn.rollback();
+            return false;
+        } finally {
+            conn.setAutoCommit(true);
+            conn.close();
+        }
+    }
+
+
+    public boolean addVariant(String inputPid, String inputClName, String inputStock, String inputOldP, String inputNewP, String finalImgUrl) throws SQLException {
+        try {
+            conn = DBConnect.getConnection();
+            conn.setAutoCommit(false);
+
+            String sql = "insert into ProductVariants (products_id,color_name,stock_quantity, market_price, sell_price,main_image_url,is_default ) values (?,?,?,?,?,?,0 )";
+            ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, (inputPid == null || inputPid.isEmpty()) ? 0 : Integer.parseInt(inputPid));
+            ps.setString(2, inputClName);
+            ps.setInt(3, (inputStock == null || inputStock.isEmpty()) ? 0 : Integer.parseInt(inputStock));
+            ps.setDouble(4, (inputOldP == null || inputOldP.isEmpty()) ? 0.0 : Double.parseDouble(inputOldP));
+            ps.setDouble(5, (inputNewP == null || inputNewP.isEmpty()) ? 0.0 : Double.parseDouble(inputNewP));
+            ps.setString(6, finalImgUrl);
+            int result = ps.executeUpdate();
+
+            conn.commit();
+            return result > 0;
+
+        } catch (Exception e) {
+            conn.rollback();
+            System.err.println("❌ LỖI TẠI addVariant DAO: ");
+            e.printStackTrace();
+            return false;
+        } finally {
+            conn.setAutoCommit(true);
+            conn.close();
+        }
+
+
     }
 }
