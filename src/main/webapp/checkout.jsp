@@ -128,7 +128,7 @@
 
             <div class="promo-code">
                 <input type="text" id="voucher-input" placeholder="Nhập mã giảm giá">
-                <button type="button" onclick="handleCheckVoucher()">Áp dụng</button>
+                <button type="button" id="btn-apply-voucher">Áp dụng</button>
             </div>
 
             <span id="voucher-msg"></span>
