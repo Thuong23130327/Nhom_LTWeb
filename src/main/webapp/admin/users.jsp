@@ -5,15 +5,6 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%
-    int userId = request.getAttribute("id") == null ? 0 : (int) request.getAttribute("id");
-    String userEmail = request.getAttribute("email") == null ? "" : request.getAttribute("email") + "";
-    String fullName = request.getAttribute("fullName") == null ? "" : request.getAttribute("fullName") + "";
-    String passHash = request.getAttribute("password_hash") == null ? "" : request.getAttribute("password_hash") + "";
-    String userRole = request.getAttribute("role") == null ? "" : request.getAttribute("role") + "";
-    boolean lockedStatus = request.getAttribute("is_locked") != null && (boolean) request.getAttribute("is_locked");
-    Timestamp timeCreated = (Timestamp) request.getAttribute("created_at");
-
-    List<User> userList = (List<User>) request.getAttribute("userList");
     request.setAttribute("pageTitle", "Quản lý Tài Khoản- AuraSound");
     request.setAttribute("activePage", "acc");
 %>
@@ -54,13 +45,14 @@
                 động tài khoản</p>
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <table class="table table-striped table-sm">
+                    <table id="userTable" class="table table-striped table-sm">
                         <thead>
                         <tr>
                             <th>ID</th>
                             <th>Tên</th>
                             <th>Email</th>
                             <th>Vai trò</th>
+                            <th>Trạng thái</th>
                             <th>Ngày tạo</th>
                             <th>Thao tác</th>
                         </tr>
@@ -93,14 +85,9 @@
                                 </td>
                                 <td>${u.createdAt}</td>
                                 <td>
-                                    <a href="${AuraSound}/profileM/profile.jsp?id=${u.id}">
-                                        <button class="btn btn-sm btn-info">Xem</button>
+                                    <a href="${AuraSound}/admin/manage-order-detail?id=${o.id}">
+                                        <button class="btn-sm">Chi tiết</button>
                                     </a>
-                                    <c:if test="${u.role != 'Admin'}">
-                                        <a href="${AuraSound}/404.jsp?id=${u.id}">
-                                            <button class="btn btn-sm btn-warning">Sửa</button>
-                                        </a>
-                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -113,10 +100,47 @@
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/script.js"></script>
 <script src="../assets/js/scriptAdmin.js"></script>
 <script src="../assets/js/scriptProfile.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // 1. Khởi tạo DataTables
+        var table = $('#userTable').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/vi.json"
+            }
+        });
+
+        $('#userTable thead tr').clone(true).appendTo('#userTable thead');
+        $('#userTable thead tr:eq(1) th').each(function (i) {
+            var title = $(this).text();
+            if (title !== 'Thao tác' && title !== 'Stt') { // Không thêm lọc cho cột thao tác/stt
+                $(this).html('<input type="text" class="form-control form-control-sm" placeholder="Lọc ' + title + '" />');
+
+                $('input', this).on('keyup change', function () {
+                    if (table.column(i).search() !== this.value) {
+                        table.column(i).search(this.value).draw();
+                    }
+                });
+            } else {
+                $(this).html('');
+            }
+        });
+    });
+</script>
 </body>
 
 </html>

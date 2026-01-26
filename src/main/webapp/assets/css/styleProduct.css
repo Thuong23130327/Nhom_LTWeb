@@ -824,3 +824,65 @@ textarea {
 .btn-group .btn.cancel:hover {
     background: #eeeeee;
 }
+
+.sentiment-rating {
+
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.sentiment-rating input[type="radio"] {
+    display: none;
+}
+
+.rate-btn {
+    padding: 4px 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: #666;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+.rate-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+    scale: calc(1.06);
+}
+
+.sentiment-rating input[type="radio"]:checked + .rate-btn {
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-color: white;
+}
+
+.btn-very-good {
+    font-size: 16px;
+    padding: 5px 10px;
+}
+
+#rate-5:checked + .btn-very-good {
+    background-color: #28a745;
+}
+
+#rate-4:checked + .btn-good {
+    background-color: #72c02c;
+}
+
+#rate-3:checked + .btn-neutral {
+    background-color: #ffc107;
+}
+
+#rate-2:checked + .btn-bad {
+    background-color: #82bfff;
+}
+
+#rate-1:checked + .btn-very-bad {
+    background-color: rgb(54, 86, 209);
+}

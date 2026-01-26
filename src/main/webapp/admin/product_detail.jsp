@@ -3,7 +3,7 @@
 
 <%
     request.setAttribute("pageTitle", "QUẢN LÝ SẢN PHẨM - AuraSound");
-    request.setAttribute("activePage", "order");
+    request.setAttribute("activePage", "product");
 %>
 
 <!DOCTYPE html>
@@ -86,12 +86,11 @@
                 <div class="col-lg-12 mb-2 ">
                     <div class="card h-100">
                         <form action="${AuraSound}/admin/upd-product?action=updateProduct" method="post">
-                            <input name="inputPid" type="hidden" value="${p.id}">
+                            <c:if test="${p != null}">
+                                <input name="inputPid" type="hidden" value="${p.id}">
+                            </c:if>
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
-                                    <div class="icon-shape bg-primary-light text-primary rounded me-3">
-                                        <i class="fas fa-info-circle fs-5"></i>
-                                    </div>
                                     <span><i class="fas fa-user-circle me-2"></i>Thông tin chung</span>
                                 </div>
 
@@ -234,7 +233,8 @@
                                     <div class="icon-shape bg-primary-light text-primary rounded me-3">
                                         <i class="fas fa-info-circle fs-5"></i>
                                     </div>
-                                    <span><i class="fas fa-user-circle me-2"></i>Biến thể </span>
+                                    <span><i class="bi bi-airplane-fill"></i>
+Sửa Biến thể </span>
                                 </div>
 
                                 <div class="d-flex align-items-center gap-4">
@@ -287,35 +287,6 @@
                                 </div>
                             </div>
 
-                            <%--                       <div class="card-header  d-flex justify-content-between">--%>
-                            <%--                            <div class="row">--%>
-                            <%--                                <div class="col-lg-4 mb-2 ">--%>
-                            <%--                                    <span><i class="fas fa-user-circle me-2"></i>Biến thể </span>--%>
-                            <%--                                </div>--%>
-
-                            <%--                                <div class="col-lg-3 mb-2 d-flex align-items-center">--%>
-                            <%--                                  --%>
-                            <%--                                </div>--%>
-
-                            <%--                                <div class="col-lg-2 mb-2 ">--%>
-                            <%--                                    --%>
-                            <%--                                </div>--%>
-                            <%--                                <div class="col-lg-3 mb-2 ">--%>
-                            <%--                                    <div class="d-flex flex-sm-row justify-content-end">--%>
-                            <%--                                        <button onclick="confirmDelete('v', document.getElementById('current-variant-id').value)"--%>
-                            <%--                                                type="button" class="btn btn-outline-danger btn-accent">--%>
-                            <%--                                            Xóa Biến thể--%>
-                            <%--                                        </button>--%>
-                            <%--                                        <button type="submit" class="btn btn-primary btn-gradient ms-2">--%>
-                            <%--                                            Lưu Thay Đổi--%>
-                            <%--                                        </button>--%>
-                            <%--                                        <button type="button" class="btn btn-outline-primary mb-3" data-bs-toggle="modal" data-bs-target="#addVariantModal">--%>
-                            <%--                                            <i class="bi bi-plus-circle"></i> Thêm biến thể mới--%>
-                            <%--                                        </button>--%>
-                            <%--                                    </div>--%>
-                            <%--                                </div>--%>
-                            <%--                            </div>--%>
-                            <%--                        </div>--%>
 
                             <div class="card-body">
                                 <div class="row">
@@ -350,8 +321,9 @@
                                         <span class="mb-4"><strong>Ảnh đại diện: </strong></span>
                                         <input type="file" name="productImage" class="form-control" accept="image/*">
                                         <input type="hidden" name="vid" id="current-variant-id" value="">
-                                        <input type="hidden" name="inputPid" value="${p.id}">
-                                        <input type="hidden" name="currentImgUrl" id="current-img-url" value="">
+                                        <c:if test="${p != null}">
+                                            <input name="inputPid" type="hidden" value="${p.id}">
+                                        </c:if> <input type="hidden" name="currentImgUrl" id="current-img-url" value="">
                                     </div>
 
                                     <div class="col-lg-4 mb-2 ">
@@ -416,11 +388,13 @@
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex justify-content-between">
-                        <h6>Ảnh sản phẩm</h6>
-                        <form action="${AuraSound}/admin/upd-gallery?action=add" method="post"
+                        <h6><i class="bi bi-file-image"></i>Ảnh sản phẩm</h6>
+                        <form action="${AuraSound}/admin/upd-product?action=addGalery" method="post"
                               enctype="multipart/form-data">
-                            <input type="hidden" name="pid" value="${p.id}">
-                            <input type="file" name="galleryFiles" class="d-none" multiple id="btn-upload"
+                            <c:if test="${p != null}">
+                                <input name="inputPid" type="hidden" value="${p.id}">
+                            </c:if>
+                            <input type="file" name="galleryFiles" class="d-none" id="btn-upload"
                                    onchange="this.form.submit()">
                             <button type="button" class="btn btn-sm btn-success"
                                     onclick="document.getElementById('btn-upload').click()">
@@ -431,7 +405,9 @@
 
                     <div class="card-body">
                         <form action="${AuraSound}/admin/upd-product?action=updateOrder" method="post">
-                            <input type="hidden" name="inputPid" value="${p.id}">
+                            <c:if test="${p != null}">
+                                <input name="inputPid" type="hidden" value="${p.id}">
+                            </c:if>
                             <div class="row">
                                 <c:forEach items="${images}" var="img">
                                     <div class="col-md-3 mb-3 text-center">
@@ -446,7 +422,7 @@
                                                        class="form-control text-center">
                                             </div>
 
-                                            <a href="admin/upd-gallery?action=delete&imgId=${img.id}&pid=${p.id}"
+                                            <a href="${AuraSound}/admin/upd-product?action=delGalery&imgId=${img.id}&inputPid=${p.id}"
                                                class="btn btn-sm btn-outline-danger w-100"
                                                onclick="return confirm('Xóa ảnh này khỏi AuraSound?')">
                                                 <i class="fas fa-trash"></i> Xóa ảnh
@@ -491,8 +467,9 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form action="${AuraSound}/admin/upd-product?action=addVariant" method="post"
-                          enctype="multipart/form-data">
-                        <input type="hidden" name="inputPid" value="${p.id}">
+                          enctype="multipart/form-data"><c:if test="${p != null}">
+                        <input name="inputPid" type="hidden" value="${p.id}">
+                    </c:if>
 
                         <div class="modal-header">
                             <h5 class="modal-title">Thêm màu mới cho ${p.name}</h5>

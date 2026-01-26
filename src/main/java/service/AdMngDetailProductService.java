@@ -17,9 +17,7 @@ public class AdMngDetailProductService {
 
         return productDao.updateProduct(pid, brandid, cateid, name, sku, discript, varSelected, isActive);
 
-
     }
-
 
     public static void main(String[] args) throws SQLException {
         AdMngDetailProductService s = new AdMngDetailProductService();
@@ -40,7 +38,6 @@ public class AdMngDetailProductService {
     }
 
     public boolean updateVariant(String vid, String inputClName, String inputStock, String inputOldP, String inputNewP, String finalImgUrl) throws SQLException {
-
         return variantDao.updateVariant(vid, inputClName, inputStock, inputOldP, inputNewP, finalImgUrl);
 
 
@@ -53,6 +50,19 @@ public class AdMngDetailProductService {
 
     public boolean updateOrderImage(String[] inputImageIds, String[] inputOrderIds) {
         return galleryDao.updateOrderImage(inputImageIds, inputOrderIds);
+
+
+    }
+
+    public boolean addImage(String pid, String img) {
+        return galleryDao.addImage(pid, img);
+
+
+    }
+
+    public boolean delImage(String inputPid, String imgId) {
+        return galleryDao.delImage(inputPid, imgId);
+
 
 
     }

@@ -44,8 +44,8 @@
 
                     <div class="small-img-group" id="thumbScroll">
                         <c:forEach items="${images}" var="eachImg">
-                            <img src="${eachImg}"
-                                 class="small-img ${eachImg == curVariant.mainImageUrl ? 'active' : ''}"
+                            <img src="${eachImg.imageUrl}"
+                                 class="small-img ${eachImg.imageUrl == curVariant.mainImageUrl ? 'active' : ''}"
                                  onclick="changeMainImg(this.src)">
                         </c:forEach>
                     </div>
@@ -89,7 +89,8 @@
 
                     <div class="product-quantity">
                         <h4>Số lượng còn:
-                            <span id="stock" data-stock="${curVariant.stockQuantity}">${curVariant.stockQuantity} </span>
+                            <span id="stock"
+                                  data-stock="${curVariant.stockQuantity}">${curVariant.stockQuantity} </span>
                         </h4>
                         <button type="button" class="quantity-btn" onclick="updateQuan(-1)">-</button>
                         <input name="quantity" id="quanProduct" type="number" onchange="checkInput()" value="1">
@@ -161,27 +162,10 @@
                 </div>
 
 
-                <button class="btn-review">Viết đánh giá</button>
-                <div class="over-lay"></div>
-                <div class="wrapper">
-
-                    <h3>Đánh giá sản phẩm</h3>
-                    <form action="cart">
-                        <div class="rating">
-                            <input type="number" name="rating" hidden>
-                            <i class='bx bx-star star'></i>
-                            <i class='bx bx-star star'></i>
-                            <i class='bx bx-star star'></i>
-                            <i class='bx bx-star star'></i>
-                            <i class='bx bx-star star'></i>
-                        </div>
-                        <textarea name="opinion" cols="30" rows="5" placeholder="Đánh giá của bạn..."></textarea>
-                        <div class="btn-group">
-                            <button type="submit" class="btn submit">Gửi</button>
-                            <button class="btn cancel">Cancel</button>
-                        </div>
-                    </form>
-                </div>
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                       onclick="handleReviewClick()">
+                    <i class="bi bi-plus-circle"></i> Đánh giá sản phẩm
+                </button>
 
 
             </div>
@@ -229,51 +213,6 @@
                 </div>
             </div>
 
-            <div class="boxReview-experience">
-                <h4>Đánh giá theo trải nghiệm</h4>
-                <div class="experience-review-item">
-                    <div class="item-title">Thời lượng pin</div>
-                    <div class="result-item">
-                        <div class="star">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="item-point">5/5</div>
-                        <div class="item-review-count">(19 đánh giá)</div>
-                    </div>
-                </div>
-                <div class="experience-review-item">
-                    <div class="item-title">Cảm giác đeo</div>
-                    <div class="result-item">
-                        <div class="star">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="item-point">5/5</div>
-                        <div class="item-review-count">(19 đánh giá)</div>
-                    </div>
-                </div>
-                <div class="experience-review-item">
-                    <div class="item-title">Chất âm</div>
-                    <div class="result-item">
-                        <div class="star">
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                            <i class='bx bxs-star'></i>
-                        </div>
-                        <div class="item-point">5/5</div>
-                        <div class="item-review-count">(19 đánh giá)</div>
-                    </div>
-                </div>
-            </div>
         </div>
 
 
@@ -319,6 +258,106 @@
         </div>
     </section>
 </main>
+
+<div class="modal fade" id="addVariantModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="${AuraSound}/add-Review" method="post"
+                  enctype="multipart/form-data">
+                <input type="hidden" name="inputPid" value="${product.id}">
+                <input type="hidden" name="inputUid" value="${sessionScope.auth.id}">
+
+                <div class="modal-header">
+                    <h2 class="modal-title" style="font-size: 16px">Đánh giá ${product.name}</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label d-block fw-bold">Mức độ hài lòng của bạn:</label>
+                        <div class="sentiment-rating">
+
+                            <input type="radio" name="rating" id="rate-1" value="1"/>
+                            <label for="rate-1" class="rate-btn btn-very-bad">Cực tệ</label>
+
+                            <input type="radio" name="rating" id="rate-2" value="2"/>
+                            <label for="rate-2" class="rate-btn btn-bad">Chưa ổn</label>
+
+                            <input type="radio" name="rating" id="rate-3" value="3"/>
+                            <label for="rate-3" class="rate-btn btn-neutral">Trung bình</label>
+
+                            <input type="radio" name="rating" id="rate-4" value="4"/>
+                            <label for="rate-4" class="rate-btn btn-good">Tuyệt</label>
+
+                            <input type="radio" name="rating" id="rate-5" value="5" required/>
+                            <label for="rate-5" class="rate-btn btn-very-good">Rât hài lòng</label>
+
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">Cảm nhận về sản phẩm:</label>
+                        <textarea name="comment" id="comment" class="form-control" rows="3"
+                                  placeholder="Chia sẻ trải nghiệm của bạn về âm thanh, thiết kế..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Thêm hình ảnh thực tế (nếu có):</label>
+                        <input type="file" name="reviewFiles" class="form-control" accept="image/*" multiple
+                        >
+                        <div id="review-preview" class="d-flex gap-2 mt-2"></div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer d-flex justify-content-end">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <%
+        String msg = (String) session.getAttribute("msg");
+        if (msg != null) {
+            if (msg.equals("success")) {
+    %>
+    <script>
+        alert("Cập nhật THÀNH CÔNG!!");
+    </script>
+    <%
+        }
+        if (msg.equals("fail")) {
+    %>
+    <script>
+        alert("Cập nhật THẤT BẠI!!");
+    </script>
+    <%
+            }
+            session.removeAttribute("msg");
+        }
+    %>
+
+</div>
+<script>
+    function handleReviewClick() {
+        const isLoggedIn = ${
+        sessionScope.auth != null ? 'true' : 'false'
+    }
+        ;
+        if (isLoggedIn) {
+            var myModal = new bootstrap.Modal(document.getElementById('addVariantModal'));
+            myModal.show();
+        } else {
+            alert("Vui lòng đăng nhập để tiếp tục đánh giá sản phẩm!");
+
+            window.location.href = '${AuraSound}/login';
+        }
+    }
+</script>
+
 <jsp:include page="/tag/_footer.jsp"></jsp:include>
 
 <script src="${AuraSound}/assets/js/script.js"></script>
@@ -327,91 +366,6 @@
 <script src="${AuraSound}/assets/js/scriptProduct.js"></script>
 </body>
 </html>
-
-<%--CODE CŨ--%>
-
-
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" %>--%>
-<%--<%@ include file="/tag/_taglibs.jsp" %>--%>
-
-<%--&lt;%&ndash;%>
-<%--    request.setAttribute("pageTitle", "Tên sp - AuraSound");--%>
-<%--    request.setAttribute("activePage", "product");--%>
-<%--    request.setAttribute("keepDefaultCss", true);--%>
-<%--%>--%>
-
-<%--<c:set var="customjs" scope="request">--%>
-<%--    <script src="assets/js/scriptProduct.js"></script>--%>
-<%--</c:set>--%>
-<%--<head>--%>
-<%--    <meta charset="UTF-8">--%>
-<%--    <meta name="viewport" content="width=device-width, initial-scale=1.0">--%>
-<%--    <title>${pageTitle}</title>--%>
-
-<%--    <link rel="preconnect" href="https://fonts.googleapis.com">--%>
-<%--    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>--%>
-<%--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">--%>
-<%--    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">--%>
-<%--    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet"/>--%>
-<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">--%>
-<%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">--%>
-<%--    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>--%>
-<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"--%>
-<%--          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">--%>
-
-<%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleStore.css">--%>
-<%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">--%>
-<%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleProfile.css">--%>
-<%--    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHeadphones.css">--%>
-<%--    <link rel="stylesheet" href="assets/css/product_detail.css">--%>
-
-<%--</head>--%>
-
-<%--<body>--%>
-
-<%--&lt;%&ndash;%>
-
-<%--%>--%>
-<%--<main>--%>
-<%--    <section class="container sproduct my-5 pt-5">--%>
-<%--                <h2 class="product-price-detail" id="displayPrice">--%>
-<%--                    <fmt:formatNumber value="${curVariant.price}" pattern="#,###"/> VNĐ--%>
-<%--                </h2>--%>
-<%--                <div class="product-options">--%>
-<%--                    <h4 class="option-title">Màu sắc:</h4>--%>
-<%--                    <div class="color-options-grid">--%>
-<%--                        <c:forEach var="v" items="${variants}">--%>
-<%--                            <div class="color-item" onclick="selectColor(this)" data-variant-id="${v.variantId}"--%>
-<%--                                 data-img="${v.mainImageUrl}">--%>
-<%--                                <img src="${v.mainImageUlr}" alt="${v.colorName}">--%>
-<%--                                <span>${v.colorName}</span>--%>
-<%--                                <div class="check-mark"><i class='bx bx-check'></i></div>--%>
-<%--                            </div>--%>
-<%--                        </c:forEach>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--                <div class="quantity-section mt-4">--%>
-<%--                    <h4 class="option-title mb-3">Số lượng: ${curVariant.stockQuantity}</h4>--%>
-<%--                    <div class="quantity-input-group d-flex align-items-center mb-4">--%>
-<%--                        &lt;%&ndash; Nút trừ/cộng giúp tăng UX trên mobile &ndash;%&gt;--%>
-<%--                        <button class="qty-btn minus" onclick="changeQty(-1)">-</button>--%>
-<%--                        <input type="number" value="1" min="1" class="qty-input" id="productQty">--%>
-<%--                        <button class="qty-btn plus" onclick="changeQty(1)">+</button>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-
-<%--                <div class="action-btns d-flex gap-3">--%>
-<%--                    <button class="btn-add-cart flex-grow-1" onclick="addToCart('${product.productId}')">--%>
-<%--                        <i class='bx bx-cart-add'></i> Thêm vào giỏ hàng--%>
-<%--                    </button>--%>
-<%--                    <button class="btn-buy-now flex-grow-1" onclick="buyNow('${product.productId}')">--%>
-<%--                        Mua Ngay--%>
-<%--                    </button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </section>--%>
 
 
 

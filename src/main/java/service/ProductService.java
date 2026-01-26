@@ -68,4 +68,17 @@ public class ProductService {
     public int totalProduct(String[] selectedBrands, String[] selectedCates) {
         return productDao.filterProduct(selectedBrands, selectedCates, 0, 0, null).size();
     }
+
+    public int addNewProduct(Product p) {
+        return productDao.addProduct(p);
+
+    }
+
+    public void updateSearchCount(String pid) {
+        productDao.updateSearchCount(pid);
+    }
+
+    public void updateViewCount(String pid) {
+        productDao.updateViewCount(pid);
+    }
 }

@@ -157,15 +157,49 @@ public class AdUpdateProduct extends HttpServlet {
 
             boolean a = false;
 
-                a = service.updateOrderImage(inputImageIds, inputOrderIds);if (a) {
-                    session.setAttribute("msg", "success");
-                    response.sendRedirect(request.getContextPath() + "/admin/product-detail-manager?pid=" + inputPid);
-                } else {
-                    session.setAttribute("msg", "fail");
-                    response.sendRedirect(request.getContextPath() + "/admin/product-detail-manager?pid=" + inputPid);
-                }
+            a = service.updateOrderImage(inputImageIds, inputOrderIds);
+            if (a) {
+                session.setAttribute("msg", "success");
+                response.sendRedirect(request.getContextPath() + "/admin/product-detail-manager?pid=" + inputPid);
+            } else {
+                session.setAttribute("msg", "fail");
+                response.sendRedirect(request.getContextPath() + "/admin/product-detail-manager?pid=" + inputPid);
+            }
 
 
+        } else if (action.equals("addGalery")) {
+            String inputPid = request.getParameter("inputPid");
+            Part filePart = request.getPart("galleryFiles");
+            String finalImgUrl = "";
+
+            System.out.println("PID nhận được: [" + inputPid + "]");
+            if (filePart != null && filePart.getSize() > 0) {
+                Cloudinary cloudinary = CloundinaryLib.getCloudinary();
+                byte[] fileBytes = filePart.getInputStream().readAllBytes();
+                Map uploadResult = cloudinary.uploader().upload(fileBytes, ObjectUtils.emptyMap());
+
+                finalImgUrl = uploadResult.get("secure_url").toString();
+            }
+            boolean a = service.addImage(pid, finalImgUrl);
+            if (a) {
+                session.setAttribute("msg", "success");
+                response.sendRedirect(request.getContextPath() + "/admin/product-detail-manager?pid=" + inputPid);
+            } else {
+                session.setAttribute("msg", "fail");
+                response.sendRedirect(request.getContextPath() + "/admin/product-detail-manager?pid=" + inputPid);
+            }
+
+        } else if (action.equals("delGalery")) {
+            String inputPid = request.getParameter("inputPid");
+            String imgId = request.getParameter("imgId");
+            boolean a = service.delImage(inputPid, imgId);
+            if (a) {
+                session.setAttribute("msg", "success");
+                response.sendRedirect(request.getContextPath() + "/admin/product-detail-manager?pid=" + inputPid);
+            } else {
+                session.setAttribute("msg", "fail");
+                response.sendRedirect(request.getContextPath() + "/admin/product-detail-manager?pid=" + inputPid);
+            }
         }
     }
 }
