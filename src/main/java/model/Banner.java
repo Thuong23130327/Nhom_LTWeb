@@ -4,8 +4,8 @@ import java.sql.Timestamp;
 
 public class Banner {
     private int id;
-    private String imageUrl;   // Lưu tên file ảnh
-    private String targetUrl;  // Link khi click vào banner
+    private String imageUrl;
+    private String targetUrl;
     private String title;
     private String description;
     private int sortOrder;

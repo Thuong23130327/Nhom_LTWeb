@@ -13,11 +13,11 @@ public class BannerDAO {
 
     private Banner mapBaner(ResultSet rs) throws SQLException {
         return new Banner(rs.getInt("id"), rs.getString("image_url"), rs.getString("target_url"), rs.getString("title")
-                , rs.getString("discription"), rs.getInt("sort_order"), rs.getBoolean("is_active"), rs.getTimestamp("created_at"));
+                , rs.getString("description"), rs.getInt("sort_order"), rs.getBoolean("is_active"), rs.getTimestamp("created_at"));
     }
 
-    public List<Banner> getListBanner() {
-        String sql = "select * from banner where is_active=1";
+    public List<Banner> get3ListBanner() {
+        String sql = "select * from banners where is_active=1 limit 3";
         try (Connection conn = DBConnect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
         ) {
