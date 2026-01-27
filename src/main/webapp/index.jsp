@@ -29,7 +29,7 @@
         <c:forEach items="${bannerList}" var="b">
             <div class="slide">
                 <a href="${AuraSound}${b.targetUrl}" class="a-nodecor">
-                    <img src="${AuraSound}/display-banner?name=${b.imageUrl}" alt="${b.title}">
+                    <img src="${b.imageUrl}" alt="${b.title}">
                 </a>
             </div>
         </c:forEach>
@@ -39,13 +39,27 @@
     <button class="slide-btn next">&#10095;</button>
 
     <div class="slide-dots">
-        <c:forEach items="${bannerList}" varStatus="i">
-            <span class="dot ${i.first ? 'active' : ''}"></span>
-        </c:forEach>
+
     </div>
 </div>
 
 <main class="home-container content">
+
+
+    <section id="brand" class="container">
+        <div class="container text-center mt-5 py-5">
+        <h3>Các thương hiệu hợp tác với AuraSound</h3>
+        </div>
+
+        <div class="row m-0 py5">
+            <c:forEach items="${brandList}" var="brand">
+                <a href="${AuraSound}/product?brandId=${brand.id}" class="col-lg-2 col-md-4 col-6 p-0">
+                <img class="img-fluid" src="${brand.logoUrl}" alt="${brand.name}">
+            </a>
+            </c:forEach>
+        </div>
+    </section>
+
     <section id="service-commitment" class="py-5">
         <div class="container row mx-auto">
             <div class="feature-box col-lg-3 col-md-6 col-12 mb-4"><i class="ri-truck-line"></i><h5 class="mt-3">GIAO
@@ -63,7 +77,11 @@
         </div>
 
     </section>
+
+
+
 </main>
+
 <jsp:include page="/tag/_footer.jsp"></jsp:include>
 
 <script src="${AuraSound}/assets/js/script.js"></script>
