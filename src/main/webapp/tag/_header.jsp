@@ -61,7 +61,7 @@
                 </form>
 
 
-                <a class="a-nodecor " href="${AuraSound}/index.jsp">
+                <a class="a-nodecor " href="${AuraSound}/home">
                     <div class="home ${activePage =='home'?'active':''}">Trang chủ</div>
                 </a>
                 <a class="a-nodecor" href="${AuraSound}/contact">

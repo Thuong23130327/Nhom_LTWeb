@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Banner;
 import model.Brand;
+import model.Product;
 import service.AdCustomService;
 import service.HomeService;
 
@@ -23,11 +24,12 @@ public class HomeServlet extends HttpServlet {
         List<Brand> brandList = null;
         try {
             brandList = service.getListBrands();
+            List<Product> featuredProducts = service.getFeaturedProducts(8);
             request.setAttribute("bannerList", bannerList);
             request.setAttribute("brandList", brandList);
             System.out.println(bannerList + " " + brandList);
+            request.setAttribute("featuredProducts", featuredProducts);
             request.getRequestDispatcher("index.jsp").forward(request, response);
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

@@ -40,7 +40,24 @@ public class ProductDAO {
         }
         return list;
     }
-
+    public List<Product> getFeaturedProducts(int limit) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT *, (avg_rating + (view_count / (SELECT SUM(view_count) + 1 FROM products) * 100) " +
+                "+ (search_count / (SELECT SUM(search_count) + 1 FROM products) * 100)) as hot_score " +
+                "FROM products WHERE is_active = 1 ORDER BY hot_score DESC LIMIT ?";
+        try (Connection conn = DBConnect.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, limit);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = mapRStoProduct(rs);
+                list.add(p);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     public List<Product> getProductByCategoryId(String cateId) {
         List<Product> list = new ArrayList<>();
         String sql =

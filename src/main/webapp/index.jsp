@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleStore.css">
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleHome.css">
     <link rel="stylesheet" href="${AuraSound}/assets/css/styleProfile.css">
+    <link rel="stylesheet" href="${AuraSound}/assets/css/styleHeadphones.css">
 
 </head>
 
@@ -48,17 +49,61 @@
 
     <section id="brand" class="container">
         <div class="container text-center mt-5 py-5">
-        <h3>Các thương hiệu hợp tác với AuraSound</h3>
+            <h3>Các thương hiệu hợp tác với AuraSound</h3>
         </div>
 
         <div class="row m-0 py5">
             <c:forEach items="${brandList}" var="brand">
                 <a href="${AuraSound}/product?brandId=${brand.id}" class="col-lg-2 col-md-4 col-6 p-0">
-                <img class="img-fluid" src="${brand.logoUrl}" alt="${brand.name}">
-            </a>
+                    <img class="img-fluid" src="${brand.logoUrl}" alt="${brand.name}">
+                </a>
             </c:forEach>
         </div>
     </section>
+
+    <div class="row mx-auto container-fluid">
+        <div class="container text-center mt-5 py-5">
+            <h3>Sản phẩm nổi bật</h3>
+            <hr class="mx-auto">
+            <p>Bạn có thể tìm thấy những sản phẩm HOTT của Aurasound tại đây.</p>
+        </div>
+        <c:forEach items="${featuredProducts}" var="p">
+            <div class="product  col-lg-3 col-md-4 col-12">
+
+                <a href="detail?pid=${p.id}" class="product-card">
+                    <c:if test="${p.discountPercent > 0}">
+                        <div class="product-badge discount">Giảm ${p.discountPercent} %</div>
+                    </c:if>
+
+                    <img src="${p.img}" alt="${p.name}" onerror="this.src='https://placehold.co/300x300?text=No+Image'">
+
+                    <div class="product-card-info">
+                        <h4>${p.name}</h4>
+
+                        <div class="price-block">
+                            <div class="new-price"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/> đ</div>
+
+                            <c:if test="${p.discountPercent > 0}">
+                                <div class="old-price"><fmt:formatNumber value="${p.oldPrice}" pattern="#,###"/> đ</div>
+                            </c:if>
+
+                        </div>
+
+                        <div class="product-bottom-row">
+                            <div class="rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>${p.avgRating}</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </a> <a href="checkout.html">
+                <button class="buy-btn">Mua Ngay</button>
+            </a></div>
+        </c:forEach>
+
+    </div>
 
     <section id="service-commitment" class="py-5">
         <div class="container row mx-auto">
@@ -77,7 +122,6 @@
         </div>
 
     </section>
-
 
 
 </main>

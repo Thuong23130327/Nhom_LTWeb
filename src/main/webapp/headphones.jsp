@@ -87,6 +87,7 @@
         </div>
 
         <div class="product-grid" id="product-grid">
+
             <c:forEach items="${productList}" var="p">
                 <a href="detail?pid=${p.id}" class="product-card">
                     <c:if test="${p.discountPercent > 0}">
