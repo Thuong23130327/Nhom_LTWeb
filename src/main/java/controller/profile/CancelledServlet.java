@@ -14,10 +14,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "ShippingServlet", value = "/order-shipping")
-public class ShippingServlet extends HttpServlet {
+@WebServlet(name = "CancelledServlet", value = "/order-cancelled")
+public class CancelledServlet  extends HttpServlet {
 
     private ProfileService profileService = new ProfileService();
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,11 +36,11 @@ public class ShippingServlet extends HttpServlet {
 
             System.out.println(userDetail.getId());
 
-            List<Order> shippingOrders = profileService.getShippingOrders(user.getId());
-            System.out.println("DEBUG: Số lượng đơn hàng tìm thấy: " + (shippingOrders != null ? shippingOrders.size() : "NULL"));
-            request.setAttribute("shippingOrders", shippingOrders);
+            List<Order> cancelledOrders = profileService.getCancelledOrders(user.getId());
+            System.out.println("DEBUG: đơn bị hủy: " + (cancelledOrders != null ? cancelledOrders.size() : "NULL"));
+            request.setAttribute("cancelledOrders", cancelledOrders);
 
-            request.getRequestDispatcher("/profileM/order-shipping.jsp").forward(request, response);
+            request.getRequestDispatcher("/profileM/order-cancelled.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

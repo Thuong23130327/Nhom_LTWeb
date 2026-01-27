@@ -20,8 +20,8 @@ public class OrderDao {
                 rs.getInt("Vouchers_id"),
                 rs.getString("order_code"),
                 rs.getTimestamp("order_date"),
-                OrderStatus.valueOf(rs.getString("status").toUpperCase()),
-                PaymentStatus.valueOf(rs.getString("payment_status").toUpperCase()),
+                rs.getString("status"),
+                rs.getString("payment_status"),
                 rs.getInt("total_products_price"),
                 rs.getDouble("shipping_fee"),
                 rs.getDouble("discount_amount"),
@@ -71,6 +71,33 @@ public class OrderDao {
         return null;
     }
 
+    public List<Order> getAllOrderById(int userId) {
+        List<Order> list = new ArrayList<>();
+        String sql = "SELECT o.*, os.recipient_name  " +
+                "from orders o  " +
+                "LEFT JOIN ordershippings os ON o.id = os.Orders_id " +
+                "WHERE o.Users_id = ? "+
+                "ORDER BY o.order_date DESC;";
+        try {
+            conn = DBConnect.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            Order order;
+
+            while (rs.next()) {
+                order = mapOrder(rs);
+                order.setRecipientName(rs.getString("recipient_name"));
+                list.add(order);
+            }
+
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public List<Order> getOrdersByStatus(int userId, String status) {
         List<Order> list = new ArrayList<>();
         String sql = "SELECT o.*, os.recipient_name " +
@@ -112,8 +139,8 @@ public class OrderDao {
     }
 
     //đơn đã hủy
-    public List<Order> getCanceledOrders(int userId) {
-        return getOrdersByStatus(userId, "Canceled");
+    public List<Order> getCancelledOrders(int userId) {
+        return getOrdersByStatus(userId, "Cancelled");
     }
 
     private OrderItems mapOrderItem(ResultSet rs) throws SQLException {
