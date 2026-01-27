@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/tag/_taglibs.jsp" %>
 <%
-    request.setAttribute("pageTitle", "Đơn hàng - AuraSound");
+    request.setAttribute("pageTitle", "Chi tiết đơn hàng - AuraSound");
     request.setAttribute("activePage", "profile");
 %>
 <head>
@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
@@ -36,28 +38,24 @@
         <div class="profile-sidebar" id="profileSidebar">
             <div class="user-info">
                 <img class="img-profile" src="assets/img/avatar/HoaiThuong.png" alt="Avatar">
-                <h5 class="user-name">Chào, Nguyễn Hoài Thương</h5>
-                <p class="user-email">23130327@st.hcmuaf.edu.vn</p>
+                <h5 class="user-name">Chào, ${userDetail.fullName}</h5>
+                <p class="user-email">${userDetail.fullName}</p>
             </div>
 
             <div class="side-menu mobile-hidden" id="sideMenuContent">
                 <ul class="nav-list">
-                    <li><a class="nav-link" href="profileM/profile.jsp"><i class="fa-solid fa-user icon"></i> Thông
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/profile"><i class="fa-solid fa-user icon"></i> Thông
                         tin tài khoản</a></li>
-                    <li><a class="nav-link" href="profileM/favorites.jsp"><i class="fa-solid fa-heart icon"></i>
-                        Sản
-                        phẩm đã
-                        yêu thích</a></li>
-                    <li><a class="nav-link" href="profileM/order-shipping.jsp"><i
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/order-shipping"><i
                             class="fa-solid fa-truck icon"></i> Đang
                         vận chuyển</a></li>
-                    <li><a class="nav-link" href="profileM/order-pending.jsp"><i
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/order-pending"><i
                             class="fa-solid fa-clock icon"></i> Đang
                         chờ duyệt</a></li>
-                    <li><a class="nav-link" href="profileM/order-cancelled.jsp"><i
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/order-cancelled"><i
                             class="fa-solid fa-ban icon"></i> Đã
                         hủy</a></li>
-                    <li><a class="nav-link active" href="profileM/order-history.jsp"><i
+                    <li><a class="nav-link active" href="${pageContext.request.contextPath}/order-history"><i
                             class="fa-solid fa-history icon"></i> Lịch
                         sử mua hàng</a></li>
                 </ul>
@@ -72,8 +70,8 @@
             <div class="order-detail-header">
                 <h3 class="title" style="margin-bottom: 0; border-bottom: none;">Chi tiết đơn hàng #AS0780</h3>
                 <span class="order-status completed">
-                        <i class="fa-solid fa-check-circle"></i> Hoàn tất
-                    </span>
+                    <i class="fa-solid fa-check-circle"></i> Hoàn tất
+                </span>
             </div>
 
             <div class="order-detail-block">

@@ -14,12 +14,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "ShippingServlet", value = "/order-shipping")
-public class ShippingServlet extends HttpServlet {
+@WebServlet(name = "PendingServlet", value = "/order-pending")
+public class PendingServlet extends HttpServlet {
 
     private ProfileService profileService = new ProfileService();
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         User user = (session != null) ? (User) session.getAttribute("auth") : null;
@@ -33,16 +32,14 @@ public class ShippingServlet extends HttpServlet {
             User userDetail = profileService.getUserById(user.getId());
             request.setAttribute("userDetail", userDetail);
 
-            System.out.println(userDetail.getId());
+            List<Order> pendingOrders = profileService.getPendingOrders(user.getId());
+            request.setAttribute("pendingOrders", pendingOrders);
 
-            List<Order> shippingOrders = profileService.getShippingOrders(user.getId());
-            System.out.println("DEBUG: Số lượng đơn hàng tìm thấy: " + (shippingOrders != null ? shippingOrders.size() : "NULL"));
-            request.setAttribute("shippingOrders", shippingOrders);
-
-            request.getRequestDispatcher("/profileM/order-shipping.jsp").forward(request, response);
+            request.getRequestDispatcher("/profileM/order-pending.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+
 }

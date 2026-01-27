@@ -44,17 +44,15 @@
 
                 <div class="side-menu mobile-hidden" id="sideMenuContent">
                     <ul class="nav-list">
-                        <li><a class="nav-link active" href="profile.jsp"><i class="fa-solid fa-user icon"></i> Thông
+                        <li><a class="nav-link active" href="${pageContext.request.contextPath}/profile"><i class="fa-solid fa-user icon"></i> Thông
                                 tin tài khoản</a></li>
-                        <li><a class="nav-link" href="profileM/favorites.jsp"><i class="fa-solid fa-heart icon"></i> Sản phẩm
-                                yêu thích</a></li>
                         <li><a class="nav-link" href="${pageContext.request.contextPath}/order-shipping"><i class="fa-solid fa-truck icon"></i> Đang
                                 vận chuyển</a></li>
-                        <li><a class="nav-link" href="profileM/order-pending.jsp"><i class="fa-solid fa-clock icon"></i> Đang
+                        <li><a class="nav-link" href="${pageContext.request.contextPath}/order-pending"><i class="fa-solid fa-clock icon"></i> Đang
                                 chờ duyệt</a></li>
-                        <li><a class="nav-link" href="profileM/order-cancelled.jsp"><i class="fa-solid fa-ban icon"></i> Đã
+                        <li><a class="nav-link" href="${pageContext.request.contextPath}/order-cancelled"><i class="fa-solid fa-ban icon"></i> Đã
                                 hủy</a></li>
-                        <li><a class="nav-link" href="profileM/order-history.jsp"><i class="fa-solid fa-history icon"></i> Lịch
+                        <li><a class="nav-link" href="${pageContext.request.contextPath}/order-history"><i class="fa-solid fa-history icon"></i> Lịch
                                 sử mua hàng</a></li>
                     </ul>
                 </div>

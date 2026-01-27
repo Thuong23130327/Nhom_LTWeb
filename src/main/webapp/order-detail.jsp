@@ -2,7 +2,7 @@
 <%@ include file="/tag/_taglibs.jsp" %>
 
 <%
-    request.setAttribute("pageTitle", "Đơn hàng - AuraSound");
+    request.setAttribute("pageTitle", "Chi tiết đơn hàng - AuraSound");
     request.setAttribute("activePage", "profile");
 %>
 <head>
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
@@ -38,29 +40,25 @@
 
         <div class="profile-sidebar" id="profileSidebar">
             <div class="user-info">
-                <img class="img-profile" src="assets/img/avatar/HoaiThuong.png" alt="Avatar">
-                <h5 class="user-name">Chào, Nguyễn Hoài Thương</h5>
-                <p class="user-email">23130327@st.hcmuaf.edu.vn</p>
+                <img class="img-profile" src="${not empty userDetail.avatarUrl ? userDetail.avatarUrl : '../assets/img/avatar/default.png'}" alt="Avatar">
+                <h5 class="user-name">Chào, ${userDetail.fullName}</h5>
+                <p class="user-email">${userDetail.fullName}</p>
             </div>
 
             <div class="side-menu mobile-hidden" id="sideMenuContent">
                 <ul class="nav-list">
-                    <li><a class="nav-link" href="profileM/profile.jsp"><i class="fa-solid fa-user icon"></i> Thông
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/profile"><i class="fa-solid fa-user icon"></i> Thông
                         tin tài khoản</a></li>
-                    <li><a class="nav-link" href="profileM/favorites.jsp"><i class="fa-solid fa-heart icon"></i>
-                        Sản
-                        phẩm đã
-                        yêu thích</a></li>
-                    <li><a class="nav-link" href="profileM/order-shipping.jsp"><i
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/order-shipping"><i
                             class="fa-solid fa-truck icon"></i> Đang
                         vận chuyển</a></li>
-                    <li><a class="nav-link" href="profileM/order-pending.jsp"><i
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/order-pending"><i
                             class="fa-solid fa-clock icon"></i> Đang
                         chờ duyệt</a></li>
-                    <li><a class="nav-link" href="profileM/order-cancelled.jsp"><i
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/order-cancelled"><i
                             class="fa-solid fa-ban icon"></i> Đã
                         hủy</a></li>
-                    <li><a class="nav-link active" href="profileM/order-history.jsp"><i
+                    <li><a class="nav-link active" href="${pageContext.request.contextPath}/order-history"><i
                             class="fa-solid fa-history icon"></i> Lịch
                         sử mua hàng</a></li>
                 </ul>
@@ -82,25 +80,17 @@
             <div class="order-detail-block">
                 <h4>Sản phẩm</h4>
                 <div class="block-content">
-                    <div class="product-item-detail">
-                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/l/o/loa-bluetooth-harman-kardon-aura-studio-5-den_7_.png"
-                             alt="Sản phẩm 1">
-                        <div class="product-info">
-                            <p class="product-name">Loa Bluetooth Harman Kardon Aura Studio 5</p>
-                            <p class="product-qty">x 1</p>
+                    <c:forEach var="item" items="${orderItems}">
+                        <div class="product-item">
+                            <img src="${item.productVariant.mainImageUrl}" alt="${item.name}" style="width: 70px; margin-right: 15px;">
+                            <div class="product-info">
+                                <h6>${item.name}</h6>
+                                <p>Màu: ${item.productVariant.colorName} | SL: ${item.quantity}</p>
+                            /div>
+                            <div class="product-price"><fmt:formatNumber value="${item.price" type="currency" currencySymbol="VNĐ"/></div>
                         </div>
-                        <div class="product-price">9.500.000₫</div>
-                    </div>
-
-                    <div class="product-item-detail">
-                        <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/l/o/loa-bluetooth-harman-kardon-onyx-studio-8-3.jpg"
-                             alt="Sản phẩm 2">
-                        <div class="product-info">
-                            <p class="product-name">Loa Bluetooth Harman Kardon Onyx Studio 8</p>
-                            <p class="product-qty">x 1</p>
-                        </div>
-                        <div class="product-price">4.350.000₫</div>
-                    </div>
+                        <hr>
+                    </c:forEach>
 
                     <div class="order-total">
                         <span>Thành tiền:</span>
@@ -115,11 +105,11 @@
                     <ul class="order-info-list">
                         <li>
                             <strong>Mã đơn hàng:</strong>
-                            <span>#AS0891</span>
+                            <span>#${orderDetail.orderCode}</span>
                         </li>
                         <li>
                             <strong>Ngày đặt:</strong>
-                            <span>11-11-2025 08:30</span>
+                            <span><fmt:formatDate value="${orderDetail.orderDate}" pattern="dd-MM-yyyy HH:mm"/></span>
                         </li>
                         <li>
                             <strong>Ngày hủy:</strong>

@@ -9,8 +9,8 @@ public class Order {
 	private int vouchersId;
 	private String orderCode;
 	private Timestamp orderDate;
-	private OrderStatus status;
-	private PaymentStatus paymentStatus;
+	private String status;
+	private String paymentStatus;
 	private double totalProductsPrice;
 	private double shippingFee;
 	private double discountAmount;
@@ -22,8 +22,8 @@ public class Order {
 	public Order() {
 	}
 
-	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, OrderStatus status,
-                 PaymentStatus paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
+	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, String status,
+                 String paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
                  double finalAmount, String adminNote) {
 		super();
 		this.id = id;
@@ -40,8 +40,8 @@ public class Order {
 		this.adminNote = adminNote;
 	}
 
-	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, OrderStatus status,
-                 PaymentStatus paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
+	public Order(int id, int usersId, int vouchersId, String orderCode, Timestamp orderDate, String status,
+                 String paymentStatus, double totalProductsPrice, double shippingFee, double discountAmount,
                  double finalAmount) {
 		this.id = id;
 		this.usersId = usersId;
@@ -105,11 +105,11 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 
-	public OrderStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(OrderStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -145,11 +145,11 @@ public class Order {
 		this.finalAmount = finalAmount;
 	}
 
-	public PaymentStatus getPaymentStatus() {
+	public String getPaymentStatus() {
 		return paymentStatus;
 	}
 
-	public void setPaymentStatus(PaymentStatus paymentStatus) {
+	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
 

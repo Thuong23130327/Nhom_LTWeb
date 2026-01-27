@@ -1,11 +1,13 @@
 package controller.profile;
 
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.CartItem;
 import model.Order;
 import model.User;
 import service.ProfileService;
@@ -14,11 +16,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "ShippingServlet", value = "/order-shipping")
-public class ShippingServlet extends HttpServlet {
+@WebServlet(name = "OrdSuccServlet", value = "/order-detail-success")
+public class OrdSuccServlet extends HttpServlet {
 
     private ProfileService profileService = new ProfileService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
@@ -35,14 +36,29 @@ public class ShippingServlet extends HttpServlet {
 
             System.out.println(userDetail.getId());
 
-            List<Order> shippingOrders = profileService.getShippingOrders(user.getId());
-            System.out.println("DEBUG: Số lượng đơn hàng tìm thấy: " + (shippingOrders != null ? shippingOrders.size() : "NULL"));
-            request.setAttribute("shippingOrders", shippingOrders);
+            String orderId = request.getParameter("id");
+            try {
+                if (orderId != null) {
+                    List<CartItem> activeItems = profileService.getAllOrdersItem(orderId);
+                    request.setAttribute("orderItems", activeItems);
 
-            request.getRequestDispatcher("/profileM/order-shipping.jsp").forward(request, response);
+                    Order order = profileService.getOrderById(orderId);
+                    request.setAttribute("order", order);
+                }
+
+                request.setAttribute("userDetail", profileService.getUserById(user.getId()));
+                request.getRequestDispatcher("/order-detail.jsp").forward(request, response);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                response.sendError(500);
+            }
+            request.getRequestDispatcher("/order-detail-success.jsp").forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
+
+
 }

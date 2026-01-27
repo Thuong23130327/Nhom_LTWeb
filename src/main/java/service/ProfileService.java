@@ -2,6 +2,7 @@ package service;
 
 import dao.OrderDao;
 import dao.profileMDAO.ProfileDAO;
+import model.CartItem;
 import model.Order;
 import model.User;
 
@@ -32,20 +33,32 @@ public class ProfileService {
         return isSuccess ? "success" : "Cập nhật thất bại tại hệ thống.";
     }
 
+    public Order getOrderById(String orderId){
+        return oDAO.getOrderById(orderId);
+    }
+
+    public List<Order> getHistoryOrders(int userId){
+        return oDAO.getAllOrderById(userId);
+    }
+
     public List<Order> getPendingOrders(int userId){
         return oDAO.getPendingOrders(userId);
     }
 
     public List<Order> getShippingOrders(int userId) {
-        return oDAO.getOrdersByStatus(userId, "SHIPPING");
+        return oDAO.getShippingOrders(userId);
     }
 
     public List<Order> getCompletedOrders(int userId) {
-        return oDAO.getOrdersByStatus(userId, "Completed");
+        return oDAO.getCompletedOrders(userId);
     }
 
-    public List<Order> getCanceledOrders(int userId) {
-        return oDAO.getOrdersByStatus(userId, "Canceled");
+    public List<Order> getCancelledOrders(int userId) {
+        return oDAO.getCancelledOrders(userId);
+    }
+
+    public List<CartItem> getAllOrdersItem(String orderId){
+        return oDAO.getAllOrdersItem(orderId);
     }
 
 }
