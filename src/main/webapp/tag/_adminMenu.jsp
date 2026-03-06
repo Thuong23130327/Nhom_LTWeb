@@ -20,7 +20,7 @@
     <ul class="nav flex-column">
 
         <li class="nav-item">
-            <a href="#" class="nav-link ${activePage == "admin"? "active" : ""}">
+            <a href="${AuraSound}/admin/dashboard" class="nav-link ${activePage == "admin"? "active" : ""}">
                 <i class="fas fa-home me-2"></i>
                 Tổng quan
             </a>

@@ -28,7 +28,7 @@
 <nav>
     <div class="nav-container content">
         <div class="nav-left">
-            <a class="a-nodecor logo-container" href="${AuraSound}/index.jsp">
+            <a class="a-nodecor logo-container" href="${AuraSound}/home">
                 <div class="logo-wave">
                     <div class="sound-wave wave1"></div>
                     <div class="sound-wave wave2"></div>

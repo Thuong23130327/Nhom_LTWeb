@@ -1,178 +1,205 @@
 package model;
 
+import org.jdbi.v3.core.mapper.reflect.ColumnName;
+
 import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 
 public class Product {
 
-	private int id;
-	private int brandId;
-	private int categoriesId;
-	private String sku;
-	private String name;
-	private String description;
-	private float avgRating;
-	private int soldCount;
-	private boolean isActive;
-	private Timestamp createdAt;
-	private double oldPrice;
-	private double sellPrice;
-	private String img;
+    private int id;
 
-	public Product() {
-	}
+    @ColumnName("Brands_id")
+    private int brandId;
 
-	public Product(int id, int brandId, int categoriesId, String sku, String name, String description, float avgRating,
-			int soldCount, boolean isActive, Timestamp createdAt, double oldPrice, double sellPrice, String img) {
-		super();
-		this.id = id;
-		this.brandId = brandId;
-		this.categoriesId = categoriesId;
-		this.sku = sku;
-		this.name = name;
-		this.description = description;
-		this.avgRating = avgRating;
-		this.soldCount = soldCount;
-		this.isActive = isActive;
-		this.createdAt = createdAt;
-		this.oldPrice = oldPrice;
-		this.sellPrice = sellPrice;
-		this.img = img;
-	}
+    @ColumnName("Categories_id")
+    private int categoriesId;
 
-	public Product(int id, Integer o, Object o1, String sku, String name, Object description, Object o2, Object o3,
-			Object o4, Object createdAt, Object o5, double displaySellPrice, String displayImageUrl) {
+    private String sku;
 
-	}
+    private String name;
 
-	public int getId() {
-		return id;
-	}
+    private String description;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @ColumnName("avg_rating")
+    private float avgRating;
 
-	public int getBrandId() {
-		return brandId;
-	}
+    @ColumnName("sold_count")
+    private int soldCount;
 
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
-	}
+    @ColumnName("is_active")
+    private boolean isActive;
 
-	public int getCategoriesId() {
-		return categoriesId;
-	}
+    @ColumnName("created_at")
+    private Timestamp createdAt;
 
-	public void setCategoriesId(int categoriesId) {
-		this.categoriesId = categoriesId;
-	}
+    @ColumnName("display_market_price")
+    private double oldPrice;
 
-	public String getSku() {
-		return sku;
-	}
+    @ColumnName("display_sell_price")
+    private double sellPrice;
 
-	public void setSku(String sku) {
-		this.sku = sku;
-	}
+    @ColumnName("display_image_url")
+    private String img;
 
-	public String getName() {
-		return name;
-	}
+    public Product() {
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Product(int id, int brandId, int categoriesId, String sku, String name, String description, float avgRating,
+                   int soldCount, boolean isActive, Timestamp createdAt, double oldPrice, double sellPrice, String img) {
+        super();
+        this.id = id;
+        this.brandId = brandId;
+        this.categoriesId = categoriesId;
+        this.sku = sku;
+        this.name = name;
+        this.description = description;
+        this.avgRating = avgRating;
+        this.soldCount = soldCount;
+        this.isActive = isActive;
+        this.createdAt = createdAt;
+        this.oldPrice = oldPrice;
+        this.sellPrice = sellPrice;
+        this.img = img;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public Product(int id, Integer o, Object o1, String sku, String name, Object description, Object o2, Object o3,
+                   Object o4, Object createdAt, Object o5, double displaySellPrice, String displayImageUrl) {
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    }
 
-	public float getAvgRating() {
-		return avgRating;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setAvgRating(float avgRating) {
-		this.avgRating = avgRating;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getSoldCount() {
-		return soldCount;
-	}
+    public int getBrandId() {
+        return brandId;
+    }
 
-	public void setSoldCount(int soldCount) {
-		this.soldCount = soldCount;
-	}
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
+    }
 
-	public boolean isActive() {
-		return isActive;
-	}
-	public boolean getIsActive() {
-		return isActive;
-	}
+    public int getCategoriesId() {
+        return categoriesId;
+    }
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+    public void setCategoriesId(int categoriesId) {
+        this.categoriesId = categoriesId;
+    }
 
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
+    public String getSku() {
+        return sku;
+    }
 
-	public String getFmCreatedAt() {
-		if (this.createdAt == null)
-			return "";
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy ");
-		return this.createdAt.toLocalDateTime().format(formatter);
-	}
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
 
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public double getOldPrice() {
-		return oldPrice;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setOldPrice(double oldPrice) {
-		this.oldPrice = oldPrice;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public double getSellPrice() {
-		return sellPrice;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setSellPrice(double sellPrice) {
-		this.sellPrice = sellPrice;
-	}
+    public float getAvgRating() {
+        return avgRating;
+    }
 
-	public String getImg() {
-		return img;
-	}
+    public void setAvgRating(float avgRating) {
+        this.avgRating = avgRating;
+    }
 
-	public void setImg(String img) {
-		this.img = img;
-	}
+    public int getSoldCount() {
+        return soldCount;
+    }
 
-	@Override
-	public String toString() {
-		return "Product [ id=" + id + ", brandId=" + brandId + ", categoriesId=" + categoriesId + ", sku=" + sku
-				+ ", name=" + name + ", description=" + description + ", avgRating=" + avgRating + ", soldCount="
-				+ soldCount + ", isActive=" + isActive + ", createdAt=" + createdAt + ", oldPrice=" + oldPrice
-				+ ", sellPrice=" + sellPrice + ", img=" + img + " ]";
-	}
+    public void setSoldCount(int soldCount) {
+        this.soldCount = soldCount;
+    }
 
-	public int getDiscountPercent() {
-		if (this.oldPrice == 0) {
-			return 0;
-		}
-		double result = ((this.oldPrice - this.sellPrice) / this.oldPrice) * 100;
-		return (int) Math.round(result);
-	}
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public boolean getIsActive() {
+        return isActive;
+    }
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getFmCreatedAt() {
+        if (this.createdAt == null)
+            return "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy ");
+        return this.createdAt.toLocalDateTime().format(formatter);
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public double getOldPrice() {
+        return oldPrice;
+    }
+
+    public void setOldPrice(double oldPrice) {
+        this.oldPrice = oldPrice;
+    }
+
+    public double getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(double sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    @Override
+    public String toString() {
+        return "Product [ id=" + id + ", brandId=" + brandId + ", categoriesId=" + categoriesId + ", sku=" + sku
+                + ", name=" + name + ", description=" + description + ", avgRating=" + avgRating + ", soldCount="
+                + soldCount + ", isActive=" + isActive + ", createdAt=" + createdAt + ", oldPrice=" + oldPrice
+                + ", sellPrice=" + sellPrice + ", img=" + img + " ]";
+    }
+
+    public int getDiscountPercent() {
+        if (this.oldPrice == 0) {
+            return 0;
+        }
+        double result = ((this.oldPrice - this.sellPrice) / this.oldPrice) * 100;
+        return (int) Math.round(result);
+    }
 
 }

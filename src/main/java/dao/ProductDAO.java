@@ -1,45 +1,24 @@
 package dao;
 
 import model.Product;
-import model.ProductVariant;
-//import model.ProductDTO;
+import org.jdbi.v3.core.Jdbi;
 
 import java.sql.*;
 import java.util.*;
+
 
 public class ProductDAO {
     private Connection conn = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
-
+    private Jdbi jdbi = dao.DB.DBConnect.getJdbi();
     static Map<Integer, Product> data = new HashMap<>();
 
     public List<Product> getAllProduct() {
-        List<Product> list = new ArrayList<>();
-
-        String sql = "SELECT * FROM products";
-
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
-                        rs.getString("sku"), rs.getString("name"), rs.getString("description"),
-                        rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"), rs.getDouble("display_market_price"),
-                        rs.getDouble("display_sell_price"), rs.getString("display_image_url"));
-                list.add(p);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
+        return jdbi.withHandle(handle -> handle.createQuery("select * from products").mapToBean(Product.class).list());
     }
+
+
     public List<Product> getFeaturedProducts(int limit) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT *, (avg_rating + (view_count / (SELECT SUM(view_count) + 1 FROM products) * 100) " +
@@ -58,6 +37,25 @@ public class ProductDAO {
         }
         return list;
     }
+
+    //    public List<Product> getFeaturedProducts() {
+//        List<Product> list = new ArrayList<>();
+//        String sql = "SELECT *, (avg_rating + (view_count / (SELECT SUM(view_count) + 1 FROM products) * 100) " +
+//                "+ (search_count / (SELECT SUM(search_count) + 1 FROM products) * 100)) as hot_score " +
+//                "FROM products WHERE is_active = 1 ORDER BY hot_score DESC LIMIT ?";
+//        try (Connection conn = DBConnect.getConnection();
+//             PreparedStatement ps = conn.prepareStatement(sql)) {
+//            ps.setInt(1, limit);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                Product p = mapRStoProduct(rs);
+//                list.add(p);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
     public List<Product> getProductByCategoryId(String cateId) {
         List<Product> list = new ArrayList<>();
         String sql =
