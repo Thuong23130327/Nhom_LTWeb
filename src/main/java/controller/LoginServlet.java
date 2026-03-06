@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("author", user);
                     response.sendRedirect("admin/dashboard");
                 } else {
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("home");
                 }
                 return;
             } else if (!userService.checkExistMail(email)) {

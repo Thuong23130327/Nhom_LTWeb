@@ -19,7 +19,6 @@ import java.util.List;
 @WebServlet(name = "AdProductServlet", value = "/admin/add-product")
 public class AdProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.getRequestDispatcher("/admin/addProduct.jsp").forward(request, response);
     }
 

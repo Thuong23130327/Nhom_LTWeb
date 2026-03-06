@@ -43,6 +43,7 @@ public class ProductService {
         return productDao.getAllProduct();
     }
 
+
     public List<Product> getProductByCategoryId(String cateId) {
         return productDao.getProductByCategoryId(cateId);
     }
@@ -55,8 +56,7 @@ public class ProductService {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ProductService ps = new ProductService();
-        //System.out.println(ps.searchProductByText("2"));
-        String[] a = {"1", "2"};
+        System.out.println(ps.getAllProduct().toString());
 
 
     }
