@@ -45,7 +45,8 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("auth", user);
                 if (user.getRole() == User.Role.Admin) {
                     session.setAttribute("author", user);
-                    response.sendRedirect("admin/dashboard");
+                    //qua AMDashboardServlet
+                    response.sendRedirect(request.getContextPath() + "/admin/dashboard");
                 } else {
                     response.sendRedirect("home");
                 }

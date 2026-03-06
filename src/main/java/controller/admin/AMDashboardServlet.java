@@ -12,8 +12,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Map;
 
-@WebServlet(name = "AdminServlet", value = "/admin/dashboard")
-public class AdminServlet extends HttpServlet {
+@WebServlet(name = "AMDashboardServlet", value = "/admin/dashboard")
+public class AMDashboardServlet extends HttpServlet {
 
     private AdminService adminService = new AdminService();
 
@@ -23,17 +23,15 @@ public class AdminServlet extends HttpServlet {
         try {
             Map<String, Object> stats = adminService.getDashboardStats();
 
-            System.out.println("===== DASHBOARD STATS =====");
-            System.out.println(stats);
+//            System.out.println("===== DASHBOARD STATS =====");
+//            System.out.println(stats);
 
             request.setAttribute("stats", stats);
-
             LocalDate now = LocalDate.now();
             request.setAttribute("currentMonth", now.getMonthValue());
             request.setAttribute("currentYear", now.getYear());
 
-
-            request.getRequestDispatcher("/admin/admin.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/admin/admin.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -41,5 +39,4 @@ public class AdminServlet extends HttpServlet {
         }
 
     }
-
 }

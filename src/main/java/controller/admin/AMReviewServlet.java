@@ -16,8 +16,8 @@ import java.util.Map;
         maxFileSize = 1024 * 1024 * 10,
         maxRequestSize = 1024 * 1024 * 50
 )
-@WebServlet(name = "ReviewServlet", value = "/add-Review")
-public class ReviewServlet extends HttpServlet {
+@WebServlet(name = "AMReviewServlet", value = "/add-Review")
+public class AMReviewServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String rating = request.getParameter("rating");

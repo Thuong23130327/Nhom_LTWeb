@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "AdminProductServlet", value = "/admin/product-manager")
-public class AdminProductServlet extends HttpServlet {
+@WebServlet(name = "AMProductServlet", value = "/admin/product-manager")
+public class AMProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -42,10 +42,10 @@ public class AdminProductServlet extends HttpServlet {
         } else {
             productList = adminProductService.getAllProduct();
         }
-        CategoryService categoryService =null;
+        CategoryService categoryService = null;
         List<Category> categoryList = new ArrayList<>();
         try {
-            categoryService= new CategoryService();
+            categoryService = new CategoryService();
             categoryList = categoryService.getAllCategories();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -57,6 +57,7 @@ public class AdminProductServlet extends HttpServlet {
         request.setAttribute("totalStockMap", stockMap);
         request.setAttribute("varCountMap", varCountMap);
         request.setAttribute("listOption", categoryList);
-        request.getRequestDispatcher("products.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/products.jsp").forward(request, response);
+
     }
 }

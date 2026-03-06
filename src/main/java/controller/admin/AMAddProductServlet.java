@@ -5,19 +5,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Brand;
-import model.Category;
 import model.Product;
-import service.BrandService;
-import service.CategoryService;
 import service.ProductService;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet(name = "AdProductServlet", value = "/admin/add-product")
-public class AdProductServlet extends HttpServlet {
+@WebServlet(name = "AMAddProductServlet", value = "/admin/add-product")
+public class AMAddProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/admin/addProduct.jsp").forward(request, response);
     }

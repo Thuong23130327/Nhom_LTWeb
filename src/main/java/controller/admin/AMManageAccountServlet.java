@@ -12,8 +12,8 @@ import model.User;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "AccountManagerServlet", value = "/admin/user-manager")
-public class AccountManagerServlet extends HttpServlet {
+@WebServlet(name = "AMManageAccountServlet", value = "/admin/user-manager")
+public class AMManageAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 // Kiểm tra phân quyền của tài khoản
@@ -29,12 +29,7 @@ public class AccountManagerServlet extends HttpServlet {
         request.setAttribute("userList", userList);
 
 // Forward đến user.jsp
-        request.getRequestDispatcher("/admin/users.jsp").forward(request, response);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/views/admin/users.jsp").forward(request, response);
 
     }
 }
