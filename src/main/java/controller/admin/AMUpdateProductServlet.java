@@ -6,19 +6,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
-import model.ProductVariant;
 import service.AdMngDetailProductService;
-import service.ProductDetailService;
 import util.CloundinaryLib;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 @MultipartConfig(maxFileSize = 1024 * 1024 * 5)
-@WebServlet(name = "AdUpdateProduct", value = "/admin/upd-product")
-public class AdUpdateProduct extends HttpServlet {
+@WebServlet(name = "AMUpdateProductServlet", value = "/admin/upd-product")
+public class AMUpdateProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

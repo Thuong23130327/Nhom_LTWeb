@@ -1,6 +1,5 @@
 package controller.admin;
 
-import dao.ProductDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,8 +19,8 @@ import java.util.List;
 
 
 //chi tiet quan ly sp Admin
-@WebServlet(name = "ManageProductDetailServlet", value = "/admin/product-detail-manager")
-public class ManageProductDetailServlet extends HttpServlet {
+@WebServlet(name = "AMProductDetailServlet", value = "/admin/product-detail-manager")
+public class AMProductDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String pid = request.getParameter("pid");
 

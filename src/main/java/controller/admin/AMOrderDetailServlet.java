@@ -9,11 +9,10 @@ import model.*;
 import service.AdOrderService;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "AdDetailOrder", value = "/admin/manage-order-detail")
-public class AdDetailOrder extends HttpServlet {
+@WebServlet(name = "AMOrderDetailServlet", value = "/admin/manage-order-detail")
+public class AMOrderDetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }

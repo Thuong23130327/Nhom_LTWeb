@@ -57,8 +57,6 @@ public class ProductService {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         ProductService ps = new ProductService();
         System.out.println(ps.getAllProduct().toString());
-
-
     }
 
     public boolean deleteProduct(String pid) {

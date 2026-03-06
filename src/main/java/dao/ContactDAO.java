@@ -3,6 +3,8 @@ package dao;
 import model.Category;
 import model.Contact;
 import model.ContactReply;
+import model.Product;
+import org.jdbi.v3.core.Jdbi;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +17,22 @@ public class ContactDAO {
     private static Connection conn = null;
     private static PreparedStatement ps = null;
     private static ResultSet rs = null;
+
+    private Jdbi jdbi = dao.DB.DBConnect.getJdbi();
+
+    public List<Contact> getAllContacts() throws SQLException, ClassNotFoundException {
+        return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM contactmails WHERE message is not null and trim(message) <>''").mapToBean(Contact.class).list());
+    }
+
+    public Contact getContact(String id) {
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM contactmails WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(Contact.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
 
     public static boolean insertContact(Contact contact) throws SQLException, ClassNotFoundException {
         String sql = "INSERT INTO ContactMails"
@@ -54,19 +72,8 @@ public class ContactDAO {
         contact.setCreatedAt(rs.getTimestamp(9));
         return contact;
     }
+//Fix JDBI
 
-    public List<Contact> getAllContacts() throws SQLException, ClassNotFoundException {
-        List<Contact> lists = new ArrayList<Contact>();
-        String sql = "SELECT * FROM contactmails WHERE message is not null and trim(message) <>''";
-
-        conn = DBConnect.getConnection();
-        ps = conn.prepareStatement(sql);
-        rs = ps.executeQuery();
-        while (rs.next()) {
-            lists.add(mapContact(rs));
-        }
-        return lists;
-    }
 
     public List<ContactReply> getReplies(int contactId) {
         List<ContactReply> list = new ArrayList<>();
@@ -102,21 +109,6 @@ public class ContactDAO {
         }
     }
 
-    public Contact getContact(String id) {
-        String sql = "SELECT * FROM contactmails WHERE id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return mapContact(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public void saveReply(String mailId, String replyContent) {
         String sql = "UPDATE contactmails SET status = 'Replied', reply_content = ? WHERE id = ?";

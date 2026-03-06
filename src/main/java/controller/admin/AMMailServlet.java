@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "AdMailServlet", value = "/admin/mail")
-public class AdMailServlet extends HttpServlet {
+@WebServlet(name = "AMMailServlet", value = "/admin/mail")
+public class AMMailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         AdminMailService adminMailService = new AdminMailService();
         List<Contact> allContacts = null;
@@ -36,11 +36,7 @@ public class AdMailServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setAttribute("statusList", statusList);
         request.setAttribute("allContacts", allContacts);
-        request.getRequestDispatcher("mailBox.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/mailBox.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        doGet(request, response);
-    }
 }

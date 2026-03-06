@@ -1,22 +1,18 @@
 package controller.admin;
 
-import jakarta.mail.MessagingException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Contact;
 import service.AdminMailService;
-import service.ContactService;
 import service.EmailSender;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
-@WebServlet(name = "sendReply", value = "/admin/send-reply")
-public class sendReply extends HttpServlet {
+@WebServlet(name = "AMSendReplyServlet", value = "/admin/send-reply")
+public class AMSendReplyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

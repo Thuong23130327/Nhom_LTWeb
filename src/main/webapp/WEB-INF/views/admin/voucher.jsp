@@ -60,10 +60,10 @@
                                 <span class="badge bg-danger">Đang phát hành</span>
                             </td>
                             <td>
-                                <a href="../profileM/profile.jsp">
+                                <a href="../../../profileM/profile.jsp">
                                     <button class="btn btn-sm btn-info">Xem</button>
                                 </a>
-                                <a href="../404.jsp">
+                                <a href="../../../404.jsp">
                                     <button class="btn btn-sm btn-warning">Sửa</button>
                                 </a>
                             </td>
@@ -77,9 +77,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/script.js"></script>
-<script src="../assets/js/scriptAdmin.js"></script>
-<script src="../assets/js/scriptProfile.js"></script>
+<script src="../../../assets/js/script.js"></script>
+<script src="../../../assets/js/scriptAdmin.js"></script>
+<script src="../../../assets/js/scriptProfile.js"></script>
 </body>
 
 </html>
