@@ -1,6 +1,7 @@
 package dao;
 
 import model.*;
+import org.jdbi.v3.core.Jdbi;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,8 @@ public class OrderDao {
     private Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+
+    private Jdbi jdbi = dao.DB.DBConnect.getJdbi();
 
     private Order mapOrder(ResultSet rs) throws SQLException {
         return new Order(rs.getInt("id"),
@@ -29,98 +32,57 @@ public class OrderDao {
                 rs.getString("admin_note"));
     }
 
+
     public List<Order> getAllOrder() {
-        List<Order> list = new ArrayList<>();
         String sql = "SELECT o.*, os.recipient_name  " +
                 "from orders o  " +
                 "LEFT JOIN ordershippings os ON o.id = os.Orders_id " +
                 "ORDER BY o.order_date DESC;";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            Order order;
 
-            while (rs.next()) {
-                order = mapOrder(rs);
-                order.setRecipientName(rs.getString("recipient_name"));
-                list.add(order);
-            }
-
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+        return jdbi.withHandle(handle -> handle.createQuery(sql).mapToBean(Order.class).list());
     }
 
     public Order getOrderById(String id) {
-        String sql = "SELECT * FROM orders where id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
-            Order order = null;
-            if (rs.next()) {
-                return mapOrder(rs);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM orders WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(Order.class)
+                        .findFirst()
+                        .orElse(null)
+        );
     }
 
     public List<Order> getAllOrderById(int userId) {
-        List<Order> list = new ArrayList<>();
         String sql = "SELECT o.*, os.recipient_name  " +
                 "from orders o  " +
                 "LEFT JOIN ordershippings os ON o.id = os.Orders_id " +
-                "WHERE o.Users_id = ? "+
+                "WHERE o.Users_id = :uid " +
                 "ORDER BY o.order_date DESC;";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, userId);
-            rs = ps.executeQuery();
-            Order order;
 
-            while (rs.next()) {
-                order = mapOrder(rs);
-                order.setRecipientName(rs.getString("recipient_name"));
-                list.add(order);
-            }
-
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+        return jdbi.withHandle(handle -> handle.createQuery(sql).bind("uid", userId).mapToBean(Order.class).list());
     }
 
+    public static void main(String[] args) {
+        OrderDao dao = new OrderDao();
+        System.out.println(dao.getAllOrder().toString());
+        System.out.println("--");
+        System.out.println(dao.getAllOrderById(1).toString());
+    }
+
+
     public List<Order> getOrdersByStatus(int userId, String status) {
-        List<Order> list = new ArrayList<>();
+
         String sql = "SELECT o.*, os.recipient_name " +
                 "FROM orders o " +
                 "LEFT JOIN ordershippings os ON o.id = os.Orders_id " +
-                "WHERE o.Users_id = ? AND o.status = ? " +
+                "WHERE o.Users_id = :uid AND o.status = :status " +
                 "ORDER BY o.order_date DESC;";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, userId);
-            ps.setString(2, status);
-            rs = ps.executeQuery();
 
-            while (rs.next()) {
-                Order order = mapOrder(rs);
-                order.setRecipientName(rs.getString("recipient_name"));
-                list.add(order);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+        return jdbi.withHandle(handle -> handle.createQuery(sql)
+                .bind("uid", userId)
+                .bind("status", status)
+                .mapToBean(Order.class).list());
+
     }
 
     //đơn chờ xử lý
@@ -143,35 +105,15 @@ public class OrderDao {
         return getOrdersByStatus(userId, "Cancelled");
     }
 
-    private OrderItems mapOrderItem(ResultSet rs) throws SQLException {
-        return new OrderItems(rs.getInt("id"),
-                rs.getInt("orders_id"),
-                rs.getInt("productvariants_id"),
-                rs.getInt("quantity"),
-                rs.getDouble("price_at_purchase"));
-    }
 
     public OrderShipping getOrShip(String ordId) {
-        String sql = "SELECT*FROM ordershippings WHERE id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, ordId);
-            rs = ps.executeQuery();
-            if (rs.next())
-                return new OrderShipping(
-                        rs.getInt("id"),
-                        rs.getInt("orders_id"),
-                        rs.getString("recipient_name"),
-                        rs.getString("phone"),
-                        rs.getString("address"),
-                        rs.getString("city"),
-                        rs.getString("note")
-                );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+
+        String sql = "SELECT*FROM ordershippings WHERE id = :oid";
+
+
+        return (OrderShipping) jdbi.withHandle(handle -> handle.createQuery(sql)
+                .bind("oid", ordId)
+                .mapToBean(OrderShipping.class));
     }
 
     public List<CartItem> getAllOrdersItem(String id) {
@@ -213,44 +155,35 @@ public class OrderDao {
     }
 
     public boolean updateStatus(String orderId, String newStatus) {
-        String sql = "UPDATE orders SET status = ? WHERE id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, newStatus);
-            ps.setString(2, orderId);
-            return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        String sql = "UPDATE orders SET status = :status WHERE id = :id";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("status", newStatus)
+                        .bind("id", orderId)
+                        .execute() > 0
+        );
     }
 
     public boolean updatePayment(String orderId, String newStatus) {
-        String sql = "UPDATE orders SET payment_status = ? WHERE id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, newStatus);
-            ps.setString(2, orderId);
-            return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        String sql = "UPDATE orders SET payment_status = :status WHERE id = :id";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("status", newStatus)
+                        .bind("id", orderId)
+                        .execute() > 0
+        );
     }
 
     public boolean updateAdNote(String orderId, String newNote) {
-        String sql = "UPDATE orders SET admin_note = ? WHERE id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, newNote);
-            ps.setString(2, orderId);
-            return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        String sql = "UPDATE orders SET admin_note = :adNote WHERE id = :id";
+
+        return jdbi.withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("adNote", newNote)
+                        .bind("id", orderId)
+                        .execute() > 0
+        );
     }
 }

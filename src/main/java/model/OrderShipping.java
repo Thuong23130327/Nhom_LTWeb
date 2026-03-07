@@ -1,5 +1,7 @@
 package model;
 
+import org.jdbi.v3.core.mapper.reflect.ColumnName;
+
 public class OrderShipping {
 	private int id;
 	private int orderId;
@@ -11,19 +13,6 @@ public class OrderShipping {
 
 	public OrderShipping() {
 	}
-
-	// Constructor tạo mới
-    public OrderShipping(int id, int orderId, String recipientName, String phone, String address, String city,
-                         String note) {
-        super();
-        this.id = id;
-        this.orderId = orderId;
-        this.recipientName = recipientName;
-        this.phone = phone;
-        this.address = address;
-        this.city = city;
-        this.note = note;
-    }
 
 	public int getId() {
 		return id;
@@ -37,6 +26,7 @@ public class OrderShipping {
 		return orderId;
 	}
 
+    @ColumnName("Orders_id")
 	public void setOrderId(int orderId) {
 		this.orderId = orderId;
 	}

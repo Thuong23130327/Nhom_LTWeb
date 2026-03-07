@@ -16,6 +16,7 @@ public class Order {
 	private double discountAmount;
 	private double finalAmount;
 	private String adminNote;
+    private Timestamp finishedAt; //ngay hoan thanh
 	private String recipientName;
 
 	// Constructor
@@ -178,5 +179,23 @@ public class Order {
 	public void setRecipientName(String recipientName) {
 		this.recipientName = recipientName;
 	}
+
+	public Timestamp getFinishedAt() {
+		return finishedAt;
+	}
+
+	public void setFinishedAt(Timestamp finishedAt) {
+		this.finishedAt = finishedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", usersId=" + usersId + ", vouchersId=" + vouchersId + ", orderCode=" + orderCode
+				+ ", orderDate=" + orderDate + ", status=" + status + ", paymentStatus=" + paymentStatus
+				+ ", totalProductsPrice=" + totalProductsPrice + ", shippingFee=" + shippingFee + ", discountAmount="
+				+ discountAmount + ", finalAmount=" + finalAmount + ", adminNote=" + adminNote + ", finishedAt="
+				+ finishedAt + ", recipientName=" + recipientName + "]";
+	}
+	
 
 }
