@@ -18,7 +18,7 @@ public class ContactDAO {
     private static PreparedStatement ps = null;
     private static ResultSet rs = null;
 
-    private Jdbi jdbi = dao.DB.DBConnect.getJdbi();
+    private static Jdbi jdbi = dao.DB.DBConnect.getJdbi();
 
     public List<Contact> getAllContacts() throws SQLException, ClassNotFoundException {
         return jdbi.withHandle(handle -> handle.createQuery("SELECT * FROM contactmails WHERE message is not null and trim(message) <>''").mapToBean(Contact.class).list());
@@ -34,29 +34,14 @@ public class ContactDAO {
         );
     }
 
-    public static boolean insertContact(Contact contact) throws SQLException, ClassNotFoundException {
-        String sql = "INSERT INTO ContactMails"
-                + " (Users_id, sender_name, sender_email, sender_phone, message,reply_content, status, created_at) "
-                + "VALUES (?, ?, ?, ?, ?,?,?, NOW())";
-        conn = DBConnect.getConnection();
-        ps = conn.prepareStatement(sql);
-
-        if (contact.getUsersID() == null) {
-            ps.setNull(1, java.sql.Types.INTEGER);
-        } else {
-            ps.setInt(1, contact.getUsersID());
-        }
-
-        ps.setString(2, contact.getSenderName());
-        ps.setString(3, contact.getSenderMail());
-        ps.setString(4, contact.getPhone());
-        ps.setString(5, contact.getMess());
-        ps.setString(6, contact.getReplyMess());
-        ps.setString(7, contact.getStatus().toString());
-
-        int i = ps.executeUpdate();
-        return i > 0;
-
+    public static boolean insertContact(Contact contact) {
+        return jdbi.withHandle(handle ->
+                handle.createUpdate("INSERT INTO ContactMails "
+                                + "(Users_id, sender_name, sender_email, sender_phone, message, reply_content, status, created_at) "
+                                + "VALUES (:usersID, :senderName, :senderMail, :phone, :mess, :replyMess, :status, NOW())")
+                        .bindBean(contact)
+                        .execute() > 0
+        );
     }
 
     private Contact mapContact(ResultSet rs) throws SQLException {
@@ -76,84 +61,61 @@ public class ContactDAO {
 
 
     public List<ContactReply> getReplies(int contactId) {
-        List<ContactReply> list = new ArrayList<>();
-        String sql = "SELECT * FROM ContactReplies WHERE contact_id = ? ORDER BY created_at ASC";
-
-        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, contactId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                ContactReply r = new ContactReply();
-                r.setId(rs.getInt("id"));
-                r.setContactId(rs.getInt("contact_id"));
-                r.setSenderType(rs.getString("sender_type"));
-                r.setMessage(rs.getString("message"));
-                r.setCreatedAt(rs.getTimestamp("created_at"));
-                list.add(r);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM ContactReplies WHERE contact_id = :contactId ORDER BY created_at ASC")
+                        .bind("contactId", contactId)
+                        .mapToBean(ContactReply.class)
+                        .list()
+        );
     }
 
     public void addReply(ContactReply reply) {
-        String sql = "INSERT INTO ContactReplies (contact_id, sender_type, message, created_at) VALUES (?, ?, ?, NOW())";
-        try (Connection conn = DBConnect.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, reply.getContactId());
-            ps.setString(2, reply.getSenderType());
-            ps.setString(3, reply.getMessage());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        jdbi.useHandle(handle ->
+                handle.createUpdate("INSERT INTO ContactReplies (contact_id, sender_type, message, created_at) " +
+                                "VALUES (:contactId, :senderType, :message, NOW())")
+                        .bindBean(reply)
+                        .execute()
+        );
     }
 
 
     public void saveReply(String mailId, String replyContent) {
-        String sql = "UPDATE contactmails SET status = 'Replied', reply_content = ? WHERE id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, replyContent);
-            ps.setString(2, mailId);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE contactmails SET status = 'Replied', reply_content = :replyContent WHERE id = :id")
+                        .bind("replyContent", replyContent)
+                        .bind("id", mailId)
+                        .execute()
+        );
     }
 
-//    public List<Contact> sort(String type) {
-//        StringBuilder sql = new StringBuilder("SELECT * FROM contactmails WHERE message is not null and trim(message) <>''");
-//        List<Contact> list = new ArrayList<>();
-//        if (type == null) return null;
-//        switch (type) {
-//            case "rep":
-//                sql.append(" and status ='Replied' order by created_at DESC");
-//                break;
-//            case "non":
-//                sql.append(" and status ='New' order by created_at DESC");
-//                break;
-//            case "old":
-//                sql.append(" order by created_at");
-//                break;
-//            case "new":
-//                sql.append("  order by created_at DESC");
-//                break;
-//        }
-//        try {
-//            conn = DBConnect.getConnection();
-//            ps = conn.prepareStatement(String.valueOf(sql));
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                list.add(mapContact(rs));
-//            }
-//            return list;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return list;
-//    }
+    public List<Contact> sort(String type) {
+        if (type == null) return new ArrayList<>();
+//    Dùng StringBuilder nối chuỗi sql rồi mapToBean chuyển đổi kq
+        StringBuilder sql = new StringBuilder("SELECT * FROM contactmails WHERE message IS NOT NULL AND TRIM(message) <> ''");
+
+        switch (type) {
+            case "rep":
+                sql.append(" AND status = 'Replied' ORDER BY created_at DESC");
+                break;
+            case "non":
+                sql.append(" AND status = 'New' ORDER BY created_at DESC");
+                break;
+            case "old":
+                sql.append(" ORDER BY created_at");
+                break;
+            case "new":
+                sql.append(" ORDER BY created_at DESC");
+                break;
+            default:
+                sql.append(" ORDER BY created_at DESC");
+
+                return jdbi.withHandle(handle ->
+                        handle.createQuery(sql.toString())
+                                .mapToBean(Contact.class)
+                                .list()
+                );
+
+    }
+        return List.of();
+    }
 }
