@@ -20,22 +20,14 @@ public class ProductDAO {
 
 
     public List<Product> getFeaturedProducts(int limit) {
-        List<Product> list = new ArrayList<>();
-        String sql = "SELECT *, (avg_rating + (view_count / (SELECT SUM(view_count) + 1 FROM products) * 100) " +
-                "+ (search_count / (SELECT SUM(search_count) + 1 FROM products) * 100)) as hot_score " +
-                "FROM products WHERE is_active = 1 ORDER BY hot_score DESC LIMIT ?";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, limit);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Product p = mapRStoProduct(rs);
-                list.add(p);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT *, (avg_rating + (view_count / (SELECT SUM(view_count) + 1 FROM products) * 100) " +
+                                "+ (search_count / (SELECT SUM(search_count) + 1 FROM products) * 100)) as hot_score " +
+                                "FROM products WHERE is_active = 1 ORDER BY hot_score DESC LIMIT :limit")
+                        .bind("limit", limit)
+                        .mapToBean(Product.class)
+                        .list()
+        );
     }
 
     //    public List<Product> getFeaturedProducts() {
@@ -57,209 +49,115 @@ public class ProductDAO {
 //        return list;
 //    }
     public List<Product> getProductByCategoryId(String cateId) {
-        List<Product> list = new ArrayList<>();
-        String sql =
-                "SELECT * FROM products WHERE Categories_id = ? OR\n" +
-                        "Categories_id IN (SELECT id from categories WHERE Categories_id = ?);";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, cateId);
-            ps.setString(2, cateId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Product p = new Product(rs.getInt("id"),
-                        rs.getInt("Brands_id"),
-                        rs.getInt("Categories_id"),
-                        rs.getString("sku"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getFloat("avg_rating"),
-                        rs.getInt("sold_count"),
-                        rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"),
-                        rs.getDouble("display_market_price"),
-                        rs.getDouble("display_sell_price"),
-                        rs.getString("display_image_url"));
-                list.add(p);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM products WHERE Categories_id = :cateId OR " +
+                                "Categories_id IN (SELECT id FROM categories WHERE Categories_id = :cateId)")
+                        .bind("cateId", cateId)
+                        .mapToBean(Product.class)
+                        .list()
+        );
     }
 
     //Lay sp tu prd id
     public Product getById(String id) {
-        Product p = null;
-        String sql = "SELECT * FROM Products WHERE id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                p = new Product(rs.getInt("id"),
-                        rs.getInt("Brands_id"),
-                        rs.getInt("Categories_id"),
-                        rs.getString("sku"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getFloat("avg_rating"),
-                        rs.getInt("sold_count"),
-                        rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"),
-                        rs.getDouble("display_market_price"),
-                        rs.getDouble("display_sell_price"),
-                        rs.getString("display_image_url"));
-            }
-            return p;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT * FROM products WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(Product.class)
+                        .findFirst()
+                        .orElse(null)
+                );
     }
 
     public List<Product> searchProductByText(String textSearch) {
-        List<Product> list = new ArrayList<>();
-        String sql = " SELECT p.* FROM products p JOIN brands b ON b.id = p.Brands_id JOIN categories c on c.id = p.Categories_id\n" +
-                "  WHERE p.`name` LIKE ? or p.sku LIKE ?" +
-                "or p.display_sell_price LIKE ? " +
-                "or p.display_market_price LIKE ? " +
-                "or b.`name` LIKE ? " +
-                "or c.`name`like ? ;\n";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            for (int i = 1; i < 7; i++) {
-                ps.setString(i, "%" + textSearch + "%");
-            }
-
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(mapRStoProduct(rs));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
+        String searchTerm = "%" + textSearch + "%";
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT p.* FROM products p " +
+                                "JOIN brands b ON b.id = p.Brands_id " +
+                                "JOIN categories c ON c.id = p.Categories_id " +
+                                "WHERE p.name LIKE :search " +
+                                "OR p.sku LIKE :search " +
+                                "OR p.display_sell_price LIKE :search " +
+                                "OR p.display_market_price LIKE :search " +
+                                "OR b.name LIKE :search " +
+                                "OR c.name LIKE :search")
+                        .bind("search", searchTerm)
+                        .mapToBean(Product.class)
+                        .list()
+        );
     }
 
 
     public Map<Integer, Integer> getTotalStock() {
-        Map<Integer, Integer> map = new HashMap<>();
-        String sql = "SELECT Products_id, SUM(stock_quantity) FROM productvariants GROUP BY Products_id; ";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                map.put(rs.getInt(1), rs.getInt(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-        }
-        return map;
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT Products_id, SUM(stock_quantity) as total FROM productvariants GROUP BY Products_id")
+                        .reduceResultSet(new HashMap<Integer, Integer>(), (map, rs, ctx) -> {
+                            map.put(rs.getInt("Products_id"), rs.getInt("total"));
+                            return map;
+                        })
+        );
     }
 
     public boolean deleteProduct(String pid) {
-
-        String sql = " DELETE FROM productspecs WHERE Products_id = ? ;\n" +
-                "        DELETE FROM productvariants WHERE Products_id =? ;\n" +
-                "        DELETE FROM productgalleries WHERE Products_id = ?;";
-
-
         try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, pid);
+            return jdbi.inTransaction(handle -> {
 
-            conn.setAutoCommit(false);
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                int afRow = ps.executeUpdate();
-                if (afRow > 0) {
-                    conn.commit();
-                }
-                return afRow > 0;
-            }
-        } catch (SQLException e) {
+                handle.createUpdate("DELETE FROM productspecs WHERE Products_id = :id")
+                        .bind("id", pid)
+                        .execute();
+
+                handle.createUpdate("DELETE FROM productvariants WHERE Products_id = :id")
+                        .bind("id", pid)
+                        .execute();
+
+                handle.createUpdate("DELETE FROM productgalleries WHERE Products_id = :id")
+                        .bind("id", pid)
+                        .execute();
+
+
+//                 return handle.createUpdate("DELETE FROM products WHERE id = :id").bind("id", pid).execute() > 0;
+
+                return true;
+            });
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            return false;
         }
-        return false;
     }
 
     public Map<Integer, Integer> getVarTotal() {
-        Map<Integer, Integer> map = new HashMap<>();
-        String sql = "SELECT Products_id, count(id) FROM productvariants GROUP BY Products_id; ";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                map.put(rs.getInt(1), rs.getInt(2));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-        }
-        return map;
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT Products_id, count(id) as total_count FROM productvariants GROUP BY Products_id")
+                        .reduceResultSet(new HashMap<Integer, Integer>(), (map, rs, ctx) -> {
+                            map.put(rs.getInt("Products_id"), rs.getInt("total_count"));
+                            return map;
+                        })
+        );
     }
 
     public List<Product> getPerPageProductByCategoryId(int numPerPage, int page, String cateId, String selectedSort) {
-        List<Product> list = new ArrayList<>();
-        StringBuffer sql = new StringBuffer(
-                "SELECT * FROM products WHERE Categories_id = ? OR\n" +
-                        "Categories_id IN (SELECT id from categories WHERE Categories_id = ?) ");
+        StringBuilder sql = new StringBuilder(
+                "SELECT * FROM products WHERE Categories_id = :cateId OR " +
+                        "Categories_id IN (SELECT id FROM categories WHERE Categories_id = :cateId) ");
 
-        if (selectedSort.equals("default")) {
+        if ("price-asc".equals(selectedSort)) {
+            sql.append(" ORDER BY display_sell_price ASC ");
+        } else if ("price-desc".equals(selectedSort)) {
+            sql.append(" ORDER BY display_sell_price DESC ");
+        } else {
             sql.append(" ORDER BY id ");
-        } else if (selectedSort.equals("price-asc")) {
-            sql.append(" ORDER BY  display_sell_price asc ");
-        } else if (selectedSort.equals("price-desc")) {
-            sql.append(" ORDER BY  display_sell_price desc ");
         }
-        sql.append(" LIMIT ? OFFSET ?");
 
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(String.valueOf(sql));
-            ps.setString(1, cateId);
-            ps.setString(2, cateId);
-            ps.setInt(3, numPerPage);
-            ps.setInt(4, (page - 1) * numPerPage);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Product p = new Product(rs.getInt("id"),
-                        rs.getInt("Brands_id"),
-                        rs.getInt("Categories_id"),
-                        rs.getString("sku"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getFloat("avg_rating"),
-                        rs.getInt("sold_count"),
-                        rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"),
-                        rs.getDouble("display_market_price"),
-                        rs.getDouble("display_sell_price"),
-                        rs.getString("display_image_url"));
-                list.add(p);
+        sql.append(" LIMIT :limit OFFSET :offset");
 
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return list;
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql.toString())
+                        .bind("cateId", cateId)
+                        .bind("limit", numPerPage)
+                        .bind("offset", (page - 1) * numPerPage)
+                        .mapToBean(Product.class)
+                        .list()
+        );
     }
 
     private Product mapRStoProduct(ResultSet rs) throws SQLException {
@@ -271,72 +169,65 @@ public class ProductDAO {
     }
 
     public List<Product> getPerPageAllProduct(int numPerPage, int page, String selectedSort) {
-        List<Product> list = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT * FROM Products");
-        if (selectedSort.equals("default")) {
-            sql.append(" ORDER BY id ");
-        } else if (selectedSort.equals("price-asc")) {
-            sql.append(" ORDER BY  display_sell_price asc ");
-        } else if (selectedSort.equals("price-desc")) {
-            sql.append(" ORDER BY  display_sell_price desc ");
-        }
-        sql.append(" LIMIT ? OFFSET ?");
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(String.valueOf(sql));
-            ps.setInt(1, numPerPage);
-            ps.setInt(2, (page - 1) * numPerPage);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Product p = new Product(rs.getInt("id"), rs.getInt("Brands_id"), rs.getInt("Categories_id"),
-                        rs.getString("sku"), rs.getString("name"), rs.getString("description"),
-                        rs.getFloat("avg_rating"), rs.getInt("sold_count"), rs.getBoolean("is_active"),
-                        rs.getTimestamp("created_at"),
-                        rs.getDouble("display_market_price"), rs.getDouble("display_sell_price"), rs.getString("display_image_url"));
-                list.add(p);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        StringBuilder sql = new StringBuilder("SELECT * FROM products");
+
+        if ("price-asc".equals(selectedSort)) {
+            sql.append(" ORDER BY display_sell_price ASC");
+        } else if ("price-desc".equals(selectedSort)) {
+            sql.append(" ORDER BY display_sell_price DESC");
+        } else {
+            sql.append(" ORDER BY id");
         }
 
-        return list;
+        sql.append(" LIMIT :limit OFFSET :offset");
+
+        return jdbi.withHandle(handle ->
+                handle.createQuery(sql.toString())
+                        .bind("limit", numPerPage)
+                        .bind("offset", (page - 1) * numPerPage)
+                        .mapToBean(Product.class)
+                        .list()
+        );
     }
 
 
     public int pageNeed(String cateId, int sizePerPage) {
-        if (cateId == null || cateId.equals("0")) {
-            System.out.println("Tong so trang: " + (int) getAllProduct().size() / sizePerPage + "all: " + getAllProduct().size());
-            return (int) getAllProduct().size() / sizePerPage + 1;
+        long totalRecords;
+
+        if (cateId == null || "0".equals(cateId)) {
+            totalRecords = jdbi.withHandle(handle ->
+                    handle.createQuery("SELECT COUNT(*) FROM products")
+                            .mapTo(Long.class)
+                            .findFirst() // Lấy kết quả đầu tiên
+                            .orElse(0L)); // Nếu không có mặc định là 0
         } else {
-            System.out.println("Tong so trang: " + (int) getProductByCategoryId(cateId).size() / sizePerPage + "all: " + getProductByCategoryId(cateId).size());
-            return (int) getProductByCategoryId(cateId).size() / sizePerPage + 1;
+            totalRecords = jdbi.withHandle(handle ->
+                    handle.createQuery("SELECT COUNT(*) FROM products WHERE Categories_id = :cateId OR " +
+                                    "Categories_id IN (SELECT id FROM categories WHERE Categories_id = :cateId)")
+                            .bind("cateId", cateId)
+                            .mapTo(Long.class)
+                            .findFirst()
+                            .orElse(0L));
         }
+
+        if (totalRecords == 0) return 1;
+        // Tính số trang
+        return (int) Math.ceil((double) totalRecords / sizePerPage);
     }
 
     private List<String> getListCategoryIdsIncludingChildren(String[] cateIds) {
-        Set<String> allCategoryIds = new HashSet<>();
-        if (cateIds == null || cateIds.length == 0)
-            return new ArrayList<>();
-        Collections.addAll(allCategoryIds, cateIds);
-        StringBuilder sql = new StringBuilder("SELECT id FROM Categories WHERE Categories_id IN (");
-        for (int i = 0; i < cateIds.length; i++) {
-            sql.append(cateIds[i]);
-            if (i < cateIds.length - 1) sql.append(",");
-        }
-        sql.append(")");
+        if (cateIds == null || cateIds.length == 0) return new ArrayList<>();
 
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(String.valueOf(sql));
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                allCategoryIds.add(String.valueOf(rs.getInt("id")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Set<String> allCategoryIds = new HashSet<>(Arrays.asList(cateIds));
+
+        List<String> childIds = jdbi.withHandle(handle ->
+                handle.createQuery("SELECT id FROM categories WHERE Categories_id IN (<ids>)")
+                        .bindList("ids", Arrays.asList(cateIds))
+                        .mapTo(String.class)
+                        .list()
+        );
+
+        allCategoryIds.addAll(childIds);
         return new ArrayList<>(allCategoryIds);
     }
 
@@ -397,152 +288,101 @@ public class ProductDAO {
     }
 
     public String getProductName(String pid) {
-        String sql = "SELECT name FROM Products WHERE id = ?";
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, pid);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                return rs.getString("name");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return "Không tìm thấy tên Sản phẩm";
-
+        return jdbi.withHandle(handle ->
+                handle.createQuery("SELECT name FROM products WHERE id = :id")
+                        .bind("id", pid)
+                        .mapTo(String.class)
+                        .findFirst()
+                        .orElse("Không tìm thấy tên Sản phẩm")
+        );
     }
 
 
-    public boolean updateProduct(String pid, String brandid, String cateid, String name, String sku, String discript, String varSelected, String isActive) throws SQLException {
+    public boolean updateProduct(String pid, String brandid, String cateid, String name, String sku, String discript, String varSelected, String isActive) {
         try {
-            conn = DBConnect.getConnection();
-            conn.setAutoCommit(false);
-            String sqlProduct = "UPDATE products SET brands_id = ?, categories_id =?, name=?, sku=?, description=?, is_active=? WHERE id=?";
-            ps = conn.prepareStatement(sqlProduct);
-            ps.setString(1, brandid);
-            ps.setString(2, cateid);
-            ps.setString(3, name);
-            ps.setString(4, sku);
-            ps.setString(5, discript);
-            ps.setString(6, isActive);
-            ps.setString(7, pid);
-            ps.executeUpdate();
+            return jdbi.inTransaction(handle -> {
+                handle.createUpdate("UPDATE products SET brands_id = :brandId, categories_id = :cateId, name = :name, sku = :sku, description = :desc, is_active = :isActive WHERE id = :id")
+                        .bind("brandId", brandid)
+                        .bind("cateId", cateid)
+                        .bind("name", name)
+                        .bind("sku", sku)
+                        .bind("desc", discript)
+                        .bind("isActive", isActive)
+                        .bind("id", pid)
+                        .execute();
 
-            String sqlResetDefault = " UPDATE productvariants SET is_default =0  WHERE products_id = ? ";
-            java.sql.PreparedStatement ps3 = conn.prepareStatement(sqlResetDefault);
-            ps3.setString(1, pid);
-            ps3.executeUpdate();
+                handle.createUpdate("UPDATE productvariants SET is_default = 0 WHERE products_id = :id")
+                        .bind("id", pid)
+                        .execute();
 
-            String sqlVarDefault = " UPDATE productvariants SET is_default =1  WHERE id=? ";
-            java.sql.PreparedStatement ps2 = conn.prepareStatement(sqlVarDefault);
-            ps2.setString(1, varSelected);
-            ps2.executeUpdate();
+                handle.createUpdate("UPDATE productvariants SET is_default = 1 WHERE id = :varId")
+                        .bind("varId", varSelected)
+                        .execute();
 
-            String sqlUpDisplayProd = "UPDATE products p " +
-                    "JOIN productvariants v ON p.id = v.products_id " +
-                    "SET p.display_image_url = v.main_image_url, " +
-                    "    p.display_sell_price = v.sell_price, " +
-                    "    p.display_market_price = v.market_price " +
-                    "WHERE v.id = ? and p.id = ?";
-            java.sql.PreparedStatement ps4 = conn.prepareStatement(sqlUpDisplayProd);
-            ps4.setString(2, pid);
-            ps4.setString(1, varSelected);
-            ps4.executeUpdate();
+                handle.createUpdate("UPDATE products p " +
+                                "JOIN productvariants v ON p.id = v.products_id " +
+                                "SET p.display_image_url = v.main_image_url, " +
+                                "    p.display_sell_price = v.sell_price, " +
+                                "    p.display_market_price = v.market_price " +
+                                "WHERE v.id = :varId AND p.id = :id")
+                        .bind("varId", varSelected)
+                        .bind("id", pid)
+                        .execute();
 
-            conn.commit();
-            return true;
-
+                return true;
+            });
         } catch (Exception e) {
-            conn.rollback();
+            e.printStackTrace();
             return false;
-        } finally {
-            conn.setAutoCommit(true);
-            conn.close();
-
         }
-
     }
 
-    public boolean updateSpecs(String[] inputSpecIds, String[] inputSpecValue) throws SQLException {
+    public boolean updateSpecs(String[] inputSpecIds, String[] inputSpecValue) {
         try {
-            conn = DBConnect.getConnection();
-            conn.setAutoCommit(false);
-            String sqlProduct = "UPDATE productspecs SET spec_value= ? WHERE id=?";
-            ps = conn.prepareStatement(sqlProduct);
-
-            for (int i = 0; i < inputSpecIds.length; i++) {
-                ps.setString(1, inputSpecValue[i]);
-                ps.setString(2, inputSpecIds[i]);
-                ps.addBatch();
-            }
-            ps.executeBatch();
-            conn.commit();
+            jdbi.useHandle(handle -> {
+                var batch = handle.prepareBatch("UPDATE productspecs SET spec_value = :value WHERE id = :id");
+                for (int i = 0; i < inputSpecIds.length; i++) {
+                    batch.bind("value", inputSpecValue[i])
+                            .bind("id", inputSpecIds[i])
+                            .add();
+                }
+                batch.execute();
+            });
             return true;
-
         } catch (Exception e) {
-            conn.rollback();
+            e.printStackTrace();
             return false;
-        } finally {
-            conn.setAutoCommit(true);
-            conn.close();
         }
     }
 
 
     public int addProduct(Product p) {
-        String sql = "INSERT INTO products (Brands_id, Categories_id, sku, name, description, is_active, avg_rating) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-        // Sử dụng try-with-resources để tự động đóng kết nối
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
-            // 2. Truyền tham số
-            ps.setInt(1, p.getBrandId());
-            ps.setInt(2, p.getCategoriesId());
-            ps.setString(3, p.getSku());
-            ps.setString(4, p.getName());
-            ps.setString(5, p.getDescription());
-            ps.setBoolean(6, p.isActive());
-            ps.setDouble(7, 5.0);
-
-            int affectedRows = ps.executeUpdate();
-
-            if (affectedRows > 0) {
-                try (ResultSet rs = ps.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        return rs.getInt(1);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
+        return jdbi.withHandle(handle ->
+                handle.createUpdate("INSERT INTO products (Brands_id, Categories_id, sku, name, description, is_active, avg_rating) " +
+                                "VALUES (:brandId, :categoriesId, :sku, :name, :description, :isActive, :avgRating)")
+                        .bindBean(p)
+                        .bind("avgRating", 5.0)
+                        .executeAndReturnGeneratedKeys("id")
+                        .mapTo(Integer.class)
+                        .findFirst()
+                        .orElse(-1)
+        );
     }
 
     public void updateSearchCount(String id) {
-        String sqlProduct = "UPDATE products SET search_count= search_count +1  WHERE id=?";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sqlProduct);) {
-            ps.setString(1, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE products SET search_count = search_count + 1 WHERE id = :id")
+                        .bind("id", id)
+                        .execute()
+        );
     }
 
     public void updateViewCount(String pid) {
-        String sqlProduct = "UPDATE products SET view_count= view_count +1  WHERE id=?";
-        try (Connection conn = DBConnect.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sqlProduct);) {
-            ps.setString(1, pid);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
-
+        jdbi.useHandle(handle ->
+                handle.createUpdate("UPDATE products SET view_count = view_count + 1 WHERE id = :id")
+                        .bind("id", pid)
+                        .execute()
+        );
     }
 }
 

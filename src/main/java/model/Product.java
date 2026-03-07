@@ -80,6 +80,7 @@ public class Product {
         return categoriesId;
     }
 
+    @ColumnName("Categories_id")
     public void setCategoriesId(int categoriesId) {
         this.categoriesId = categoriesId;
     }
@@ -132,6 +133,8 @@ public class Product {
     public boolean getIsActive() {
         return isActive;
     }
+
+    @ColumnName("is_active")
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
