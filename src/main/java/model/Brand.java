@@ -7,7 +7,6 @@ public class Brand {
     private String logoUrl;
 
     public Brand(){
-
     }
     public Brand(int id, String name, String logoUrl) {
         super();
