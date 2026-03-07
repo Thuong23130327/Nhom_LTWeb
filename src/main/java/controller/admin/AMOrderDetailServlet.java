@@ -27,6 +27,6 @@ public class AMOrderDetailServlet extends HttpServlet {
         request.setAttribute("listItem", listItem);
         request.setAttribute("o", order);
         request.setAttribute("os", os);
-        request.getRequestDispatcher("order_detail.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/admin/order_detail.jsp").forward(request, response);
     }
 }

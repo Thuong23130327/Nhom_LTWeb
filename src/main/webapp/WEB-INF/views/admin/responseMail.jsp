@@ -39,12 +39,11 @@
                 </h2>
 
                 <div class="btn-toolbar">
-                    <a class="a-nodecor" href="${AuraSound}/admin/mailr">
-                        <button type="button" class="btn btn-sm btn-primary btn-update-status">
+                    <a href="${AuraSound}/admin/mail">
+                        <button type="button" class="btn btn-primary px-4">
                             Trở lại
                         </button>
                     </a>
-
                 </div>
             </div>
             <form action="${AuraSound}/admin/send-reply" method="POST">

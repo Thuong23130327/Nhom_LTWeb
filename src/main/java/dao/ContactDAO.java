@@ -125,35 +125,35 @@ public class ContactDAO {
         }
     }
 
-    public List<Contact> sort(String type) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM contactmails WHERE message is not null and trim(message) <>''");
-        List<Contact> list = new ArrayList<>();
-        if (type == null) return null;
-        switch (type) {
-            case "rep":
-                sql.append(" and status ='Replied' order by created_at DESC");
-                break;
-            case "non":
-                sql.append(" and status ='New' order by created_at DESC");
-                break;
-            case "old":
-                sql.append(" order by created_at");
-                break;
-            case "new":
-                sql.append("  order by created_at DESC");
-                break;
-        }
-        try {
-            conn = DBConnect.getConnection();
-            ps = conn.prepareStatement(String.valueOf(sql));
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(mapContact(rs));
-            }
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
+//    public List<Contact> sort(String type) {
+//        StringBuilder sql = new StringBuilder("SELECT * FROM contactmails WHERE message is not null and trim(message) <>''");
+//        List<Contact> list = new ArrayList<>();
+//        if (type == null) return null;
+//        switch (type) {
+//            case "rep":
+//                sql.append(" and status ='Replied' order by created_at DESC");
+//                break;
+//            case "non":
+//                sql.append(" and status ='New' order by created_at DESC");
+//                break;
+//            case "old":
+//                sql.append(" order by created_at");
+//                break;
+//            case "new":
+//                sql.append("  order by created_at DESC");
+//                break;
+//        }
+//        try {
+//            conn = DBConnect.getConnection();
+//            ps = conn.prepareStatement(String.valueOf(sql));
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                list.add(mapContact(rs));
+//            }
+//            return list;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
 }

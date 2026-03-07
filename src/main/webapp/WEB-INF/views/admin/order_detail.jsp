@@ -40,7 +40,7 @@
 
                 <div class="btn-toolbar">
                     <a class="a-nodecor" href="${AuraSound}/admin/manage-order">
-                        <button type="button" class="btn btn-sm btn-primary btn-update-status">
+                        <button type="button" class="btn btn-primary px-4">
                             Trở lại
                         </button>
                     </a>
@@ -125,12 +125,14 @@
                                 <span><i class="fas fa-user-circle me-2"></i>Ghi chú Admin</span>
                             </div>
                             <div class="card-body">
-                                    <textarea ${o.status == 'Cancelled' || o.status == 'Completed' ? 'readonly':''} id="adminNote" class="form-control" rows="4"
-                                              placeholder="Thêm ghi chú nội bộ về đơn hàng này...">
-${o.adminNote}
+                                    <textarea ${o.status == 'Cancelled' || o.status == 'Completed' ? 'readonly':''}
+                                            id="adminNote" class="form-control" rows="4"
+                                            placeholder="Thêm ghi chú nội bộ về đơn hàng này...">
+                                        ${o.adminNote}
                                     </textarea>
 
-                                <button ${o.status == 'Cancelled' || o.status == 'Completed' ? 'disabled':''} class="mt-3 btn btn-sm btn-primary " onclick="saveAdminNote('${o.id}')">
+                                <button ${o.status == 'Cancelled' || o.status == 'Completed' ? 'disabled':''}
+                                        class="mt-3 btn btn-sm btn-primary " onclick="saveAdminNote('${o.id}')">
                                     <i class="fas fa-save"></i>
                                     Lưu ghi chú
                                 </button>

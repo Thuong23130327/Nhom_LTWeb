@@ -3,10 +3,10 @@ function updateOrderStatus(orderId) {
     const statusSelect = document.getElementById("statusDropdown");
     const newStatus = statusSelect.value;
     let cancelReason = "";
+    const newNote = document.getElementById("adminNote").value;
 
     if (newStatus === "Cancelled") {
         cancelReason = prompt("Vui lòng nhập lý do hủy đơn hàng này: ");
-
         if (cancelReason === null) {
             statusSelect.value = old;
             return;
@@ -19,16 +19,16 @@ function updateOrderStatus(orderId) {
     }
     if (confirm("Bạn có chắc chắn muốn chuyển sang trạng thái " + newStatus + " không?")) {
         $.ajax({
-            url: path + "/admin/update-order-status",
+            url: path + "/admin/order",
             type: "POST",
             data: {
+                action: "updateStatus",
                 id: orderId,
                 status: newStatus
             },
             success: function (response) {
                 if (response.trim() == "true") {
-                    alert("Cập nhật trạng thái thành công !");
-                    location.reload();
+                    autoSaveNote(orderId, newNote);
                 } else {
                     alert("Có lỗi xảy ra khi Update trạng thái, vui lòng thử lại !");
                 }
@@ -37,36 +37,53 @@ function updateOrderStatus(orderId) {
                 alert("Có lỗi xảy ra khi Update trạng thái, vui lòng thử lại !");
             }
         });
-        updateAdNote(orderId,cancelReason);
     }
 }
 
-function updateAdNote(orderId,newNote) {
+function autoSaveNote(orderId, newNote) {
     $.ajax({
-        url: path + "/admin/update-admin-note",
+        url: path + "/admin/order",
         type: "POST",
         data: {
+            action: "updateNote",
             id: orderId,
             status: newNote
         },
         success: function (response) {
-            if (response.trim() == "true") {
-                alert("Cập nhật thành công !");
-                location.reload();
-            } else {
-                alert("Update note thành công");
-            }
+            alert("Cập nhật trạng thái và ghi chú thành công!");
+            location.reload();
         },
         error: function () {
-            alert("Có lỗi khi update note!");
+            alert("Trạng thái đã cập nhật nhưng có lỗi khi lưu ghi chú!");
+            location.reload();
         }
     });
 }
 
-function saveAdminNote(orderId) {
+
+function updateAdNote(orderId) {
     const newNote = document.getElementById("adminNote").value;
     if (confirm("Bạn có chắc muốn update Ghi chú mới của admin chứ? ")) {
-        updateAdNote(orderId, newNote);
+        $.ajax({
+            url: path + "/admin/order",
+            type: "POST",
+            data: {
+                action: "updateNote",
+                id: orderId,
+                status: newNote
+            },
+            success: function (response) {
+                if (response.trim() == "true") {
+                    alert("Cập nhật thành công !");
+                    location.reload();
+                } else {
+                    alert("Update note thành công");
+                }
+            },
+            error: function () {
+                alert("Có lỗi khi update note!");
+            }
+        });
     }
 }
 

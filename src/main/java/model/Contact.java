@@ -67,6 +67,7 @@ public class Contact {
     public String getSenderMail() {
         return senderMail;
     }
+
     @ColumnName("sender_email")
     public void setSenderMail(String senderMail) {
         this.senderMail = senderMail;
@@ -83,6 +84,7 @@ public class Contact {
     public String getPhone() {
         return phone;
     }
+
     @ColumnName("sender_phone")
     public void setPhone(String phone) {
         this.phone = phone;
@@ -128,6 +130,7 @@ public class Contact {
     public String getReplyMess() {
         return replyMess;
     }
+
     @ColumnName("reply_content")
     public void setReplyMess(String replyMess) {
         this.replyMess = replyMess;
