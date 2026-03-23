@@ -57,8 +57,6 @@ public class ContactDAO {
         contact.setCreatedAt(rs.getTimestamp(9));
         return contact;
     }
-//Fix JDBI
-
 
     public List<ContactReply> getReplies(int contactId) {
         return jdbi.withHandle(handle ->
@@ -90,7 +88,6 @@ public class ContactDAO {
 
     public List<Contact> sort(String type) {
         if (type == null) return new ArrayList<>();
-//    Dùng StringBuilder nối chuỗi sql rồi mapToBean chuyển đổi kq
         StringBuilder sql = new StringBuilder("SELECT * FROM contactmails WHERE message IS NOT NULL AND TRIM(message) <> ''");
 
         switch (type) {

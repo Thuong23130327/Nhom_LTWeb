@@ -9,7 +9,7 @@ import java.util.List;
 
 import model.Brand;
 
-public class BrandDAO {
+public class BrandDAO{
     private Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
